@@ -1,0 +1,155 @@
+= NEWS
+
+== 3.4.1 (2005-11-20)
+  * [CHANGE] do not apply *.rb filter for lib/**.
+  * [CHANGE] updates "#!/usr/bin/env ruby" on --shebang=ruby (it is default).
+  * [fix] --shebang option did not work.
+  * [fix] --without-ext option did not work.
+  * [fix] default --rubypath value should include file extension. (Thanks U.Nakamura)
+  * [fix] task SHOW, SETUP, TEST, CLEAN, DISTCLEAN with any argument wrongly caused exception.
+
+== 3.4.0 (2005-09-25)
+  * [fix] fix Windows specific bug, which causes error while
+    modifying bin/*.rb files in setup phase.
+  * [new] new task `test'.
+  * [new] installs configuration files from conf/.
+  * [new] installs man pages from man/.
+  * [new] new config option: --installdirs.
+  * [new] new config option: --shebang.
+  * [new] new config option: --sysconfdir.
+  * [new] new config option: --mandir.
+  * [new] new config option: --libruby.
+  * [new] new config option: --localstetedir.
+
+== 3.3.1 (2004-10-02)
+  * [fix] `install' did not work if bin/*.rb exists.
+  * [fix] relative $prefix path caused infinite loop.
+
+== 3.3.0 (2004-09-21)
+  * [new] Invoke config-setup-install when no global task is given.
+  * [new] new task `all', which invokes config-setup-install.
+
+== 3.2.4 (2004-02-12)
+  * [new] get default value of --make-prog from CONFIG['configure_args']. [ruby-list:39186]
+  * [fix] open files in binary mode, also on ruby 1.8. [ruby-list:39184]
+  * [fix] wrong path was written in InstalledFiles.
+
+== 3.2.3 (2004-02-12)
+  * [fix] open files in binary mode. [ruby-list:39158]
+
+== 3.2.2 (2003-12-16)
+  * [fix] did not work with metaconfig. (thanks Guillaume Marcais)
+  * [fix] should save configurations after running all hooks. (thanks Alex Fenton)
+  * [fix] does not reject *.elc, *.so, etc. (thanks Rubikitch)
+
+== 3.2.1 (2003-09-01)
+  * [fix] did not work.
+
+== 3.2.0 (2003-08-27)
+  * [CHANGE] install.rb is merged into the setup.rb.
+  * [fix] clean/distclean should be able to invoke before configuring.
+
+== 3.1.5 (2003-08-21)
+  * [CHANGE] install only *.rb from the lib/ directory.
+  * [CHANGE] ban MANIFEST.
+
+== 3.1.4 (2003-02-25)
+  * [new] ignore CVS/ *~ *.bak #* .* etc.
+  * [new] explicit file designation by MANIFEST.
+  * [new] new task `distclean'.
+  * bundle Makefile and asm.rb, which are tools to create
+    install.rb/setup.rb from source file.
+
+== 3.1.3 (2002-12-06)
+  * better help message.
+
+== 3.1.2 (2002-05-07)
+  * [fix] config --without did not work.
+  * [fix] wrong filenames were written to InstalledFiles.
+
+== 3.1.1 (2002-01-11)
+  * [CHANGE] changes "config --install-prefix" to "install --prefix"
+  * [new] new config option --site-ruby-common
+  * [new] new metaconfig interface set_config_default(n,v)
+
+== 3.1.0 (2002-01-08)
+  * [new] new config option --without-ext
+  * [new] new config option --install-prefix
+  * [new] new hook interface get_config(k), set_config(k,v)
+  * [new] config option config file 'metaconfig'
+  * [fix] setup.rb executes hooks in top directory
+          (does not run hooks in packages/ dir. This is a feature.)
+
+== 3.0.2 (2001-10-01)
+  * did not work on Ruby 1.4.4 ... 1.6.3
+    (rbconfig['rubylidir'] does not exist.)
+
+== 3.0.1 (2001-09-07)
+  * new options -q, --quiet, --verbose
+  * parametarizes 'setup.rb' in strings
+
+== 3.0.0 (2001-08-28)
+  * archive structure completely changed.
+  * single package installer install.rb
+  * restructs setup.rb
+  * outputs installed file names into the file "InstalledFiles"
+  * --with/--without accepts only package names.
+  * "config -- --with-foo=bar" passes options to extconf.rb
+  * supports customized site_ruby (thanks Akira Yamada)
+
+== 2.2.1 (2001-08-01)
+  * modify --with and --without (reported by Knu)
+
+== 2.2.0 (2001-06-30)
+  * ban PATHCONV.  Use setup/*.rb instead.
+
+== 2.1.0 (2001-06-30)
+  * support parameterized config value (i.e. --prefix)
+  * Developpers can hook any tasks. (thanks rubikitch)
+  * support srcdir
+
+== 2.0.4 (2001-04-07)
+  * support Ruby 1.4
+
+== 2.0.3 (2001-03-26)
+  * ignore if Makefile is not exist when "make clean"
+  * avoids windows' stat() bug
+
+== 2.0.2 (2001-02-13)
+  * ignore if Makefile is not exist when "make clean" (thanks rubikitch)
+  * support DOS's drive letter
+
+== 2.0.1 (2001-02-09)
+  * does "make clean" on each SETUP
+  * does not fork new ruby process when executing extconf.rb
+  * config --rbconfig=file
+
+== 2.0.0 (2000-12-19)
+  * now setup.rb does not depend on amstd
+  * install --no-harm
+  * add templates
+
+== 1.0.7 (2000-11-18)
+  * allow --without=ext/*
+
+== 1.0.6 (2000-08-27)
+  * new option --make-prog=[make] (patched by Katsuyuki Komatsu)
+
+== 1.0.5 (2000-08-27)
+  * generates Makefile every time
+
+== 1.0.4 (2000-07-13)
+  * can pass directory name (like ext/cparse) for --with, --without
+
+== 1.0.3 (2000-06-08)
+  * new command dryrun (patched by rubikitch)
+
+== 1.0.2 (2000-06-03)
+  * update document
+
+== 1.0.1 (2000-06-01)
+  * modify syntax error  (patched by rubikitch)
+  * new command "clean"  (patched by rubikitch)
+
+== 1.0.0 (2000-05-30)
+  * first release

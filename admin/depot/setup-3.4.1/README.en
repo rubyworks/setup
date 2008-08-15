@@ -1,0 +1,30 @@
+setup.rb README
+===============
+
+  setup.rb is a generic installer for Ruby programs.
+
+
+Usage
+-----
+
+  Just copy setup.rb in to your package.
+  For details, see HTML documents located under doc.en/.
+
+
+License
+-------
+
+  GNU LGPL, Lesser General Public License version 2.1.
+  For details of LGPL, see the file "COPYING".
+
+
+Bug Reports
+-----------
+
+  Any kind of bug reports are welcome.
+  If you find bugs, please email me.
+
+
+                                         Minero Aoki
+                                 aamine@loveruby.net
+                               http://i.loveruby.net

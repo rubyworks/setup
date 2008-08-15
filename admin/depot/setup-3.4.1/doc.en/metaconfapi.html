@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <meta http-equiv="Content-Language" content="en">
+<title>metaconfig API</title>
+</head>
+<body>
+
+<h1>metaconfig API</h1>
+<dl>
+<dt>add_path_config(<var>confname</var>, <var>default</var>, <var>description</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+<dt>default</dt><dd>String</dd>
+<dt>description</dt><dd>String</dd>
+</dl>
+<p>
+defines a path config option CONFNAME.
+DEFAULT is the <var>default</var> value of this option.
+DESCRIPTION is the short <var>description</var> of this option
+which is used from '--help' global option.
+</p>
+</dd>
+<dt>add_bool_config(<var>confname</var>, <var>default</var>, <var>description</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+<dt>default</dt><dd>String</dd>
+<dt>description</dt><dd>String</dd>
+</dl>
+<p>
+defines a bool config option CONFNAME.
+DEFAULT is the <var>default</var> value of this option.
+DESCRIPTION is the short <var>description</var> of this option
+which is used from '--help' global option.
+</p>
+</dd>
+<dt>set_config_default(<var>confname</var>, <var>val</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+<dt>val</dt><dd>String | bool</dd>
+</dl>
+<p>
+set <var>default</var> value of config CONFNAME to VAL.
+If CONFNAME is a bool config, VAL should be boolean.
+Else VAL should be a String.
+</p>
+</dd>
+<dt>remove_config(<var>confname</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+</dl>
+<p>
+removes config entry CONFNAME from the installer completely.
+You must use this method at your own lisk. For example,
+'remove_config(&quot;prefix&quot;)' causes fatal error.
+</p>
+</dd>
+<dt>packages -&gt; [String]</dt>
+<dd><p>
+Returns the list of package names.
+This method raises RuntimeError if called in the single
+package archive.
+</p>
+</dd>
+<dt>declare_packages(<var>list</var>)</dt>
+<dd><dl class="typedecl">
+<dt>list</dt><dd>[String]</dd>
+</dl>
+<p>
+Set the ordered <var>list</var> of installing package names.
+This method raises RuntimeError if called in the single
+package archive.
+</p>
+</dd>
+</dl>
+
+</body>
+</html>

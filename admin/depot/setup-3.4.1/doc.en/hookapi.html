@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <meta http-equiv="Content-Language" content="en">
+<title>Hook Script API</title>
+</head>
+<body>
+
+<h1>Hook Script API</h1>
+<dl>
+<dt>get_config(<var>key</var>) -&gt; String</dt>
+<dt>config(<var>key</var>) -&gt; String</dt>
+<dd><p>
+get a configuration. (e.g. config('prefix') for --prefix)
+</p>
+</dd>
+<dt>set_config(<var>key</var>, <var>val</var>)</dt>
+<dd><p>
+set a configuration KEY to VAL. (e.g. set_config(&quot;prefix&quot;, &quot;/usr&quot;))
+</p>
+</dd>
+<dt>curr_srcdir -&gt; String</dt>
+<dd><p>
+the current srcdir.
+</p>
+</dd>
+<dt>curr_objdir -&gt; String</dt>
+<dd><p>
+the current objdir.
+</p>
+</dd>
+<dt>srcdir_root -&gt; String</dt>
+<dd><p>
+the root directory of srcdir.
+When the hook script is called from setup.rb, this method
+returns the top directory of each package directory
+(ARCHIVE_TOP/packages/*/).
+</p>
+</dd>
+<dt>objdir_root -&gt; String</dt>
+<dd><p>
+the root directory of objdir.
+When the hook script is called from setup.rb, this method
+returns the top directory of each package directory
+(OBJDIR/packages/*/).
+</p>
+</dd>
+<dt>srcfile(<var>filename</var>) -&gt; String</dt>
+<dd><p>
+expands relational path FNAME which is in the current srcdir,
+into the absolute path.
+</p>
+</dd>
+<dt>srcexist?(<var>filename</var>)</dt>
+<dd><p>
+true if a file FNAME exists in the current srcdir.
+</p>
+</dd>
+<dt>srcdirectory?(<var>filename</var>)</dt>
+<dd><p>
+true if a directory FNAME exists in the current srcdir.
+</p>
+</dd>
+<dt>srcfile?(<var>filename</var>)</dt>
+<dd><p>
+true if a normal file FNAME exists in the current srcdir.
+</p>
+</dd>
+<dt>srcentries(<var>relative_path</var> = '.') -&gt; [String]</dt>
+<dd><p>
+returns the list of file entiries in the directory
+&quot;current srcdir + '/' + relpath&quot;
+</p>
+</dd>
+<dt>srcfiles(<var>relative_path</var> = '.') -&gt; [String]</dt>
+<dd><p>
+returns the list of file names in the directory
+&quot;current srcdir + '/' + relpath&quot;
+</p>
+</dd>
+<dt>srcdirectories(<var>relative_path</var> = '.') -&gt; [String]</dt>
+<dd><p>
+returns the list of directory names in the directory
+&quot;current srcdir + '/' + relpath&quot;
+</p>
+</dd>
+</dl>
+
+</body>
+</html>

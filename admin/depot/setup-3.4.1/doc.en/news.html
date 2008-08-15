@@ -1,0 +1,189 @@
+<h1>NEWS</h1>
+<h2>3.4.1 (2005-11-20)</h2>
+<ul>
+<li>[CHANGE] do not apply *.rb filter for lib/**.</li>
+<li>[CHANGE] updates &quot;#!/usr/bin/env ruby&quot; on --shebang=ruby (it is default).</li>
+<li>[fix] --shebang option did not work.</li>
+<li>[fix] --without-ext option did not work.</li>
+<li>[fix] default --rubypath value should include file extension. (Thanks U.Nakamura)</li>
+<li>[fix] task SHOW, SETUP, TEST, CLEAN, DISTCLEAN with any argument wrongly caused exception.</li>
+</ul>
+<h2>3.4.0 (2005-09-25)</h2>
+<ul>
+<li>[fix] fix Windows specific bug, which causes error while
+modifying bin/*.rb files in setup phase.</li>
+<li>[new] new task `test'.</li>
+<li>[new] installs configuration files from conf/.</li>
+<li>[new] installs man pages from man/.</li>
+<li>[new] new config option: --installdirs.</li>
+<li>[new] new config option: --shebang.</li>
+<li>[new] new config option: --sysconfdir.</li>
+<li>[new] new config option: --mandir.</li>
+<li>[new] new config option: --libruby.</li>
+<li>[new] new config option: --localstetedir.</li>
+</ul>
+<h2>3.3.1 (2004-10-02)</h2>
+<ul>
+<li>[fix] `install' did not work if bin/*.rb exists.</li>
+<li>[fix] relative $prefix path caused infinite loop.</li>
+</ul>
+<h2>3.3.0 (2004-09-21)</h2>
+<ul>
+<li>[new] Invoke config-setup-install when no global task is given.</li>
+<li>[new] new task `all', which invokes config-setup-install.</li>
+</ul>
+<h2>3.2.4 (2004-02-12)</h2>
+<ul>
+<li>[new] get default value of --make-prog from CONFIG['configure_args']. [ruby-list:39186]</li>
+<li>[fix] open files in binary mode, also on ruby 1.8. [ruby-list:39184]</li>
+<li>[fix] wrong path was written in InstalledFiles.</li>
+</ul>
+<h2>3.2.3 (2004-02-12)</h2>
+<ul>
+<li>[fix] open files in binary mode. [ruby-list:39158]</li>
+</ul>
+<h2>3.2.2 (2003-12-16)</h2>
+<ul>
+<li>[fix] did not work with metaconfig. (thanks Guillaume Marcais)</li>
+<li>[fix] should save configurations after running all hooks. (thanks Alex Fenton)</li>
+<li>[fix] does not reject *.elc, *.so, etc. (thanks Rubikitch)</li>
+</ul>
+<h2>3.2.1 (2003-09-01)</h2>
+<ul>
+<li>[fix] did not work.</li>
+</ul>
+<h2>3.2.0 (2003-08-27)</h2>
+<ul>
+<li>[CHANGE] install.rb is merged into the setup.rb.</li>
+<li>[fix] clean/distclean should be able to invoke before configuring.</li>
+</ul>
+<h2>3.1.5 (2003-08-21)</h2>
+<ul>
+<li>[CHANGE] install only *.rb from the lib/ directory.</li>
+<li>[CHANGE] ban MANIFEST.</li>
+</ul>
+<h2>3.1.4 (2003-02-25)</h2>
+<ul>
+<li>[new] ignore CVS/ *~ *.bak #* .* etc.</li>
+<li>[new] explicit file designation by MANIFEST.</li>
+<li>[new] new task `distclean'.</li>
+<li>bundle Makefile and asm.rb, which are tools to create
+install.rb/setup.rb from source file.</li>
+</ul>
+<h2>3.1.3 (2002-12-06)</h2>
+<ul>
+<li>better help message.</li>
+</ul>
+<h2>3.1.2 (2002-05-07)</h2>
+<ul>
+<li>[fix] config --without did not work.</li>
+<li>[fix] wrong filenames were written to InstalledFiles.</li>
+</ul>
+<h2>3.1.1 (2002-01-11)</h2>
+<ul>
+<li>[CHANGE] changes &quot;config --install-prefix&quot; to &quot;install --prefix&quot;</li>
+<li>[new] new config option --site-ruby-common</li>
+<li>[new] new metaconfig interface set_config_default(n,v)</li>
+</ul>
+<h2>3.1.0 (2002-01-08)</h2>
+<ul>
+<li>[new] new config option --without-ext</li>
+<li>[new] new config option --install-prefix</li>
+<li>[new] new hook interface get_config(k), set_config(k,v)</li>
+<li>[new] config option config file 'metaconfig'</li>
+<li>[fix] setup.rb executes hooks in top directory
+(does not run hooks in packages/ dir. This is a feature.)</li>
+</ul>
+<h2>3.0.2 (2001-10-01)</h2>
+<ul>
+<li>did not work on Ruby 1.4.4 ... 1.6.3
+(rbconfig['rubylidir'] does not exist.)</li>
+</ul>
+<h2>3.0.1 (2001-09-07)</h2>
+<ul>
+<li>new options -q, --quiet, --verbose</li>
+<li>parametarizes 'setup.rb' in strings</li>
+</ul>
+<h2>3.0.0 (2001-08-28)</h2>
+<ul>
+<li>archive structure completely changed.</li>
+<li>single package installer install.rb</li>
+<li>restructs setup.rb</li>
+<li>outputs installed file names into the file &quot;InstalledFiles&quot;</li>
+<li>--with/--without accepts only package names.</li>
+<li>&quot;config -- --with-foo=bar&quot; passes options to extconf.rb</li>
+<li>supports customized site_ruby (thanks Akira Yamada)</li>
+</ul>
+<h2>2.2.1 (2001-08-01)</h2>
+<ul>
+<li>modify --with and --without (reported by Knu)</li>
+</ul>
+<h2>2.2.0 (2001-06-30)</h2>
+<ul>
+<li>ban PATHCONV.  Use setup/*.rb instead.</li>
+</ul>
+<h2>2.1.0 (2001-06-30)</h2>
+<ul>
+<li>support parameterized config value (i.e. --prefix)</li>
+<li>Developpers can hook any tasks. (thanks rubikitch)</li>
+<li>support srcdir</li>
+</ul>
+<h2>2.0.4 (2001-04-07)</h2>
+<ul>
+<li>support Ruby 1.4</li>
+</ul>
+<h2>2.0.3 (2001-03-26)</h2>
+<ul>
+<li>ignore if Makefile is not exist when &quot;make clean&quot;</li>
+<li>avoids windows' stat() bug</li>
+</ul>
+<h2>2.0.2 (2001-02-13)</h2>
+<ul>
+<li>ignore if Makefile is not exist when &quot;make clean&quot; (thanks rubikitch)</li>
+<li>support DOS's drive letter</li>
+</ul>
+<h2>2.0.1 (2001-02-09)</h2>
+<ul>
+<li>does &quot;make clean&quot; on each SETUP</li>
+<li>does not fork new ruby process when executing extconf.rb</li>
+<li>config --rbconfig=file</li>
+</ul>
+<h2>2.0.0 (2000-12-19)</h2>
+<ul>
+<li>now setup.rb does not depend on amstd</li>
+<li>install --no-harm</li>
+<li>add templates</li>
+</ul>
+<h2>1.0.7 (2000-11-18)</h2>
+<ul>
+<li>allow --without=ext/*</li>
+</ul>
+<h2>1.0.6 (2000-08-27)</h2>
+<ul>
+<li>new option --make-prog=[make] (patched by Katsuyuki Komatsu)</li>
+</ul>
+<h2>1.0.5 (2000-08-27)</h2>
+<ul>
+<li>generates Makefile every time</li>
+</ul>
+<h2>1.0.4 (2000-07-13)</h2>
+<ul>
+<li>can pass directory name (like ext/cparse) for --with, --without</li>
+</ul>
+<h2>1.0.3 (2000-06-08)</h2>
+<ul>
+<li>new command dryrun (patched by rubikitch)</li>
+</ul>
+<h2>1.0.2 (2000-06-03)</h2>
+<ul>
+<li>update document</li>
+</ul>
+<h2>1.0.1 (2000-06-01)</h2>
+<ul>
+<li>modify syntax error  (patched by rubikitch)</li>
+<li>new command &quot;clean&quot;  (patched by rubikitch)</li>
+</ul>
+<h2>1.0.0 (2000-05-30)</h2>
+<ul>
+<li>first release</li>
+</ul>

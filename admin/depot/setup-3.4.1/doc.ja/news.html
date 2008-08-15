@@ -1,0 +1,186 @@
+<h1>NEWS</h1>
+<h2>3.4.1 (2005-11-20)</h2>
+<ul>
+<li>[CHANGE] lib/ 以下からインストールするファイルを *.rb に限定しないことにした。</li>
+<li>[CHANGE] #!/usr/bin/env ruby もデフォルトでアップデートする</li>
+<li>[fix] --shebang オプションが動いていなかった</li>
+<li>[fix] --without-ext オプションが動いていなかった</li>
+<li>[fix] --rubypath のデフォルト値に拡張子をつけた (Thanks U.Nakamura)</li>
+<li>[fix] タスク show, setup, test, clean, distclean に引数を渡すと正しく終了しなかった</li>
+</ul>
+<h2>3.4.0 (2005-09-25)</h2>
+<ul>
+<li>[fix] Windows で shebang を修正する途中にエラーになる問題を修正</li>
+<li>[new] 新しいタスク test を追加</li>
+<li>[new] conf/ 以下からコンフィグファイルをインストールするようになった</li>
+<li>[new] man/ 以下から man ページをインストールするようになった</li>
+<li>[new] 新しい config オプション --installdirs</li>
+<li>[new] 新しい config オプション --shebang</li>
+<li>[new] 新しい config オプション --sysconfdir</li>
+<li>[new] 新しい config オプション --mandir</li>
+<li>[new] 新しい config オプション --libruby</li>
+<li>[new] 新しい config オプション --localstatedir</li>
+</ul>
+<h2>3.3.1 (2004-10-02)</h2>
+<ul>
+<li>[fix] #!を合わせるコードにバグがあった</li>
+<li>[fix] configで相対パスを設定すると無限ループになる</li>
+</ul>
+<h2>3.3.0 (2004-09-21)</h2>
+<ul>
+<li>[new] 引数がないときは自動的に config setup install を実行する</li>
+<li>[new] config setup install を一気に実行する新しいタスク「all」</li>
+</ul>
+<h2>3.2.4 (2004-02-12)</h2>
+<ul>
+<li>[new] --make-prog のデフォルト値を CONFIG['configure_args'] から取る [ruby-list:39186]</li>
+<li>[fix] ファイルを開くときは常にバイナリモードにする (その2) [ruby-list:39184]</li>
+<li>[fix] InstalledFiles に書き込まれるパスが間違っていた</li>
+</ul>
+<h2>3.2.3 (2004-02-12)</h2>
+<ul>
+<li>[fix] ファイルを開くときは常にバイナリモードにする [ruby-list:39158]</li>
+</ul>
+<h2>3.2.2 (2003-12-16)</h2>
+<ul>
+<li>[fix] metaconfigを使うとread_fileでエラーになっていた (thanks Guillaume Marcais)</li>
+<li>[fix] pre-configで設定した値が保存されていなかった (thanks Alex Fenton)</li>
+<li>[fix] data/からは*.elcや*.soもインストールすべき (thanks Rubikitch)</li>
+</ul>
+<h2>3.2.1 (2003-09-01)</h2>
+<ul>
+<li>[fix] 全く動かなかった</li>
+</ul>
+<h2>3.2.0 (2003-08-27)</h2>
+<ul>
+<li>[CHANGE] install.rb を setup.rb にマージした。</li>
+<li>[fix] clean/distclean が config 前に呼べなかったのを修正。</li>
+</ul>
+<h2>3.1.5 (2003-08-21)</h2>
+<ul>
+<li>[CHANGE] lib/ からは *.rb のみインストールすることにした</li>
+<li>[CHANGE] 早くも MANIFEST 廃止</li>
+</ul>
+<h2>3.1.4 (2003-02-25)</h2>
+<ul>
+<li>[new] CVS が無視するファイル (CVS/ *~ *.bak #* .* など) を無視する</li>
+<li>[new] MANIFEST というファイルでインストールするファイルを明示的に指定するようにした</li>
+<li>[new] 新しいタスク distclean</li>
+<li>install.rb/setup.rb だけでなく、構築時に使うファイルも配布するようにした</li>
+</ul>
+<h2>3.1.3 (2002-12-06)</h2>
+<ul>
+<li>ヘルプメッセージを改善した</li>
+</ul>
+<h2>3.1.2 (2002-05-07)</h2>
+<ul>
+<li>[fix] config --without が動かなかった</li>
+<li>[fix] InstalledFiles の中身がおかしかった</li>
+</ul>
+<h2>3.1.1 (2002-01-11)</h2>
+<ul>
+<li>[CHANGE] config --install-prefix を install --prefix に移動</li>
+<li>[new] コンフィグ --site-ruby-common を追加</li>
+<li>[new] metaconfig インターフェイス set_config_default(n,v) を追加</li>
+</ul>
+<h2>3.1.0 (2002-01-08)</h2>
+<ul>
+<li>[new] コンフィグ --without-ext を追加</li>
+<li>[new] コンフィグ --install-prefix を追加 [rubyist:0984]</li>
+<li>[new] フックインターフェイス get_config(k), set_config(k,v) を追加</li>
+<li>[new] config オプションのコンフィグファイル metaconfig  [ruby-list:33139]</li>
+<li>[fix] setup.rb と同じディレクトリにあるフックを実行していなかった
+(ただし package/ 直下のファイルは実行しません。仕様です。)</li>
+</ul>
+<h2>3.0.2 (2001-10-01)</h2>
+<ul>
+<li>Ruby 1.4.4 〜 1.6.3 で動かなかったバグを修正
+(rbconfig['rubylidir'] がない)</li>
+</ul>
+<h2>3.0.1 (2001-09-07)</h2>
+<ul>
+<li>新しいオプション -q, --quiet, --verbose</li>
+<li>文字列埋めこみの 'setup.rb' をパラメタライズ</li>
+</ul>
+<h2>3.0.0 (2001-08-28)</h2>
+<ul>
+<li>単体パッケージ向けインストーラ install.rb</li>
+<li>install.rb をベースに setup.rb を再構築</li>
+<li>実際にインストールしたファイルのリストを InstalledFiles に出力</li>
+<li>--with/--without はパッケージ名のみ受けつける</li>
+<li>config - --with-foo=bar で extconf に引数を指定</li>
+<li>site_ruby が変更される可能性に対処 (thanks Akira Yamada)</li>
+</ul>
+<h2>2.2.1 (2001-08-01)</h2>
+<ul>
+<li>--with, --without で落ちるバグを修正 (reported by Knu)</li>
+</ul>
+<h2>2.2.0 (2001-06-30)</h2>
+<ul>
+<li>PATHCONV から setup/*.rb へ移行</li>
+</ul>
+<h2>2.1.0 (2001-06-30)</h2>
+<ul>
+<li>ネストしたコンフィグ設定 (--prefix など) に対応</li>
+<li>タスクをフックできるようにした (thanks rubikitch)</li>
+<li>srcdir 対応</li>
+</ul>
+<h2>2.0.4 (2001-04-07)</h2>
+<ul>
+<li>Ruby 1.4 に対応</li>
+</ul>
+<h2>2.0.3 (2001-03-26)</h2>
+<ul>
+<li>clean で Makefile がなくても無視 (変えた)</li>
+<li>Windows の stat() のバグに対応</li>
+</ul>
+<h2>2.0.2 (2001-02-13)</h2>
+<ul>
+<li>clean で Makefile がなくても無視 (thanks rubikitch)</li>
+<li>DOS のドライブレターに対応</li>
+</ul>
+<h2>2.0.1 (2001-02-09)</h2>
+<ul>
+<li>拡張モジュールをコンパイルする時、毎回 clean するようにした</li>
+<li>extconf.rb を実行するとき新しい Ruby を起動しないようにした</li>
+<li>config --rbconfig=file</li>
+</ul>
+<h2>2.0.0 (2000-12-19)</h2>
+<ul>
+<li>amstd 依存をなくした</li>
+<li>setup.rb 用 README のテンプレートをつけた</li>
+<li>install --no-harm</li>
+</ul>
+<h2>1.0.7 (2000-11-18)</h2>
+<ul>
+<li>--without=ext/* とできるようにした</li>
+</ul>
+<h2>1.0.6 (2000-08-27)</h2>
+<ul>
+<li>新オプション --make-prog (patched by Katsuyuki Komatsu)</li>
+</ul>
+<h2>1.0.5 (2000-08-27)</h2>
+<ul>
+<li>常に Makefile を作りなおす (reported by Dave Thomas)</li>
+</ul>
+<h2>1.0.4 (2000-07-13)</h2>
+<ul>
+<li>--with、--without にディレクトリを指定できるようにした</li>
+</ul>
+<h2>1.0.3 (2000-06-08)</h2>
+<ul>
+<li>新コマンド dryrun (patched by rubikitch)</li>
+</ul>
+<h2>1.0.2 (2000-06-03)</h2>
+<ul>
+<li>ドキュメントを更新</li>
+</ul>
+<h2>1.0.1 (2000-06-01)</h2>
+<ul>
+<li>いきなりバグがあった  (patched by rubikitch)</li>
+<li>新コマンド clean      (patched by rubikitch)</li>
+</ul>
+<h2>1.0.0 (2000-05-30)</h2>
+<ul>
+<li>初リリース</li>
+</ul>

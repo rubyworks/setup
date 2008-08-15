@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <meta http-equiv="Content-Language" content="en">
+<title>Creating Packages with setup.rb</title>
+</head>
+<body>
+
+<h1>Creating Packages with setup.rb</h1>
+<h2>Creating Single Package Archive</h2>
+<p>
+&quot;Single Package Archive&quot; means the archive which includes
+only one PACKAGE.  &quot;package&quot; means one set of ruby scripts,
+ruby extentions, commands, and data files.
+</p>
+<p>
+setup.rb requires that the archive is structured like this:
+</p>
+<pre>
+PackageTop/
+    setup.rb
+    lib/
+        (ruby scripts)
+    ext/
+        (ruby extentions)
+    bin/
+        (commands)
+    data/
+        (data files)
+    conf/
+        (configuration files)
+    man/
+        (manual pages)
+    test/
+        (tests)
+</pre>
+<p>
+Each file/directories acts as below:
+</p>
+<dl>
+<dt>setup.rb</dt>
+<dd><p>
+The installer. This file is included in this archive.
+Just copy it to your package.
+</p>
+</dd>
+<dt>lib/, bin/, data/, conf/, man/</dt>
+<dd><p>
+These directories includes files which are to be installed.
+This directory tree is mirrored to the target directory, from 'lib/'
+to 'RUBYLIB/', from 'bin/' to 'BINDIR/', from 'data/' to 'DATADIR/' ....
+</p>
+<p>
+Use 'lib/' for ruby scripts, 'bin/' for commands, 'data/' for any
+other data files, 'conf/' for configuration files, 'man/' for
+manual pages.
+</p>
+</dd>
+<dt>ext/</dt>
+<dd><p>
+'ext/' directory includes source code of ruby extentions.
+If you want to install 'RUBYLIB/ARCH/someext.so', create
+a directory 'ext/someext/' and put source files into it.
+</p>
+<p>
+[WARNING] All extention source directories MUST include
+extconf.rb or MANIFEST.
+</p>
+</dd>
+<dt>test/</dt>
+<dd><p>
+'test/' directory contains test scripts.  You must write
+test scripts which run on test/unit library.
+</p>
+</dd>
+</dl>
+<h2>Creating Multi-Package Archive</h2>
+<p>
+setup.rb can handle an archive which includes multiple PACKAGEs.
+</p>
+<p>
+setup.rb requires the archive is structured as below:
+</p>
+<pre>
+PackageTop/
+    setup.rb
+    packages/         &lt;--- fixed name
+        tmail/        &lt;--- tmail package
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+        raccrt/       &lt;--- raccrt package
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+        strscan/      &lt;--- strscan package
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+        amstd/        &lt;--- amstd package
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+</pre>
+<h2>Hooking Tasks</h2>
+<p>
+You can hook any tasks, such as &quot;config&quot; &quot;setup&quot;.
+For example, you want to make some files in 'lib/tmail/' when setup.
+Then create file 'lib/tmail/pre-setup.rb' and put this:
+</p>
+<pre>
+# pre-setup.rb
+
+# process grammer file
+system &quot;racc #{srcdir_root + '/src/mp.y'} -o mailp.rb&quot;
+
+# require all ruby scripts in this directory from _loadlib.rb.
+list = Dir.glob(curr_srcdir + '/*.rb').collect {|n| File.basename(n) }
+File.open( '_loadlib.rb', 'w' ) {|f|
+  f.puts list.collect {|n| &quot;require 'tmail/&quot; + n + &quot;'&quot; }
+}
+File.open( '../tmail.rb', 'w' ) {|f|
+  f.puts &quot;require 'tmail/_loadlib'&quot;
+}
+</pre>
+<p>
+This file is evaluated on task &quot;setup&quot; in the directory,
+before processing any other thing. Acceptable hook file names are:
+</p>
+<pre>
+{pre,post}-{config,setup,install,test,clean,distclean}.rb
+</pre>
+<p>
+[NOTE] You can also put hook files in the top directory of archive
+and/or the type-root directory ('bin/', 'lib/',...).
+</p>
+<h2>srcdir/objdir support</h2>
+<p>
+setup.rb supports srcdir/objdir separation. In other words,
+you can compile everything out of the source directory.
+</p>
+<p>
+If you write hooks, you should supports srcdir/objdir system.
+When you read source code, read it from srcdir. When you write
+anything, write it to the current directory. There's also some
+APIs to help your work. see
+,&lt;a href=&quot;hookapi.html&quot;&gt;Hook Script APIs Reference Manual&lt;/a&gt;
+</p>
+<h2>metaconfig</h2>
+<p>
+You can add new config options by writing file &quot;metaconfig&quot;.
+metaconfig must be placed in the package-root directory.
+</p>
+<p>
+Here is a simple example of metaconfig.
+</p>
+<pre>
+add_path_config 'libc', '/lib/libc.so', 'path to the C standard library'
+add_bool_config 'win32', false, 'compile with Win32 support'
+</pre>
+<p>
+This script defined new config option --libc and --win32.
+</p>
+<p>
+In 'metaconfig', you can use some APIs described in
+,&lt;a href=&quot;metaconfapi.html&quot;&gt;metaconfig API Reference Manual&lt;/a&gt;
+</p>
+<h2>Backward Compatibility</h2>
+<p>
+I do not assure any backward compatibility for the setup.rb.
+If you'd like old behavior, just use old version.
+</p>
+<h2>License</h2>
+<p>
+GNU LGPL, Lesser General Public License version 2.1.
+For details, see file &quot;COPYING&quot;.
+</p>
+<p>
+NOTE: You CAN distribute your program under the any licenses
+you like. LGPL does not force you to make your programs LGPL
+while the installer is LGPL'ed one.
+</p>
+<h2>Installation Manual</h2>
+<p>
+You can freely copy/edit and/or distribute Usage_*.txt files
+which are included in this archive.  I do not claim any rights
+on them.  Removing my copyright is also OK.
+</p>
+
+</body>
+</html>

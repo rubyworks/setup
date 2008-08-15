@@ -1,0 +1,12 @@
+= RELEASE NEWS
+
+Currently Setup doesn not support Aoki's Metaconfig API.
+It's usefulness seems extremely limited, but we will 
+reconsider adding it back in a furture version.
+
+This is an early release of Setup. While it is likely
+to work just fine, at this point we are not recommending
+it for production use.
+
+
+

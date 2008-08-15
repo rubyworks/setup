@@ -1,0 +1,35 @@
+sow:
+  class: Sow
+
+syntax:
+  class: Syntax
+
+stats:
+  class: Stats
+
+notes:
+  class: Notes
+
+test:
+  class: TestUnit
+
+rdoc:
+  class    : RDoc
+  template : html
+  inline   : true
+  exclude  :
+    - lib/sow/scaffolds
+    - lib/sow/generators/*/templates
+
+ri:
+  class: RIDoc
+  exclude  :
+    - lib/sow/scaffolds
+    - lib/sow/generators/*/templates
+
+gem:
+  class: Gem
+
+rubyforge:
+  class: Rubyforge
+

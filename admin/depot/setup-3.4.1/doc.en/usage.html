@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <meta http-equiv="Content-Language" content="en">
+<title>Installing Programs with setup.rb</title>
+</head>
+<body>
+
+<h1>Installing Programs with setup.rb</h1>
+<h2>Quick Start</h2>
+<p>
+Type this (You might needs super user previledge):
+</p>
+<pre>
+($ su)
+ # ruby setup.rb
+</pre>
+<p>
+If you want to install a program in to your home directory
+($HOME), use following instead:
+</p>
+<pre>
+$ ruby setup.rb all --prefix=$HOME
+</pre>
+<h2>Detailed Installtion Process</h2>
+<p>
+setup.rb invokes installation by three steps.  There are
+&quot;config&quot;, &quot;setup&quot; and &quot;install&quot;.  You can invoke each steps
+separately as following:
+</p>
+<pre>
+$ ruby setup.rb config
+$ ruby setup.rb setup
+# ruby setup.rb install
+</pre>
+<p>
+You can controll installation process by giving detailed
+options for each tasks.  For example, --bin-dir=$HOME/bin
+let setup.rb install commands in $HOME/bin.
+</p>
+<p>
+For details, see &quot;Task Options&quot;.
+</p>
+<h2>Global Options</h2>
+<p>
+&quot;Global Option&quot; is a command line option which you can use
+for all tasks.  You must give a global option before any task
+name.
+</p>
+<dl>
+<dt>-q,--quiet</dt>
+<dd><p>
+suppress message outputs
+</p>
+</dd>
+<dt>--verbose</dt>
+<dd><p>
+output messages verbosely (default)
+</p>
+</dd>
+<dt>-h,--help</dt>
+<dd><p>
+prints help and quit
+</p>
+</dd>
+<dt>-v,--version</dt>
+<dd><p>
+prints version and quit
+</p>
+</dd>
+<dt>--copyright</dt>
+<dd><p>
+prints copyright and quit
+</p>
+</dd>
+</dl>
+<h2>Tasks</h2>
+<p>
+These are acceptable tasks:
+</p>
+<dl>
+<dt>all</dt>
+<dd><p>
+Invokes `config', `setup', then `install'.
+Task options for all is same with config.
+</p>
+</dd>
+<dt>config</dt>
+<dd><p>
+Checks and saves configurations.
+</p>
+</dd>
+<dt>show</dt>
+<dd><p>
+Prints current configurations.
+</p>
+</dd>
+<dt>setup</dt>
+<dd><p>
+Compiles ruby extentions.
+</p>
+</dd>
+<dt>install</dt>
+<dd><p>
+Installs files.
+</p>
+</dd>
+<dt>test</dt>
+<dd><p>
+Invokes tests.
+</p>
+</dd>
+<dt>clean</dt>
+<dd><p>
+Removes created files.
+</p>
+</dd>
+<dt>distclean</dt>
+<dd><p>
+Removes all created files.
+</p>
+</dd>
+</dl>
+<h2>Task Options for CONFIG/ALL</h2>
+<p>
+You can pass following long options for CONFIG task
+and ALL task.
+</p>
+<p>
+All options accept parameterized value, like
+--rbdir=$siterubyver or --sodir=$siterubyverarch.
+On UNIX shells, you should escape &quot;$&quot; character,
+so use --rbdir=\$siterubyver or --sodir=$siterubyverach.
+</p>
+<dl>
+<dt>--installdirs=(std|site|home)</dt>
+<dd><p>
+A handy option to set common install target.
+</p>
+<p>
+std: install files under $libruby.
+</p>
+<p>
+site: install files under $siteruby.
+</p>
+<p>
+home: install files under home directory ($HOME).
+</p>
+</dd>
+<dt>--prefix=PATH</dt>
+<dd><p>
+The path prefix of target directory pathes like $bindir, $libdir...
+</p>
+</dd>
+<dt>--bindir=PATH</dt>
+<dd><p>
+The directory for commands.
+</p>
+</dd>
+<dt>--rbdir=PATH</dt>
+<dd><p>
+The directory for ruby scripts.
+</p>
+</dd>
+<dt>--sodir=PATH</dt>
+<dd><p>
+The directory for ruby extentions.
+</p>
+</dd>
+<dt>--datadir=PATH</dt>
+<dd><p>
+The directory for shared data.
+</p>
+</dd>
+<dt>--sysconfdir=PATH</dt>
+<dd><p>
+The directory for configuration files.
+</p>
+</dd>
+<dt>--mandir=PATH</dt>
+<dd><p>
+The directory for manual pages.
+</p>
+</dd>
+<dt>--libruby=PATH</dt>
+<dd><p>
+The directory for ruby libraries.
+</p>
+</dd>
+<dt>--librubyver=PATH</dt>
+<dd><p>
+The directory for standard ruby libraries.
+</p>
+</dd>
+<dt>--librubyverarch=PATH</dt>
+<dd><p>
+The directory for standard ruby extensions.
+</p>
+</dd>
+<dt>--siteruby=PATH</dt>
+<dd><p>
+The directory for version-independent non-standard
+ruby libraries
+</p>
+</dd>
+<dt>--siterubyver=PATH</dt>
+<dd><p>
+The directory for non-standard ruby libraries.
+</p>
+</dd>
+<dt>--siterubyverarch=PATH</dt>
+<dd><p>
+The directory for non-standard ruby extensions.
+</p>
+</dd>
+<dt>--rubypath=PATH</dt>
+<dd><p>
+The path to set to #! line.
+</p>
+</dd>
+<dt>--shebang=(all|ruby|never)</dt>
+<dd><p>
+Shenbang line (#!) rewriting mode.
+</p>
+<p>
+all: replace all shebang lines.
+</p>
+<p>
+ruby: replace shebang lines which invokes ruby.
+</p>
+<p>
+never: never rewrite shebang.
+</p>
+</dd>
+<dt>--rubyprog=PATH</dt>
+<dd><p>
+The ruby program using for installation.
+</p>
+</dd>
+<dt>--makeprog=NAME</dt>
+<dd><p>
+The make program to compile ruby extentions.
+</p>
+</dd>
+<dt>--without-ext</dt>
+<dd><p>
+Forces to setup.rb never to compile/install
+ruby extentions.
+</p>
+</dd>
+<dt>--rbconfig=PATH</dt>
+<dd><p>
+Your rbconfig.rb to load.
+</p>
+</dd>
+</dl>
+<p>
+If there's the directory named &quot;packages&quot;,
+You can also use these options:
+</p>
+<dl>
+<dt>--with=NAME,NAME,NAME...</dt>
+<dd><p>
+Package names which you want to install.
+</p>
+</dd>
+<dt>--without=NAME,NAME,NAME...</dt>
+<dd><p>
+Package names which you do not want to install.
+</p>
+</dd>
+</dl>
+<p>
+[NOTE] You can pass options to extconf.rb like this:
+</p>
+<pre>
+ruby setup.rb config -- --with-tklib=/usr/lib/libtk-ja.so.8.0
+</pre>
+<h2>Task Options for INSTALL</h2>
+<dl>
+<dt>--no-harm</dt>
+<dd><p>
+prints what to do and done nothing really.
+</p>
+</dd>
+<dt>--prefix=PATH</dt>
+<dd><p>
+The prefix of the installing directory path.
+This option may help binary package maintainers.
+A default value is an empty string.
+</p>
+</dd>
+</dl>
+
+</body>
+</html>

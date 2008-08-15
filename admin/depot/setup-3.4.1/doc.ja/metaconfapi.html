@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja-JP">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
+  <meta http-equiv="Content-Language" content="ja-JP">
+<title>metaconfig API</title>
+</head>
+<body>
+
+<h1>metaconfig API</h1>
+<dl>
+<dt>add_path_config(<var>confname</var>, <var>default</var>, <var>description</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+<dt>default</dt><dd>String</dd>
+<dt>description</dt><dd>String</dd>
+</dl>
+<p>
+パスを値に取るコンフィグオプション <var>confname</var> を定義します。
+文字列 <var>default</var> はオプションのデフォルト値、
+<var>description</var> はヘルプメッセージに表示するための
+短い説明です。
+</p>
+</dd>
+<dt>add_bool_config(<var>confname</var>, <var>default</var>, <var>description</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+<dt>default</dt><dd>String</dd>
+<dt>description</dt><dd>String</dd>
+</dl>
+<p>
+真偽値をとるコンフィグオプション <var>confname</var> を定義します。
+<var>default</var> はオプションのデフォルト値（true/false）、
+<var>description</var> はヘルプメッセージに表示するための
+短い説明です。
+</p>
+</dd>
+<dt>set_config_default(<var>confname</var>, <var>val</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+<dt>val</dt><dd>String | bool</dd>
+</dl>
+<p>
+コンフィグオプション <var>confname</var> のデフォルトを <var>val</var> に
+します。<var>confname</var> が真偽値をとるコンフィグの場合 <var>val</var>
+には true/false を、それ以外ならば文字列を渡さなければ
+いけません。
+</p>
+</dd>
+<dt>remove_config(<var>confname</var>)</dt>
+<dd><dl class="typedecl">
+<dt>confname</dt><dd>String</dd>
+</dl>
+<p>
+コンフィグ <var>confname</var> を使用不可能にします。
+依存関係は全く考慮しませんので、たとえば --prefix を
+削除するとインストールでエラーになります。自己責任で
+使ってください。
+</p>
+</dd>
+<dt>packages → [String]</dt>
+<dd><p>
+マルチパッケージアーカイブ内に存在するパッケージのリストを返します。
+このメソッドはマルチパッケージアーカイブでしか使えません。
+</p>
+</dd>
+<dt>declare_packages(<var>list</var>)</dt>
+<dd><dl class="typedecl">
+<dt>list</dt><dd>[String]</dd>
+</dl>
+<p>
+インストールするパッケージ名のリストを宣言します。setup.rb は
+ここで宣言されたパッケージのみを対象に、同じ順番で処理します。
+このメソッドはマルチパッケージアーカイブでしか使えません。
+</p>
+</dd>
+</dl>
+
+</body>
+</html>
