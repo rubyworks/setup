@@ -1,0 +1,732 @@
+Sun Nov 20 20:55:02 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.4.1 released.
+
+Sun Nov 20 20:54:46 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* test/test_installer.rb: new file.
+
+Sun Nov 20 20:54:03 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (update_shebang_line): revert verbose message.
+
+Sun Nov 20 20:24:56 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (parsearg_no_options): caused error when ARGV is empty.
+
+	* setup.rb (adjust_shebang): --shebang option did not work.
+
+	* setup.rb (adjust_shebang): replace "#!/usr/bin/env ruby" when
+	  --shebang=ruby.
+
+	* setup.rb (adjust_shebang): when original file does not begin
+	  with "#!", shebang line should be added, not be replaced.
+
+	* setup.rb (adjust_shebang): refactoring.
+	  #adjust_shebang -> #update_shebang_line.
+
+Sun Nov 20 19:13:28 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* test/testmain.rb: removed.
+
+	* test/testconfig.rb: removed.
+
+Sun Nov 20 16:49:14 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (standard_entries): $rubypath should include file
+	  extension.  This patch is contributed by U.Nakamura.
+
+Fri Nov  4 19:39:45 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: --without-ext did not work.
+
+Thu Oct 13 04:25:35 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (MetaConfigEnvironment): fix typo.
+
+Thu Sep 29 03:12:01 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (install_dir_lib): do not install *.y and *.output
+	  (Racc files). [FEATURE CHANGE]
+
+Thu Sep 29 02:05:01 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (rubyscripts): accept all non-junk files.
+	  [FEATURE CHANGE]
+
+Sun Sep 25 02:22:15 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.4.0 released.
+
+Sun Sep 25 02:22:01 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (exec_test): check if test/unit was loaded.
+
+Sun Sep 25 02:17:54 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: fix varname.
+
+Sun Sep 25 02:15:10 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: use .makeparams mechanism.
+
+Sat Sep 24 23:22:42 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* NEWS.m: wrote about --shebang, --installdirs.
+
+	* doc/usage.rd.m: ditto.
+
+Sat Sep 24 23:21:56 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: --installdirs did not work.
+
+Sat Sep 24 22:54:11 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* NEWS.m: add release note for 3.4.0.
+
+	* doc/{devel,metaconfapi,usage}.rd.m: wrote about conf/, man/,
+	  test/.
+
+Sat Sep 24 22:52:33 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: multipackage archive did not work.
+
+Sat Sep 24 22:15:15 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: update version (3.4.0).
+
+	* setup.rb: ditto.
+
+Sat Sep 24 22:05:34 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: new task `test'.  This function is fetched from
+	  bioruby's install.rb.
+
+Sat Sep 24 21:59:12 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* README.{ja,en}: Lesser GPL is version 2.1, not 2.0.
+
+	* doc/devel.rd.m: ditto.
+
+Sat Sep 24 21:52:37 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: update version (3.3.2).
+
+	* setup.rb: ditto.
+
+Sat Sep 24 21:50:24 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* COPYING: new file.
+
+	* doc/devel.rd.m: update copyright related description.
+
+Fri Aug 19 09:57:44 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: new file type `man'.  This patch is contributed by
+	  Tommy Midttveit.
+
+Sat Aug  6 02:28:21 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: new option --installdirs.
+
+	* setup.rb: parameterize only $prefix.
+
+Wed May  4 00:23:20 2005  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: new config option --localstatedir.
+
+	* setup.rb: install conf/**/*.
+	  (These 2 patches are contributed by Paul van Tilburg)
+
+	* setup.rb: site_ruby points fixed path (is not affected by
+	  --prefix change).
+
+	* setup.rb: new config option --libruby.
+
+	* setup.rb: refactoring ConfigTable_class and ConfigTable.
+
+Sun Dec  5 02:07:11 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (command): use multiple-argument #system, to support a
+	  path which includes space.
+
+	* setup.rb (extdir?): check extconf.rb, too.
+
+Thu Oct 28 00:12:39 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (adjust_shebang): $rubypath may not end with "ruby".
+	  I forget why I added this line.
+
+Mon Oct 25 06:15:06 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (adjust_shebang): rename(2) cannot overwrite opening
+	  file on Windows. [ruby-ext:02239]
+
+Mon Oct 25 06:04:18 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: new method remove_tree.
+
+	* setup.rb: new method remove_file.
+
+	* setup.rb: new method force_remove_file.
+
+	* setup.rb (rm_rf): use remove_tree.
+
+	* setup.rb (rm_f): use force_remove_file.
+
+Sat Oct  2 20:06:19 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.3.1 released.
+
+Sat Oct  2 20:06:04 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: tested in Ruby 1.4.6.
+
+Sat Oct  2 19:54:45 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: do not use "rescue XXX => err", Ruby 1.4 does not
+	  support it.
+
+Sat Oct  2 19:52:51 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: provide more config items. (datadir, mandir,
+	  sysconfdir, ...)
+
+	* setup.rb: more strong parameterization. ($siteruby,
+	  $siterubyver, ...)
+
+	* setup.rb: $siteruby points .../lib/ruby/site_ruby.
+
+	* setup.rb: $siterubyver points .../lib/ruby/site_ruby/X.X.
+
+	* setup.rb: $site-ruby-common points .../lib/ruby/site_ruby for
+	  backward compatibility.
+
+	* setup.rb: $site-ruby points .../lib/ruby/site_ruby/X.X for
+	  backward compatibility.
+
+	* setup.rb: objectify config items.
+
+	* setup.rb: remove ConfigTable class methods.
+
+	* setup.rb: remove useless compat methods.
+
+Sat Oct  2 15:11:21 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (ConfigTable#[]=): does not expand path value when it
+	  begins with '$'.
+
+Sat Oct  2 14:32:12 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (ConfigTable#[]=): support relational path in
+	  configration.
+
+Sat Oct  2 14:16:39 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (adjust_shebang): missing SHEBANG_RE. (thanks: Thomas
+	  Link)
+
+Tue Sep 28 15:40:46 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: --bin-dir -> --bindir, etc.  Old options are kept as
+	  aliases. [ruby-talk:113880]
+
+Tue Sep 21 12:05:56 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.3.0 released.
+
+Tue Sep 21 12:01:47 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: new task `all', it invokes config, setup, and install.
+
+Tue Sep 21 11:25:27 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb (install): fix bug.
+
+Tue Sep 21 10:56:39 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: invoke config-setup-install if there is no global
+	  option.
+
+	* setup.rb: modify shebang only when original shebang contains
+	  `ruby'.
+
+Sun Jun 13 03:44:12 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: ignore .svn/.  (thanks: Aredridel)
+
+Mon Feb 16 18:02:50 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.2.4.
+
+Mon Feb 16 17:55:35 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: get make-prog default value from
+	  CONFIG['configure_args'].  [ruby-list:39186]
+
+	* setup.rb (FileOp#install): wrong path was written in
+	  InstalledFiles.
+
+Mon Feb 16 17:14:00 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: remove task `asm'.
+
+	* Makefile: default task is `update'.
+
+	* Makefile (update): update version in setup.rb.
+
+Mon Feb 16 17:06:07 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb: created by concatenating all files.
+
+	* asm.rb: removed.
+
+	* base.rb: removed.
+
+	* compat.rb: removed.
+
+	* config.rb: removed.
+
+	* fileop.rb: removed.
+
+	* setup.rb.in: removed.
+
+	* toplevel.rb: removed.
+
+Mon Feb 16 17:03:39 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* setup.rb.in: update copyright year.
+
+Mon Feb 16 17:03:10 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* config.rb: Array#index(re) does not work, use detect.
+	  [ruby-list:39187]
+
+	* compat.rb: define Enumerable#detect.
+
+Mon Feb 16 16:30:14 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* compat.rb (File.read): original File.read does not open file in
+	  binary mode.
+
+	* compat.rb: new method File.binread.
+
+	* fileop.rb: use File.binread for binary files. [ruby-list:39184]
+
+Thu Feb 12 23:37:45 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.2.3.
+
+Thu Feb 12 23:37:45 2004  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb: open files in binary mode.
+
+	* compat.rb: ditto.
+
+Tue Dec 16 18:35:36 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: version 3.2.2.
+
+	* toplevel.rb: ditto.
+
+Tue Dec 16 18:06:41 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* asm.rb: Regexp#=== -> =~
+
+	* base.rb: ditto.
+
+	* fileop.rb: ditto.
+
+	* toplevel.rb: ditto.
+
+	* base.rb (REJECT_PATTERNS): escape '#'.
+
+	* setup.rb.in: unindent copyright.
+
+Tue Dec 16 18:03:15 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb (REJECT_PATTERNS): remove *.elc, *.so, etc.
+
+Tue Dec  2 22:08:05 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* config.rb (ConfigTable#[]=): does not expand path.
+
+Tue Dec  2 22:07:40 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* toplevel.rb (exec_config): must save configuration after running
+	  all hooks.
+
+Fri Oct 17 22:57:46 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* fileop.rb (install): should write `dest' to InstallFiles, not
+	  `realdest'.
+
+Mon Sep  8 09:09:47 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb: FileOperations#dir? -> File.dir?
+
+	* fileop.rb: ditto.
+
+	* toplevel.rb: ditto.
+
+	* base.rb: FileTest -> File
+
+	* config.rb: ditto.
+
+	* fileop.rb: ditto.
+
+Mon Sep  8 09:03:44 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Now MetaConfigAPI does not need #read_file.
+	  (reported by Guillaume Marcais)
+
+	* compat.rb: define File.read again (replaces
+	  FileOperations#read_file).
+
+	* base.rb: read_file -> File.read
+
+	* config.rb: ditto.
+
+	* fileop.rb: ditto.
+
+Mon Sep  1 00:09:22 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.2.1.
+
+Mon Sep  1 00:09:11 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* NEWS.m: update for version 3.2.1.
+
+Mon Sep  1 00:03:52 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: version up.
+
+	* toplevel.rb: ditto.
+
+	* web/setup.ja.html: ditto.
+
+	* web/setup.en.html: ditto.
+
+Mon Sep  1 00:01:35 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* toplevel.rb: does not work. (thanks Tadayoshi Funaba)
+
+Thu Aug 28 19:11:52 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* README.en: small modify.
+
+	* README.setup: wrote a not about each packages.
+
+	* README.setup: remove my address.
+
+Wed Aug 27 13:10:46 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* web/setup.html: removed.
+
+	* web/setup.ja.html: new file.
+
+	* web/setup.en.html: new file.
+
+	* Makefile (site): install web/*.html.
+
+Wed Aug 27 13:01:29 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.2.0.
+
+Wed Aug 27 13:00:32 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* README.en: add description.
+
+Wed Aug 27 12:58:36 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* README.ja: new file.
+
+Wed Aug 27 12:53:06 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/hookapi.rrd.m: update type description.
+
+Wed Aug 27 12:49:23 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* .cvsignore: remove install.rb.
+
+	* README.en: ditto.
+
+	* TODO: ditto.
+
+Wed Aug 27 12:42:35 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* toplevel.rb (load_config): need argument `task'.
+
+	* toplevel.rb (exec_*clean): remove config.save.
+
+	* toplevel.rb: new method verbose? and no_harm? to allow rm_f.
+
+Wed Aug 27 12:18:16 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: version 3.2.0.
+
+	* toplevel.rb: ditto.
+
+	* web/setup.rb: ditto.
+
+Wed Aug 27 12:16:25 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* web/setup.rb: new file.
+
+	* Makefile (dist): remove web/ in distribution archive.
+
+Wed Aug 27 12:05:35 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/devel.rd.m: remove description about install.rb.
+
+	* doc/index.rhtml.m: ditto.
+
+	* doc/usage.rd.m: ditto.
+
+Wed Aug 27 12:04:56 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* NEWS.m: updated.
+
+Wed Aug 27 11:14:12 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb: require rbconfig.rb.
+
+	* base.rb: new module HookUtils (methods moved from Installer).
+
+	* base.rb: new module HookScriptAPI (methods moved from
+	  Installer).
+
+	* base.rb (srcentries): does not exclude hook files.
+
+	* base.rb (adjust_shebang): simplify log message.
+
+	* base.rb (collect_filenames_auto): debug.
+
+	* base.rb (existfiles): does not use #curr_objdir, which is moved
+	  to HookScriptAPI.
+
+	* config.rb: now #multipackage_install? is defined globaly.
+
+	* fileop.rb (move_file): code enhancement.
+
+	* fileop.rb (move_file): simplify log message.
+
+	* fileop.rb (install): does not use #objdir, which is removed.
+
+	* setup.rb.in: now #multipackage_install? is defined globaly.
+
+	* toplevel.rb: remove .create_instance (merged in to .instance).
+	  Use singleton pattern.
+
+	* toplevel.rb: new method #load_config.
+
+	* toplevel.rb (load_config): On *clean, load config only the file
+	  exists.
+
+	* toplevel.rb (try): removed, to reduce useless log message.
+
+	* toplevel.rb (exec_config): save config before traversing.
+
+Wed Aug 27 09:20:38 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* sample/add-task.rb: new file.
+
+Wed Aug 27 09:08:07 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* install.rb.in: removed (merged into setup.rb).
+
+	* package.rb: removed (merged into toplevel.rb).
+
+	* Makefile: now install.rb is removed.
+
+	* base.rb: move Version, Copyright to toplevel.rb.
+
+	* base.rb (Installer.declare_toplevel_installer): removed.
+
+	* base.rb (Installer.toplevel_installer): removed. use
+	  ToplevelInstaller.instance.
+
+	* base.rb (try_run_hook): eval hook files on installer itself.
+
+	* base.rb: reformat.
+
+	* compat.rb: reformat.
+
+	* config.rb: multi-package descripter moved from package.rb.
+
+	* fileop.rb: #mv -> #move_file.
+
+	* setup.rb.in: merge install.rb.in.
+
+	* toplevel.rb: now ToplevelInstall does not inherit Installer.
+
+	* toplevel.rb: new constant ToplevelInstaller::Version.
+
+	* toplevel.rb: new constant ToplevelInstaller::Copyright.
+
+	* toplevel.rb: new method .multipackage_install?
+
+	* toplevel.rb: new method .create_instance
+
+	* toplevel.rb: new method .instance
+
+	* toplevel.rb: merge package.rb (ToplevelInstallerMulti).
+
+	* asm.rb: does not print file names.
+
+Wed Aug 27 07:33:37 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb: small refactoring.
+
+	* base.rb: move #make and #extdir? to fileop.rb.
+
+	* compat.rb: remove File.write.
+
+	* compat.rb: move File.read_all to fileop.rb (#read_file).
+
+	* config.rb: restruct .new and .load.
+
+	* fileop.rb: add #make, #extdir?, #read_file from other files.
+
+	* toplevel.rb (parsearg_TASK): refactoring: reduce #respond_to?.
+
+Tue Aug 26 03:22:59 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb (REJECT_PATTERNS): missing parens.
+
+Tue Aug 26 03:09:57 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb: update coding style.
+
+	* config.rb: ditto.
+
+	* fileop.rb: ditto.
+
+	* package.rb: ditto.
+
+	* toplevel.rb: ditto.
+
+Thu Aug 21 15:17:32 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: new task `site'.
+
+Thu Aug 21 15:17:09 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/index.rhtml.m: add hyper link to note.html.
+
+Thu Aug 21 15:16:32 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/devel.rd.m: wrote about precise behavior.
+
+Thu Aug 21 14:32:06 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* version 3.1.5
+
+Thu Aug 21 14:31:00 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/devel.rd.m: wrote about backward compatibility policy.
+
+Thu Aug 21 14:20:04 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile (asm): in.* -> *.in
+
+	* Makefile (text): create NEWS.*
+
+	* Makefile (text): usage-*.txt -> Usage_*.txt
+
+Thu Aug 21 14:19:09 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* NEWS.m: wrote version 3.1.5 news.
+
+Thu Aug 21 14:18:33 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/usage.rd.m: update.
+
+Thu Aug 21 14:10:11 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* in.install.rb -> install.rb.in
+
+	* in.setup.rb -> setup.rb.in
+
+Thu Aug 21 13:57:26 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* 0ChangeLog -> NEWS.m
+
+Thu Aug 21 13:41:05 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile (dist): does not create src/.
+
+Thu Aug 14 17:11:32 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* compat.rb: avoid 1.8 warning.
+
+Mon May 19 06:29:54 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb (clean_dir_ext, dist_dir_ext): should not execute make
+	  unless it is an extdir. [ruby-list:37687]
+
+Mon May 19 06:28:01 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: new task `update'.
+
+Sun May 18 01:55:30 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile (install.rb, setup.rb): use $@ for target file name.
+
+Sun May 18 01:54:06 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: typo: public -> publish
+
+Sun May 18 01:53:34 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: add variable $ardir.
+
+	* Makefile: new task `publish'.
+
+	* Makefile: move Makefile and asm.rb into src/ in distribution
+	  packages.
+
+	* Remake: removed.
+
+Sun May 18 01:46:17 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* Makefile: new task `doc'.
+
+	* Makefile: new task `text'.
+
+	* Makefile: new task `dist'.
+
+	* Makefile: wrote .PHONY.
+
+Sun May 18 01:16:35 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb (install_dir_lib): install lib/**/*.rb.  Does not use
+	  MANIFEST.
+
+	* base.rb (install_dir_bin): MANIFEST support is removed.
+
+	* base.rb (install_dir_data): ditto.
+
+Sun May 18 01:12:16 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* base.rb (srcentries): typo: hookfilenames -> hookfiles (thanks:
+	  Tim Hunter)
+
+Sun May 18 01:09:59 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* doc/devel.rd -> doc/devel.rd.m
+
+	* doc/hookapi.rrd -> doc/hookapi.rrd.m
+
+	* doc/index.html -> doc/index.rhtml.m
+
+	* doc/metaconfapi.rrd -> doc/metaconfapi.rrd.m
+
+	* doc/usage.rd -> doc/usage.rd.m
+
+Sun May 18 01:09:39 2003  Minero Aoki  <aamine@loveruby.net>
+
+	* ChangeLog -> 0ChangeLog
+
+	* ChangeLog: renewed.
+

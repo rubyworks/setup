@@ -1,0 +1,44 @@
+
+body {
+  font-family: sans-serif;
+  font-size: 12px;
+  padding: 30px;
+  background: #100;
+}
+
+h1 {
+ font-family: times;
+ font-size: 36pt;
+ color: #500;
+}
+
+#content {
+  width: 680px;
+  margin: 0 auto;
+  border: 1px solid gray;
+  padding: 30px;
+  background: #FFF;
+  border: 1px solid #cccccc;
+  border-right: 3px solid #aaaaaa;
+  border-bottom: 3px solid #aaaaaa;
+}
+
+#example {
+  text-align: left;
+  border: 1px solid #cccccc;
+  width: 300px;
+  padding: 20px;
+}
+
+#about {
+  clear: both;
+  padding: 30px;
+  border: 0px solid red;
+  text-align: left;
+}
+
+#copyright {
+  margin-top: 50px;
+  font-family: monospace;
+  font-size: 11px;
+}
