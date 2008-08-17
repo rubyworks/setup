@@ -15,21 +15,19 @@ test:
 
 rdoc:
   class    : RDoc
-  template : html
+  template : ./admin/config/rdoc-template
   inline   : true
   exclude  :
-    - lib/sow/scaffolds
-    - lib/sow/generators/*/templates
+    - doc/rdoc
+    - doc/ri
 
 ri:
   class: RIDoc
-  exclude  :
-    - lib/sow/scaffolds
-    - lib/sow/generators/*/templates
 
 gem:
   class: Gem
 
 rubyforge:
-  class: Rubyforge
+  class   : Rubyforge
+  groupid : 6829
 

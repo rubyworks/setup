@@ -2,5 +2,5 @@ name=setup
 version=4.0.0
 status=beta
 date=2008-02-11
-libpath=lib
+libpath=lib;lib/setup
 default=setup.rb
