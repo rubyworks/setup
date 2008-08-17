@@ -1,12 +1,21 @@
-= RELEASE NEWS
+= NEWS
 
-Currently Setup doesn not support Aoki's Metaconfig API.
+== 4.0.0 // 2008-08-16
+
+This is the initial release of Setup. As such it is getting
+the label "betaware" until enough people put it 
+through it's paces. However, since it is predominantly
+setup.rb 3.4.1 code, and that it works to install
+itself ;) it certainly is a usable product.
+
+Please report any problems so we can fix them ASAP.
+
+Currently Setup does not support Aoki's Metaconfig API.
 It's usefulness seems extremely limited, but we will 
 reconsider adding it back in a furture version.
 
-This is an early release of Setup. While it is likely
-to work just fine, at this point we are not recommending
-it for production use.
+Multi-package support has also been removed.
 
-
+--
+Website: http://setup.rubyforge.org
 
