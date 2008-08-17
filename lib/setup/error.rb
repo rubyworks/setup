@@ -1,0 +1,1 @@
+class SetupError < StandardError; end

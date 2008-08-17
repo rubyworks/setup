@@ -1,5 +1,6 @@
 require 'rbconfig'
 require 'setup/rubyver'
+require 'setup/error'
 
 module Setup
 
@@ -265,6 +266,7 @@ module Setup
         begin
           File.foreach(CONFIGFILE) do |line|
             k, v = *line.split(/=/, 2)
+            k.gsub!('-','_')
             __send__("#{k}=",v.strip) #self[k] = v.strip
           end
         rescue Errno::ENOENT

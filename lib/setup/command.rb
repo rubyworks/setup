@@ -35,7 +35,7 @@ module Setup
       task = ARGV.find{ |a| a !~ /^[-]/ }
       task = 'all' unless task
 
-      unless Installer::TASKS.include?(task)
+      unless TASKS.include?(task)
         $stderr.puts "Not a valid task -- #{task}"
         exit 1
       end
@@ -98,17 +98,17 @@ module Setup
 
       # Tail options (eg. commands in option form)
       opts.on_tail("-h", "--help", "display this help information") do
-        puts Setup.help
+        puts help
         exit
       end
 
       opts.on_tail("--version", "Show version") do
-        puts File.basename($0) + ' v' + Setup::Version.join('.')
+        puts File.basename($0) + ' v' + Setup::VERSION #Version.join('.')
         exit
       end
 
       opts.on_tail("--copyright", "Show copyright") do
-        puts Setup::Copyright
+        puts Setup::COPYRIGHT #opyright
         exit
       end
 

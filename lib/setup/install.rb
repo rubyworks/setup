@@ -1,13 +1,18 @@
 require 'optparse'
 require 'setup/config'
 
-# TODO: Need to get settings from where?
+# TODO: we need to abort install if tests fail (how?)
+#       We will also need to add a force install option then.
+# TODO: Need to get name setting from where?
+# TODO: Add support for rdoc once project name issue is worked out. (see RDOC HERE.)
+# TODO: Generate rdocs? Package developer may want to deactivate this.
 
 # Need the package name. This is used to install docs in system doc/ruby-{name}/ location.
-#PACKAGE_NAME = File.read(Dir.glob('{.,meta/}unixname{,.txt}', File::FNM_CASEFOLD).first).strip
+PACKAGE_NAME = ""
 
-# Generate rdocs? Package developer may want to deactivate this.
-#GENERATE_RDOC = true
+#--
+#File.read(Dir.glob('{.,meta/}unixname{,.txt}', File::FNM_CASEFOLD).first).strip
+#++
 
 module Setup
 
@@ -18,7 +23,7 @@ module Setup
 
     MANIFEST  = '.installedfiles'
 
-    FILETYPES = %w( bin lib ext data conf man doc )
+    FILETYPES = %w( bin lib ext data etc man doc )
 
     # Configuration
     attr :config
@@ -68,6 +73,18 @@ module Setup
       end
     end
 
+    #
+    def report_header(phase)
+       return if quiet?
+       #center = "            "
+       #c = (center.size - phase.size) / 2
+       #center[c,phase.size] = phase.to_s.upcase
+       line = '- ' * 4 + ' -' * 24
+       #c = (line.size - phase.size) / 2
+       line[5,phase.size] = " #{phase.to_s.upcase} "
+       puts "\n" + line + "\n\n"
+    end
+
     # Added these for future use in simplificaiton of design.
 
     def extensions
@@ -104,9 +121,8 @@ module Setup
     def exec_all
       exec_config
       exec_setup
-      exec_test      # TODO: we need to stop here if tests fail (how?)
-      exec_rdoc      unless config.without_doc? if GENERATE_RDOC
-      exec_ri        unless config.without_doc?
+      exec_test     # TODO: stop here if fail (?)
+      exec_doc
       exec_install
     end
 
@@ -115,9 +131,10 @@ module Setup
     #
 
     def exec_config
+      report_header('config')
       config.env_config
       config.save_config
-      config.show unless quiet?
+      config.show if verbose?
       puts("Configuration saved.") unless quiet?
       exec_task_traverse 'config'
     end
@@ -130,7 +147,7 @@ module Setup
     end
 
     alias config_dir_data noop
-    alias config_dir_conf noop
+    alias config_dir_etc noop
     alias config_dir_man noop
     alias config_dir_doc noop
 
@@ -150,15 +167,18 @@ module Setup
     # TASK setup
     #
     # FIXME: Update shebang at time of install not before.
-    # for now I've commented it out the shebang.
+    # for now I've commented out the shebang.
+    #
 
     def exec_setup
+      report_header('setup')
       exec_task_traverse 'setup'
+      puts "Ok."
     end
 
     def setup_dir_bin(rel)
       files_of(curr_srcdir()).each do |fname|
-        #update_shebang_line "#{curr_srcdir()}/#{fname}"
+        #update_shebang_line "#{curr_srcdir()}/#{fname}"  # HERE
       end
     end
 
@@ -169,7 +189,7 @@ module Setup
     end
 
     alias setup_dir_data noop
-    alias setup_dir_conf noop
+    alias setup_dir_etc noop
     alias setup_dir_man noop
     alias setup_dir_doc noop
 
@@ -254,25 +274,10 @@ module Setup
     # TODO: Add spec support.
 
     def exec_test
-      $stderr.puts 'Running tests...' if verbose?
-
+      report_header('test')
       runner = config.testrunner
-
       case runner
-      when 'auto'
-        unless File.directory?('test')
-          $stderr.puts 'no test in this package' if verbose?
-          return
-        end
-        begin
-          require 'test/unit'
-        rescue LoadError
-          setup_rb_error 'test/unit cannot loaded.  You need Ruby 1.8 or later to invoke this task.'
-        end
-        autorunner = Test::Unit::AutoRunner.new(true)
-        autorunner.to_run << 'test'
-        autorunner.run
-      else # use testrb
+      when 'testrb'  # TODO: needs work
         opt = []
         opt << " -v" if verbose?
         opt << " --runner #{runner}"
@@ -294,6 +299,19 @@ module Setup
           $stderr.puts cmd if verbose?
           system cmd  #config.ruby "-S tesrb", opt
         end
+      else # autorunner
+        unless File.directory?('test')
+          $stderr.puts 'no test in this package' if verbose?
+          return
+        end
+        begin
+          require 'test/unit'
+        rescue LoadError
+          setup_rb_error 'test/unit cannot loaded.  You need Ruby 1.8 or later to invoke this task.'
+        end
+        autorunner = Test::Unit::AutoRunner.new(true)
+        autorunner.to_run << 'test'
+        autorunner.run
       end
     end
 
@@ -302,8 +320,19 @@ module Setup
     #end
 
     #
+    #
+    #
+
+    def exec_doc
+      return if config.without_doc?
+      report_header('doc')
+      #exec_rdoc   unless config.without_doc?  # RDOC HERE
+      exec_ri      
+    end
+
     # TASK rdoc
     #
+    # NOTE USED YET.
 
     def exec_rdoc
       output    = File.join('doc', 'rdoc')
@@ -391,9 +420,11 @@ module Setup
     #
 
     def exec_install
-      installation!  # were are installing
+      report_header('install')
+      installation!  # we are installing
       #rm_f MANIFEST # we'll append rather then delete!
       exec_task_traverse 'install'
+      $stderr.puts "Done.\n\n" unless quiet?
     end
 
     def install_dir_bin(rel)
@@ -414,7 +445,7 @@ module Setup
       install_files targetfiles(), "#{config.datadir}/#{rel}", 0644
     end
 
-    def install_dir_conf(rel)
+    def install_dir_etc(rel)
       # FIXME: should not remove current config files
       # (rename previous file to .old/.org)
       install_files targetfiles(), "#{config.sysconfdir}/#{rel}", 0644
@@ -429,6 +460,10 @@ module Setup
       return if config.without_doc?
       dir = "#{config.docdir}/ruby-#{PACKAGE_NAME}/#{rel}" # "#{config.docdir}/#{rel}"
       install_files targetfiles(), dir, 0644
+    end
+
+    # doc installs to directory named: "ruby-#{package}"
+    def install_dir_doc(rel)
     end
 
     def install_files(list, dest, mode)
@@ -482,7 +517,7 @@ module Setup
 
     def hookfiles
       %w( pre-%s post-%s pre-%s.rb post-%s.rb ).map {|fmt|
-        %w( config setup install clean ).map {|t| sprintf(fmt, t) }
+        %w( etc setup install clean ).map {|t| sprintf(fmt, t) }
       }.flatten
     end
 
@@ -552,7 +587,7 @@ module Setup
     alias clean_dir_bin noop
     alias clean_dir_lib noop
     alias clean_dir_data noop
-    alias clean_dir_conf noop
+    alias clean_dir_etc noop
     alias clean_dir_man noop
     alias clean_dir_doc noop
 
@@ -580,13 +615,11 @@ module Setup
     end
 
     alias distclean_dir_data noop
-    alias distclean_dir_conf noop
+    alias distclean_dir_etc noop
     alias distclean_dir_man noop
 
     def distclean_dir_doc(rel)
-      if GENERATE_RDOC
-        rm_rf('rdoc') if File.directory?('rdoc')
-      end
+      #rm_rf('rdoc') if File.directory?('rdoc')  # RDOC HERE
     end
 
     #
