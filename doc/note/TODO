@@ -1,0 +1,14 @@
+-  --prefix
+-  support srcdir
+-  output installed file names to the file
+-  single package installer
+-  restruct setup.rb on the top of single package installers
+-  developper level hook again
+-  pass options to extconf.rb
+-  --without-ext
+-  (multi-package archive) package installation order
+-  "ruby setup.rb" means "config; setup; install"
+*  package checker (for developpers)
+*  pass options to hook
+?  .rpm/.deb automatic creation
+?  restruct extconf.rb
