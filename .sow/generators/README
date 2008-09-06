@@ -1,7 +1,0 @@
-= Sow Generator Plugins
-
-You can add sow generator plugins here.
-
-Any file in this directory matching *.rb will
-be loaded by Sow whe it is started.
-

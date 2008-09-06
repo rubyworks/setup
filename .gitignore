@@ -1,6 +1,4 @@
-.installedfiles
-.config
-admin/log/
-doc/rdoc/
-doc/ri/
-
+.cache
+doc/rdoc
+doc/ri
+log

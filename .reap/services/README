@@ -1,5 +1,0 @@
-You can put service plugins for Reap in this directory.
-
-Any .rb file located here will be required by Reap
-when it is invoked.
-
