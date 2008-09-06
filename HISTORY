@@ -1,5 +1,9 @@
 = RELEASE HISTORY
 
+== 4.0.1 // 2008-09-06
+
+* Change cache files to store as .cache/setup/.
+
 == 4.0.0 // 2008-08-15
 
 * Intial release.

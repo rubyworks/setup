@@ -1,17 +1,22 @@
 = NEWS
 
+== 4.1.0 // 2008-09-06
+
+Change the location of the cache files to .cache/setup/.
+
+
 == 4.0.0 // 2008-08-16
 
-This is the initial release of Setup. As such it is getting
-the label "betaware" until enough people put it 
-through it's paces. However, since it is predominantly
-setup.rb 3.4.1 code, and that it works to install
+This is the initial release of Setup. As such it is
+getting the label "betaware" until enough people put
+it through it's paces. However, since it is predominantly
+setup.rb 3.4.1 code, and that it works to install 
 itself ;) it certainly is a usable product.
 
 Please report any problems so we can fix them ASAP.
 
 Currently Setup does not support Aoki's Metaconfig API.
-It's usefulness seems extremely limited, but we will 
+It's usefulness seems limited to me, but we can 
 reconsider adding it back in a furture version.
 
 Multi-package support has also been removed.
