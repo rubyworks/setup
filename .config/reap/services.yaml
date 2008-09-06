@@ -1,33 +1,32 @@
 sow:
-  class: Sow
+  service: SowGen
 
 syntax:
-  class: Syntax
+  service: Syntax
 
 stats:
-  class: Stats
+  service: BasicStats
 
 notes:
-  class: Notes
+  service: Notes
 
 test:
-  class: TestUnit
+  service: TestUnit
 
 rdoc:
-  class    : RDoc
-  template : ./admin/config/rdoc-template
+  service  : RDoc
+  template : .config/rdoc-template
   inline   : true
-  exclude  :
-    - doc/rdoc
-    - doc/ri
 
 ri:
-  class: RIDoc
+  service: RIDoc
 
 gem:
-  class: Gem
+  service : Gem
+  include : [ bin, doc, lib, meta, task, test, '[A-Z]*' ]
+  exclude : [ doc/rdoc, doc/ri ]
 
 rubyforge:
-  class   : Rubyforge
+  service : Rubyforge
   groupid : 6829
 
