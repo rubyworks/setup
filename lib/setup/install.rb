@@ -21,7 +21,7 @@ module Setup
 
   class Installer
 
-    MANIFEST  = '.installedfiles'
+    MANIFEST  = '.cache/setup/installedfiles'
 
     FILETYPES = %w( bin lib ext data etc man doc )
 
@@ -804,6 +804,7 @@ module Setup
     end
 
     def record_installation(path)
+      FileUtils.mkdir_p(File.dirname("#{objdir_root()}/#{MANIFEST}"))
       File.open("#{objdir_root()}/#{MANIFEST}", 'a') do |f|
         f.puts(path)
       end

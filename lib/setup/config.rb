@@ -1,4 +1,5 @@
 require 'rbconfig'
+require 'fileutils'
 require 'setup/rubyver'
 require 'setup/error'
 
@@ -10,7 +11,7 @@ module Setup
 
     RBCONFIG  = ::Config::CONFIG
 
-    CONFIGFILE = '.config'
+    CONFIGFILE = '.cache/setup/config'
 
     DESCRIPTIONS = [
       [:prefix          , :path, 'path prefix of target environment'],
@@ -277,6 +278,7 @@ module Setup
 
     # Save configuration.
     def save_config
+      FileUtils.mkdir_p(File.dirname(CONFIGFILE))
       File.open(CONFIGFILE, 'w') do |f|
         OPTIONS.each do |name|
           val = self[name]
