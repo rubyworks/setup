@@ -4,7 +4,7 @@ body {
   font-size: 12px;
   padding: 0;
   margin: 0;
-  background: #100;
+  background: #fff;
 }
 
 h1 {
@@ -20,12 +20,8 @@ h2 {
 #content {
   width: 720px;
   margin: 0 auto;
-  border: 1px solid gray;
   padding: 30px;
   background: #FFF;
-  border: 1px solid #cccccc;
-  border-right: 3px solid #aaaaaa;
-  border-bottom: 3px solid #aaaaaa;
 }
 
 #example {
@@ -45,14 +41,19 @@ h2 {
   padding: 30px;
   border: 0px solid red;
   text-align: left;
-  font-size: 20pt;
+  font-size: 18pt;
+  text-align: justify;
+  font-family: times;
 }
 
 #copyright {
   margin: 5px 0px;
   font-family: monospace;
   font-size: 10px;
-  color: #cccccc;
+  color: #aaa;
   text-align: center;
 }
+
+#tigerops { width: 900px; margin: 30 auto;}
+#tigerops iframe { width: 900px; border: none; }
 
