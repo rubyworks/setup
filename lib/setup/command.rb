@@ -30,7 +30,8 @@ module Setup
 
     #
     def run
-      installer = Setup::Installer.new
+      config    = ConfigTable.new
+      installer = Installer.new(config)
 
       task = ARGV.find{ |a| a !~ /^[-]/ }
       task = 'all' unless task
@@ -40,14 +41,14 @@ module Setup
         exit 1
       end
 
-      opts = OptionParser.new
+      opts   = OptionParser.new
 
       opts.banner = "Usage: #{File.basename($0)} [task] [options]"
 
       if task == 'config' or task == 'all'
         opts.separator ""
-        opts.separator "Config options:"   
-        ConfigTable::DESCRIPTIONS.each do |name, type, desc|
+        opts.separator "Config options:"
+        config.descriptions.each do |name, type, desc|
           opts.on("--#{name} #{type.to_s.upcase}", desc) do |val|
             ENV[name.to_s] = val.to_s
           end
@@ -63,14 +64,14 @@ module Setup
         end
       end
 
-      if task == 'test'
-        opts.separator ""
-        opts.separator "Install options:"
-
-        opts.on("--runner TYPE", "Test runner (auto|console|gtk|gtk2|tk)") do |val|
-          installer.config.testrunner = val
-        end
-      end
+      #if task == 'test'
+      #  opts.separator ""
+      #  opts.separator "Install options:"
+      #
+      #  opts.on("--runner TYPE", "Test runner (auto|console|gtk|gtk2|tk)") do |val|
+      #    installer.config.testrunner = val
+      #  end
+      #end
 
       # common options
       opts.separator ""

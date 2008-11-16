@@ -31,7 +31,7 @@ module Setup
       [:rbdir           , :path, 'directory for ruby scripts'],
       [:sodir           , :path, 'directory for ruby extentions'],
       [:rubypath        , :prog, 'path to set to #! line'],
-      [:rubyprog        , :prog, 'ruby program using for installation'],
+      [:rubyprog        , :prog, 'ruby program used for installation'],
       [:makeprog        , :prog, 'make program to compile ruby extentions'],
       [:extconfopt      , :name, 'options to pass-thru to extconf.rb'],
       [:without_ext     , :bool, 'do not compile/install ruby extentions'],
@@ -111,16 +111,16 @@ module Setup
       end
     end
 
-    DESCRIPTIONS.each do |k,t,d|
-      case t
-      when :path
-        attr_pathname k
-      when :bool
-        attr_boolean k
-      else
-        attr_accessor k
-      end
-    end
+    #DESCRIPTIONS.each do |k,t,d|
+    #  case t
+    #  when :path
+    #    attr_pathname k
+    #  when :bool
+    #    attr_boolean k
+    #  else
+    #    attr_accessor k
+    #  end
+    #end
 
     # # provide verbosity (default is true)
     # attr_accessor :verbose?
@@ -159,6 +159,7 @@ module Setup
 
     # New ConfigTable
     def initialize(values=nil)
+      initialize_attributes
       initialize_defaults
       if values
         values.each{ |k,v| __send__("#{k}=", v) }
@@ -167,9 +168,33 @@ module Setup
       load_config if File.file?(CONFIGFILE)
     end
 
+    #
+    def initialize_attributes
+      load_meta_config
+      desc = descriptions
+      (class << self; self; end).class_eval do
+        desc.each do |k,t,d|
+          case t
+          when :path
+              attr_pathname k
+          when :bool
+            attr_boolean k
+          else
+            attr_accessor k
+          end
+        end
+      end
+    end
+
+    #
+    def descriptions
+      @descriptions ||= DESCRIPTIONS
+    end
+
     # Assign CONFIG defaults
     #
     # TODO: Does this handle 'nmake' on windows?
+    #
     def initialize_defaults
       prefix = RBCONFIG['prefix']
 
@@ -335,7 +360,94 @@ module Setup
     #  self[name].gsub(%r<\\$([^/]+)>){ self[$1] }
     #end
 
-  end
+    # Metaconfig file is '.config/setup/metaconfig{,.rb}'.
+    def load_meta_config
+      path = Dir.glob('.config/setup/metaconfig{,.rb}').first 
+      if path && File.file?(path)
+        MetaConfigEnvironment.new(self).instance_eval(File.read(path), path)
+      end
+    end
 
-end
+    #= Meta Configuration
+    # This works a bit differently from 3.4.1.
+    # Defaults are currently not supported but remain in the method interfaces.
+    class MetaConfigEnvironment
+      def initialize(config) #, installer)
+        @config    = config
+        #@installer = installer
+      end
+
+      #
+      def config_names
+        @config.descriptions.collect{ |n, t, d| n.to_s }
+      end
+
+      #
+      def config?(name)
+        @config.descriptions.find do |sym, type, desc|
+          sym.to_s == name.to_s
+        end
+      end
+
+      #
+      def bool_config?(name)
+        @config.descriptions.find do |sym, type, desc|
+          sym.to_s == name.to_s && type == :bool
+        end
+        #@config.lookup(name).config_type == 'bool'
+      end
+
+      #
+      def path_config?(name)
+        @config.descriptions.find do |sym, type, desc|
+          sym.to_s == name.to_s && type == :path
+        end
+        #@config.lookup(name).config_type == 'path'
+      end
+
+      #
+      def value_config?(name)
+        @config.descriptions.find do |sym, type, desc|
+          sym.to_s == name.to_s && type != :prog
+        end
+        #@config.lookup(name).config_type != 'exec'
+      end
+
+      #
+      def add_config(name, default, desc)
+        @config.descriptions << [name.to_sym, nil, desc]
+        #@config.add item
+      end
+
+      #
+      def add_bool_config(name, default, desc)
+        @config.descriptions << [name.to_sym, :bool, desc]
+        #@config.add BoolItem.new(name, 'yes/no', default ? 'yes' : 'no', desc)
+      end
+
+      #
+      def add_path_config(name, default, desc)
+        @config.descriptions << [name.to_sym, :path, desc]
+        #@config.add PathItem.new(name, 'path', default, desc)
+      end
+
+      #
+      def set_config_default(name, default)
+        @config[name] = default
+      end
+
+      #
+      def remove_config(name)
+        item = @config.descriptions.find do |sym, type, desc|
+          sym.to_s == name.to_s
+        end
+        index = @config.descriptions.index(item)
+        @config.descriptions.delete(index)
+        #@config.remove(name)
+      end
+    end
+
+  end #class ConfigTable
+
+end #module Setup
 

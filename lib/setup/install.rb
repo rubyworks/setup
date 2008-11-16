@@ -35,11 +35,11 @@ module Setup
     attr_accessor :install_prefix
 
     # New Installer.
-    def initialize #:yield:
+    def initialize(config=nil) #:yield:
       srcroot = '.'
       objroot = '.'
 
-      @config = ConfigTable.new
+      @config = config || ConfigTable.new
 
       @srcdir = File.expand_path(srcroot)
       @objdir = File.expand_path(objroot)
@@ -98,7 +98,7 @@ module Setup
     #
     def noop(rel); end
 
-    #
+    ##
     # Hook Script API bases
     #
 
@@ -114,19 +114,19 @@ module Setup
       @currdir
     end
 
-    #
+    ##
     # Task all
     #
 
     def exec_all
       exec_config
       exec_setup
-      exec_test     # TODO: stop here if fail (?)
+      exec_test
       exec_doc
       exec_install
     end
 
-    #
+    ##
     # TASK config
     #
 
@@ -155,7 +155,7 @@ module Setup
       ruby "#{curr_srcdir()}/extconf.rb", config.extconfopt
     end
 
-    #
+    ##
     # TASK show
     #
 
@@ -163,7 +163,7 @@ module Setup
       config.show
     end
 
-    #
+    ##
     # TASK setup
     #
     # FIXME: Update shebang at time of install not before.
@@ -268,60 +268,87 @@ module Setup
       end
     end
 
-    #
+    ##
     # TASK test
     #
-    # TODO: Add spec support.
+    # This part of the install process still needs some consideration.
+    #
+    # Complexities arise in trying to figure out what test framework
+    # is used, and how to run them. To simplify the process, this
+    # method simply looks for a script 'script/test' or 'task/test'
+    # and runs it if it is found. Alternately it will look for a
+    # file called 'test/suite.rb' and run it with +testrb+.
+    #
+    # TODO: abort if tests fail
 
     def exec_test
-      report_header('test')
-      runner = config.testrunner
-      case runner
-      when 'testrb'  # TODO: needs work
-        opt = []
-        opt << " -v" if verbose?
-        opt << " --runner #{runner}"
-        if File.file?('test/suite.rb')
-          notests = false
-          opt << "test/suite.rb"
-        else
-          notests = Dir["test/**/*.rb"].empty?
-          lib = ["lib"] + config.extensions.collect{ |d| File.dirname(d) }
-          opt << "-I" + lib.join(':')
-          opt << Dir["test/**/{test,tc}*.rb"]
-        end
-        opt = opt.flatten.join(' ').strip
-        # run tests
-        if notests
-          $stderr.puts 'no test in this package' if verbose?
-        else
-          cmd = "testrb #{opt}"
-          $stderr.puts cmd if verbose?
-          system cmd  #config.ruby "-S tesrb", opt
-        end
-      else # autorunner
-        unless File.directory?('test')
-          $stderr.puts 'no test in this package' if verbose?
-          return
-        end
-        begin
-          require 'test/unit'
-        rescue LoadError
-          setup_rb_error 'test/unit cannot loaded.  You need Ruby 1.8 or later to invoke this task.'
-        end
-        autorunner = Test::Unit::AutoRunner.new(true)
-        autorunner.to_run << 'test'
-        autorunner.run
+      if Dir.glob('{script,task}/test', File::FNM_CASEFOLD).first
+        cmd = config.rubyprog + ' task/test'
+      elsif Dir.glob('test/suite.rb', File::FNM_CASEFOLD).first
+        cmd = config.rubyprog + ' testrb test/suite.rb'
+      else
+        cmd = nil
+      end
+
+      if cmd
+        report_header('test')
+        $stderr.puts cmd if verbose?
+        system(cmd)
       end
     end
+
+    ### DEPRECATED
+    #def exec_test
+      #runner = config.testrunner
+      #case runner
+      #when 'testrb'  # TODO: needs work
+      #  opt = []
+      #  opt << " -v" if verbose?
+      #  opt << " --runner #{runner}"
+      #  if File.file?('test/suite.rb')
+      #    notests = false
+      #    opt << "test/suite.rb"
+      #  else
+      #    notests = Dir["test/**/*.rb"].empty?
+      #    lib = ["lib"] + config.extensions.collect{ |d| File.dirname(d) }
+      #    opt << "-I" + lib.join(':')
+      #    opt << Dir["test/**/{test,tc}*.rb"]
+      #  end
+      #  opt = opt.flatten.join(' ').strip
+      #  # run tests
+      #  if notests
+      #    $stderr.puts 'no test in this package' if verbose?
+      #  else
+      #    cmd = "testrb #{opt}"
+      #    $stderr.puts cmd if verbose?
+      #    system cmd  #config.ruby "-S testrb", opt
+      #  end
+      #else # autorunner
+      #  unless File.directory?('test')
+      #    $stderr.puts 'no test in this package' if verbose?
+      #    return
+      #  end
+      #  begin
+      #    require 'test/unit'
+      #  rescue LoadError
+      #    setup_rb_error 'test/unit cannot loaded.  You need Ruby 1.8 or later to invoke this task.'
+      #  end
+      #  lib = ["lib"] + config.extensions.collect{ |d| File.dirname(d) }
+      #  lib.each{ |l| $LOAD_PATH << l }
+      #  autorunner = Test::Unit::AutoRunner.new(true)
+      #  autorunner.to_run << 'test'
+      #  autorunner.run
+      #end
+    #end
 
     # MAYBE: We could traverse and run each test independently (?)
     #def test_dir_test
     #end
 
+    ##
+    # TASK doc
     #
-    #
-    #
+    # NOT USED YET.
 
     def exec_doc
       return if config.without_doc?
@@ -330,9 +357,7 @@ module Setup
       exec_ri      
     end
 
-    # TASK rdoc
-    #
-    # NOTE USED YET.
+    # Generate rdocs.
 
     def exec_rdoc
       output    = File.join('doc', 'rdoc')
@@ -369,7 +394,7 @@ module Setup
       end
     end
 
-    # TASK ri
+    # Generate ri documentation.
 
     def exec_ri
       case config.installdirs
@@ -415,7 +440,7 @@ module Setup
       end
     end
 
-    #
+    ##
     # TASK install
     #
 
@@ -544,7 +569,7 @@ module Setup
       })\z/
     end
 
-    #
+    ##
     # TASK uninstall
     #
 
@@ -574,7 +599,7 @@ module Setup
       rm_f(MANIFEST)
     end
 
-    #
+    ##
     # TASK clean
     #
 
@@ -596,7 +621,7 @@ module Setup
       make 'clean' if File.file?('Makefile')
     end
 
-    #
+    ##
     # TASK distclean
     #
 
@@ -622,7 +647,7 @@ module Setup
       #rm_rf('rdoc') if File.directory?('rdoc')  # RDOC HERE
     end
 
-    #
+    ##
     # Traversing
     #
 
@@ -676,6 +701,7 @@ module Setup
       end
     end
 
+    ##
     # File Operations
     #
     # This module requires: #verbose?, #no_harm?
@@ -847,7 +873,7 @@ module Setup
       }
     end
 
-    #
+    ##
     # Hook Script API
     #
     # These require: #srcdir_root, #objdir_root, #relpath
@@ -864,10 +890,12 @@ module Setup
       config[key] = val
     end
 
-    #
     # srcdir/objdir (works only in the package directory)
     #
+    # TODO: Since package directory has been deprecated these 
+    # probably can be worked out of the system.
 
+    #
     def curr_srcdir
       "#{srcdir_root()}/#{relpath()}"
     end
