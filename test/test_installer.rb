@@ -1,3 +1,6 @@
+# This isn't begin used presently. The only tests were for sheband lines
+# and these are not being made in the current version.
+
 require 'setup'
 require 'fileutils'
 require 'stringio'
@@ -21,7 +24,7 @@ class DummyConfig
   end
 end
 
-class TestInstaller < Test::Unit::TestCase
+class TestInstaller #< Test::Unit::TestCase
 
   include FileUtils
 

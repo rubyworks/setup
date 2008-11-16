@@ -3,12 +3,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
   <meta http-equiv="Content-Language" content="en">
+  <link href="../../assets/images/setup-small.png" rel="shortcut icon"/>
   <link href="custom.css" rel="stylesheet" type="text/css"/>
   <title>Creating Packages with setup.rb</title>
 </head>
 <body>
 <div id="content">
-<img src="../images/setup-small.png" align="left"/>
+<img src="../../assets/images/setup-small.png" align="left"/>
 <h1>Creating Packages</h1>
 <hr/>
 <h2>Creating Single Package Archive</h2>
@@ -22,7 +23,6 @@ setup.rb requires that the archive is structured like this:
 </p>
 <pre>
 PackageTop/
-    setup.rb
     lib/
         (ruby scripts)
     ext/
@@ -42,12 +42,6 @@ PackageTop/
 Each file/directories acts as below:
 </p>
 <dl>
-<dt>setup.rb</dt>
-<dd><p>
-The installer. This file is included in this archive.
-Just copy it to your package.
-</p>
-</dd>
 <dt>lib/, bin/, data/, etc/, man/</dt>
 <dd><p>
 These directories includes files which are to be installed.

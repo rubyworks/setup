@@ -1,5 +1,5 @@
-sow:
-  service: SowGen
+#sow:
+#  service: SowGen
 
 syntax:
   service: Syntax
@@ -15,7 +15,7 @@ test:
 
 rdoc:
   service  : RDoc
-  template : .config/rdoc-template
+  template : ./.config/rdoc/template
   inline   : true
 
 ri:
@@ -25,6 +25,11 @@ gem:
   service : Gem
   include : [ bin, doc, lib, meta, task, test, '[A-Z]*' ]
   exclude : [ doc/rdoc, doc/ri ]
+
+tgz:
+  service: Tgz
+  include: [ bin, doc, lib, meta, task, test, '[A-Z]*' ]
+  exclude: [ doc/rdoc, doc/ri ]
 
 rubyforge:
   service : Rubyforge
