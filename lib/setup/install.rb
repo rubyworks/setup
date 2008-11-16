@@ -568,9 +568,24 @@ module Setup
       paths = File.read(MANIFEST).split("\n")
       dirs, files = paths.partition{ |f| File.dir?(f) }
 
-      files.each do |file|
+      remove = []
+      files.uniq.each do |file|
         next if /^\#/ =~ file  # skip comments
-        rm_f(file) if File.exist?(file)
+        remove << file if File.exist?(file)
+      end
+
+      if verbose? && !no_harm?
+        puts remove.collect{ |f| "rm #{f}" }.join("\n")
+        ans = ask("Continue?", "yN")
+        case ans
+        when 'y', 'Y', 'yes'
+        else
+          return # abort?
+        end
+      end
+
+      remove.each do |file|
+        rm_f(file) 
       end
 
       dirs.each do |dir|
@@ -864,6 +879,14 @@ module Setup
       Dir.open(dir) {|d|
         return d.select {|ent| File.dir?("#{dir}/#{ent}") } - DIR_REJECT
       }
+    end
+
+    # Ask a question of the user.
+    def ask(question, answers=nil)
+      $stdout << "#{question}"
+      $stdout << " [#{answers}] " if answers
+      until inp = $stdin.gets ; sleep 1 ; end
+      inp.strip
     end
 
     ##

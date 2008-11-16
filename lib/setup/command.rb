@@ -11,25 +11,28 @@ module Setup
     TASKS = %w(all config show setup test install uninstall rdoc ri clean distclean)
 
     TASK_DESCRIPTIONS = [
-      [ 'all',      'do config, setup, then install' ],
-      [ 'config',   'saves your configurations' ],
-      [ 'show',     'shows current configuration' ],
-      [ 'setup',    'compiles ruby extentions and others' ],
-      [ 'rdoc',     'generate rdoc documentation' ],
-      [ 'ri',       'generate ri documentation' ],
-      [ 'install',  'installs files' ],
-      [ 'test',     'run all tests in test/' ],
-      [ 'clean',    "does `make clean' for each extention" ],
-      [ 'distclean',"does `make distclean' for each extention" ]
+      [ 'all',       "do config, setup, then install" ],
+      [ 'config',    "saves your configurations" ],
+      [ 'show',      "shows current configuration" ],
+      [ 'setup',     "compiles ruby extentions and others" ],
+      [ 'rdoc',      "generate rdoc documentation" ],
+      [ 'ri',        "generate ri documentation" ],
+      [ 'install',   "installs files" ],
+      [ 'uninstall', "uninstalls files" ],
+      [ 'test',      "run all tests in test/" ],
+      [ 'clean',     "does `make clean' for each extention" ],
+      [ 'distclean', "does `make distclean' for each extention" ]
     ]
 
     #
-    def self.run
-      new.run
+    def self.run(*argv)
+      new.run(*argv)
     end
 
     #
-    def run
+    def run(*argv)
+      ARGV.replace(argv) unless argv.empty?
+
       config    = ConfigTable.new
       installer = Installer.new(config)
 
@@ -89,11 +92,11 @@ module Setup
         installer.verbose = val
       end
 
-      opts.on("-n", "--no-write", "Do not write to disk") do |val|
+      opts.on("--no-write", "Do not write to disk") do |val|
         installer.no_harm = !val
       end
 
-      opts.on("--dryrun", "Same as --no-write") do |val|
+      opts.on("-n", "--dryrun", "Same as --no-write") do |val|
         installer.no_harm = val
       end
 
