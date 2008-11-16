@@ -62,6 +62,10 @@ module Setup
         opts.on("--prefix PATH", "Installation prefix") do |val|
           installer.install_prefix = val
         end
+
+        opts.on("--no-test", "Do not run tests") do |val|
+          installer.install_no_test = true
+        end
       end
 
       #if task == 'test'

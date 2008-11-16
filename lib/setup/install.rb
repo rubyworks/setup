@@ -33,6 +33,7 @@ module Setup
     attr_writer :quiet
 
     attr_accessor :install_prefix
+    attr_accessor :install_no_test
 
     # New Installer.
     def initialize(config=nil) #:yield:
@@ -60,9 +61,9 @@ module Setup
     def installation?; @installation; end
     def installation!; @installation = true; end
 
-    def no_harm?; @no_harm; end
-    def verbose?; @verbose; end
-    def quiet?; @quiet; end
+    def no_harm? ; @no_harm ; end
+    def verbose? ; @verbose ; end
+    def quiet?   ; @quiet   ; end
 
     def verbose_off #:yield:
       begin
@@ -271,29 +272,19 @@ module Setup
     ##
     # TASK test
     #
-    # This part of the install process still needs some consideration.
-    #
     # Complexities arise in trying to figure out what test framework
-    # is used, and how to run them. To simplify the process, this
-    # method simply looks for a script 'script/test' or 'task/test'
-    # and runs it if it is found. Alternately it will look for a
-    # file called 'test/suite.rb' and run it with +testrb+.
+    # is used, and how to run tests. To simplify the process, this
+    # method simply looks for a script, either '.config/setup/testrc.rb',
+    # or 'script/test' or 'task/test' and runs it if found.
     #
-    # TODO: abort if tests fail
-
     def exec_test
-      if Dir.glob('{script,task}/test', File::FNM_CASEFOLD).first
-        cmd = config.rubyprog + ' task/test'
-      elsif Dir.glob('test/suite.rb', File::FNM_CASEFOLD).first
-        cmd = config.rubyprog + ' testrb test/suite.rb'
-      else
-        cmd = nil
-      end
-
-      if cmd
+      return if install_no_test
+      file   = nil
+      file ||= Dir.glob('.config/setup/test{,rc}{,.rb}', File::FNM_CASEFOLD).first
+      file ||= Dir.glob('{script,task}/test', File::FNM_CASEFOLD).first
+      if file
         report_header('test')
-        $stderr.puts cmd if verbose?
-        system(cmd)
+        ruby(file)
       end
     end
 
@@ -674,6 +665,7 @@ module Setup
       }
     end
 
+    #
     def dive_into(rel)
       return unless File.dir?("#{@srcdir}/#{rel}")
 
@@ -689,6 +681,7 @@ module Setup
       @currdir = File.dirname(rel)
     end
 
+    #
     def run_hook(id)
       path = [ "#{curr_srcdir()}/#{id}",
                "#{curr_srcdir()}/#{id}.rb" ].detect {|cand| File.file?(cand) }
@@ -881,7 +874,7 @@ module Setup
 
     #
     def get_config(key)
-      config.__send__(key)
+      config[key]
     end
 
     # obsolete: use metaconfig to change configuration
@@ -893,7 +886,7 @@ module Setup
     # srcdir/objdir (works only in the package directory)
     #
     # TODO: Since package directory has been deprecated these 
-    # probably can be worked out of the system.
+    # probably can be worked out of the system. ?
 
     #
     def curr_srcdir
