@@ -8,8 +8,9 @@ The API is largely the same, with a only few distinctions.
 Most importantly, multi-package support has been removed.
 Also the underlying system has been made more object-oriented,
 for instance, what was ToplevelInstaller is now Setup::Installer.
-Finally configuration files are placed .config/setup, rather
-than directly into the root project directory.
+Finally configuration files are saved to .cache/setup and
+metaconfig should be placed in .config/setup, rather then
+directly into the root project directory.
 
 I still consider this and "early" release of Ruby Setup, that
 is until enough people put it through it's paces.
@@ -28,8 +29,8 @@ Please report any problems so I can fix them ASAP.
     * cache files are now stored in .cache/setup/
     * Renamed binary from rubysetup to setup.rb.
       * Hoping that the use of a dot in the name is not a problem on Windows.
-      * By using setup.rb for the binary, it matches exacly the name of the old script.
-      * Other developers could do likwise, eg. setup.py; akin to mkfs.ext3 and friends. 
+      * By using setup.rb for the binary, it matches exactly the name of the old script.
+      * Other developers could do likewise, eg. setup.py; akin to mkfs.ext3 and friends. 
     * Added script/install as a bootstrap installer.
     * restored metaconfig
 
