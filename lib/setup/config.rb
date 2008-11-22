@@ -53,7 +53,7 @@ module Setup
           @#{name}.gsub(%r<\\$([^/]+)>){ self[$1] }
         end
         def #{name}=(path)
-          raise SetupError, "bad config: #{name.to_s.upcase} requires argument" unless path
+          raise Error, "bad config: #{name.to_s.upcase} requires argument" unless path
           @#{name} = (path[0,1] == '$' ? path : File.expand_path(path))
         end
       }   
@@ -102,7 +102,7 @@ module Setup
               when 'n', 'no', 'f', 'false'
                  @#{name} = false
               else
-                raise SetupError, "bad config: use #{name.upcase}=(yes|no) [\#{val}]"
+                raise Error, "bad config: use #{name.upcase}=(yes|no) [\#{val}]"
               end
             end
           end
@@ -133,7 +133,7 @@ module Setup
       if %w(all ruby never).include?(val)
         @shebang = val
       else
-        raise SetupError, "bad config: use SHEBANG=(all|ruby|never) [#{val}]"
+        raise Error, "bad config: use SHEBANG=(all|ruby|never) [#{val}]"
       end
     end
 
@@ -148,12 +148,12 @@ module Setup
         self.rbdir = '$siterubyver'
         self.sodir = '$siterubyverarch'
       when 'home'
-        raise SetupError, 'HOME is not set.' unless ENV['HOME']
+        raise Error, 'HOME is not set.' unless ENV['HOME']
         self.prefix = ENV['HOME']
         self.rbdir = '$libdir/ruby'
         self.sodir = '$libdir/ruby'
       else
-        raise SetupError, "bad config: use INSTALLDIRS=(std|site|home|local) [#{val}]"
+        raise Error, "bad config: use INSTALLDIRS=(std|site|home|local) [#{val}]"
       end
     end
 
@@ -296,7 +296,7 @@ module Setup
             __send__("#{k}=",v.strip) #self[k] = v.strip
           end
         rescue Errno::ENOENT
-          raise SetupError, $!.message + "\n#{File.basename($0)} config first"
+          raise Error, $!.message + "\n#{File.basename($0)} config first"
         end
       #end
     end

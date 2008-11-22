@@ -1,6 +1,7 @@
 require 'setup/config'
 require 'setup/build'
 require 'setup/install'
+require 'setup/error'
 
 module Setup
 
@@ -129,7 +130,7 @@ module Setup
 
       begin
         installer.__send__("exec_#{task}")
-      rescue SetupError
+      rescue Error
         raise if $DEBUG
         $stderr.puts $!.message
         $stderr.puts "Try 'ruby #{$0} --help' for detailed usage."

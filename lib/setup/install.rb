@@ -53,6 +53,7 @@ module Setup
       yield(self) if block_given?
     end
 
+    #
     def inspect
       "#<#{self.class} #{File.basename(@srcdir)}>"
     end
