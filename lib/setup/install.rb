@@ -170,7 +170,6 @@ module Setup
     #
     # FIXME: Update shebang at time of install not before.
     # for now I've commented out the shebang.
-    #
 
     def exec_setup
       report_header('setup')
@@ -275,14 +274,14 @@ module Setup
     #
     # Complexities arise in trying to figure out what test framework
     # is used, and how to run tests. To simplify the process, this
-    # method simply looks for a script, either '.config/setup/testrc.rb',
-    # or 'script/test' or 'task/test' and runs it if found.
+    # simply looks for a script in .config/setup called testrc.rb,
+    # or just test.rb.
     #
     def exec_test
       return if install_no_test
-      file   = nil
-      file ||= Dir.glob('.config/setup/test{,rc}{,.rb}', File::FNM_CASEFOLD).first
-      file ||= Dir.glob('{script,task}/test', File::FNM_CASEFOLD).first
+      #file   = nil
+      file = Dir.glob('.config/setup/test{,rc}.rb', File::FNM_CASEFOLD).first
+      #file ||= Dir.glob('{script,task}/test', File::FNM_CASEFOLD).first
       if file
         report_header('test')
         ruby(file)
@@ -339,8 +338,6 @@ module Setup
 
     ##
     # TASK doc
-    #
-    # NOT USED YET.
 
     def exec_doc
       return if config.without_doc?
@@ -350,6 +347,9 @@ module Setup
     end
 
     # Generate rdocs.
+    #
+    # NOT USED YET B/C WE WOULD HAVE TO KNOW THE NAME OF THE PROJECT
+    # TO DO THIS CORRECTLY. (WHERE DO WE GET THAT?)
 
     def exec_rdoc
       output    = File.join('doc', 'rdoc')
