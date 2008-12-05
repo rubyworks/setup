@@ -168,9 +168,7 @@ module Setup
     ##
     # TASK setup
     #
-    # FIXME: Update shebang at time of install not before.
-    # for now I've commented out the shebang.
-
+    # FIXME: Update shebang on install rather than before.
     def exec_setup
       report_header('setup')
       exec_task_traverse 'setup'
@@ -179,7 +177,7 @@ module Setup
 
     def setup_dir_bin(rel)
       files_of(curr_srcdir()).each do |fname|
-        #update_shebang_line "#{curr_srcdir()}/#{fname}"  # HERE
+        update_shebang_line "#{curr_srcdir()}/#{fname}"  # MOVE TO INSTALL (BUT HOW?)
       end
     end
 
