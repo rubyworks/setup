@@ -13,8 +13,7 @@ converts setup.rb into a stand-alone application. No longer will you
 need distribute setup.rb with you Ruby packages. Just instruct your
 users to use Setup.
 
-
-== IMPORTANT
+=== IMPORTANT
 
 There a couple very important difference between the old 3.4.1 verison
 of the setup.rb script and version 4.0.0 of the independent application.
