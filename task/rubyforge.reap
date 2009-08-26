@@ -1,0 +1,6 @@
+---
+rubyforge:
+  service : Rubyforge
+  groupid : 6829
+  active  : true
+
