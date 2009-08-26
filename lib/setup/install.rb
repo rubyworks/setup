@@ -64,9 +64,6 @@ module Setup
       self.verbose = ENV['verbose'] if ENV['verbose']
       self.no_harm = ENV['nowrite'] if ENV['nowrite']
 
-      # must have package name to generate docs.
-      config.withoutdoc = true unless PACKAGE
-
       yield(self) if block_given?
     end
 
@@ -527,6 +524,7 @@ module Setup
     # doc installs to directory named: "ruby-#{package}"
     def install_dir_doc(rel)
       return if config.withoutdoc?
+      return unless PACKAGE
       dir = "#{config.docdir}/ruby-#{PACKAGE}/#{rel}" # "#{config.docdir}/#{rel}"
       install_files targetfiles(), dir, 0644
     end
