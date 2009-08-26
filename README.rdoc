@@ -82,20 +82,22 @@ file!
 == COPYRIGHT & LICENSE
 
 Copyright (c) 2002,2005 Minero Aoki
+
 Copyright (c) 2008,2009 Thomas Sawyer
 
 GNU LGPL, Lesser General Public License version 2.1.
+
 For details of LGPL, see the file "COPYING".
 
 
 
 
-                                     7trans
-                        transfire@gmail.com
-                        http://tigerops.org
+                                               7trans
+                                  transfire@gmail.com
+                                  http://tigerops.org
 
 
-                                Minero Aoki
-                        aamine@loveruby.net
-                      http://i.loveruby.net
+                                          Minero Aoki
+                                  aamine@loveruby.net
+                                http://i.loveruby.net
 
