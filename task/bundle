@@ -7,6 +7,7 @@ scripts = scripts.reject{ |f| File.directory?(f) }
 
 # We don't want the rake helper.
 scripts = scripts - ["lib/setup/rake.rb"]
+scripts = scripts + ["bin/setup.rb"]
 
 #
 bundle = ""
