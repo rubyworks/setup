@@ -1,6 +1,6 @@
 ---
 rubyforge:
-  service : Rubyforge
-  groupid : 6829
-  active  : true
-
+  service: Rubyforge
+  sitemap:
+    site: <%= package %>
+  active: true
