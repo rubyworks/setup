@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+raise "Not the right place #{Dir.pwd}" unless File.directory?('lib')
+
+scripts = (Dir['lib/*.rb'] + Dir['lib/**/*']).uniq
+scripts = scripts.reject{ |f| File.directory?(f) }
+
+# We don't want the rake helper.
+scripts = scripts - ["lib/setup/rake.rb"]
+
+#
+bundle = ""
+
+# insert scripts
+scripts.each do |script|
+  bundle << "\n\n# %-16s #{"#" * 60}\n\n" % File.basename(script)
+  bundle << File.read(script)
+end
+
+# remove setup requires
+bundle.gsub!(/require\s+["']setup\/(.*?)["']\s*$/, '')
+
+# save
+File.open('setup.rb', 'w'){ |f| f << bundle }
+
