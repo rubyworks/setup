@@ -1,9 +1,9 @@
-= Setup
+= Ruby Setup
 
   http://setup.rubyforge.org
 
 
-== Introduction
+== INTRODUCTION
 
 Every Rubyist is aware of Minero Aoki's ever useful setup.rb script.
 It's how most of us used to install our ruby programs before RubyGems
@@ -14,7 +14,7 @@ need distribute setup.rb with you Ruby packages. Just instruct your
 users to use Setup.
 
 
-== Important
+== IMPORTANT
 
 There a couple very important difference between the old 3.4.1 verison
 of the setup.rb script and version 4.0.0 of the independent application.
@@ -23,7 +23,7 @@ of the setup.rb script and version 4.0.0 of the independent application.
 * Multi-package project layouts are no longer supported.
 
 
-== Install
+== INSTALLATION
 
 The easy way to install is via RubyGems.
 
@@ -35,7 +35,7 @@ you, by running the following:
   $ ruby setup.rb
 
 
-== Usage
+== SYNOPSIS
 
 To use setup.rb, a project must conform to the setup.rb standard layout.
 
@@ -73,13 +73,13 @@ Not that this last command will remove the .cache/setup/installedfiles
 file!
 
 
-== To Do
+== TODO LIST
 
 * Maybe protect 'installedfiles' from removal, even on distclean.
 * Separate compiling code into separate class.
 
 
-== License
+== COPYRIGHT & LICENSE
 
 Copyright (c) 2002,2005 Minero Aoki
 Copyright (c) 2008,2009 Thomas Sawyer
