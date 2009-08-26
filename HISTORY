@@ -1,42 +1,77 @@
+= RELEASE HISTORY
+
+== 4.2.0 / 2009-08-26
+
+This release finally gets rdoc generation and doc installation working.
+Note that rdoc generation is shelled-out at the moment b/c of issues with
+loading the new verison of RDoc vs. the old version included with Ruby
+(which bombs). In the process of doding this, all configuration files
+have now been located in meta/ and meta/setup (or .meta/). See the changes
+below for more details.
+
+Changes:
+
+* 7 Major Enhancements
+
+    * relocated all user configuration files to meta/ and meta/setup
+    * meta/package must exist for doc to be installed.
+    * meta/setup/test.rb must be provided to run tests.
+    * meta/setup/doc.rb can be provided as alternate for generating docs.
+    * meta/setup/metaconfig.rb is now where meta-configuration goes.
+    * documentation is installed to <system-doc-dir>/ruby-<package>/.
+    * documentation generation shells out (for now, b/c of issues with using API)
+
+* 1 Minor Addition
+
+    * Notice the setup.rb file in the project repo. Guess what that is! ;)
+
+
 == 4.1.0 / 2008-11-16
 
-* 1 Major Enhancements
+Ruby Setup is a fork or Minero Aokoi's setup.rb script. Whereas setup.rb
+had to be copied into every project that used it, Ruby Setup is a stand
+alone application.
 
-    * cache files are now stored in .cache/setup/  (#b8640be633f04655f585def40697bab338fe9b8b)
+The API is largely the same, with a only few distinctions. Most importantly,
+multi-package support has been removed. Also the underlying system has been
+made more object-oriented. For instance, what was ToplevelInstaller is now
+Setup::Installer. Finally configuration files are saved to .cache/setup and
+metaconfig should be placed in .config/setup, rather then directly into
+the root project directory.
 
-* 21 Other Enhancements
+I still consider this and "early" release of Ruby Setup, that is until enough
+people put it through it's paces. However, since it is predominantly
+setup.rb 3.4.1 code, and since it works well enough to install itself ;)
+it certainly is a usable product.
 
-    * Added error.rb and altered requires. (#f2ca0fe260c0a96a7069110945c8c436e3c4f73c)
-    * Added rdoc-template.rb under admin/config/. (#3e6a28a529ea1b9f7cdbc86f20950d23cbf1ae07)
-    * Update metadata, readem and news files. (#6c85924bfde94bb9b8fa159f6498c632e62ba907)
-    * Added .gitignore file. (#887b3b5505b3b735d2ac5ae4e0e89a8dd0f2f70d)
+Please report any problems so I can fix them ASAP. Thanks.
+
+Changes:
+
+* 5 Major Enhancements
+
+    * testing only runs if a test script if provided
+    * cache files are now stored in .cache/setup/
     * Renamed binary from rubysetup to setup.rb.
       * Hoping that the use of a dot in the name is not a problem on Windows.
-      * By using setup.rb for the binary, it matches exacly the name of the old script.
-      * Other developers could do likwise, eg. setup.py; akin to mkfs.ext3 and friends. (#2bd780a1e68f87210b4f3d0e3798c2c1fb868b4f)
-    * Added script/install as a bootstrap installer. (#ba9ddb30d1d7fe443ccd528a43362875f54e671e)
-    * Added website files. (#7ae0f5b7f48ddad9ce127e3b0ea59c01b0f9f652)
-    * Update website. (#540304bb7b2b3caa7c36c74a506e64b4ad2db8ec)
-    * Added in website .rsync-filter. (#96c4e7d0570117670a063bb73782008f2c6c6143)
-    * changed cache files to store in .cache/setup/ (#a7b2c297fb13064e7c992c9869d8f1d1efcb165a)
-    * reorganize for new reap (#008fb24e4ff2374c1ae45cef01e831c9a4d725cf)
-    * added documentation (#cda3adf0d6ebc57be35731dae652ff29bd6638e3)
-    * moved script/ to task/ and upped minor verison. (#ce5a52daedca15b5d0f9530fafaa403c9e60d958)
-    * added meta/ (#6abdd9de8082e4c4ac95acc77a2f1ceac30463a0)
-    * updated README (#7a3d836cd66c7b8bdf136d812f92caeaaf6c5b1e)
-    * moved web/ contents to doc/ (#2fc9900ccedbf8bfdde93febc3775a67604b1645)
-    * restored metaconfig (#1173be3bf601662dd0c3859db54f244d538e39c3)
-    * added test from original (needs work) (#fbc05bdef5cb6702934d3ff12e949a6875cf6f58)
-    * udpate to website docs (#51f5b1fa896677f346d824e75f03db338804b15d)
-    * update documentation (#3b664c158a5fe1ca5e82b924a37f957958cd69c3)
-    * removed test/suite.rb option from testing (#a9095c6b95fe7ea79d004af23ea4f2b4c27e0a37)
+      * By using setup.rb for the binary, it matches exactly the name of the old script.
+      * Other developers could do likewise, eg. setup.py; akin to mkfs.ext3 and friends. 
+    * Added script/install as a bootstrap installer.
+    * restored metaconfig
+
+* 2 Minor Enhancements
+
+    * added test from original (needs work)
+    * removed test/suite.rb option from testing
 
 
 == 4.0.0 / 2008-08-15
 
+This is the first whack at making setup.rb a stand-alone application.
+
+Changes:
+
 * 3 Other Enhancements
 
-    * Initial checkin. (#034373ad9924b9f6677b0ed695e0c77deef75dbe)
-    * Moved setup.rb.erb to the right place. (#edf8eb71f0ee384dca8a36c33b6266f0bde6ca3a)
-    * Added README's to .reap and .sow plugin directories. (#a75911fc4475de53be14a670f5635ff3f46c7d17)
+    * Initial checkin.
 
