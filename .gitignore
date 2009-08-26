@@ -2,4 +2,5 @@ MANIFEST
 .cache
 doc/rdoc
 doc/ri
-doc/log
+log
+pack

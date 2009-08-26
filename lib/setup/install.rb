@@ -1,18 +1,32 @@
 require 'optparse'
 require 'setup/config'
 
-# TODO: we need to abort install if tests fail (how?)
-#       We will also need to add a force install option then.
-# TODO: Need to get name setting from where?
-# TODO: Add support for rdoc once project name issue is worked out. (see RDOC HERE.)
-# TODO: Generate rdocs? Package developer may want to deactivate this.
+# TODO: we need to abort install if tests fail (check return code of TESTER)
+#       We will also need to add a force install option then to by pass failed tests.
+#
+# TODO: Generate rdocs... Package developer may want to deactivate this. How?
+#
+# TODO: Should be using Rdoc programmatically, but load issue arose and an error
+#       was being generated on ri generation. Reverting back to shelling out for now.
 
-# Need the package name. This is used to install docs in system doc/ruby-{name}/ location.
-PACKAGE_NAME = ""
+# The name of the package, used to install docs in system doc/ruby-{name}/ location.
+# The information must be provided in a file called meta/package.
+PACKAGE =(
+  if file = Dir["{meta,.meta}/package"].first
+    File.read(file).strip
+  else
+    nil
+  end
+)
 
-#--
-#File.read(Dir.glob('{.,meta/}unixname{,.txt}', File::FNM_CASEFOLD).first).strip
-#++
+# A ruby script that instructs setup how to run tests, located at meta/setup/test.rb
+# If the tests fail, the script should exit with a fail status (eg. -1).
+TESTER = Dir.glob('{meta,.meta}/setup/test{,rc}.rb', File::FNM_CASEFOLD).first
+
+# A ruby script that instructs setup how to generate docs, located at meta/setup/doc.rb
+# NOTE: Docs must be generate into the doc/ for them to be installed.
+DOCTOR = Dir.glob('{meta,.meta}/setup/doc{,rc}.rb', File::FNM_CASEFOLD).first
+
 
 module Setup
 
@@ -46,9 +60,12 @@ module Setup
       @objdir = File.expand_path(objroot)
       @currdir = '.'
 
-      self.quiet   = ENV['quiet'] if ENV['quiet']
+      self.quiet   = ENV['quiet']   if ENV['quiet']
       self.verbose = ENV['verbose'] if ENV['verbose']
       self.no_harm = ENV['nowrite'] if ENV['nowrite']
+
+      # must have package name to generate docs.
+      config.withoutdoc = true unless PACKAGE
 
       yield(self) if block_given?
     end
@@ -272,18 +289,17 @@ module Setup
     #
     # Complexities arise in trying to figure out what test framework
     # is used, and how to run tests. To simplify the process, this
-    # simply looks for a script in .config/setup called testrc.rb,
+    # simply looks for a script in meta/setup called testrc.rb,
     # or just test.rb.
     #
     def exec_test
       return if install_no_test
-      #file   = nil
-      file = Dir.glob('.config/setup/test{,rc}.rb', File::FNM_CASEFOLD).first
-      #file ||= Dir.glob('{script,task}/test', File::FNM_CASEFOLD).first
+      file = TESTER
       if file
         report_header('test')
         ruby(file)
       end
+      #puts "Ok." unless quiet?
     end
 
     ### DEPRECATED
@@ -338,49 +354,74 @@ module Setup
     # TASK doc
 
     def exec_doc
-      return if config.without_doc?
+      return if config.withoutdoc?
       report_header('doc')
-      #exec_rdoc   unless config.without_doc?  # RDOC HERE
-      exec_ri      
+      if file = DOCTOR
+        ruby(file)
+      else
+        exec_rdoc
+      end
+      exec_ri
     end
 
     # Generate rdocs.
     #
     # NOT USED YET B/C WE WOULD HAVE TO KNOW THE NAME OF THE PROJECT
     # TO DO THIS CORRECTLY. (WHERE DO WE GET THAT?)
-
+    #
+    # Answer: meta/package or .meta/package
+    #
     def exec_rdoc
-      output    = File.join('doc', 'rdoc')
-      title     = (PACKAGE_NAME.capitalize + " API").strip
-      main      = Dir.glob("README{,.txt}", File::FNM_CASEFOLD).first
-      template  = config.doctemplate || 'html'
-
-      opt = []
-      opt << "-U"
-      opt << "-S"
-      opt << "--op=#{output}"
-      opt << "--template=#{template}"
-      opt << "--title=#{title}"
-      opt << "--main=#{main}"     if main
+      main = Dir.glob("README{,.*}", File::FNM_CASEFOLD).first
 
       if File.exist?('.document')
         files = File.read('.document').split("\n")
         files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
         files.collect!{ |f| f.strip }
-        opt << files
       else
-        opt << main               if main
-        opt << ["lib", "ext"]
+        files = []
+        files << main  if main
+        files << 'lib' if File.directory?('lib')
+        files << 'ext' if File.directory?('ext')
       end
+
+      checkfiles = (files + files.map{ |f| Dir[File.join(f,'*','**')] }).flatten.uniq
+      if FileUtils.uptodate?('doc/rdoc', checkfiles)
+        puts "RDocs look uptodate."
+        return
+      end
+
+      output    = 'doc/rdoc'
+      title     = (PACKAGE.capitalize + " API").strip
+      template  = config.doctemplate || 'html'
+
+      opt = []
+      opt << "-U"
+      opt << "-q" #if quiet?
+      opt << "--op=#{output}"
+      #opt << "--template=#{template}"
+      opt << "--title=#{title}"
+      opt << "--main=#{main}"     if main
+      #opt << "--debug"
+      opt << files
 
       opt = opt.flatten
 
+      cmd = "rdoc " + opt.join(' ')
+
       if no_harm?
-        puts "rdoc " + opt.join(' ').strip
+        puts cmd 
       else
-        #sh "rdoc {opt.join(' ').strip}"
-        require 'rdoc/rdoc'
-        ::RDoc::RDoc.new.document(opt)
+        begin
+          system(cmd)
+          #require 'rdoc/rdoc'
+          #::RDoc::RDoc.new.document(opt)
+          puts "Ok rdoc." unless quiet?
+        rescue Exception
+          puts "Fail rdoc."
+          puts "Command was: '#{cmd}'"
+          puts "Proceeding with install anyway."
+        end
       end
     end
 
@@ -403,30 +444,43 @@ module Setup
         files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
         files.collect!{ |f| f.strip }
       else
-        files = ["lib", "ext"]
+        files = []
+        files << 'lib' if File.directory?('lib')
+        files << 'ext' if File.directory?('ext')
       end
 
       opt = []
       opt << "-U"
+      opt << "-q" #if quiet?
+      #opt << "-D" #if $DEBUG
       opt << output
       opt << files
+
       opt = opt.flatten
 
+      cmd = "rdoc " + opt.join(' ')
+
       if no_harm?
-        puts "rdoc #{opt.join(' ').strip}"
+        puts cmd
       else
         # Generate in system location specified
-        #sh "rdoc #{opt.join(' ').strip}"
-        require 'rdoc/rdoc'
-        ::RDoc::RDoc.new.document(opt)
-
+        begin
+          system(cmd)
+          #require 'rdoc/rdoc'
+          #::RDoc::RDoc.new.document(opt)
+          puts "Ok ri." unless quiet?
+        rescue Exception
+          puts "Fail ri."
+          puts "Command was: '#{cmd}'"
+          puts "Proceeding with install anyway."
+        end
         # Now in local directory
-        opt = []
-        opt << "-U"
-        opt << "--ri --op 'doc/ri'"
-        opt << files
-        opt = opt.flatten
-        ::RDoc::RDoc.new.document(opt)
+        #opt = []
+        #opt << "-U"
+        #opt << "--ri --op 'doc/ri'"
+        #opt << files
+        #opt = opt.flatten
+        #::RDoc::RDoc.new.document(opt)
       end
     end
 
@@ -472,8 +526,8 @@ module Setup
 
     # doc installs to directory named: "ruby-#{package}"
     def install_dir_doc(rel)
-      return if config.without_doc?
-      dir = "#{config.docdir}/ruby-#{PACKAGE_NAME}/#{rel}" # "#{config.docdir}/#{rel}"
+      return if config.withoutdoc?
+      dir = "#{config.docdir}/ruby-#{PACKAGE}/#{rel}" # "#{config.docdir}/#{rel}"
       install_files targetfiles(), dir, 0644
     end
 
@@ -518,7 +572,7 @@ module Setup
     end
 
     # picked up many entries from cvs-1.11.1/src/ignore.c
-    JUNK_FILES = %w( 
+    JUNK_FILES = %w(
       core RCSLOG tags TAGS .make.state
       .nse_depinfo #* .#* cvslog.* ,* .del-* *.olb
       *~ *.old *.bak *.BAK *.orig *.rej _$* *$
@@ -584,7 +638,7 @@ module Setup
       end
 
       remove.each do |file|
-        rm_f(file) 
+        rm_f(file)
       end
 
       dirs.each do |dir|
@@ -659,7 +713,7 @@ module Setup
     def exec_task_traverse(task)
       run_hook "pre-#{task}"
       FILETYPES.each do |type|
-        if type == 'ext' and config.without_ext == 'yes'
+        if type == 'ext' and config.withoutext? #== 'yes'
           $stderr.puts 'skipping ext/* by user option' if verbose?
           next
         end
@@ -907,7 +961,7 @@ module Setup
 
     # srcdir/objdir (works only in the package directory)
     #
-    # TODO: Since package directory has been deprecated these 
+    # TODO: Since package directory has been deprecated these
     # probably can be worked out of the system. ?
 
     #

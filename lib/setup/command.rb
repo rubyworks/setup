@@ -5,8 +5,7 @@ require 'setup/error'
 
 module Setup
 
-  # CLI for setup.
-  #
+  # CLI for Setup.rb
   class Command
 
     TASKS = %w(all config show setup test install uninstall rdoc ri clean distclean)
@@ -138,9 +137,9 @@ module Setup
       end
     end
 
-    # Generate help text.
+    # Generate help text
     def help
-      fmt = " " * 10 + "%-10s       %s"
+    fmt = " " * 10 + "%-10s       %s"
       commands = TASK_DESCRIPTIONS.collect do |k,d|
         (fmt % ["#{k}", d])
       end.join("\n").strip
@@ -168,11 +167,8 @@ module Setup
             -n --no-write                 Do not write to disk
 
       END
-
       text.gsub(/^ \ \ \ \ \ /, '')
     end
 
   end
-
 end
-

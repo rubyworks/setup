@@ -34,8 +34,8 @@ module Setup
       [:rubyprog        , :prog, 'ruby program used for installation'],
       [:makeprog        , :prog, 'make program to compile ruby extentions'],
       [:extconfopt      , :name, 'options to pass-thru to extconf.rb'],
-      [:without_ext     , :bool, 'do not compile/install ruby extentions'],
-      [:without_doc     , :bool, 'do not generate html documentation'],
+      [:withoutext      , :bool, 'do not compile/install ruby extentions'],
+      [:withoutdoc      , :bool, 'do not generate documentation'],
       [:shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'],
       [:doctemplate     , :pick, 'document template to use (html|xml)'],
       [:testrunner      , :pick, 'Runner to use for testing (auto|console|tk|gtk|gtk2)'],
@@ -56,7 +56,7 @@ module Setup
           raise Error, "bad config: #{name.to_s.upcase} requires argument" unless path
           @#{name} = (path[0,1] == '$' ? path : File.expand_path(path))
         end
-      }   
+      }
     end
 
     # List of pathnames. These are not expanded though.
@@ -73,7 +73,7 @@ module Setup
             @#{name} = pathlist.to_s.split(/[:;,]/)
           end
         end
-      }   
+      }
     end
 
     # Adds boolean support.
@@ -270,10 +270,10 @@ module Setup
       self.makeprog        = makeprog
       self.extconfopt      = ''
       self.shebang         = 'ruby'
-      self.without_ext     = 'no'
-      self.without_doc     = 'yes'
-      self.doctemplate     = 'html'
-      self.testrunner      = 'auto'
+      self.withoutext      = 'no'
+      self.withoutdoc      = 'no'
+      self.doctemplate     = nil
+      self.testrunner      = 'auto' # needed?
       self.installdirs     = 'site'
     end
 
@@ -330,7 +330,6 @@ module Setup
     end
 
     #
-
     def extconfs
       @extconfs ||= Dir['ext/**/extconf.rb']
     end
@@ -362,7 +361,7 @@ module Setup
 
     # Metaconfig file is '.config/setup/metaconfig{,.rb}'.
     def load_meta_config
-      path = Dir.glob('.config/setup/metaconfig{,.rb}').first 
+      path = Dir.glob('.config/setup/metaconfig{,.rb}').first
       if path && File.file?(path)
         MetaConfigEnvironment.new(self).instance_eval(File.read(path), path)
       end

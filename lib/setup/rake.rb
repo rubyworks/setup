@@ -18,7 +18,7 @@ end
 
 desc 'Runs unit tests'
 task :test do
-  setup.exec_test 
+  setup.exec_test
 end
 
 desc 'Generate rdoc documentation'
