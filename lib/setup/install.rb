@@ -531,10 +531,6 @@ module Setup
       install_files targetfiles(), dir, 0644
     end
 
-    # doc installs to directory named: "ruby-#{package}"
-    def install_dir_doc(rel)
-    end
-
     def install_files(list, dest, mode)
       mkdir_p dest, install_prefix
       list.each do |fname|
