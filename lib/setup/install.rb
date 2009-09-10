@@ -19,6 +19,19 @@ PACKAGE =(
   end
 )
 
+# This is needed if a project has loadpaths other than the standard lib/.
+# Not the routine is designed to handle YAML arrays or line by line list.
+LOADPATH =(
+  if file = Dir.glob('{meta,.meta}/loadpath').first
+    raw = File.read(file).strip.chomp(']')
+    raw.split(/[\n,]/).map do |e|
+      e.strip.sub(/^[\[-]\s*/,'')
+    end
+  else
+    nil
+  end
+)
+
 # A ruby script that instructs setup how to run tests, located at meta/setup/test.rb
 # If the tests fail, the script should exit with a fail status (eg. -1).
 TESTER = Dir.glob('{meta,.meta}/setup/test{,rc}.rb', File::FNM_CASEFOLD).first
@@ -26,6 +39,7 @@ TESTER = Dir.glob('{meta,.meta}/setup/test{,rc}.rb', File::FNM_CASEFOLD).first
 # A ruby script that instructs setup how to generate docs, located at meta/setup/doc.rb
 # NOTE: Docs must be generate into the doc/ for them to be installed.
 DOCTOR = Dir.glob('{meta,.meta}/setup/doc{,rc}.rb', File::FNM_CASEFOLD).first
+
 
 
 module Setup
@@ -363,10 +377,7 @@ module Setup
 
     # Generate rdocs.
     #
-    # NOT USED YET B/C WE WOULD HAVE TO KNOW THE NAME OF THE PROJECT
-    # TO DO THIS CORRECTLY. (WHERE DO WE GET THAT?)
-    #
-    # Answer: meta/package or .meta/package
+    # meta/package or .meta/package
     #
     def exec_rdoc
       main = Dir.glob("README{,.*}", File::FNM_CASEFOLD).first
@@ -384,12 +395,12 @@ module Setup
 
       checkfiles = (files + files.map{ |f| Dir[File.join(f,'*','**')] }).flatten.uniq
       if FileUtils.uptodate?('doc/rdoc', checkfiles)
-        puts "RDocs look uptodate."
+        puts "RDocs look current."
         return
       end
 
       output    = 'doc/rdoc'
-      title     = (PACKAGE.capitalize + " API").strip
+      title     = (PACKAGE.capitalize + " API").strip if PACKAGE
       template  = config.doctemplate || 'html'
 
       opt = []
@@ -711,15 +722,30 @@ module Setup
           $stderr.puts 'skipping ext/* by user option' if verbose?
           next
         end
-        traverse task, type, "#{task}_dir_#{type}"
+        # TODO: I think setup.rb would have to rewritten to handle this.
+        if type == 'lib' && LOADPATH
+          LOADPATH.each do |lp|
+            dirs = Dir[File.join(lp,'*/')]
+            dirs.each do |d|
+              traverse task, d.chomp('/'), "#{task}_dir_#{type}", "#{lp}/"
+            end
+          end
+        else
+          traverse task, type, "#{task}_dir_#{type}"
+        end
       end
       run_hook "post-#{task}"
     end
 
-    def traverse(task, rel, mid)
+    def traverse(task, rel, mid, clip=nil)
       dive_into(rel) {
         run_hook "pre-#{task}"
-        __send__ mid, rel.sub(%r[\A.*?(?:/|\z)], '')
+        if clip
+          rel2 = rel.sub(/\A#{Regexp.escape(clip)}/,'')
+        else
+          rel2 = rel.sub(%r[\A.*?(?:/|\z)], '')  # trans: this clips off 'lib/'. Why so complex?
+        end
+        __send__ mid, rel2
         directories_of(curr_srcdir()).each do |d|
           traverse task, "#{rel}/#{d}", mid
         end

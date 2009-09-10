@@ -1,5 +1,18 @@
 = RELEASE HISTORY
 
+== 4.2.1 / 2009-08-26
+
+This release add support for multiple loadpaths. Add a list of them
+to meta/loadpath, and they will be installed. For example, the is used
+in Facets to install both lib/more and lib/core.
+
+Changes:
+
+* 1 Major Enhancement
+
+    * meta/loadpath is now supported if you have multiple paths to install.
+
+
 == 4.2.0 / 2009-08-26
 
 This release finally gets rdoc generation and doc installation working.

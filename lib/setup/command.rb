@@ -66,6 +66,10 @@ module Setup
           installer.install_prefix = val
         end
 
+        #opts.on("--doc", "Generate documentation") do |val|
+        #  installer.install_make_docs = true
+        #end
+
         opts.on("--no-test", "Do not run tests") do |val|
           installer.install_no_test = true
         end
