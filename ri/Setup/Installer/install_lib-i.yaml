@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Install library files.
+full_name: Setup::Installer#install_lib
+is_singleton: false
+name: install_lib
+params: ()
+visibility: public

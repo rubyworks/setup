@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "Alias for #noop"
+full_name: Setup::Installer#clean_dir_man
+is_singleton: false
+name: clean_dir_man
+params: (rel)
+visibility: public

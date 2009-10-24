@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Installer#run_hook
+is_singleton: false
+name: run_hook
+params: (id)
+visibility: public

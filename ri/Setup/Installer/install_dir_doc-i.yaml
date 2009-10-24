@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "doc installs to directory named: &quot;ruby-#{package}&quot;"
+full_name: Setup::Installer#install_dir_doc
+is_singleton: false
+name: install_dir_doc
+params: (rel)
+visibility: public

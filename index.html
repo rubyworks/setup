@@ -1,0 +1,142 @@
+<html>
+<head>
+  <title>Setup.rb</title>
+  <link href="assets/styles/reset.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/styles/site.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/images/setup-small.png" rel="shortcut icon"/>
+</head>
+<body>
+
+<div id="nav">
+<div class="page">
+  <!-- <a href="news.html">NEWS</a> &middot; -->
+  <a href="guide/doc.en/index.html">English Manual</a> &nbsp;&middot;&nbsp;
+  <a href="rdoc/index.html">API Documents</a> &nbsp;&middot;&nbsp;
+  <a href="http://github.com/proutils/setup/downloads">Download</a> &nbsp;&middot;&nbsp;
+  <a href="http://github.com/proutils/setup">Development</a>
+</div>
+</div>
+
+<div id="header">
+<div class="page">
+  <img src="assets/images/setup.png" height="200px" align="right"/>
+  <h2>Before RubyGems... there was...</h2>
+  <h1>Setup.rb</h1>
+</div>
+</div>
+
+<div id="main">
+<div class="page">
+
+  <p>Setup.rb is the generic installer for ruby scripts and extentions.
+  You can automate configuration and installation of your program package
+  very easily with setup.rb simply by following a convention. And if
+  you need more control, setup.rb also offers all the configuration you'll 
+  ever need.</p>
+
+ <p>Typical end-installer usage looks like this:</p>
+
+  <pre>
+    $ gem install setup
+    $ tar -xvzf helloworld-1.0.0.tgz
+    $ cd helloworld-1.0.0.tgz
+    $ sudo setup.rb
+  </pre>
+
+  <p>If needs be, the end-installer can separate setup.rb's operation
+  into it's component phases:</p>
+
+  <pre>
+    $ setup.rb config
+    $ setup.rb setup
+    $ setup.rb test
+    $ sudo setup.rb install
+  </pre>
+
+  <p>There are numerous configuration options:</p>
+
+  <pre>
+  USAGE: setup.rb [command] [options]
+
+  Commands:
+    all              do config, setup, then install
+    config           saves your configurations
+    show             shows current configuration
+    setup            compiles ruby extentions and others
+    rdoc             generate rdoc documentation
+    ri               generate ri documentation
+    install          installs files
+    uninstall        uninstalls files
+    test             run all tests in test/
+    clean            does `make clean' for each extention
+    distclean        does `make distclean' for each extention
+
+  Options for CONFIG:
+       --prefix                   path prefix of target environment
+       --bindir                   directory for commands
+       --libdir                   directory for libraries
+       --datadir                  directory for shared data
+       --mandir                   directory for man pages
+       --docdir                   Directory for documentation
+       --sysconfdir               directory for system configuration files
+       --localstatedir            directory for local state data
+       --libruby                  directory for ruby libraries
+       --librubyver               directory for standard ruby libraries
+       --librubyverarch           directory for standard ruby extensions
+       --siteruby                 directory for version-independent aux ruby libraries
+       --siterubyver              directory for aux ruby libraries
+       --siterubyverarch          directory for aux ruby binaries
+       --rbdir                    directory for ruby scripts
+       --sodir                    directory for ruby extentions
+       --rubypath                 path to set to #! line
+       --rubyprog                 ruby program used for installation
+       --makeprog                 make program to compile ruby extentions
+       --extconfopt               options to pass-thru to extconf.rb
+       --withoutext               do not compile/install ruby extentions
+       --withoutdoc               do not generate documentation
+       --shebang                  shebang line (#!) editing mode (all,ruby,never)
+       --doctemplate              document template to use (html|xml)
+       --testrunner               Runner to use for testing (auto|console|tk|gtk|gtk2)
+       --installdirs              install location mode (std,site,home :: libruby,site_ruby,$HOME)
+
+  Options for INSTALL:
+       --prefix                   Set the install prefix
+
+  Options in common:
+    -q --quiet                    Silence output
+       --verbose                  Provide verbose output
+    -n --no-write                 Do not write to disk
+  </pre>
+
+
+  <h2>Current Status</h2>
+
+  <p>Setup.rb is going throught refactorization presently. Much of the code pre-dates Ruby 1.4 and
+  and could use a good deal of simplificaiton. In the process we plan to make installs atomic.</p>
+
+</div>
+</div>
+
+<div id="footer">
+  <script type="text/javascript"><!--
+  google_ad_client = "pub-1126154564663472";
+  /* PROUTILS 09-10-14 728x90 */
+  google_ad_slot = "0711173189";
+  google_ad_width = 728;
+  google_ad_height = 90;
+  //-->
+  </script>
+  <script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  </script>
+
+  <br/><br/>
+
+  <div class="copyright">
+  Setup.rb Copyright (c) 2009 Thomas Sawyer &middot; setup.rb Copyright (c) 2002 Minero Aoki <br/>
+  Distributed under the terms of the Ruby License
+  </div>
+</dir>
+
+</body>
+</html>

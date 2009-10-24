@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Install binaries (executables).
+full_name: Setup::Installer#install_bin
+is_singleton: false
+name: install_bin
+params: ()
+visibility: public

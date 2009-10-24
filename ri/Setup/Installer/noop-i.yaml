@@ -1,0 +1,54 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: 
+- !ruby/object:RDoc::RI::AliasName 
+  name: config_dir_bin
+- !ruby/object:RDoc::RI::AliasName 
+  name: config_dir_lib
+- !ruby/object:RDoc::RI::AliasName 
+  name: config_dir_data
+- !ruby/object:RDoc::RI::AliasName 
+  name: config_dir_etc
+- !ruby/object:RDoc::RI::AliasName 
+  name: config_dir_man
+- !ruby/object:RDoc::RI::AliasName 
+  name: config_dir_doc
+- !ruby/object:RDoc::RI::AliasName 
+  name: setup_dir_lib
+- !ruby/object:RDoc::RI::AliasName 
+  name: setup_dir_data
+- !ruby/object:RDoc::RI::AliasName 
+  name: setup_dir_etc
+- !ruby/object:RDoc::RI::AliasName 
+  name: setup_dir_man
+- !ruby/object:RDoc::RI::AliasName 
+  name: setup_dir_doc
+- !ruby/object:RDoc::RI::AliasName 
+  name: clean_dir_bin
+- !ruby/object:RDoc::RI::AliasName 
+  name: clean_dir_lib
+- !ruby/object:RDoc::RI::AliasName 
+  name: clean_dir_data
+- !ruby/object:RDoc::RI::AliasName 
+  name: clean_dir_etc
+- !ruby/object:RDoc::RI::AliasName 
+  name: clean_dir_man
+- !ruby/object:RDoc::RI::AliasName 
+  name: clean_dir_doc
+- !ruby/object:RDoc::RI::AliasName 
+  name: distclean_dir_bin
+- !ruby/object:RDoc::RI::AliasName 
+  name: distclean_dir_lib
+- !ruby/object:RDoc::RI::AliasName 
+  name: distclean_dir_data
+- !ruby/object:RDoc::RI::AliasName 
+  name: distclean_dir_etc
+- !ruby/object:RDoc::RI::AliasName 
+  name: distclean_dir_man
+block_params: 
+comment: []
+
+full_name: Setup::Installer#noop
+is_singleton: false
+name: noop
+params: (rel)
+visibility: public

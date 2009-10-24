@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Adds boolean support.
+full_name: Setup::ConfigTable::attr_accessor
+is_singleton: true
+name: attr_accessor
+params: (*names)
+visibility: public

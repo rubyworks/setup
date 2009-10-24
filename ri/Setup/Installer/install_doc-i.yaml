@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Install documentation.
+full_name: Setup::Installer#install_doc
+is_singleton: false
+name: install_doc
+params: ()
+visibility: public

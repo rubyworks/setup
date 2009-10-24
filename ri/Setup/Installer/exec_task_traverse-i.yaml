@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Traversing
+full_name: Setup::Installer#exec_task_traverse
+is_singleton: false
+name: exec_task_traverse
+params: (task)
+visibility: public

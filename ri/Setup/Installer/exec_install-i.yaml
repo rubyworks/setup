@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: TASK install
+full_name: Setup::Installer#exec_install
+is_singleton: false
+name: exec_install
+params: ()
+visibility: public

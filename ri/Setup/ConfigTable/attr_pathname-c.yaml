@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Pathname attribute. Pathnames are automatically expanded unless they start with '$', a path variable.
+full_name: Setup::ConfigTable::attr_pathname
+is_singleton: true
+name: attr_pathname
+params: (name)
+visibility: public

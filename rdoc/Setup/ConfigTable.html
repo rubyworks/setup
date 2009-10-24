@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Setup::ConfigTable</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../images/class.png">
+  
+
+  <link type="text/css" media="screen" rel="stylesheet" href="../rdoc.css" />
+
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../images/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../index.html">Setup</a>&nbsp;
+      <a href="/">Setup::ConfigTable</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../lib/setup/config_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/setup/config.rb">lib/setup/config.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <li class="class">Object</li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+      <div id="namespace-list-section" class="section">
+        <h3 class="section-header">Namespace</h3>
+        <ul class="link-list">
+          
+          <li class="class"><a href="ConfigTable/MetaConfigEnvironment.html">Setup::ConfigTable::MetaConfigEnvironment</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li class="method"><a href="#M000058">::attr_accessor</a></li>
+          
+          <li class="method"><a href="#M000060">::attr_boolean</a></li>
+          
+          <li class="method"><a href="#M000057">::attr_pathlist</a></li>
+          
+          <li class="method"><a href="#M000055">::attr_pathname</a></li>
+          
+          <li class="method"><a href="#M000070">::new</a></li>
+          
+          <li class="method"><a href="#M000107">#[]</a></li>
+          
+          <li class="method"><a href="#M000108">#[]=</a></li>
+          
+          <li class="method"><a href="#M000106">#compiles?</a></li>
+          
+          <li class="method"><a href="#M000076">#descriptions</a></li>
+          
+          <li class="method"><a href="#M000096">#env_config</a></li>
+          
+          <li class="method"><a href="#M000104">#extconfs</a></li>
+          
+          <li class="method"><a href="#M000105">#extensions</a></li>
+          
+          <li class="method"><a href="#M000073">#initialize_attributes</a></li>
+          
+          <li class="method"><a href="#M000077">#initialize_defaults</a></li>
+          
+          <li class="method"><a href="#M000067">#installdirs=</a></li>
+          
+          <li class="method"><a href="#M000097">#load_config</a></li>
+          
+          <li class="method"><a href="#M000109">#load_meta_config</a></li>
+          
+          <li class="method"><a href="#M000100">#save_config</a></li>
+          
+          <li class="method"><a href="#M000066">#shebang=</a></li>
+          
+          <li class="method"><a href="#M000101">#show</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="../HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="../Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="../Setup/ConfigTable.html">Setup::ConfigTable</a></li>
+        
+          <li class="class"><a href="../Setup/ConfigTable/MetaConfigEnvironment.html">Setup::ConfigTable::MetaConfigEnvironment</a></li>
+        
+          <li class="class"><a href="../Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="../Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="../Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+
+    <div id="validator-badges">
+      Generated with <a href="http://github.com/proutils/rdazzle">Razzle Dazzle Redfish</a><br/><br/>
+      <a href="http://validator.w3.org/check/referer">[Validate]</a>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>ConfigTable</h1>
+      
+
+      <p>
+Config stores platform information.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+    <div id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt><a name="RBCONFIG">RBCONFIG</a></dt>
+        
+        <dd class="description missing-docs">(Not documented)</dd>
+        
+      
+        <dt><a name="CONFIGFILE">CONFIGFILE</a></dt>
+        
+        <dd class="description missing-docs">(Not documented)</dd>
+        
+      
+        <dt><a name="DESCRIPTIONS">DESCRIPTIONS</a></dt>
+        
+        <dd class="description missing-docs">(Not documented)</dd>
+        
+      
+        <dt><a name="OPTIONS">OPTIONS</a></dt>
+        
+        <dd class="description"><p>
+List of configurable options.
+</p></dd>
+        
+      
+      </dl>
+    </div>
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="attr-accessor-method" class="method-detail ">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">attr_accessor</span><span
+            class="method-args">(*names)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Adds boolean support.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="attr-accessor-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 80</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attr_accessor</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+      <span class="ruby-identifier">bools</span>, <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">names</span>.<span class="ruby-identifier">partition</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\?$/</span> }
+      <span class="ruby-identifier">attr_boolean</span> <span class="ruby-operator">*</span><span class="ruby-identifier">bools</span>
+      <span class="ruby-keyword kw">super</span> <span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="attr-boolean-method" class="method-detail ">
+        <a name="M000060"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">attr_boolean</span><span
+            class="method-args">(*names)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Boolean attribute. Can be assigned true, false, nil, or a string matching
+yes|true|y|t or no|false|n|f.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="attr-boolean-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 88</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attr_boolean</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+      <span class="ruby-identifier">names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-value str">'?'</span>)
+        <span class="ruby-identifier">attr_reader</span> <span class="ruby-identifier">name</span>  <span class="ruby-comment cmt"># MAYBE: Deprecate</span>
+        <span class="ruby-identifier">code</span> = <span class="ruby-node">%{
+          def #{name}?; @#{name}; end
+          def #{name}=(val)
+            case val
+            when true, false, nil
+              @#{name} = val
+            else
+              case val.to_s.downcase
+              when 'y', 'yes', 't', 'true'
+                 @#{name} = true
+              when 'n', 'no', 'f', 'false'
+                 @#{name} = false
+              else
+                raise Error, &quot;bad config: use #{name.upcase}=(yes|no) [\#{val}]&quot;
+              end
+            end
+          end
+        }</span>
+        <span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">code</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="attr-pathlist-method" class="method-detail ">
+        <a name="M000057"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">attr_pathlist</span><span
+            class="method-args">(name)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+List of pathnames. These are not expanded though.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="attr-pathlist-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 63</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attr_pathlist</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">class_eval</span> <span class="ruby-node">%{
+        def #{name}
+          @#{name}
+        end
+        def #{name}=(pathlist)
+          case pathlist
+          when Array
+            @#{name} = pathlist
+          else
+            @#{name} = pathlist.to_s.split(/[:;,]/)
+          end
+        end
+      }</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="attr-pathname-method" class="method-detail ">
+        <a name="M000055"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">attr_pathname</span><span
+            class="method-args">(name)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Pathname attribute. Pathnames are automatically expanded unless they start
+with &#8217;$&#8217;, a path variable.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="attr-pathname-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 50</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attr_pathname</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">class_eval</span> <span class="ruby-node">%{
+        def #{name}
+          @#{name}.gsub(%r&lt;\\$([^/]+)&gt;){ self[$1] }
+        end
+        def #{name}=(path)
+          raise Error, &quot;bad config: #{name.to_s.upcase} requires argument&quot; unless path
+          @#{name} = (path[0,1] == '$' ? path : File.expand_path(path))
+        end
+      }</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new</span><span
+            class="method-args">(values=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+New <a href="ConfigTable.html">ConfigTable</a>
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 161</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">values</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">initialize_attributes</span>
+      <span class="ruby-identifier">initialize_defaults</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">values</span>
+        <span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{k}=&quot;</span>, <span class="ruby-identifier">v</span>) }
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">yeild</span>(<span class="ruby-keyword kw">self</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">load_config</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-constant">CONFIGFILE</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="compiles--method" class="method-detail ">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">compiles?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p class="missing-docs">(Not documented)</p>
+          
+
+          
+          <div class="method-source-code"
+            id="compiles--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 341</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compiles?</span>
+      <span class="ruby-operator">!</span><span class="ruby-identifier">extensions</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="descriptions-method" class="method-detail ">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">descriptions</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="descriptions-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 190</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">descriptions</span>
+      <span class="ruby-ivar">@descriptions</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DESCRIPTIONS</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="env-config-method" class="method-detail ">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">env_config</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Get configuration from environment.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="env-config-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 281</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">env_config</span>
+      <span class="ruby-constant">OPTIONS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">name</span>]
+          <span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{name}=&quot;</span>,<span class="ruby-identifier">value</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="extconfs-method" class="method-detail ">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">extconfs</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="extconfs-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 333</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extconfs</span>
+      <span class="ruby-ivar">@extconfs</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Dir</span>[<span class="ruby-value str">'ext/**/extconf.rb'</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="extensions-method" class="method-detail ">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">extensions</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p class="missing-docs">(Not documented)</p>
+          
+
+          
+          <div class="method-source-code"
+            id="extensions-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 337</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extensions</span>
+      <span class="ruby-ivar">@extensions</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">extconfs</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">f</span>) }
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="initialize-attributes-method" class="method-detail ">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">initialize_attributes</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="initialize-attributes-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 172</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_attributes</span>
+      <span class="ruby-identifier">load_meta_config</span>
+      <span class="ruby-identifier">desc</span> = <span class="ruby-identifier">descriptions</span>
+      (<span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">end</span>).<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">desc</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">t</span>,<span class="ruby-identifier">d</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">t</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:path</span>
+              <span class="ruby-identifier">attr_pathname</span> <span class="ruby-identifier">k</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:bool</span>
+            <span class="ruby-identifier">attr_boolean</span> <span class="ruby-identifier">k</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">attr_accessor</span> <span class="ruby-identifier">k</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="initialize-defaults-method" class="method-detail ">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">initialize_defaults</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Assign CONFIG defaults
+</p>
+<p>
+TODO: Does this handle &#8216;nmake&#8217; on windows?
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="initialize-defaults-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 198</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_defaults</span>
+      <span class="ruby-identifier">prefix</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'prefix'</span>]
+
+      <span class="ruby-identifier">rubypath</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'bindir'</span>], <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'ruby_install_name'</span>] <span class="ruby-operator">+</span> <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'EXEEXT'</span>])
+
+      <span class="ruby-identifier">major</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'MAJOR'</span>].<span class="ruby-identifier">to_i</span>
+      <span class="ruby-identifier">minor</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'MINOR'</span>].<span class="ruby-identifier">to_i</span>
+      <span class="ruby-identifier">teeny</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'TEENY'</span>].<span class="ruby-identifier">to_i</span>
+      <span class="ruby-identifier">version</span> = <span class="ruby-node">&quot;#{major}.#{minor}&quot;</span>
+
+      <span class="ruby-comment cmt"># ruby ver. &gt;= 1.4.4?</span>
+      <span class="ruby-identifier">newpath_p</span> = ((<span class="ruby-identifier">major</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span>) <span class="ruby-keyword kw">or</span>
+                   ((<span class="ruby-identifier">major</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>) <span class="ruby-keyword kw">and</span>
+                    ((<span class="ruby-identifier">minor</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">5</span>) <span class="ruby-keyword kw">or</span>
+                     ((<span class="ruby-identifier">minor</span> <span class="ruby-operator">==</span> <span class="ruby-value">4</span>) <span class="ruby-keyword kw">and</span> (<span class="ruby-identifier">teeny</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">4</span>)))))
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'rubylibdir'</span>]
+        <span class="ruby-comment cmt"># V &gt; 1.6.3</span>
+        <span class="ruby-identifier">libruby</span>         = <span class="ruby-node">&quot;#{prefix}/lib/ruby&quot;</span>
+        <span class="ruby-identifier">librubyver</span>      = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'rubylibdir'</span>]
+        <span class="ruby-identifier">librubyverarch</span>  = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'archdir'</span>]
+        <span class="ruby-identifier">siteruby</span>        = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'sitedir'</span>]
+        <span class="ruby-identifier">siterubyver</span>     = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'sitelibdir'</span>]
+        <span class="ruby-identifier">siterubyverarch</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'sitearchdir'</span>]
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">newpath_p</span>
+        <span class="ruby-comment cmt"># 1.4.4 &lt;= V &lt;= 1.6.3</span>
+        <span class="ruby-identifier">libruby</span>         = <span class="ruby-node">&quot;#{prefix}/lib/ruby&quot;</span>
+        <span class="ruby-identifier">librubyver</span>      = <span class="ruby-node">&quot;#{prefix}/lib/ruby/#{version}&quot;</span>
+        <span class="ruby-identifier">librubyverarch</span>  = <span class="ruby-node">&quot;#{prefix}/lib/ruby/#{version}/#{c['arch']}&quot;</span>
+        <span class="ruby-identifier">siteruby</span>        = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'sitedir'</span>]
+        <span class="ruby-identifier">siterubyver</span>     = <span class="ruby-node">&quot;$siteruby/#{version}&quot;</span>
+        <span class="ruby-identifier">siterubyverarch</span> = <span class="ruby-node">&quot;$siterubyver/#{RBCONFIG['arch']}&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-comment cmt"># V &lt; 1.4.4</span>
+        <span class="ruby-identifier">libruby</span>         = <span class="ruby-node">&quot;#{prefix}/lib/ruby&quot;</span>
+        <span class="ruby-identifier">librubyver</span>      = <span class="ruby-node">&quot;#{prefix}/lib/ruby/#{version}&quot;</span>
+        <span class="ruby-identifier">librubyverarch</span>  = <span class="ruby-node">&quot;#{prefix}/lib/ruby/#{version}/#{c['arch']}&quot;</span>
+        <span class="ruby-identifier">siteruby</span>        = <span class="ruby-node">&quot;#{prefix}/lib/ruby/#{version}/site_ruby&quot;</span>
+        <span class="ruby-identifier">siterubyver</span>     = <span class="ruby-identifier">siteruby</span>
+        <span class="ruby-identifier">siterubyverarch</span> = <span class="ruby-node">&quot;$siterubyver/#{RBCONFIG['arch']}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arg</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-value str">'configure_args'</span>].<span class="ruby-identifier">split</span>.<span class="ruby-identifier">detect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-regexp re">/--with-make-prog=/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">arg</span> }
+        <span class="ruby-identifier">makeprog</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/'/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/=/</span>, <span class="ruby-value">2</span>)[<span class="ruby-value">1</span>]
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">makeprog</span> = <span class="ruby-value str">'make'</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parameterize</span> = <span class="ruby-identifier">lambda</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">val</span> = <span class="ruby-constant">RBCONFIG</span>[<span class="ruby-identifier">path</span>]
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown path -- #{path}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-identifier">val</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/\A#{Regexp.quote(prefix)}/</span>, <span class="ruby-value str">'$prefix'</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">prefix</span>          = <span class="ruby-identifier">prefix</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">bindir</span>          = <span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'bindir'</span>]
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">libdir</span>          = <span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'libdir'</span>]
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">datadir</span>         = <span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'datadir'</span>]
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mandir</span>          = <span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'mandir'</span>]
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">docdir</span>          = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'docdir'</span>])  <span class="ruby-comment cmt"># b/c of trailing $(PACKAGE)</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sysconfdir</span>      = <span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'sysconfdir'</span>]
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">localstatedir</span>   = <span class="ruby-identifier">parameterize</span>[<span class="ruby-value str">'localstatedir'</span>]
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">libruby</span>         = <span class="ruby-identifier">libruby</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">librubyver</span>      = <span class="ruby-identifier">librubyver</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">librubyverarch</span>  = <span class="ruby-identifier">librubyverarch</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">siteruby</span>        = <span class="ruby-identifier">siteruby</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">siterubyver</span>     = <span class="ruby-identifier">siterubyver</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">siterubyverarch</span> = <span class="ruby-identifier">siterubyverarch</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rbdir</span>           = <span class="ruby-value str">'$siterubyver'</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sodir</span>           = <span class="ruby-value str">'$siterubyverarch'</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rubypath</span>        = <span class="ruby-identifier">rubypath</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rubyprog</span>        = <span class="ruby-identifier">rubypath</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">makeprog</span>        = <span class="ruby-identifier">makeprog</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">extconfopt</span>      = <span class="ruby-value str">''</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">shebang</span>         = <span class="ruby-value str">'ruby'</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">withoutext</span>      = <span class="ruby-value str">'no'</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">withoutdoc</span>      = <span class="ruby-value str">'no'</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">doctemplate</span>     = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">testrunner</span>      = <span class="ruby-value str">'auto'</span> <span class="ruby-comment cmt"># needed?</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">installdirs</span>     = <span class="ruby-value str">'site'</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="installdirs--method" class="method-detail ">
+        <a name="M000067"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">installdirs=</span><span
+            class="method-args">(val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+installdirs has only three options; and it has side-effects.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="installdirs--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 141</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">installdirs=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-ivar">@installdirs</span> = <span class="ruby-identifier">val</span>
+      <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'std'</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rbdir</span> = <span class="ruby-value str">'$librubyver'</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sodir</span> = <span class="ruby-value str">'$librubyverarch'</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'site'</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rbdir</span> = <span class="ruby-value str">'$siterubyver'</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sodir</span> = <span class="ruby-value str">'$siterubyverarch'</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'home'</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-value str">'HOME is not set.'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HOME'</span>]
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">prefix</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HOME'</span>]
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rbdir</span> = <span class="ruby-value str">'$libdir/ruby'</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sodir</span> = <span class="ruby-value str">'$libdir/ruby'</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-node">&quot;bad config: use INSTALLDIRS=(std|site|home|local) [#{val}]&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="load-config-method" class="method-detail ">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">load_config</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Load configuration.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="load-config-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 290</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_config</span>
+      <span class="ruby-comment cmt">#if File.file?(CONFIGFILE)</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-constant">File</span>.<span class="ruby-identifier">foreach</span>(<span class="ruby-constant">CONFIGFILE</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/=/</span>, <span class="ruby-value">2</span>)
+            <span class="ruby-identifier">k</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-value str">'-'</span>,<span class="ruby-value str">'_'</span>)
+            <span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{k}=&quot;</span>,<span class="ruby-identifier">v</span>.<span class="ruby-identifier">strip</span>) <span class="ruby-comment cmt">#self[k] = v.strip</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-identifier">$!</span>.<span class="ruby-identifier">message</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;\n#{File.basename($0)} config first&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt">#end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="save-config-method" class="method-detail ">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">save_config</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Save configuration.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="save-config-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 305</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_config</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">CONFIGFILE</span>))
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">CONFIGFILE</span>, <span class="ruby-value str">'w'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">OPTIONS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">val</span> = <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">name</span>]
+          <span class="ruby-identifier">f</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{name}=#{val}\n&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="shebang--method" class="method-detail ">
+        <a name="M000066"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">shebang=</span><span
+            class="method-args">(val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+shebang has only three options.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="shebang--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 132</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shebang=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-node">%w(all ruby never)</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">val</span>)
+        <span class="ruby-ivar">@shebang</span> = <span class="ruby-identifier">val</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-node">&quot;bad config: use SHEBANG=(all|ruby|never) [#{val}]&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="show-method" class="method-detail ">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p class="missing-docs">(Not documented)</p>
+          
+
+          
+          <div class="method-source-code"
+            id="show-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 315</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+      <span class="ruby-identifier">fmt</span> = <span class="ruby-value str">&quot;%-20s %s\n&quot;</span>
+      <span class="ruby-constant">OPTIONS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">name</span>]
+        <span class="ruby-identifier">reslv</span> = <span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">reslv</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>
+          <span class="ruby-identifier">reslv</span> = <span class="ruby-value str">&quot;(none)&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">reslv</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-identifier">reslv</span> = <span class="ruby-value str">&quot;no&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-keyword kw">true</span>
+          <span class="ruby-identifier">reslv</span> = <span class="ruby-value str">&quot;yes&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">printf</span> <span class="ruby-identifier">fmt</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">reslv</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="private-instance-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="--method" class="method-detail ">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">[]</span><span
+            class="method-args">(name)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Get unresloved attribute.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 348</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-node">&quot;@#{name}&quot;</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="--method" class="method-detail ">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">[]=</span><span
+            class="method-args">(name, value)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Set attribute.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 353</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{name}&quot;</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="load-meta-config-method" class="method-detail ">
+        <a name="M000109"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">load_meta_config</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Metaconfig file is &#8217;.config/setup/metaconfig{,.rb}&#8217;.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="load-meta-config-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/config.rb, line 363</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_meta_config</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-value str">'.config/setup/metaconfig{,.rb}'</span>).<span class="ruby-identifier">first</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">path</span>)
+        <span class="ruby-constant">MetaConfigEnvironment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>).<span class="ruby-identifier">instance_eval</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>), <span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::H 
+  level: 1
+  text: Meta Configuration
+- !ruby/struct:RDoc::Markup::Flow::VERB 
+  body: " This works a bit differently from 3.4.1.\n Defaults are currently not supported but remain in the method interfaces.\n"
+- !ruby/struct:RDoc::Markup::Flow::RULE 
+  width: 
+- !ruby/struct:RDoc::Markup::Flow::H 
+  level: 1
+  text: Meta Configuration
+- !ruby/struct:RDoc::Markup::Flow::VERB 
+  body: " This works a bit differently from 3.4.1.\n Defaults are currently not supported but remain in the method interfaces.\n"
+- !ruby/struct:RDoc::Markup::Flow::RULE 
+  width: 
+- !ruby/struct:RDoc::Markup::Flow::H 
+  level: 1
+  text: Meta Configuration
+- !ruby/struct:RDoc::Markup::Flow::VERB 
+  body: " This works a bit differently from 3.4.1.\n Defaults are currently not supported but remain in the method interfaces.\n"
+constants: []
+
+full_name: Setup::ConfigTable::MetaConfigEnvironment
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: add_bool_config
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: add_config
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: add_path_config
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: bool_config?
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: config?
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: config_names
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: path_config?
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: remove_config
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: set_config_default
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: value_config?
+name: MetaConfigEnvironment
+superclass: Object

@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja-JP">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
+  <meta http-equiv="Content-Language" content="ja-JP">
+<title>setup.rb を使ったパッケージを作る</title>
+</head>
+<body>
+
+<h1>setup.rb を使ったパッケージを作る</h1>
+<h2>シングルパッケージアーカイブを作る</h2>
+<p>
+「シングルパッケージアーカイブ」とは、以下のファイルが
+一組だけ入ったプログラムパッケージのことです。
+</p>
+<ul>
+<li>コマンド</li>
+<li>Ruby ライブラリ</li>
+<li>Ruby 拡張ライブラリ</li>
+<li>その他のデータ</li>
+</ul>
+<p>
+つまり普通のプログラムパッケージのことです。
+</p>
+<p>
+シングルパッケージアーカイブを作るには、アーカイブを
+以下のルールに従ってレイアウトしてください。
+</p>
+<pre>
+アーカイブのトップ/
+  setup.rb
+  bin/
+      コマンド類
+  lib/
+      Ruby ライブラリ
+  ext/
+      拡張モジュール
+  data/
+      その他のデータ
+  conf/
+      設定ファイル
+  man/
+      man ページ
+  test/
+      テスト
+</pre>
+<p>
+bin/, lib/, ext/, data/, conf/, man/ の下には各々インストールされるイメージを
+そのままにファイルを配置します。例えば lib/tmail/header.rb というファイルを
+置くと RUBYLIB/tmail/header.rb としてインストールされます。なお、これらの
+ディレクトリは中身が空のときには省略できます。
+</p>
+<p>
+ext/ は配置ルールが少し特殊です。複数のファイルからひとつの共有ライブラリ
+anyname.so ができるので、.so ができるべき場所にディレクトリを作り、その中に
+必要なファイルを入れます。例えば RUBYLIB/ARCH/tmail/parser.so が必要ならば、
+ディレクトリ ext/tmail/parser/ を作ってその中に parser.c や extconf.rb,
+depend, MANIFEST などを置きます。
+</p>
+<p>
+[注意] setup.rb は extconf.rb または MANIFEST があるディレクトリだけを
+コンパイル対象にします。
+</p>
+<p>
+最後に、test/ にはテストコードを置きます。setup.rb は test/unit で
+書かれたテストしか実行できません。なお test/unit は Ruby 1.8 以降に
+標準添付されています。
+</p>
+<h2>マルチパッケージアーカイブを作る</h2>
+<p>
+setup.rb は複数のパッケージを一つのアーカイブにまとめて、それを
+同時に扱うことができます。例えば依存関係のあるパッケージを全部
+まとめて配布したりするのに使えます。
+</p>
+<p>
+マルチパッケージアーカイブを作るには、まずトップに setup.rb と
+ディレクトリ packages/ を作り、その下にパッケージ名のディレクトリ
+を作ります。そしてその中にシングルパッケージアーカイブと同じ
+ディレクトリツリーを配置します。つまり全体像は以下のようになります。
+</p>
+<pre>
+アーカイブのトップ/
+    setup.rb
+    packages/
+        tmail/      # tmail パッケージ
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+        raccrt/     # raccrt パッケージ
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+        strscan/    # strscan パッケージ
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+        amstd/      # amstd パッケージ
+            bin/
+            lib/
+            ext/
+            data/
+            conf/
+            man/
+            test/
+</pre>
+<p>
+packages/ の下にあるディレクトリ名がパッケージ名です。
+このパッケージ名は setup.rb のヘルプメッセージに表示され、
+インストールするパッケージを --with や --without でユーザが
+選択するときに使われます。
+</p>
+<p>
+またデフォルトだとパッケージはソート順にインストールされます。
+順番を変更したいときは metaconfig API の declare_packages を
+使ってください。
+</p>
+<h2>setup.rb の働き</h2>
+<p>
+ファイルを上記のとおり配置しておけばあとは setup.rb が自動的に
+それなりの動作をしてくれます。具体的には、setup のときに以下の
+ことを実行します。
+</p>
+<ul>
+<li>bin/ 以下にあるファイルが #! で始まっていてかつ
+文字列 ruby を含む場合は #! 行を --ruby-path に置き換える</li>
+<li>ext/ 以下の拡張モジュールをコンパイルする</li>
+</ul>
+<p>
+install では以下のことを実行します。
+</p>
+<ul>
+<li>bin/ 以下のファイルを --bindir にインストール</li>
+<li>lib/ 以下の *.rb を --rbdir にインストール</li>
+<li>ext/ 以下の *.so を --sodir にインストール</li>
+<li>data/ 以下のファイルを --datadir にインストール</li>
+<li>conf/ 以下のファイルを --localstatedir にインストール</li>
+<li>man/ 以下のファイルを --mandir にインストール</li>
+</ul>
+<h2>フックファイル</h2>
+<p>
+デフォルトの動作でもたいていの場合には通用します。しかし場合によっては
+インストール時になにか特別な作業をしたいこともあるでしょう。その
+場合は特別なファイルを置くことで動作を追加することができます。
+</p>
+<p>
+たとえば setup のタイミングに lib/tmail/ でなにかをしたいとしたら、
+lib/tmail/pre-setup.rb を作ってその中にやりたいことを書きます。
+</p>
+<pre>
+# pre-setup.rb
+
+# racc の文法ファイルをその場でコンパイル (普通、やらない)
+system &quot;racc #{srcdir_root + '/src/mp.y'} -o mailp.rb&quot;
+
+# require 'tmail' で tmail/ の中身を全部 require できるようにする
+list = Dir.glob(curr_srcdir + '/*.rb').collect {|n| File.basename(n) }
+File.open( '_loadlib.rb', 'w' ) {|f|
+  f.puts list.collect {|n| &quot;require 'tmail/&quot; + n + &quot;'&quot; }
+}
+File.open( '../tmail.rb', 'w' ) {|f|
+  f.puts &quot;require 'tmail/_loadlib'&quot;
+}
+</pre>
+<p>
+一般には、ディレクトリに入った直後に pre-TASK.rb を、
+ディレクトリを出る直前に post-TASK.rb を実行します。
+TASK の部分に使えるもの（フック可能なタスク）は
+config, setup, install, test, clean, distclean の六つです。
+</p>
+<p>
+またフックスクリプトの実行中に例外が起きた場合はインストーラ
+全体が即座に失敗します。逆に言うと、処理失敗の時は例外を投げれば
+よいということです。exit はしないでください。
+</p>
+<p>
+またフックファイルの例で srcdir_root や curr_srcdir という
+メソッドを使っていることに注意してください。setup.rb には、
+作ったファイルだけを別のディレクトリに置く仕組みがある
+（srcdir と objdir が区別されている）ので、カレントディレクトリから
+読めばよいとは限りません。フックファイル中では以下のルールに従って
+ください。
+</p>
+<ul>
+<li>読みこみは常に現在の srcdir (curr_srcdir) から行う。</li>
+<li>書きこみは常にカレントディレクトリに対して行う。</li>
+</ul>
+<p>
+srcdir/objdir の仕組み
+</p>
+<pre>
+archive_top/                  srcdir は変更しないで
+    ext/tmail/scanmail/
+        MANIFEST
+        depend
+        extconf.rb
+        scanmail.c
+
+OBJ/                          対応する objdir に作ったものを置く
+    ext/tmail/scanmail/
+        Makefile
+        scanmail.o
+        scanmail.so
+</pre>
+<p>
+この場合 archive_top/ を「srcdir のルート」、
+OBJ/ を「objdir のルート」と言います。
+また archive_top/ext/tmail/scanmail/ を「カレント srcdir」、
+OBJ/ext/tmail/scanmail/ を「カレント objdir」と呼びます。
+</p>
+<p>
+こうしておくと、srcdir に対しては読み出ししか行われないので、
+clean などしなくても常に srcdir を最小限のファイルのきれいな
+状態に保てます。またマニアックなところでは複数のクロスコンパイルを
+同時に行ったりもできるようになります。そこまでいかなくとも、
+コンパイルオプションだけを変えていくつものバージョンを作ったりする
+ことはあるでしょう。この仕組みはそのような場合に便利なのです。
+</p>
+<p>
+srcdir/objdir 対応は絶対必要というわけではありませんが、対応して
+おいて損はありません。
+</p>
+<p>
+また curr_srcdir や srcdir_root など
+フックファイル中で使える API については別ページの
+&lt;a href=&quot;hookapi.html&quot;&gt;フック API リファレンス&lt;/a&gt;
+を参照してください。
+</p>
+<h2>メタコンフィグ</h2>
+<p>
+setup.rb では、config のタスクオプションを増やすことができます。
+このために使うのが metaconfig ファイルです。
+</p>
+<p>
+例えば、libc のパスを指定するための config オプション --libc と、
+win32 サポートのオンオフを指定するためのオプション --win32 を
+追加してみましょう。setup.rb を置くのと同じディレクトリに metaconfig
+というファイルを作り、この中に以下のような Ruby スクリプトを書きます。
+</p>
+<pre>
+add_path_config 'libc', '/lib/libc.so', 'path to the C standard library'
+add_bool_config 'win32', false, 'compile with Win32 support'
+</pre>
+<p>
+これで、パスを指定するオプション --libc と、真偽値を取る
+オプション--win32 が追加されました。以下のように config
+のときに使うことができます。
+</p>
+<pre>
+ruby setup.rb config --libc=/lib/libc-devel.so --win32
+</pre>
+<p>
+また setup.rb のヘルプメッセージにも自動的に表示されます。
+</p>
+<p>
+metaconfig で使える API については
+&lt;a href=&quot;metaconfapi.html&quot;&gt;metaconfig API リファレンスマニュアル&lt;/a&gt;
+を参照してください。
+</p>
+<h2>以前のバージョンとの互換性</h2>
+<p>
+インストーラというものの特殊性を考え、
+互換性はまったく保っていません。2.0 以前とは別物と思ってください。
+前バージョンの動作が必要ならばそのバージョンを使いましょう。
+以前のバージョンとは以下の点で非互換です。
+</p>
+<ul>
+<li>ディレクトリ構造が完全に違う</li>
+<li>PATHCONV がない</li>
+<li>share/ → data/</li>
+<li>フックの形式が違う</li>
+<li>dryrun コマンドがない → --prefix 使ってインストールしてください。</li>
+</ul>
+<h2>ライセンスについて</h2>
+<p>
+setup.rb 自体は GNU LGPL (Lesser General Public License) version 2.1
+に従って配布します。詳細はファイル COPYING を見てください。また、
+setup.rb を使ってインストールするプログラムが LGPL である必要は
+ありません。
+</p>
+<h2>インストールマニュアル</h2>
+<p>
+このアーカイブに含まれている Usage_*.txt は自由にコピー・編集
+して自分のパッケージに使ってください。Copyright 表示が入って
+いますが、これは単に自動化が楽だから入っているだけなので消しても
+構いません。
+</p>
+
+</body>
+</html>

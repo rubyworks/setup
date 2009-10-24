@@ -1,0 +1,32 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: run
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: CLI for Setup.rb
+- !ruby/struct:RDoc::Markup::Flow::RULE 
+  width: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: CLI for Setup.rb
+constants: 
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  name: TASKS
+  value: "%w(all config show setup test install uninstall rdoc ri clean distclean)"
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  name: TASK_DESCRIPTIONS
+  value: "[       [ 'all',       \"do config, setup, then install\" ],       [ 'config',    \"saves your configurations\" ],       [ 'show',      \"shows current configuration\" ],       [ 'setup',     \"compiles ruby extentions and others\" ],       [ 'rdoc',      \"generate rdoc documentation\" ],       [ 'ri',        \"generate ri documentation\" ],       [ 'install',   \"installs files\" ],       [ 'uninstall', \"uninstalls files\" ],       [ 'test',      \"run all tests in test/\" ],       [ 'clean',     \"does `make clean' for each extention\" ],       [ 'distclean', \"does `make distclean' for each extention\" ]     ]"
+full_name: Setup::Command
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: help
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: run
+name: Command
+superclass: Object

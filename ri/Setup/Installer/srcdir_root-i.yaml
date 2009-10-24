@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Hook Script API bases
+full_name: Setup::Installer#srcdir_root
+is_singleton: false
+name: srcdir_root
+params: ()
+visibility: public

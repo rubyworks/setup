@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Generate help text
+full_name: Setup::Command#help
+is_singleton: false
+name: help
+params: ()
+visibility: public

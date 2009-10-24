@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Ask a question of the user.
+full_name: Setup::Installer#ask
+is_singleton: false
+name: ask
+params: (question, answers=nil)
+visibility: public

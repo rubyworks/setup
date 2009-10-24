@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: ""
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: New Installer.
+full_name: Setup::Installer::new
+is_singleton: true
+name: new
+params: (config=nil) {|| ...}
+visibility: public

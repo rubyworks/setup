@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Metaconfig file is '.config/setup/metaconfig{,.rb}'.
+full_name: Setup::ConfigTable#load_meta_config
+is_singleton: false
+name: load_meta_config
+params: ()
+visibility: private

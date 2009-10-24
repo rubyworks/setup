@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: TASK uninstall
+full_name: Setup::Installer#exec_uninstall
+is_singleton: false
+name: exec_uninstall
+params: ()
+visibility: public

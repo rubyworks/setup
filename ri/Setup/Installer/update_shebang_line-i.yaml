@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#update_shebang_line
+is_singleton: false
+name: update_shebang_line
+params: (path)
+visibility: public

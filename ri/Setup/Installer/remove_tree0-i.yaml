@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#remove_tree0
+is_singleton: false
+name: remove_tree0
+params: (path)
+visibility: public

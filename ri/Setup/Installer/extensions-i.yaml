@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Added these for future use in simplificaiton of design.
+full_name: Setup::Installer#extensions
+is_singleton: false
+name: extensions
+params: ()
+visibility: public

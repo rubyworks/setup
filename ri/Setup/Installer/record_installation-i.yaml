@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#record_installation
+is_singleton: false
+name: record_installation
+params: (path)
+visibility: public

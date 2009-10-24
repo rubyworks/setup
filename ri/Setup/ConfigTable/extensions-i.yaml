@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::ConfigTable#extensions
+is_singleton: false
+name: extensions
+params: ()
+visibility: public

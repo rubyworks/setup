@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: shebang has only three options.
+full_name: Setup::ConfigTable#shebang=
+is_singleton: false
+name: shebang=
+params: (val)
+visibility: public

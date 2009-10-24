@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#mkdir_p
+is_singleton: false
+name: mkdir_p
+params: (dirname, prefix = nil)
+visibility: public

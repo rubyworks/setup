@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#srcexist?
+is_singleton: false
+name: srcexist?
+params: (path)
+visibility: private

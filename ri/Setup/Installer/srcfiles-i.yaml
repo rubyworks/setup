@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#srcfiles
+is_singleton: false
+name: srcfiles
+params: (path = '.')
+visibility: private

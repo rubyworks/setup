@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::ConfigTable::MetaConfigEnvironment#config?
+is_singleton: false
+name: config?
+params: (name)
+visibility: public

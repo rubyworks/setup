@@ -1,0 +1,14 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: File Operations
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "This module requires: #verbose?, #no_harm?"
+full_name: Setup::Installer#binread
+is_singleton: false
+name: binread
+params: (fname)
+visibility: public

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>File: README.rdoc [Setup]</title>
+
+  <link rel="SHORTCUT ICON" href="./images/file.png">
+
+  <link type="text/css" media="screen" rel="stylesheet" href="./rdoc.css" />
+
+  <script src="./js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/thickbox.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body class="file">
+
+  <div class="head">
+    <h1>
+      <img src="./images/file.png" align="absmiddle">&nbsp;
+      <a href="./index.html">Setup</a>&nbsp;
+      <a href="/">README.rdoc</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="./HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li class="module"><a href="./Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="./Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="./Setup/ConfigTable.html">Setup::ConfigTable</a></li>
+        
+          <li class="class"><a href="./Setup/ConfigTable/MetaConfigEnvironment.html">Setup::ConfigTable::MetaConfigEnvironment</a></li>
+        
+          <li class="class"><a href="./Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="./Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="./Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+
+    <div id="validator-badges">
+      Generated with <a href="http://github.com/proutils/rdazzle">Razzle Dazzle Redfish</a><br/><br/>
+      <a href="http://validator.w3.org/check/referer">[Validate]</a>
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1>Ruby <a href="Setup.html">Setup</a></h1>
+<pre>
+  http://setup.rubyforge.org
+</pre>
+<h2>INTRODUCTION</h2>
+<p>
+Every Rubyist is aware of Minero Aoki&#8217;s ever useful setup.rb script.
+It&#8217;s how most of us used to install our ruby programs before RubyGems
+came along. And it&#8217;s still mighty useful in certain scenarios, not
+the least of which is the job of the distribution package managers. <a
+href="Setup.html">Setup</a> converts setup.rb into a stand-alone
+application. No longer will you need distribute setup.rb with you Ruby
+packages. Just instruct your users to use <a href="Setup.html">Setup</a>.
+</p>
+<h3>IMPORTANT</h3>
+<p>
+There a couple very important difference between the old 3.4.1 verison of
+the setup.rb script and version 4.0.0 of the independent application.
+</p>
+<ul>
+<li>The directory convention &#8216;conf&#8217; has been change to
+&#8216;etc&#8217;.
+
+</li>
+<li>Multi-package project layouts are no longer supported.
+
+</li>
+</ul>
+<h2>INSTALLATION</h2>
+<p>
+The easy way to install is via RubyGems.
+</p>
+<pre>
+  $ gem install setup
+</pre>
+<p>
+To install <a href="Setup.html">Setup</a> manually you need to
+&#8220;boot-strap&#8221; it. This is done for you, by running the
+following:
+</p>
+<pre>
+  $ ruby setup.rb
+</pre>
+<h2>SYNOPSIS</h2>
+<p>
+To use setup.rb, a project must conform to the setup.rb standard layout.
+</p>
+<p>
+Please see the documentation in doc/book. Note that the documentation is
+slightly out of sync with the latest release.
+</p>
+<p>
+Usage is as simple as:
+</p>
+<pre>
+  $ setup.rb config
+  $ setup.rb setup
+  $ setup.rb install
+</pre>
+<p>
+or
+</p>
+<pre>
+  $ setup.rb all
+</pre>
+<p>
+If you later decide you want to remove the program.
+</p>
+<pre>
+  $ setup.rb uninstall
+</pre>
+<p>
+Note that uninstall is made possible by the
+&#8217;.cache/setup/installedfiles&#8217; file that is generated by the
+install process. If that file is deleted than you will not be able to
+uninstall. (You can get around this be reinstalling first though).
+</p>
+<p>
+You can clean up any setup products with:
+</p>
+<pre>
+  $ setup.rb clean
+</pre>
+<p>
+And restore the package to it&#8217;s pristine state with:
+</p>
+<pre>
+  $ setup.rb distclean
+</pre>
+<p>
+Not that this last command will remove the .cache/setup/installedfiles
+file!
+</p>
+<h2>TODO LIST</h2>
+<ul>
+<li>Maybe protect &#8216;installedfiles&#8217; from removal, even on distclean.
+
+</li>
+<li>Separate compiling code into separate class.
+
+</li>
+</ul>
+<h2>COPYRIGHT &amp; LICENSE</h2>
+<p>
+Copyright &#169; 2002,2005 Minero Aoki
+</p>
+<p>
+Copyright &#169; 2008,2009 Thomas Sawyer
+</p>
+<p>
+GNU LGPL, Lesser General Public License version 2.1.
+</p>
+<p>
+For details of LGPL, see the file &#8220;COPYING&#8221;.
+</p>
+<pre>
+                                               7trans
+                                  transfire@gmail.com
+                                  http://tigerops.org
+
+                                          Minero Aoki
+                                  aamine@loveruby.net
+                                http://i.loveruby.net
+</pre>
+
+  </div>
+
+</body>
+
+
+</html>

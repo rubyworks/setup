@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja-JP">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
+  <meta http-equiv="Content-Language" content="ja-JP">
+<title>setup.rb を使ったプログラムのインストール</title>
+</head>
+<body>
+
+<h1>setup.rb を使ったプログラムのインストール</h1>
+<p>
+この文書ではエンドユーザが setup.rb を使って
+パッケージをインストールする方法を説明します。
+</p>
+<h2>最も単純な方法</h2>
+<p>
+通常は次のように打つだけで十分です。
+（UNIX 系 OS ではおそらくスーパーユーザ権限が必要です）
+</p>
+<pre>
+($ su)
+ # ruby setup.rb
+</pre>
+<p>
+自分のホームディレクトリ以下にインストールしたいときは
+次のようにしてください。
+</p>
+<pre>
+$ ruby setup.rb all --prefix=$HOME
+</pre>
+<h2>インストールの詳細</h2>
+<p>
+以下、もう少し詳細に説明します。
+</p>
+<p>
+setup.rb ではインストールのプロセスが「config」「setup」「install」
+の三つの段階に分かれています。setup.rb を引数なしで実行すると
+config setup install を一気に実行してしまうのですが、次のように
+すると三つに分けて実行できます。
+</p>
+<pre>
+$ ruby setup.rb config
+$ ruby setup.rb setup
+# ruby setup.rb install
+</pre>
+<p>
+そして各段階にオプションを付けるとインストール先などを細かく制御
+することができます。例えば config に「--bin-dir=$HOME/bin」オプ
+ションを付けるとコマンドが $HOME/bin にインストールされます。
+</p>
+<p>
+詳しくは「タスクオプション」の節を見てください。
+</p>
+<h2>グローバルオプション</h2>
+<p>
+グローバルオプションとは、タスク (config や setup) に関らず
+指定できるオプションのことです。必ずタスクの前に指定してください。
+</p>
+<dl>
+<dt>-q,--quiet</dt>
+<dd><p>
+メッセージ出力を最小限にする
+</p>
+</dd>
+<dt>--verbose</dt>
+<dd><p>
+実行中の状況を詳細に表示する (デフォルトはオン)
+</p>
+</dd>
+<dt>-h,--help</dt>
+<dd><p>
+setup.rb の使いかたなどを表示
+</p>
+</dd>
+<dt>-v,--version</dt>
+<dd><p>
+setup.rb のバージョンを表示
+</p>
+</dd>
+<dt>--copyright</dt>
+<dd><p>
+setup.rb の著作権を表示
+</p>
+</dd>
+</dl>
+<h2>タスク</h2>
+<p>
+タスクは以下の七つです。
+</p>
+<dl>
+<dt>all</dt>
+<dd><p>
+config, setup, install を一気に行う。
+タスクオプションは config と共通。
+</p>
+</dd>
+<dt>config</dt>
+<dd><p>
+設定をチェックしたうえで保存する
+</p>
+</dd>
+<dt>show</dt>
+<dd><p>
+現在の設定を表示する
+</p>
+</dd>
+<dt>setup</dt>
+<dd><p>
+コンパイルなど、ファイル内容の変更を行うもの
+</p>
+</dd>
+<dt>install</dt>
+<dd><p>
+インストールを行う。
+</p>
+</dd>
+<dt>test</dt>
+<dd><p>
+テストを実行する。
+</p>
+</dd>
+<dt>clean</dt>
+<dd><p>
+setup で作成したものを消す
+</p>
+</dd>
+<dt>distclean</dt>
+<dd><p>
+setup で作成したものを消す (より強力)
+</p>
+</dd>
+</dl>
+<h2>config/all のタスクオプション</h2>
+<p>
+config タスクで使えるオプションを説明します。
+</p>
+<p>
+値を取るオプションはすべて --opt=value の形で指定します。
+「=」のまわりに空白を入れてはいけません。各オプションの
+デフォルト値は ruby setup.rb --help で見られます。
+</p>
+<p>
+すべてのオプションで、値に別の変数を使うことができます。
+例えば Ruby ライブラリを site_ruby にインストール
+したければ、--rbdir=$siterubyver と指定できます。
+UNIX シェルでは「$」をエスケープして --rbdir=\$siterubyver
+としてください。
+</p>
+<dl>
+<dt>--installdirs=(std|site|home)</dt>
+<dd><p>
+よく使われるインストール先ディレクトリを
+まとめてセットするオプション。
+</p>
+<p>
+std: $libruby 以下にインストールする。
+</p>
+<p>
+site: $siteruby 以下にインストールする。
+</p>
+<p>
+home: ホームディレクトリ下にインストールする。
+</p>
+</dd>
+<dt>--prefix=PATH</dt>
+<dd><p>
+$bindir, $libdir などの共通部分
+</p>
+</dd>
+<dt>--bindir=PATH</dt>
+<dd><p>
+実行可能ファイル（コマンド）をインストールするディレクトリ。
+</p>
+</dd>
+<dt>--rbdir=PATH</dt>
+<dd><p>
+Ruby ライブラリをインストールするディレクトリ。
+</p>
+</dd>
+<dt>--sodir=PATH</dt>
+<dd><p>
+Ruby の拡張モジュールをインストールするディレクトリ。
+</p>
+</dd>
+<dt>--datadir=PATH</dt>
+<dd><p>
+その他のデータファイルをインストールするディレクトリ。
+</p>
+</dd>
+<dt>--sysconfdir=PATH</dt>
+<dd><p>
+設定ファイルをインストールするディレクトリ。
+</p>
+</dd>
+<dt>--mandir=PATH</dt>
+<dd><p>
+man ページをインストールするディレクトリ。
+</p>
+</dd>
+<dt>--libruby=PATH</dt>
+<dd><p>
+Ruby ライブラリをインストールするディレクトリ
+</p>
+</dd>
+<dt>--librubyver=PATH</dt>
+<dd><p>
+Ruby の標準添付ライブラリがインストールされるディレクトリ
+</p>
+</dd>
+<dt>--librubyverarch=PATH</dt>
+<dd><p>
+Ruby の標準添付拡張ライブラリがインストールされるディレクトリ
+</p>
+</dd>
+<dt>--siteruby=PATH</dt>
+<dd><p>
+Ruby のバージョンに依存しない、非標準の Ruby ライブラリが
+インストールされるディレクトリ (site_ruby)
+</p>
+</dd>
+<dt>--siterubyver=PATH</dt>
+<dd><p>
+Ruby のバージョンに依存する、非標準の Ruby ライブラリが
+インストールされるディレクトリ (バージョンつき site_ruby)。
+</p>
+</dd>
+<dt>--siterubyverarch=PATH</dt>
+<dd><p>
+非標準の Ruby 拡張ライブラリがインストールされるディレクトリ
+(バージョン・アーキテクチャ名つき site_ruby)。
+</p>
+</dd>
+<dt>--rubypath=PATH</dt>
+<dd><p>
+shebang 行 (#!) にセットする Ruby インタプリタのパス。
+つまり、インストールしたプログラムを実行するときに
+この ruby が使われます。
+</p>
+</dd>
+<dt>--shebang=(all|ruby|never)</dt>
+<dd><p>
+shebang 行 (#!) の書き換えモードです。
+</p>
+<p>
+all: すべてのファイルの shenbang 行を書き換えもしくは追加する。
+</p>
+<p>
+ruby: ruby を起動していると思われる shebang 行だけを書き換える。
+</p>
+<p>
+never: いっさい shebang 行を書き換えない。
+</p>
+</dd>
+<dt>--rubyprog=PATH</dt>
+<dd><p>
+インストール時に使う ruby プログラムへのパス。
+</p>
+</dd>
+<dt>--makeprog=NAME</dt>
+<dd><p>
+拡張ライブラリのコンパイルに使用する make プログラム。
+</p>
+</dd>
+<dt>--without-ext</dt>
+<dd><p>
+拡張モジュールのコンパイル・インストールを無条件に
+スキップする。ただし当然ながら、インストールされる
+プログラム自体が拡張モジュールなしで動くようになって
+いなければ意味がありません。
+</p>
+</dd>
+<dt>--rbconfig=PATH</dt>
+<dd><p>
+デフォルト値の設定に使う rbconfig.rb
+</p>
+</dd>
+</dl>
+<p>
+またマルチパッケージアーカイブではこれに加えて以下のオプションも使えます。
+</p>
+<dl>
+<dt>--with=NAME,NAME,NAME...</dt>
+<dd><p>
+インストールするパッケージ
+</p>
+</dd>
+<dt>--without=NAME,NAME,NAME...</dt>
+<dd><p>
+インストールしないパッケージ
+</p>
+</dd>
+</dl>
+<p>
+さらに、「--」（マイナス二つ）に続けてオプションを指定することで
+extconf.rb に引数を渡すことができます。
+</p>
+<pre>
+ruby setup.rb config -- --with-tklib=/usr/lib/libtk-ja.so.8.0
+</pre>
+<h2>install のタスクオプション</h2>
+<dl>
+<dt>--no-harm</dt>
+<dd><p>
+挙動を表示するだけで実行しません。
+</p>
+</dd>
+<dt>--prefix=PATH</dt>
+<dd><p>
+config で決定したパスの先頭にさらに PATH を付加します。
+config --prefix がプログラムが実行されるときのパスであるのに
+対し、install --prefix はプログラムファイルをコピーするパスを
+指定します。主に RPM などのバイナリパッケージ作成用です。
+デフォルトは空文字列です。
+</p>
+</dd>
+</dl>
+
+</body>
+</html>

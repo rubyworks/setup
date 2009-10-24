@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#new_shebang
+is_singleton: false
+name: new_shebang
+params: (old)
+visibility: public

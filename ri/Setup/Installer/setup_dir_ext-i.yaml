@@ -1,0 +1,10 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Setup::Installer#setup_dir_ext
+is_singleton: false
+name: setup_dir_ext
+params: (rel)
+visibility: public
