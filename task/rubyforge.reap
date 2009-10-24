@@ -1,6 +1,0 @@
----
-rubyforge:
-  service: Rubyforge
-  sitemap:
-    site: <%= package %>
-  active: true

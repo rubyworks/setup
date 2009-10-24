@@ -2,8 +2,8 @@
 rubygems:
   service: Box
   active : true
-  types  : [gem, tar]
+  types  : [gem, gz]
   include: [bin, demo, lib, meta, test, "[A-Z]*"]
   exclude: ~
-  remanifest: true
+  master : true
 
