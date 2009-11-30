@@ -1,0 +1,4 @@
+default : --format progress test/features
+debug   : --format pretty test/features
+log     : --format progress --format html --out=log/cucumber/index.html test/features
+

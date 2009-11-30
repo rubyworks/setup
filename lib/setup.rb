@@ -1,3 +1,3 @@
 module Setup
-  VERSION   = '4.1.1'
+  VERSION   = '5.0.0'
 end

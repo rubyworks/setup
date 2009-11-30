@@ -1,28 +1,10 @@
-require 'setup/config'
-require 'setup/build'
-require 'setup/install'
-require 'setup/error'
+require 'setup/session'
+require 'optparse'
 
 module Setup
 
   # CLI for Setup.rb
   class Command
-
-    TASKS = %w(all config show setup test install uninstall rdoc ri clean distclean)
-
-    TASK_DESCRIPTIONS = [
-      [ 'all',       "do config, setup, then install" ],
-      [ 'config',    "saves your configurations" ],
-      [ 'show',      "shows current configuration" ],
-      [ 'setup',     "compiles ruby extentions and others" ],
-      [ 'rdoc',      "generate rdoc documentation" ],
-      [ 'ri',        "generate ri documentation" ],
-      [ 'install',   "installs files" ],
-      [ 'uninstall', "uninstalls files" ],
-      [ 'test',      "run all tests in test/" ],
-      [ 'clean',     "does `make clean' for each extention" ],
-      [ 'distclean', "does `make distclean' for each extention" ]
-    ]
 
     #
     def self.run(*argv)
@@ -30,109 +12,75 @@ module Setup
     end
 
     #
+    def self.tasks
+      @tasks ||= {}
+    end
+
+    #
+    def self.order
+      @order ||= []
+    end
+
+    #
+    def self.task(name, description)
+      tasks[name] = description
+      order << name
+    end
+
+    task 'all'      , "do config, setup, then install"
+    task 'config'   , "saves your configuration"
+    task 'show'     , "show current configuration"
+    task 'setup'    , "compile ruby extentions"
+    task 'ri'       , "generate ri documentation"
+    task 'rdoc'     , "generate rdoc documentation"
+    task 'test'     , "run tests"
+    task 'install'  , "install project files"
+    task 'uninstall', "uninstall previously installed files"
+    task 'clean'    , "does `make clean' for each extention"
+    task 'distclean', "does `make distclean' for each extention"
+
+    #
     def run(*argv)
       ARGV.replace(argv) unless argv.empty?
 
-      config    = ConfigTable.new
-      installer = Installer.new(config)
+      #session = Session.new(:io=>$stdio)
+      #config  = session.configuration
 
       task = ARGV.find{ |a| a !~ /^[-]/ }
       task = 'all' unless task
 
-      unless TASKS.include?(task)
+      unless task_names.include?(task)
         $stderr.puts "Not a valid task -- #{task}"
         exit 1
       end
 
-      opts   = OptionParser.new
+      parser  = OptionParser.new
+      options = {}
 
-      opts.banner = "Usage: #{File.basename($0)} [task] [options]"
+      parser.banner = "Usage: #{File.basename($0)} [TASK] [OPTIONS]"
 
-      if task == 'config' or task == 'all'
-        opts.separator ""
-        opts.separator "Config options:"
-        config.descriptions.each do |name, type, desc|
-          opts.on("--#{name} #{type.to_s.upcase}", desc) do |val|
-            ENV[name.to_s] = val.to_s
-          end
-        end
+      optparse_header(parser, options)
+      case task
+      when 'all'
+        optparse_all(parser, options)
+      when 'config'
+        optparse_config(parser, options)
+      when 'install'
+        optparse_install(parser, options)
       end
-
-      if task == 'install'
-        opts.separator ""
-        opts.separator "Install options:"
-
-        opts.on("--prefix PATH", "Installation prefix") do |val|
-          installer.install_prefix = val
-        end
-
-        #opts.on("--doc", "Generate documentation") do |val|
-        #  installer.install_make_docs = true
-        #end
-
-        opts.on("--no-test", "Do not run tests") do |val|
-          installer.install_no_test = true
-        end
-      end
-
-      #if task == 'test'
-      #  opts.separator ""
-      #  opts.separator "Install options:"
-      #
-      #  opts.on("--runner TYPE", "Test runner (auto|console|gtk|gtk2|tk)") do |val|
-      #    installer.config.testrunner = val
-      #  end
-      #end
-
-      # common options
-      opts.separator ""
-      opts.separator "General options:"
-
-      opts.on("-q", "--quiet", "Silence output") do |val|
-        installer.quiet = val
-      end
-
-      opts.on("--verbose", "Provide verbose output") do |val|
-        installer.verbose = val
-      end
-
-      opts.on("--no-write", "Do not write to disk") do |val|
-        installer.no_harm = !val
-      end
-
-      opts.on("-n", "--dryrun", "Same as --no-write") do |val|
-        installer.no_harm = val
-      end
-
-      # common options
-      opts.separator ""
-      opts.separator "Inform options:"
-
-      # Tail options (eg. commands in option form)
-      opts.on_tail("-h", "--help", "display this help information") do
-        puts help
-        exit
-      end
-
-      opts.on_tail("--version", "Show version") do
-        puts File.basename($0) + ' v' + Setup::VERSION #Version.join('.')
-        exit
-      end
-
-      opts.on_tail("--copyright", "Show copyright") do
-        puts Setup::COPYRIGHT #opyright
-        exit
-      end
+      optparse_common(parser, options)
 
       begin
-        opts.parse!(ARGV)
+        parser.parse!(ARGV)
       rescue OptionParser::InvalidOption
         $stderr.puts $!.to_s.capitalize
         exit 1
       end
 
+      $stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
+
       begin
-        installer.__send__("exec_#{task}")
+        session.__send__(task)
       rescue Error
         raise if $DEBUG
         $stderr.puts $!.message
@@ -141,15 +89,127 @@ module Setup
       end
     end
 
+    #
+    def session
+      @session ||= Session.new(:io=>$stdout)
+    end
+
+    #
+    def configuration
+      @configuration ||= session.configuration
+    end
+
+    #
+    def optparse_header(parser, options)
+      parser.banner = "USAGE: #{File.basename($0)} [command] [options]"
+    end
+
+    #
+    def optparse_all(parser, options)
+      #optparse_config(parser, options)
+      optparse_install(parser, options)
+    end
+
+    #
+    def optparse_config(parser, options)
+      parser.separator ""
+      parser.separator "Config options:"
+      configuration.options.each do |name, type, desc|
+        parser.on("--#{name} [#{type.to_s.upcase}]", desc) do |val|
+          #ENV["RUBYSETUP_#{name.to_s.upcase}"] = val.to_s
+          configuration.__send__("#{name}=", val)
+        end
+      end
+    end
+
+    #
+    def optparse_install(parser, options)
+      parser.separator ""
+      parser.separator "Install options:"
+      parser.on("--prefix [PATH]", "Installation prefix") do |val|
+        session.options[:install_prefix] = val
+      end
+      parser.on("--no-doc", "Doc not generate ri documentation") do
+        #ENV['RUBYSETUP_NO_DOC'] = 'true'
+        configuration.no_doc = true
+      end
+      parser.on("--no-test", "Do not run tests") do
+        #ENV['RUBYSETUP_NO_TEST'] = 'true'
+        configuration.no_test = true
+      end
+    end
+
+    #def optparse_test(parser, options)
+    #  parser.separator ""
+    #  parser.separator "Install options:"
+    #
+    #  parser.on("--runner TYPE", "Test runner (auto|console|gtk|gtk2|tk)") do |val|
+    #    ENV['RUBYSETUP_TESTRUNNER'] = val
+    #  end
+    #end
+
+    #
+    def optparse_uninstall(parser, options)
+      #parser.separator ""
+      #parser.separator "Uninstall options:"
+      #parser.on("--prefix [PATH]", "Installation prefix") do |val|
+      #  session.options[:install_prefix] = val
+      #end
+    end
+
+    # Common options
+    def optparse_common(parser, options)
+      parser.separator ""
+      parser.separator "General options:"
+
+      parser.on("-q", "--quiet", "Suppress output") do |val|
+        session.options[:quiet] = val
+      end
+
+      parser.on("--trace", "--verbose", "Watch execution") do |val|
+        session.options[:trace] = true
+      end
+
+      parser.on("--trial", "--no-harm", "Do not write to disk") do |val|
+        session.options[:trial] = true
+      end
+
+      parser.separator ""
+      parser.separator "Inform options:"
+
+      # Tail options (eg. commands in option form)
+      parser.on_tail("-h", "--help", "display this help information") do
+        #puts help
+        puts parser
+        exit
+      end
+
+      parser.on_tail("--version", "-v", "Show version") do
+        puts File.basename($0) + ' v' + Setup::VERSION #Version.join('.')
+        exit
+      end
+
+      parser.on_tail("--copyright", "Show copyright") do
+        puts Setup::COPYRIGHT #opyright
+        exit
+      end
+    end
+
+    #
+    def task_names
+      self.class.tasks.keys
+    end
+
     # Generate help text
     def help
-    fmt = " " * 10 + "%-10s       %s"
-      commands = TASK_DESCRIPTIONS.collect do |k,d|
+    fmt = " " * 12 + "%-10s       %s"
+      commands = self.class.order.collect do |k|
+        d = self.class.tasks[k]
         (fmt % ["#{k}", d])
       end.join("\n").strip
 
       fmt = " " * 13 + "%-20s       %s"
-      configs = ConfigTable::DESCRIPTIONS.collect do |k,t,d|
+      configs = configuration.options.collect do |k,t,d|
         (fmt % ["--#{k}", d])
       end.join("\n").strip
 
@@ -160,10 +220,10 @@ module Setup
             #{commands}
 
         Options for CONFIG:
-               #{configs}
+            #{configs}
 
         Options for INSTALL:
-               --prefix                   Set the install prefix
+            --prefix                      Set the install prefix
 
         Options in common:
             -q --quiet                    Silence output
@@ -171,7 +231,7 @@ module Setup
             -n --no-write                 Do not write to disk
 
       END
-      text.gsub(/^ \ \ \ \ \ /, '')
+      text.gsub(/^\ {8,8}/, '')
     end
 
   end

@@ -56,8 +56,8 @@ module Setup
     # Configuration
     attr :config
 
-    attr_writer :no_harm
-    attr_writer :verbose
+    attr_writer :trial
+    attr_writer :trace
     attr_writer :quiet
 
     attr_accessor :install_prefix
@@ -68,15 +68,15 @@ module Setup
       srcroot = '.'
       objroot = '.'
 
-      @config = config || ConfigTable.new
+      @config = config || Configuration.new
 
       @srcdir = File.expand_path(srcroot)
       @objdir = File.expand_path(objroot)
       @currdir = '.'
 
       self.quiet   = ENV['quiet']   if ENV['quiet']
-      self.verbose = ENV['verbose'] if ENV['verbose']
-      self.no_harm = ENV['nowrite'] if ENV['nowrite']
+      self.trace = ENV['trace'] if ENV['trace']
+      self.trial = ENV['nowrite'] if ENV['nowrite']
 
       yield(self) if block_given?
     end
@@ -90,16 +90,17 @@ module Setup
     def installation?; @installation; end
     def installation!; @installation = true; end
 
-    def no_harm? ; @no_harm ; end
-    def verbose? ; @verbose ; end
-    def quiet?   ; @quiet   ; end
+    def trial? ; @trial ; end
+    def trace? ; @trace ; end
+    def quiet? ; @quiet ; end
 
-    def verbose_off #:yield:
+    #
+    def trace_off #:yield:
       begin
-        save, @verbose = verbose?, false
+        save, @trace = trace?, false
         yield
       ensure
-        @verbose = save
+        @trace = save
       end
     end
 
@@ -164,7 +165,7 @@ module Setup
       report_header('config')
       config.env_config
       config.save_config
-      config.show if verbose?
+      config.show if trace?
       puts("Configuration saved.") unless quiet?
       exec_task_traverse 'config'
     end
@@ -221,7 +222,7 @@ module Setup
     alias setup_dir_doc noop
 
     def update_shebang_line(path)
-      return if no_harm?
+      return if trial?
       return if config.shebang == 'never'
       old = Shebang.load(path)
       if old
@@ -236,7 +237,7 @@ module Setup
         return unless config.shebang == 'all'
         new = Shebang.new(config.rubypath)
       end
-      $stderr.puts "updating shebang: #{File.basename(path)}" if verbose?
+      $stderr.puts "updating shebang: #{File.basename(path)}" if trace?
       open_atomic_writer(path) {|output|
         File.open(path, 'rb') {|f|
           f.gets if old   # discard
@@ -319,7 +320,7 @@ module Setup
       #case runner
       #when 'testrb'  # TODO: needs work
       #  opt = []
-      #  opt << " -v" if verbose?
+      #  opt << " -v" if trace?
       #  opt << " --runner #{runner}"
       #  if File.file?('test/suite.rb')
       #    notests = false
@@ -333,15 +334,15 @@ module Setup
       #  opt = opt.flatten.join(' ').strip
       #  # run tests
       #  if notests
-      #    $stderr.puts 'no test in this package' if verbose?
+      #    $stderr.puts 'no test in this package' if trace?
       #  else
       #    cmd = "testrb #{opt}"
-      #    $stderr.puts cmd if verbose?
+      #    $stderr.puts cmd if trace?
       #    system cmd  #config.ruby "-S testrb", opt
       #  end
       #else # autorunner
       #  unless File.directory?('test')
-      #    $stderr.puts 'no test in this package' if verbose?
+      #    $stderr.puts 'no test in this package' if trace?
       #    return
       #  end
       #  begin
@@ -417,7 +418,7 @@ module Setup
 
       cmd = "rdoc " + opt.join(' ')
 
-      if no_harm?
+      if trial?
         puts cmd 
       else
         begin
@@ -468,7 +469,7 @@ module Setup
 
       cmd = "rdoc " + opt.join(' ')
 
-      if no_harm?
+      if trial?
         puts cmd
       else
         # Generate in system location specified
@@ -632,7 +633,7 @@ module Setup
         remove << file if File.exist?(file)
       end
 
-      if verbose? && !no_harm?
+      if trace? && !trial?
         puts remove.collect{ |f| "rm #{f}" }.join("\n")
         ans = ask("Continue?", "yN")
         case ans
@@ -650,13 +651,13 @@ module Setup
         # okay this is over kill, but playing it safe...
         empty = Dir[File.join(dir,'*')].empty?
         begin
-          if no_harm?
+          if trial?
             $stderr.puts "rmdir #{dir}"
           else
             rmdir(dir) if empty
           end
         rescue Errno::ENOTEMPTY
-          $stderr.puts "may not be empty -- #{dir}" if verbose?
+          $stderr.puts "may not be empty -- #{dir}" if trace?
         end
       end
 
@@ -719,7 +720,7 @@ module Setup
       run_hook "pre-#{task}"
       FILETYPES.each do |type|
         if type == 'ext' and config.withoutext? #== 'yes'
-          $stderr.puts 'skipping ext/* by user option' if verbose?
+          $stderr.puts 'skipping ext/* by user option' if trace?
           next
         end
         # TODO: I think setup.rb would have to rewritten to handle this.
@@ -761,11 +762,11 @@ module Setup
       Dir.mkdir dir unless File.dir?(dir)
       prevdir = Dir.pwd
       Dir.chdir dir
-      $stderr.puts '---> ' + rel if verbose?
+      $stderr.puts '---> ' + rel if trace?
       @currdir = rel
       yield
       Dir.chdir prevdir
-      $stderr.puts '<--- ' + rel if verbose?
+      $stderr.puts '<--- ' + rel if trace?
       @currdir = File.dirname(rel)
     end
 
@@ -785,7 +786,7 @@ module Setup
     ##
     # File Operations
     #
-    # This module requires: #verbose?, #no_harm?
+    # This module requires: #trace?, #trial?
 
     def binread(fname)
       File.open(fname, 'rb'){ |f|
@@ -795,8 +796,8 @@ module Setup
 
     def mkdir_p(dirname, prefix = nil)
       dirname = prefix + File.expand_path(dirname) if prefix
-      $stderr.puts "mkdir -p #{dirname}" if verbose?
-      return if no_harm?
+      $stderr.puts "mkdir -p #{dirname}" if trace?
+      return if trial?
 
       # Does not check '/', it's too abnormal.
       dirs = File.expand_path(dirname).split(%r<(?=/)>)
@@ -812,20 +813,20 @@ module Setup
     end
 
     def rm_f(path)
-      $stderr.puts "rm -f #{path}" if verbose?
-      return if no_harm?
+      $stderr.puts "rm -f #{path}" if trace?
+      return if trial?
       force_remove_file path
     end
 
     def rm_rf(path)
-      $stderr.puts "rm -rf #{path}" if verbose?
-      return if no_harm?
+      $stderr.puts "rm -rf #{path}" if trace?
+      return if trial?
       remove_tree path
     end
 
     def rmdir(path)
-      $stderr.puts "rmdir #{path}" if verbose?
-      return if no_harm?
+      $stderr.puts "rmdir #{path}" if trace?
+      return if trial?
       Dir.rmdir path
     end
 
@@ -885,14 +886,14 @@ module Setup
     end
 
     def install(from, dest, mode, prefix = nil)
-      $stderr.puts "install #{from} #{dest}" if verbose?
-      return if no_harm?
+      $stderr.puts "install #{from} #{dest}" if trace?
+      return if trial?
 
       realdest = prefix ? prefix + File.expand_path(dest) : dest
       realdest = File.join(realdest, File.basename(from)) if File.dir?(realdest)
       str = binread(from)
       if diff?(str, realdest)
-        verbose_off {
+        trace_off {
           rm_f realdest if File.exist?(realdest)
         }
         File.open(realdest, 'wb') {|f|
@@ -923,7 +924,7 @@ module Setup
     end
 
     def command(*args)
-      $stderr.puts args.join(' ') if verbose?
+      $stderr.puts args.join(' ') if trace?
       system(*args) or raise RuntimeError,
           "system(#{args.map{|a| a.inspect }.join(' ')}) failed"
     end
