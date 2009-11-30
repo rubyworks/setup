@@ -2,7 +2,7 @@
 require 'mkmf'
 
 # Give it a name
-extension_name = 'mytest'
+extension_name = 'faux'
 
 # The destination
 dir_config(extension_name)

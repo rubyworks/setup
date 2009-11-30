@@ -7,10 +7,13 @@ Given /a setup\.rb compliant Ruby project$/ do
 end
 
 Given /the project does NOT have extensions$/ do
-  FileUtils.rm_r('ext')
+  dir = FAUXDIR + FIXTURE.basename
+  dir = File.join(dir, 'ext')
+  FileUtils.rm_r(dir)
+  $setup_no_extensions = true
 end
 
-Given /^'setup\.rb (.*?)' has already been run$/ do |cmd|
+Given /^'setup\.rb (.*?)' has been run$/ do |cmd|
   argv = cmd.split(/\s+/)
   Setup::Command.run(*argv)
 end
