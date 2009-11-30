@@ -77,7 +77,7 @@ module Setup
         exit 1
       end
 
-      $stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
+      #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
 
       begin
         session.__send__(task)

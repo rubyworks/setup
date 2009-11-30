@@ -55,8 +55,8 @@ module Setup
     #option :rdoc            , :pick, 'generate rdoc documentation'
     #option :rdoctemplate    , :pick, 'rdoc document template to use'
     #option :testrunner      , :pick, 'Runner to use for testing (auto|console|tk|gtk|gtk2)'
-    option :installdirs     , :pick, 'install location mode (site,std,home,local)'
-
+    option :installdirs     , :pick, 'install location mode (site,std,home)'  #, local)
+    option :type            , :pick, 'install location mode (site,std,home)'
 
     # Turn all of CONFIG into methods.
 
@@ -80,7 +80,8 @@ module Setup
 
     #
     def options
-      (class << self ; self ; end).options
+      #(class << self ; self ; end).options
+      self.class.options
     end
 
     # #  I N I T I A L I Z E  # #
@@ -106,7 +107,7 @@ module Setup
 
     #
     def initialize_defaults
-      self.installdirs = 'site'
+      self.type = 'site'
       #@rbdir = siterubyver      #'$siterubyver'
       #@sodir = siterubyverarch  #'$siterubyverarch'
     end
@@ -126,9 +127,13 @@ module Setup
       if File.exist?(CONFIGFILE)
         data = YAML.load(File.new(CONFIGFILE))
         data.each do |k, v|
+          next if 'type' == k
           next if 'installdirs' == k
           k = k.gsub('-','_')
           __send__("#{k}=", v)
+        end
+        if data['type']
+          self.type = data['type']
         end
         if data['installdirs']
           self.installdirs = data['installdirs']
@@ -199,13 +204,13 @@ module Setup
     # #  C O N F I G U R A T I O N  # #
 
     #
-    def installdirs
-      @installdirs ||= 'site'
+    def type
+      @type ||= 'site'
     end
 
     #
-    def installdirs=(val)
-      @installdirs = val
+    def type=(val)
+      @type = val
       case val.to_s
       when 'std', 'ruby'
         @rbdir = librubyver       #'$librubyver'
@@ -224,9 +229,15 @@ module Setup
       #  self.rbdir  = File.join(prefix, rbdir) #'$libdir/ruby'
       #  self.sodir  = File.join(prefix, sodir) #'$libdir/ruby'
       else
-        raise Error, "bad config: use INSTALLDIRS=(std|site|home|local) [#{val}]"
+        raise Error, "bad config: use type=(std|site|home) [#{val}]"
       end
     end
+
+    #
+    alias_method :installdirs, :type
+
+    #
+    alias_method :installdirs=, :type=
 
     # Path prefix of target environment
     def prefix
@@ -356,12 +367,12 @@ module Setup
 
     # Directory for ruby scripts
     def rbdir
-      @rbdir || File.join(prefix, base_libdir)
+      @rbdir || File.join(prefix, base_rubylibdir)
     end
 
     # Directory for ruby extentions
     def sodir
-      @sodir || File.join(prefix, base_archdir)
+      @sodir || File.join(prefix, base_rubyarchdir)
     end
 
     # Directory for system configuration files

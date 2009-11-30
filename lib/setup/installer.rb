@@ -17,11 +17,12 @@ module Setup
     def install
       Dir.chdir(rootdir) do
         install_bin
+        install_ext
         install_lib
         install_data
-        install_etc
         install_man
         install_doc
+        install_etc
       end
     end
 
@@ -38,7 +39,12 @@ module Setup
       return unless directory?('ext')
       files = files('ext')
       files = select_dllext(files)
-      install_files('etc', files, config.sodir, 0555)
+      #install_files('ext', files, config.sodir, 0555)
+      files.each do |file|
+        name = File.join(File.dirname(File.dirname(file)), File.basename(file))
+        dest = destination(config.sodir, name)
+        install_file('ext', file, dest, 0555, install_prefix)
+      end
     end
 
     # Install library files.
@@ -93,54 +99,53 @@ module Setup
     #
     def select_dllext(files)
       ents = files.select do |file| 
-        File.fnmatch?(File.basename(file), "*.#{dllext}")
+        File.extname(file) == ".#{dllext}"
       end
       if ents.empty? && !files.empty?
-        raise Error, "no ruby extention exists: '#{$0} setup' first"
+        raise Error, "ruby extention uncompiled: 'setup.rb setup' first"
       end
       ents
     end
 
     #
     def dllext
-      ConfigTable::RBCONFIG['DLEXT']
+      config.dlext
+      #Configuration::RBCONFIG['DLEXT']
     end
 
     #
     def install_files(dir, list, dest, mode)
       #mkdir_p(dest) #, install_prefix)
       list.each do |fname|
+        dest = destination(dest, fname)
         install_file(dir, fname, dest, mode, install_prefix)
       end
     end
 
-    # TODO: Can this be simplified?
+    #
     def install_file(dir, from, dest, mode, prefix=nil)
-      realdest = destination(dest, from)
-      #realdest = prefix ? File.join(prefix, File.expand_path(dest)) : dest
-      #realdest = File.join(realdest, from) #if File.dir?(realdest) #File.basename(from)) if File.dir?(realdest)
-
+      mkdir_p(File.dirname(dest))
+  
       if trace? or trial?
         #to = prefix ? File.join(prefix, dir, from) : File.join(dir, from)
-        $stderr.puts "install #{dir}/#{from} #{realdest}"
+        $stderr.puts "install #{dir}/#{from} #{dest}"
       end
+
       return if trial?
 
-      mkdir_p(File.direname(realdest))
-
       str = binread(File.join(dir, from))
-      if diff?(str, realdest)
+      if diff?(str, dest)
         trace_off {
-          rm_f(realdest) if File.exist?(realdest)
+          rm_f(dest) if File.exist?(dest)
         }
-        File.open(realdest, 'wb'){ |f| f.write(str) }
-        File.chmod(mode, realdest)
+        File.open(dest, 'wb'){ |f| f.write(str) }
+        File.chmod(mode, dest)
         #if prefix
         #  path = realdest.sub(prefix, '')
         #else
         #  path = realdest
         #end
-        record_installation(realdest)
+        record_installation(dest)
       end
     end
 
@@ -176,6 +181,10 @@ module Setup
         f.puts(path)
       end
     end
+
+
+    #realdest = prefix ? File.join(prefix, File.expand_path(dest)) : dest
+    #realdest = File.join(realdest, from) #if File.dir?(realdest) #File.basename(from)) if File.dir?(realdest)
 
     #
     def destination(dir, file)
