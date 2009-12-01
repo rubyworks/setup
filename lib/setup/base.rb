@@ -4,7 +4,7 @@ module Setup
   FILETYPES = %w( bin lib ext data etc man doc )
 
   #
-  MANIFEST  = '.cache/setup/installedfiles'
+  INSTALL_RECORD = '.cache/setup/installedfiles'
 
   # Common base class for all Setup build classes.
   # 
@@ -67,8 +67,8 @@ module Setup
 
     # Ask a question of the user.
     def ask(question, answers=nil)
-      $stdout << "#{question}"
-      $stdout << " [#{answers}] " if answers
+      $stdout.puts "#{question}"
+      $stdout.puts " [#{answers}] " if answers
       until inp = $stdin.gets ; sleep 1 ; end
       inp.strip
     end
@@ -87,7 +87,7 @@ module Setup
 
     #
     def rm_f(path)
-      $stderr.puts "rm -f #{path}" if trace?
+      io.puts "rm -f #{path}" if trace?
       return if trial?
       force_remove_file(path)
     end

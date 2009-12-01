@@ -7,7 +7,7 @@ module Setup
 
     #
     def uninstall
-      paths = File.read(MANIFEST).split("\n")
+      paths = File.read(INSTALL_RECORD).split("\n")
       dirs, files = paths.partition{ |f| File.dir?(f) }
 
       remove = []
@@ -16,7 +16,7 @@ module Setup
         remove << file if File.exist?(file)
       end
 
-      if verbose? && !dryrun?
+      if trace? && !trial?
         puts remove.collect{ |f| "rm #{f}" }.join("\n")
         ans = ask("Continue?", "yN")
         case ans
@@ -34,17 +34,17 @@ module Setup
         # okay this is over kill, but playing it safe...
         empty = Dir[File.join(dir,'*')].empty?
         begin
-          if dryrun?
-            $stderr.puts "rmdir #{dir}"
+          if trial?
+            io.puts "rmdir #{dir}"
           else
             rmdir(dir) if empty
           end
         rescue Errno::ENOTEMPTY
-          $stderr.puts "may not be empty -- #{dir}" if trace?
+          io.puts "may not be empty -- #{dir}" if trace?
         end
       end
 
-      rm_f(MANIFEST)
+      rm_f(INSTALL_RECORD)
     end
 
   end

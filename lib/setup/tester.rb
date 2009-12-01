@@ -4,20 +4,42 @@ module Setup
   # is used, and how to run tests. To simplify the process, this
   # class simply looks for a special script, ususally this will be
   # a shell script <tt>script/test</tt>, but a ruby script
-  # <tt>script/setup/test.rb</tt> will be used if it exists.
+  # <tt>script/setup/test.rb</tt> will be used instead if it exists.
 
   class Tester < Base
 
+    RUBYSCRIPT  = 'script/setup/test.rb'
+    SHELLSCRIPT = 'script/test'
+
+    #
+    def testable?
+      return false if config.no_test
+      return true  if File.exist?(RUBYSCRIPT)
+      return true  if File.exist?(SHELLSCRIPT)
+      false
+    end
+
     #
     def test
-      return if config.no_test
-      if File.exist?('script/setup/test.rb')
-        ruby(file)
-      elsif File.exist?('script/setup')
-        bash(file)
+      return if !testable?
+      if File.exist?(RUBYSCRIPT)
+        test_rubyscript
+      elsif File.exist?(SHELLSCRIPT)
+        test_shellscript
       end
       #puts "Ok." unless quiet?
     end
+
+    #
+    def test_shellscript
+      bash(SHELLSCRIPT)
+    end
+
+    #
+    def test_rubyscript
+      bash(RUBYSCRIPT)
+    end
+
 
     # DEPRECATED
     #def test

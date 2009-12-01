@@ -4,14 +4,15 @@ module Setup
 
   # Installer class handles the actual install procedure.
   #
-  # THIS IS A WORK IN PROGRESS REWRITE.
-  #
-  # This version will not support per-directory hooks.
+  # NOTE: This new version does not support per-directory hooks.
   #
   class Installer < Base
 
     #
-    attr_accessor :install_prefix
+    def install_prefix
+      config.install_prefix
+    end
+    #attr_accessor :install_prefix
 
     # Install package.
     def install
@@ -29,6 +30,7 @@ module Setup
     # Install binaries (executables).
     def install_bin
       return unless directory?('bin')
+      io.puts "---> bin" unless quiet?
       files = files('bin')
       install_files('bin', files, config.bindir, 0755)
       #install_shebang(files, config.bindir)
@@ -37,6 +39,7 @@ module Setup
     # Install shared extension libraries.
     def install_ext
       return unless directory?('ext')
+      io.puts "---> ext" unless quiet?
       files = files('ext')
       files = select_dllext(files)
       #install_files('ext', files, config.sodir, 0555)
@@ -50,6 +53,7 @@ module Setup
     # Install library files.
     def install_lib
       return unless directory?('lib')
+      io.puts "---> lib" unless quiet?
       files = files('lib')
       install_files('lib', files, config.rbdir, 0644)
     end
@@ -57,6 +61,7 @@ module Setup
     # Install shared data.
     def install_data
       return unless directory?('data')
+      io.puts "---> data" unless quiet?
       files = files('data')
       install_files('data', files, config.datadir, 0644)
     end
@@ -64,6 +69,7 @@ module Setup
     # Install configuration.
     def install_etc
       return unless directory?('etc')
+      io.puts "---> etc" unless quiet?
       files = files('etc')
       install_files('etc', files, config.sysconfdir, 0644)
     end
@@ -71,6 +77,7 @@ module Setup
     # Install manpages.
     def install_man
       return unless directory?('man')
+      io.puts "---> man" unless quiet?
       files = files('man')
       install_files('man', files, config.mandir, 0644)
     end
@@ -78,8 +85,11 @@ module Setup
     # Install documentation.
     def install_doc
       return unless directory?('doc')
+      return unless session.project.name
+      io.puts "---> doc" unless quiet?
       files = files('doc')
-      install_files('doc', files, config.docdir, 0644)
+      dir   = File.join(config.docdir, "ruby-{session.project.name}")
+      install_files('doc', files, dir, 0644)
     end
 
   private
@@ -102,7 +112,7 @@ module Setup
         File.extname(file) == ".#{dllext}"
       end
       if ents.empty? && !files.empty?
-        raise Error, "ruby extention uncompiled: 'setup.rb setup' first"
+        raise Error, "ruby extention not compiled: 'setup.rb setup' first"
       end
       ents
     end
@@ -128,7 +138,7 @@ module Setup
   
       if trace? or trial?
         #to = prefix ? File.join(prefix, dir, from) : File.join(dir, from)
-        $stderr.puts "install #{dir}/#{from} #{dest}"
+        io.puts "install #{dir}/#{from} #{dest}"
       end
 
       return if trial?
@@ -155,7 +165,7 @@ module Setup
       #dirname = File.join(prefix, File.expand_path(dirname)) if prefix
       return if File.directory?(dirname)
 
-      $stderr.puts "mkdir -p #{dirname}" if trace? or trial?
+      io.puts "mkdir -p #{dirname}" if trace? or trial?
 
       return if trial?
 
@@ -176,12 +186,23 @@ module Setup
 
     #
     def record_installation(path)
-      FileUtils.mkdir_p(File.dirname("#{rootdir}/#{MANIFEST}"))
-      File.open("#{rootdir}/#{MANIFEST}", 'a') do |f|
+      File.open(install_record, 'a') do |f|
         f.puts(path)
       end
+      #io.puts "install #{path}" if trace?
     end
 
+    #
+    def install_record
+      @install_record ||= (
+        file = INSTALL_RECORD
+        dir  = File.dirname(file)
+        unless File.directory?(dir)
+          FileUtils.mkdir_p(dir)
+        end
+        file
+      )
+    end
 
     #realdest = prefix ? File.join(prefix, File.expand_path(dest)) : dest
     #realdest = File.join(realdest, from) #if File.dir?(realdest) #File.basename(from)) if File.dir?(realdest)
@@ -190,6 +211,7 @@ module Setup
     def destination(dir, file)
       dest = install_prefix ? File.join(install_prefix, File.expand_path(dir)) : dir
       dest = File.join(dest, file) #if File.dir?(dest)
+      dest = File.expand_path(dest)
       dest
     end
 

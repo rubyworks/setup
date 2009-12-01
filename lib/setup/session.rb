@@ -3,111 +3,150 @@ require 'setup/project'
 require 'setup/configuration'
 require 'setup/compiler'
 require 'setup/installer'
-#require 'setup/tester'
-#require 'setup/documentor'
+require 'setup/tester'
+require 'setup/documentor'
 require 'setup/uninstaller'
 
 module Setup
 
   #
   class Session
+
     # Session options.
     attr :options
-    #
+
+    # New Session
     def initialize(options={})
       @options = options
       self.io ||= StringIO.new  # log instead ?
     end
 
-    #
-    #def set(options)
-    #  options.each do |k,v|
-    #    send("#{k}=", v) if respond_to?("#{k}=")
-    #  end
-    #end
+    # #  O P T I O N S  # #
 
     #
     def io
       @options[:io]
     end
+
     #
     def io=(anyio)
       @options[:io] = anyio
     end
+
     #
     def trace?; @options[:trace]; end
+
     #
     def trace=(val)
       @options[:trace] = val
     end
+
     #
     def trial?; @options[:trial]; end
+
     #
     def trial=(val)
       @options[:trial] = val
     end
+
     #
     def quiet?; @options[:quiet]; end
+
     #
     def quiet=(val)
       @options[:quiet] = val
     end
+
+    # #  S E T U P  T A S K S  # #
+
+    # Run all tasks in sequences.
+    #
+    # * config
+    # * setup
+    # * test
+    # * install
+    # * document
     #
     def all
+      log_header('config')
       config
-      setup
-      test
-      document
+
+      if configuration.compile?
+        log_header('setup')
+        setup
+      end
+
+      if configuration.test?
+        log_header('test')
+        test
+      end
+
+      log_header('install')
       install
+
+      if configuration.document?
+        log_header('document')
+        document
+      end
     end
+
     #
     def config
-      log_header('config')
-      #configuration.env_config
       configuration.save_config
       configuration.show if trace?
       io.puts("Configuration saved.") unless quiet?
       compiler.configure
     end
-    # TODO: Hate the name b/c of <tt>$ setup setup</tt>. Rename to 'compile' or 'make'?
+
+    # TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to 'compile' or 'make'?
     def setup
-      log_header('setup')
       abort "must setup config first" unless configuration.exist?
       compiler.compile
     end
+
     #
     def install
-      log_header('install')
       abort "must setup config first" unless configuration.exist?
       installer.install
     end
+
     #
     def test
-      return unless configuration.test?
-      log_header('test')
+      return unless tester.testable?
       tester.test
     end
+
     #
     def document
-      return unless configuration.document?
-      log_header('document')
       documentor.document
     end
+
     #
     def clean
-      log_header('clean')
+      #log_header('clean')
       compiler.clean
     end
+
     #
     def distclean
-      log_header('distclean')
+      #log_header('distclean')
       compiler.distclean
     end
+
     #
     def uninstall
-      log_header('uninstall')
+      #log_header('uninstall')
       uninstaller.uninstall
     end
+
+    #
+    def show
+      #configuration.show
+      puts configuration
+    end
+
+    # #  C O N T R O L L E R S / M O D E L S  # #
+
     #
     def project
       @project ||= Project.new
@@ -136,6 +175,9 @@ module Setup
     def uninstaller
       @uninstaller ||= Uninstaller.new(project, configuration, options)
     end
+
+    # #  S U P P O R T  # #
+  
     #
     def log_header(phase)
        return if quiet?
@@ -147,6 +189,8 @@ module Setup
        line[5,phase.size] = " #{phase.to_s.upcase} "
        io.puts "\n" + line + "\n"
     end
+
   end
+
 end
 

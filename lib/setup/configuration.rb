@@ -1,5 +1,6 @@
 require 'rbconfig'
 require 'fileutils'
+require 'erb'
 require 'setup/rubyver'
 
 module Setup
@@ -29,7 +30,7 @@ module Setup
     option :libdir          , :path, 'directory for libraries'
     option :datadir         , :path, 'directory for shared data'
     option :mandir          , :path, 'directory for man pages'
-    option :docdir          , :path, 'Directory for documentation'
+    option :docdir          , :path, 'directory for documentation'
     option :rbdir           , :path, 'directory for ruby scripts'
     option :sodir           , :path, 'directory for ruby extentions'
     option :sysconfdir      , :path, 'directory for system configuration files'
@@ -48,13 +49,19 @@ module Setup
 
     option :extconfopt      , :opts, 'options to pass-thru to extconf.rb'
 
+    option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
+
     option :no_ext          , :bool, 'do not compile/install ruby extentions'
     option :no_test         , :bool, 'do not run tests'
     option :no_doc          , :bool, 'do not generate ri documentation'
-    option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
+
     #option :rdoc            , :pick, 'generate rdoc documentation'
-    #option :rdoctemplate    , :pick, 'rdoc document template to use'
+    #option :rdoc_template   , :pick, 'rdoc document template to use'
     #option :testrunner      , :pick, 'Runner to use for testing (auto|console|tk|gtk|gtk2)'
+
+    option :install_prefix  , :path, 'install to alternate root location'
+    option :root            , :path, 'install to alternate root location'
+
     option :installdirs     , :pick, 'install location mode (site,std,home)'  #, local)
     option :type            , :pick, 'install location mode (site,std,home)'
 
@@ -105,9 +112,13 @@ module Setup
       end
     end
 
-    #
+    # By default installation is to site locations,
+    # and ri documentation will not be generated.
     def initialize_defaults
-      self.type = 'site'
+      self.type    = 'site'
+      self.no_doc  = true
+      self.no_test = false
+      self.no_ext  = false
       #@rbdir = siterubyver      #'$siterubyver'
       #@sodir = siterubyverarch  #'$siterubyverarch'
     end
@@ -123,30 +134,40 @@ module Setup
 
     # Load configuration.
     def initialize_configfile
-      #begin
       if File.exist?(CONFIGFILE)
-        data = YAML.load(File.new(CONFIGFILE))
-        data.each do |k, v|
+        erb = ERB.new(File.read(CONFIGFILE))
+        txt = erb.result(binding)
+        dat = YAML.load(txt)
+        dat.each do |k, v|
           next if 'type' == k
           next if 'installdirs' == k
           k = k.gsub('-','_')
           __send__("#{k}=", v)
         end
-        if data['type']
-          self.type = data['type']
+
+        if dat['type']
+          self.type = dat['type']
         end
-        if data['installdirs']
-          self.installdirs = data['installdirs']
+
+        if dat['installdirs']
+          self.installdirs = dat['installdirs']
         end
-        #File.foreach(CONFIGFILE) do |line|
-        #  k, v = *line.split(/=/, 2)
-        #  k.gsub!('-','_')
-        #  __send__("#{k}=",v.strip) #self[k] = v.strip
-        #end
-      #rescue Errno::ENOENT
+      #else
       #  raise Error, $!.message + "\n#{File.basename($0)} config first"
       end
     end
+
+    #def initialize_configfile
+    # begin
+    #    File.foreach(CONFIGFILE) do |line|
+    #      k, v = *line.split(/=/, 2)
+    #      k.gsub!('-','_')
+    #      __send__("#{k}=",v.strip) #self[k] = v.strip
+    #    end
+    #  rescue Errno::ENOENT
+    #    raise Error, $!.message + "\n#{File.basename($0)} config first"
+    #  end
+    #end
 
     # #  B A S E  D I R E C T O R I E S  # #
 
@@ -238,6 +259,14 @@ module Setup
 
     #
     alias_method :installdirs=, :type=
+
+
+    #
+    alias_method :install_prefix, :root
+
+    #
+    alias_method :install_prefix=, :root=
+
 
     # Path prefix of target environment
     def prefix
@@ -492,6 +521,10 @@ module Setup
     #def rdoctemplate    = nil
     #def testrunner      = 'auto' # needed?
 
+    def compile?
+      !no_ext
+    end
+
     def test?
       !no_test
     end
@@ -510,6 +543,11 @@ module Setup
         h[name] = __send__(name)
       end
       h
+    end
+
+    #
+    def to_s
+      to_yaml
     end
 
     #
@@ -551,12 +589,12 @@ module Setup
   private
 
     def pathname(path)
-      File.expand_path(path).gsub(%r<\\$([^/]+)>){ self[$1] }
-    end
-
-    def relative_pathname(path)
       path.gsub(%r<\\$([^/]+)>){ self[$1] }
     end
+
+    #def absolute_pathname(path)
+    #  File.expand_path(path).gsub(%r<\\$([^/]+)>){ self[$1] }
+    #end
 
     # Boolean attribute. Can be assigned true, false, nil, or
     # a string matching yes|true|y|t or no|false|n|f.

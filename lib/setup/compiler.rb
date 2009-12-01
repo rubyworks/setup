@@ -52,6 +52,7 @@ module Setup
 
     #
     def make(task=nil)
+      return unless File.exist?('Makefile')
       bash(*[config.makeprog, task].compact)
     end
 

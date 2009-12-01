@@ -8,8 +8,8 @@ module Setup
     #
     def document
       return if config.no_doc
-      report_header('document')
       exec_ri
+
       #if file = DOCSCRIPT
       #  ruby(file)
       #else
@@ -18,9 +18,11 @@ module Setup
     end
 
     # Generate ri documentation.
-
+    #++
+    # TODO: call rdoc programmatically.
+    #--
     def exec_ri
-      case config.installdirs
+      case config.type #installdirs
       when 'std', 'ruby'
         output = "--ri-system"
       when 'site'
@@ -28,13 +30,14 @@ module Setup
       when 'home'
         output = "--ri"
       else
-        abort "bad config: sould not be possible -- installdirs = #{config.installdirs}"
+        abort "bad config: should not be possible -- type=#{config.type}"
       end
 
       if File.exist?('.document')
         files = File.read('.document').split("\n")
         files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
         files.collect!{ |f| f.strip }
+      #elsif File.exist?('meta/loadpath')
       else
         files = []
         files << 'lib' if File.directory?('lib')
@@ -55,17 +58,17 @@ module Setup
       if trial?
         puts cmd
       else
-        # Generate in system location specified
         begin
           system(cmd)
           #require 'rdoc/rdoc'
           #::RDoc::RDoc.new.document(opt)
-          puts "Ok ri." unless quiet?
+          io.puts "Ok ri." #unless quiet?
         rescue Exception
-          puts "Fail ri."
-          puts "Command was: '#{cmd}'"
-          puts "Proceeding with install anyway."
+          $stderr.puts "ri generation failed"
+          $stderr.puts "command was: '#{cmd}'"
+          $stderr.puts "proceeding with install..."
         end
+
         # Now in local directory
         #opt = []
         #opt << "-U"
@@ -78,7 +81,11 @@ module Setup
 
     # Generate rdocs.
     #
-    # meta/package or .meta/package
+    # Needs <tt>meta/name</tt> or <tt>.meta/name</tt>.
+    #
+    # NOTE: This is not being used. It's here in case we decide
+    # to add this feature, though it is quite possible that
+    # we may never do so.
     #
     def exec_rdoc
       main = Dir.glob("README{,.*}", File::FNM_CASEFOLD).first

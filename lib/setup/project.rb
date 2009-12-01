@@ -5,9 +5,19 @@ module Setup
 
   class Project
 
+    # Match used to determine the root dir of a project.
+    ROOT_MARKER = '{setup.rb,script/setup,meta/,MANIFEST,lib/}'
+
     # TODO: locate project root via some marker
     def rootdir
-      Dir.pwd
+      @rootdir ||= (
+        root = Dir[File.join(Dir.pwd, ROOT_MARKER)].first
+        if !root
+          raise Error, "not a project directory"
+        else
+          Dir.pwd
+        end
+      )
     end
 
     # The name of the package, used to install docs in system doc/ruby-{name}/ location.

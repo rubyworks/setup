@@ -31,9 +31,9 @@ module Setup
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
     task 'setup'    , "compile ruby extentions"
-    task 'ri'       , "generate ri documentation"
-    task 'rdoc'     , "generate rdoc documentation"
+    #task 'rdoc'     , "generate rdoc documentation"
     task 'test'     , "run tests"
+    task 'document' , "generate ri documentation"
     task 'install'  , "install project files"
     task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
@@ -77,6 +77,13 @@ module Setup
         exit 1
       end
 
+      # This ensures we are in a project directory.
+      if session.quiet?
+        session.project.rootdir
+      else
+        puts "# (#{File.basename(session.project.rootdir)})"
+      end
+
       #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
 
       begin
@@ -84,7 +91,7 @@ module Setup
       rescue Error
         raise if $DEBUG
         $stderr.puts $!.message
-        $stderr.puts "Try 'ruby #{$0} --help' for detailed usage."
+        $stderr.puts "Try 'setup.rb --help' for detailed usage."
         exit 1
       end
     end
@@ -106,18 +113,39 @@ module Setup
 
     #
     def optparse_all(parser, options)
-      #optparse_config(parser, options)
-      optparse_install(parser, options)
+      optparse_config(parser, options)
+      #optparse_install(parser, options)
+      #parser.on("--no-test", "do not run tests") do
+      #  configuration.no_test = true
+      #end
+      #parser.on("--no-doc", "do not generate ri documentation") do
+      #  configuration.no_doc = true
+      #end
     end
 
     #
     def optparse_config(parser, options)
       parser.separator ""
-      parser.separator "Config options:"
+      parser.separator "Configuration options:"
       configuration.options.each do |name, type, desc|
-        parser.on("--#{name} [#{type.to_s.upcase}]", desc) do |val|
-          #ENV["RUBYSETUP_#{name.to_s.upcase}"] = val.to_s
-          configuration.__send__("#{name}=", val)
+        optname = name.to_s.gsub('_', '-')
+        case type
+        when :bool
+          if optname.index('no-') == 0
+            optname = "[no-]" + optname.sub(/^no-/, '')
+            parser.on("--#{optname}", desc) do |val|
+              configuration.__send__("#{name}=", !val)
+            end
+          else
+            optname = "[no-]" + optname.sub(/^no-/, '')
+            parser.on("--#{optname}", desc) do |val|
+              configuration.__send__("#{name}=", val)
+            end
+          end
+        else
+          parser.on("--#{optname} #{type.to_s.upcase}", desc) do |val|
+            configuration.__send__("#{name}=", val)
+          end
         end
       end
     end
@@ -126,16 +154,9 @@ module Setup
     def optparse_install(parser, options)
       parser.separator ""
       parser.separator "Install options:"
-      parser.on("--prefix [PATH]", "Installation prefix") do |val|
-        session.options[:install_prefix] = val
-      end
-      parser.on("--no-doc", "Doc not generate ri documentation") do
-        #ENV['RUBYSETUP_NO_DOC'] = 'true'
-        configuration.no_doc = true
-      end
-      parser.on("--no-test", "Do not run tests") do
-        #ENV['RUBYSETUP_NO_TEST'] = 'true'
-        configuration.no_test = true
+      parser.on("--prefix PATH", "Installation prefix") do |val|
+        #session.options[:install_prefix] = val
+        configuration.install_prefix = val
       end
     end
 
@@ -200,6 +221,7 @@ module Setup
       self.class.tasks.keys
     end
 
+=begin
     # Generate help text
     def help
     fmt = " " * 12 + "%-10s       %s"
@@ -233,6 +255,7 @@ module Setup
       END
       text.gsub(/^\ {8,8}/, '')
     end
+=end
 
   end
 end
