@@ -1,5 +1,29 @@
 = RELEASE HISTORY
 
+== 5.0.0 / 2009-12-02
+
+Version 5 represents a major milestone in Setup.rb's development.
+While the 4.x series focused on imporving upon aspects of the
+orginal 3.4.1 code by Minero Aoki, this version takes the next step
+and reworks the entire script into an truly object-oriented design.
+In so doing, the system no longer traverses project directories
+one-by-one installing or compiling files as they are come across,
+but instead collects a list of files to handle up front, then iterates
+through them performing the required action.
+
+Changes:
+
+* 2 Major Changes
+
+    * Split script into distinct classes, one for each setup phase.
+    * Testing is handled by optional script/test or script/setup.rc/test.rb file.
+
+* 2 Minor Changes
+
+    * Returned to using InstalledFiles for record installation and improved.
+    * Use SetupConfig instead of .cache/setup/config to store system configuration.
+
+
 == 4.2.1 / 2009-08-26
 
 This release add support for multiple loadpaths. Add a list of them
@@ -81,10 +105,13 @@ Changes:
 == 4.0.0 / 2008-08-15
 
 This is the first whack at making setup.rb a stand-alone application.
+Basically I have reverse engineered Aoki's 3.4.1 version of setup.rb,
+and then reworked some of the code to make it more modern, including 
+retro-fitting it to use OptionParser. Some features of the original
+are no longer supported, such a metaconfig and multi-package installs.
 
 Changes:
 
-* 3 Other Enhancements
-
-    * Initial checkin.
+* Same basic code as 3.4.1, but many parts have been refit.
+* Initial checkin to git repostitory.
 
