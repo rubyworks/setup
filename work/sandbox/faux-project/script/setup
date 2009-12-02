@@ -91,7 +91,7 @@ module Setup
     def all
       log_header('config')
       config
-      if configuration.compile?
+      if configuration.compile? && project.compiles?
         log_header('setup')
         setup
       end
@@ -107,9 +107,12 @@ module Setup
       end
     end
     def config
-      configuration.save_config
-      configuration.show if trace?
-      io.puts("Configuration saved.") unless quiet?
+      if configuration.save_config
+        io.puts "Configuration saved." unless quiet?
+      else
+        io.puts "Configuration current." unless quiet?
+      end
+      puts configuration if trace? && !quiet?
       compiler.configure
     end
     def setup
@@ -162,15 +165,15 @@ module Setup
     end
     def log_header(phase)
        return if quiet?
-       line = '- ' * 4 + ' -' * 24
+       line = '- ' * 4 + ' -' * 28
        line[5,phase.size] = " #{phase.to_s.upcase} "
-       io.puts "\n" + line + "\n"
+       io.puts "\n" + line + "\n\n"
     end
   end
 end
 module Setup
   FILETYPES = %w( bin lib ext data etc man doc )
-  INSTALL_RECORD = '.cache/setup/installedfiles'
+  INSTALL_RECORD = 'InstalledFiles'
   class Base
     attr :project
     attr :config
@@ -281,11 +284,12 @@ end
 require 'rbconfig'
 require 'fileutils'
 require 'erb'
+require 'yaml'
 module Setup
   class Configuration
     RBCONFIG  = ::Config::CONFIG
-    CONFIGFILE = '.cache/setup/config'
-    METACONFIGFILE = 'script/setup/metaconfig{,.rb}'
+    CONFIGFILE = 'SetupConfig'
+    METACONFIGFILE = 'script/.setup/metaconfig{,.rb}'
     def self.options
       @options ||= []
     end
@@ -604,35 +608,25 @@ module Setup
       h
     end
     def to_s
-      to_yaml
+      to_yaml.sub(/\A---\s*\n/,'')
     end
     def to_yaml(*args)
       to_h.to_yaml(*args)
     end
     def save_config
-      FileUtils.mkdir_p(File.dirname(CONFIGFILE))
-      File.open(CONFIGFILE, 'w') do |f|
-        f << to_yaml
+      out = to_yaml
+      if not File.exist?(File.dirname(CONFIGFILE))
+        FileUtils.mkdir_p(File.dirname(CONFIGFILE))
       end
+      if File.exist?(CONFIGFILE)
+        txt = File.read(CONFIGFILE)
+        return nil if txt == out
+      end          
+      File.open(CONFIGFILE, 'w'){ |f| f << out }
+      true
     end
     def exist?
       File.exist?(CONFIGFILE)
-    end
-    def show
-      fmt = "%-20s %s\n"
-      OPTIONS.each do |name|
-        value = self[name]
-        reslv = __send__(name)
-        case reslv
-        when String
-          reslv = "(none)" if reslv.empty?
-        when false, nil
-          reslv = "no"
-        when true
-          reslv = "yes"
-        end
-        printf fmt, name, reslv
-      end
     end
   private
     def pathname(path)
@@ -718,38 +712,6 @@ end #module Setup
         @config.descriptions.delete(index)
       end
     end
-=end
-=begin
-      major = RBCONFIG['MAJOR'].to_i
-      minor = RBCONFIG['MINOR'].to_i
-      teeny = RBCONFIG['TEENY'].to_i
-      version = "#{major}.#{minor}"
-      newpath_p = ((major >= 2) or
-                   ((major == 1) and
-                    ((minor >= 5) or
-                     ((minor == 4) and (teeny >= 4)))))
-      if RBCONFIG['rubylibdir']
-        libruby         = "#{prefix}/lib/ruby"
-        librubyver      = RBCONFIG['rubylibdir']
-        librubyverarch  = RBCONFIG['archdir']
-        siteruby        = RBCONFIG['sitedir']
-        siterubyver     = RBCONFIG['sitelibdir']
-        siterubyverarch = RBCONFIG['sitearchdir']
-      elsif newpath_p
-        libruby         = "#{prefix}/lib/ruby"
-        librubyver      = "#{prefix}/lib/ruby/#{version}"
-        librubyverarch  = "#{prefix}/lib/ruby/#{version}/#{c['arch']}"
-        siteruby        = RBCONFIG['sitedir']
-        siterubyver     = "$siteruby/#{version}"
-        siterubyverarch = "$siterubyver/#{RBCONFIG['arch']}"
-      else
-        libruby         = "#{prefix}/lib/ruby"
-        librubyver      = "#{prefix}/lib/ruby/#{version}"
-        librubyverarch  = "#{prefix}/lib/ruby/#{version}/#{c['arch']}"
-        siteruby        = "#{prefix}/lib/ruby/#{version}/site_ruby"
-        siterubyver     = siteruby
-        siterubyverarch = "$siterubyver/#{RBCONFIG['arch']}"
-      end
 =end
 module Setup
   class Documentor < Base
@@ -855,17 +817,18 @@ module Setup
         install_man
         install_doc
         install_etc
+        prune_install_record
       end
     end
     def install_bin
       return unless directory?('bin')
-      io.puts "---> bin" unless quiet?
+      io.puts "* bin -> #{config.bindir}" unless quiet?
       files = files('bin')
       install_files('bin', files, config.bindir, 0755)
     end
     def install_ext
       return unless directory?('ext')
-      io.puts "---> ext" unless quiet?
+      io.puts "* ext -> #{config.sodir}" unless quiet?
       files = files('ext')
       files = select_dllext(files)
       files.each do |file|
@@ -876,39 +839,40 @@ module Setup
     end
     def install_lib
       return unless directory?('lib')
-      io.puts "---> lib" unless quiet?
+      io.puts "* lib -> #{config.rbdir}" unless quiet?
       files = files('lib')
       install_files('lib', files, config.rbdir, 0644)
     end
     def install_data
       return unless directory?('data')
-      io.puts "---> data" unless quiet?
+      io.puts "* data -> #{config.datadir}" unless quiet?
       files = files('data')
       install_files('data', files, config.datadir, 0644)
     end
     def install_etc
       return unless directory?('etc')
-      io.puts "---> etc" unless quiet?
+      io.puts "* etc -> #{config.sysconfdir}" unless quiet?
       files = files('etc')
       install_files('etc', files, config.sysconfdir, 0644)
     end
     def install_man
       return unless directory?('man')
-      io.puts "---> man" unless quiet?
+      io.puts "* man -> #{config.mandir}" unless quiet?
       files = files('man')
       install_files('man', files, config.mandir, 0644)
     end
     def install_doc
+      return unless config.document?  # TODO: seprate ri generation from doc installation
       return unless directory?('doc')
-      return unless session.project.name
-      io.puts "---> doc" unless quiet?
+      return unless project.name
+      dir   = File.join(config.docdir, "ruby-{project.name}")
+      io.puts "* doc -> #{dir}" unless quiet?
       files = files('doc')
-      dir   = File.join(config.docdir, "ruby-{session.project.name}")
       install_files('doc', files, dir, 0644)
     end
   private
-    def directory?(dir)
-      File.directory?(dir)
+    def directory?(path)
+      File.directory?(path)
     end
     def files(dir)
       files = Dir["#{dir}/**/*"]
@@ -930,8 +894,8 @@ module Setup
     end
     def install_files(dir, list, dest, mode)
       list.each do |fname|
-        dest = destination(dest, fname)
-        install_file(dir, fname, dest, mode, install_prefix)
+        rdest = destination(dest, fname)
+        install_file(dir, fname, rdest, mode, install_prefix)
       end
     end
     def install_file(dir, from, dest, mode, prefix=nil)
@@ -947,8 +911,8 @@ module Setup
         }
         File.open(dest, 'wb'){ |f| f.write(str) }
         File.chmod(mode, dest)
-        record_installation(dest)
       end
+      record_installation(dest) # record file as installed
     end
     def mkdir_p(dirname) #, prefix=nil)
       return if File.directory?(dirname)
@@ -962,14 +926,22 @@ module Setup
       dirs.each_index do |idx|
         path = dirs[0..idx].join('')
         unless File.dir?(path)
-          Dir.mkdir path
-          record_installation(path)  # also record directories made
+          Dir.mkdir(path)
         end
+        record_installation(path)  # record directories made
       end
     end
     def record_installation(path)
       File.open(install_record, 'a') do |f|
         f.puts(path)
+      end
+    end
+    def prune_install_record
+      entries = File.read(install_record).split("\n")
+      entries.uniq!
+      File.open(install_record, 'w') do |f|
+        f << entries.join("\n")
+        f << "\n"
       end
     end
     def install_record
@@ -1074,7 +1046,7 @@ module Setup
 end
 module Setup
   class Tester < Base
-    RUBYSCRIPT  = 'script/setup/test.rb'
+    RUBYSCRIPT  = 'script/.setup/test.rb'
     SHELLSCRIPT = 'script/test'
     def testable?
       return false if config.no_test
@@ -1094,7 +1066,7 @@ module Setup
       bash(SHELLSCRIPT)
     end
     def test_rubyscript
-      bash(RUBYSCRIPT)
+      ruby(RUBYSCRIPT)
     end
   end
 end
@@ -1189,11 +1161,7 @@ module Setup
         $stderr.puts $!.to_s.capitalize
         exit 1
       end
-      if session.quiet?
-        session.project.rootdir
-      else
-        puts "# (#{File.basename(session.project.rootdir)})"
-      end
+      rootdir = session.project.rootdir
       begin
         session.__send__(task)
       rescue Error
@@ -1202,6 +1170,7 @@ module Setup
         $stderr.puts "Try 'setup.rb --help' for detailed usage."
         exit 1
       end
+      puts unless session.quiet?
     end
     def session
       @session ||= Session.new(:io=>$stdout)
