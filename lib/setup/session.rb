@@ -71,7 +71,7 @@ module Setup
       log_header('config')
       config
 
-      if configuration.compile?
+      if configuration.compile? && project.compiles?
         log_header('setup')
         setup
       end
@@ -92,9 +92,13 @@ module Setup
 
     #
     def config
-      configuration.save_config
-      configuration.show if trace?
-      io.puts("Configuration saved.") unless quiet?
+      if configuration.save_config
+        io.puts "Configuration saved." unless quiet?
+      else
+        io.puts "Configuration current." unless quiet?
+      end
+      puts configuration if trace? && !quiet?
+      #io.puts("Configuration saved.") unless quiet?
       compiler.configure
     end
 
@@ -184,10 +188,10 @@ module Setup
        #center = "            "
        #c = (center.size - phase.size) / 2
        #center[c,phase.size] = phase.to_s.upcase
-       line = '- ' * 4 + ' -' * 24
+       line = '- ' * 4 + ' -' * 28
        #c = (line.size - phase.size) / 2
        line[5,phase.size] = " #{phase.to_s.upcase} "
-       io.puts "\n" + line + "\n"
+       io.puts "\n" + line + "\n\n"
     end
 
   end

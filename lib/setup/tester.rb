@@ -8,7 +8,7 @@ module Setup
 
   class Tester < Base
 
-    RUBYSCRIPT  = 'script/setup/test.rb'
+    RUBYSCRIPT  = 'script/.setup/test.rb'
     SHELLSCRIPT = 'script/test'
 
     #
@@ -37,7 +37,7 @@ module Setup
 
     #
     def test_rubyscript
-      bash(RUBYSCRIPT)
+      ruby(RUBYSCRIPT)
     end
 
 

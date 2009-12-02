@@ -78,11 +78,18 @@ module Setup
       end
 
       # This ensures we are in a project directory.
-      if session.quiet?
-        session.project.rootdir
-      else
-        puts "# (#{File.basename(session.project.rootdir)})"
-      end
+      rootdir = session.project.rootdir
+
+      # TODO: Might be nice to have a ouput header, but not sure
+      # what it should conatin or look like yet.
+
+      #unless session.quiet?
+      #  if session.project.name
+      #    puts "= #{session.project.name} (#{rootdir})"
+      #  else
+      #    puts "= #{rootdir}"
+      #  end
+      #end
 
       #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
 
@@ -94,6 +101,8 @@ module Setup
         $stderr.puts "Try 'setup.rb --help' for detailed usage."
         exit 1
       end
+
+      puts unless session.quiet?
     end
 
     #

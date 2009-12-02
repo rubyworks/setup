@@ -1,6 +1,7 @@
 require 'rbconfig'
 require 'fileutils'
 require 'erb'
+require 'yaml'
 require 'setup/rubyver'
 
 module Setup
@@ -11,9 +12,11 @@ module Setup
 
     RBCONFIG  = ::Config::CONFIG
 
-    CONFIGFILE = '.cache/setup/config'
+    #CONFIGFILE = '.cache/setup/config'
+    CONFIGFILE = 'SetupConfig'
 
-    METACONFIGFILE = 'script/setup/metaconfig{,.rb}'
+    # Custom configuration file.
+    METACONFIGFILE = 'script/.setup/metaconfig{,.rb}'
 
     def self.options
       @options ||= []
@@ -547,7 +550,7 @@ module Setup
 
     #
     def to_s
-      to_yaml
+      to_yaml.sub(/\A---\s*\n/,'')
     end
 
     #
@@ -557,10 +560,16 @@ module Setup
 
     # Save configuration.
     def save_config
-      FileUtils.mkdir_p(File.dirname(CONFIGFILE))
-      File.open(CONFIGFILE, 'w') do |f|
-        f << to_yaml
+      out = to_yaml
+      if not File.exist?(File.dirname(CONFIGFILE))
+        FileUtils.mkdir_p(File.dirname(CONFIGFILE))
       end
+      if File.exist?(CONFIGFILE)
+        txt = File.read(CONFIGFILE)
+        return nil if txt == out
+      end          
+      File.open(CONFIGFILE, 'w'){ |f| f << out }
+      true
     end
 
     # Does the configuration file exist?
@@ -569,22 +578,22 @@ module Setup
     end
 
     #
-    def show
-      fmt = "%-20s %s\n"
-      OPTIONS.each do |name|
-        value = self[name]
-        reslv = __send__(name)
-        case reslv
-        when String
-          reslv = "(none)" if reslv.empty?
-        when false, nil
-          reslv = "no"
-        when true
-          reslv = "yes"
-        end
-        printf fmt, name, reslv
-      end
-    end
+    #def show
+    #  fmt = "%-20s %s\n"
+    #  OPTIONS.each do |name|
+    #    value = self[name]
+    #    reslv = __send__(name)
+    #    case reslv
+    #    when String
+    #      reslv = "(none)" if reslv.empty?
+    #    when false, nil
+    #      reslv = "no"
+    #    when true
+    #      reslv = "yes"
+    #    end
+    #    printf fmt, name, reslv
+    #  end
+    #end
 
   private
 
@@ -645,6 +654,11 @@ module Setup
   end #class ConfigTable
 
 end #module Setup
+
+
+
+
+
 
 
 
@@ -782,42 +796,5 @@ end #module Setup
     end
 =end
 
-=begin
-      major = RBCONFIG['MAJOR'].to_i
-      minor = RBCONFIG['MINOR'].to_i
-      teeny = RBCONFIG['TEENY'].to_i
-      version = "#{major}.#{minor}"
-
-      # ruby ver. >= 1.4.4?
-      newpath_p = ((major >= 2) or
-                   ((major == 1) and
-                    ((minor >= 5) or
-                     ((minor == 4) and (teeny >= 4)))))
-
-      if RBCONFIG['rubylibdir']
-        # V > 1.6.3
-        libruby         = "#{prefix}/lib/ruby"
-        librubyver      = RBCONFIG['rubylibdir']
-        librubyverarch  = RBCONFIG['archdir']
-        siteruby        = RBCONFIG['sitedir']
-        siterubyver     = RBCONFIG['sitelibdir']
-        siterubyverarch = RBCONFIG['sitearchdir']
-      elsif newpath_p
-        # 1.4.4 <= V <= 1.6.3
-        libruby         = "#{prefix}/lib/ruby"
-        librubyver      = "#{prefix}/lib/ruby/#{version}"
-        librubyverarch  = "#{prefix}/lib/ruby/#{version}/#{c['arch']}"
-        siteruby        = RBCONFIG['sitedir']
-        siterubyver     = "$siteruby/#{version}"
-        siterubyverarch = "$siterubyver/#{RBCONFIG['arch']}"
-      else
-        # V < 1.4.4
-        libruby         = "#{prefix}/lib/ruby"
-        librubyver      = "#{prefix}/lib/ruby/#{version}"
-        librubyverarch  = "#{prefix}/lib/ruby/#{version}/#{c['arch']}"
-        siteruby        = "#{prefix}/lib/ruby/#{version}/site_ruby"
-        siterubyver     = siteruby
-        siterubyverarch = "$siterubyver/#{RBCONFIG['arch']}"
-      end
-=end
+# Designed to work with Ruby 1.6.3 or greater.
 

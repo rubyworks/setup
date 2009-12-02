@@ -24,13 +24,14 @@ module Setup
         install_man
         install_doc
         install_etc
+        prune_install_record
       end
     end
 
     # Install binaries (executables).
     def install_bin
       return unless directory?('bin')
-      io.puts "---> bin" unless quiet?
+      io.puts "* bin -> #{config.bindir}" unless quiet?
       files = files('bin')
       install_files('bin', files, config.bindir, 0755)
       #install_shebang(files, config.bindir)
@@ -39,7 +40,7 @@ module Setup
     # Install shared extension libraries.
     def install_ext
       return unless directory?('ext')
-      io.puts "---> ext" unless quiet?
+      io.puts "* ext -> #{config.sodir}" unless quiet?
       files = files('ext')
       files = select_dllext(files)
       #install_files('ext', files, config.sodir, 0555)
@@ -53,7 +54,7 @@ module Setup
     # Install library files.
     def install_lib
       return unless directory?('lib')
-      io.puts "---> lib" unless quiet?
+      io.puts "* lib -> #{config.rbdir}" unless quiet?
       files = files('lib')
       install_files('lib', files, config.rbdir, 0644)
     end
@@ -61,7 +62,7 @@ module Setup
     # Install shared data.
     def install_data
       return unless directory?('data')
-      io.puts "---> data" unless quiet?
+      io.puts "* data -> #{config.datadir}" unless quiet?
       files = files('data')
       install_files('data', files, config.datadir, 0644)
     end
@@ -69,7 +70,7 @@ module Setup
     # Install configuration.
     def install_etc
       return unless directory?('etc')
-      io.puts "---> etc" unless quiet?
+      io.puts "* etc -> #{config.sysconfdir}" unless quiet?
       files = files('etc')
       install_files('etc', files, config.sysconfdir, 0644)
     end
@@ -77,28 +78,34 @@ module Setup
     # Install manpages.
     def install_man
       return unless directory?('man')
-      io.puts "---> man" unless quiet?
+      io.puts "* man -> #{config.mandir}" unless quiet?
       files = files('man')
       install_files('man', files, config.mandir, 0644)
     end
 
     # Install documentation.
+    #
+    # TODO: The use of the project name in the doc directory
+    # should be set during the config phase. Define a seperate
+    # config method for it.
     def install_doc
+      return unless config.document?  # TODO: seprate ri generation from doc installation
       return unless directory?('doc')
-      return unless session.project.name
-      io.puts "---> doc" unless quiet?
+      return unless project.name
+      dir   = File.join(config.docdir, "ruby-{project.name}")
+      io.puts "* doc -> #{dir}" unless quiet?
       files = files('doc')
-      dir   = File.join(config.docdir, "ruby-{session.project.name}")
       install_files('doc', files, dir, 0644)
     end
 
   private
 
-    def directory?(dir)
-      File.directory?(dir)
+    # Comfirm a +path+ is a directory and exists.
+    def directory?(path)
+      File.directory?(path)
     end
 
-    #
+    # Get a list of project files given a project subdirectory.
     def files(dir)
       files = Dir["#{dir}/**/*"]
       files = files.select{ |f| File.file?(f) }
@@ -106,7 +113,7 @@ module Setup
       files
     end
 
-    #
+    # Extract dynamic link libraries from all ext files.
     def select_dllext(files)
       ents = files.select do |file| 
         File.extname(file) == ".#{dllext}"
@@ -117,22 +124,22 @@ module Setup
       ents
     end
 
-    #
+    # Dynamic link library extension for this system.
     def dllext
       config.dlext
       #Configuration::RBCONFIG['DLEXT']
     end
 
-    #
+    # Install project files.
     def install_files(dir, list, dest, mode)
       #mkdir_p(dest) #, install_prefix)
       list.each do |fname|
-        dest = destination(dest, fname)
-        install_file(dir, fname, dest, mode, install_prefix)
+        rdest = destination(dest, fname)
+        install_file(dir, fname, rdest, mode, install_prefix)
       end
     end
 
-    #
+    # Install a project file.
     def install_file(dir, from, dest, mode, prefix=nil)
       mkdir_p(File.dirname(dest))
   
@@ -144,22 +151,22 @@ module Setup
       return if trial?
 
       str = binread(File.join(dir, from))
+
       if diff?(str, dest)
         trace_off {
           rm_f(dest) if File.exist?(dest)
         }
         File.open(dest, 'wb'){ |f| f.write(str) }
         File.chmod(mode, dest)
-        #if prefix
-        #  path = realdest.sub(prefix, '')
-        #else
-        #  path = realdest
-        #end
-        record_installation(dest)
       end
+
+      record_installation(dest) # record file as installed
     end
 
+    # Install a directory.
+    #--
     # TODO: Surely this can be simplified.
+    #++
     def mkdir_p(dirname) #, prefix=nil)
       #dirname = destination(dirname)
       #dirname = File.join(prefix, File.expand_path(dirname)) if prefix
@@ -178,21 +185,33 @@ module Setup
       dirs.each_index do |idx|
         path = dirs[0..idx].join('')
         unless File.dir?(path)
-          Dir.mkdir path
-          record_installation(path)  # also record directories made
+          Dir.mkdir(path)
         end
+        record_installation(path)  # record directories made
       end
     end
 
-    #
+    # Record that a file or directory was installed in the
+    # install record file.
     def record_installation(path)
       File.open(install_record, 'a') do |f|
         f.puts(path)
       end
-      #io.puts "install #{path}" if trace?
+      #io.puts "installed #{path}" if trace?
     end
 
-    #
+    # Remove duplicates from the install record.
+    def prune_install_record
+      entries = File.read(install_record).split("\n")
+      entries.uniq!
+      File.open(install_record, 'w') do |f|
+        f << entries.join("\n")
+        f << "\n"
+      end
+    end
+
+    # Get the install record file name, and ensure it's location
+    # is prepared (ie. make it's directory).
     def install_record
       @install_record ||= (
         file = INSTALL_RECORD
@@ -207,7 +226,7 @@ module Setup
     #realdest = prefix ? File.join(prefix, File.expand_path(dest)) : dest
     #realdest = File.join(realdest, from) #if File.dir?(realdest) #File.basename(from)) if File.dir?(realdest)
 
-    #
+    # Determine actual destination including install_prefix.
     def destination(dir, file)
       dest = install_prefix ? File.join(install_prefix, File.expand_path(dir)) : dir
       dest = File.join(dest, file) #if File.dir?(dest)
@@ -215,21 +234,23 @@ module Setup
       dest
     end
 
-    #
+    # Is a current project file different from a previously
+    # installed file?
     def diff?(new_content, path)
       return true unless File.exist?(path)
       new_content != binread(path)
     end
 
-    #
+    # Binary read.
     def binread(fname)
       File.open(fname, 'rb') do |f|
         return f.read
       end
     end
 
-    # TODO: The shebang updating needs some reworking.
-    # I beleive that on unix-based systems <tt>!/bin/env ruby</tt>
+    # TODO: The shebang updating needs some work.
+    #
+    # I beleive that on unix-based systems <tt>#!/usr/bin/env ruby</tt>
     # is the appropriate shebang.
 
     #

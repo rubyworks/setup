@@ -4,7 +4,8 @@ module Setup
   FILETYPES = %w( bin lib ext data etc man doc )
 
   #
-  INSTALL_RECORD = '.cache/setup/installedfiles'
+  INSTALL_RECORD = 'InstalledFiles'
+  #INSTALL_RECORD = '.cache/setup/installedfiles'
 
   # Common base class for all Setup build classes.
   # 
