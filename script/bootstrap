@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
-
 $LOAD_PATH.unshift('lib')
-
 require 'setup/command'
-
-Setup::Command.run('uninstall', *ARGV)
+Setup::Command.run(*ARGV)
 
