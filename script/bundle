@@ -21,6 +21,16 @@ end
 # remove setup requires
 bundle.gsub!(/require\s+["']setup\/(.*?)["']\s*$/, '')
 
-# save
-File.open('setup.rb', 'w'){ |f| f << bundle }
+# remove blank lines
+bundle.gsub!(/^\s*\n/, '')
 
+# remove comments
+bundle.gsub!(/^\s*\#.*?\n/, '')
+
+# save
+File.open('script/setup', 'w') do |f|
+  f << "#!/usr/bin/env ruby\n"
+  f << bundle
+end
+
+FileUtils.chmod(0744, 'script/setup')
