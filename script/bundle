@@ -2,12 +2,27 @@
 
 raise "Not the right place #{Dir.pwd}" unless File.directory?('lib')
 
-scripts = (Dir['lib/*.rb'] + Dir['lib/**/*']).uniq
-scripts = scripts.reject{ |f| File.directory?(f) }
-
+#scripts = (Dir['lib/*.rb'] + Dir['lib/**/*']).uniq
+#scripts = scripts.reject{ |f| File.directory?(f) }
 # We don't want the rake helper.
-scripts = scripts - ["lib/setup/rake.rb"]
-scripts = scripts + ["bin/setup.rb"]
+#scripts = scripts - ["lib/setup/rake.rb"]
+#scripts = scripts + ["bin/setup.rb"]
+
+scripts = %w{
+  lib/setup.rb
+  lib/setup/rubyver.rb
+  lib/setup/project.rb
+  lib/setup/session.rb
+  lib/setup/base.rb
+  lib/setup/compiler.rb
+  lib/setup/configuration.rb
+  lib/setup/documentor.rb
+  lib/setup/installer.rb
+  lib/setup/tester.rb
+  lib/setup/uninstaller.rb
+  lib/setup/command.rb
+  bin/setup.rb
+}
 
 #
 bundle = ""
