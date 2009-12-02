@@ -63,8 +63,7 @@
     config           saves your configurations
     show             shows current configuration
     setup            compiles ruby extentions and others
-    rdoc             generate rdoc documentation
-    ri               generate ri documentation
+    document         generate ri documentation
     install          installs files
     uninstall        uninstalls files
     test             run all tests in test/
@@ -92,27 +91,27 @@
        --rubyprog                 ruby program used for installation
        --makeprog                 make program to compile ruby extentions
        --extconfopt               options to pass-thru to extconf.rb
-       --withoutext               do not compile/install ruby extentions
-       --withoutdoc               do not generate documentation
        --shebang                  shebang line (#!) editing mode (all,ruby,never)
-       --doctemplate              document template to use (html|xml)
-       --testrunner               Runner to use for testing (auto|console|tk|gtk|gtk2)
-       --installdirs              install location mode (std,site,home :: libruby,site_ruby,$HOME)
-
-  Options for INSTALL:
-       --prefix                   Set the install prefix
+       --no-ext                   do not compile/install ruby extentions
+       --no-test                  do not run tests
+       --no-doc                   do not generate documentation
+       --type                     install location mode (std,site,home)
+       --installdirs              old term for --type
+       --install_prefix           set the install prefix
 
   Options in common:
-    -q --quiet                    Silence output
-       --verbose                  Provide verbose output
-    -n --no-write                 Do not write to disk
+    -q --quiet                    silence output
+       --trace --verbose          provide verbose output
+       --trial --no-harm          do not write to disk
   </pre>
 
 
   <h2>Current Status</h2>
 
-  <p>Setup.rb is going throught refactorization presently. Much of the code pre-dates Ruby 1.4 and
-  and could use a good deal of simplificaiton. In the process we plan to make installs atomic.</p>
+  <p>Version 5.0.0 is a major re-engineering of setup.rb. Although it is fairly well
+  tested, as such, it should be considered betaware until it accumulates
+  enough use in the field. I will update this message when I feel a new status
+  has been achieved -- likely accompanied by a new release.</p>
 
 </div>
 </div>
@@ -133,10 +132,11 @@
   <br/>
 
   <div class="copyright">
-  Setup.rb Copyright (c) 2009 Thomas Sawyer &middot; setup.rb Copyright (c) 2002 Minero Aoki <br/><br/>
+  Ruby Setup Copyright (c) 2009 Thomas Sawyer &middot; setup.rb Copyright (c) 2002 Minero Aoki <br/><br/>
   Distributed under the terms of the Ruby License
   </div>
 </dir>
 
 </body>
 </html>
+

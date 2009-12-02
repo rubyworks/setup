@@ -24,6 +24,7 @@ of the setup.rb and Ruby Setup.
 * Multi-package project layouts are no longer supported.
 * Metaconfig support is handled via singleton extension.
 * No longer supports hooks API (may support in the future like Metaconfig though).
+* No longer supports versions of Ruby older than v1.6.3.
 
 === STATUS
 
