@@ -3,12 +3,12 @@ Given /^'setup\.rb setup' has NOT been run$/ do
 end
 
 When /I issue the install command 'setup.rb install'$/ do
-  Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--trace")
+  Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--quiet") #, "--trace")
 end
 
 When /I issue the install command 'setup.rb install' unprepared$/ do
   begin
-    Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--trace")
+    Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--quiet") #, "--trace")
   rescue SystemExit => error
     $setup_feature_error = error
   end
