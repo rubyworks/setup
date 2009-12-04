@@ -1,5 +1,5 @@
 require 'setup/core_ext'
-require 'setup/constats'
+require 'setup/constants'
 require 'setup/project'
 require 'setup/configuration'
 require 'setup/compiler'
@@ -58,6 +58,14 @@ module Setup
       @options[:quiet] = val
     end
 
+    #
+    def force?; @options[:force]; end
+
+    #
+    def force=(val)
+      @options[:force] = val
+    end
+
     # #  S E T U P  T A S K S  # #
 
     # Run all tasks in sequences.
@@ -69,24 +77,15 @@ module Setup
     # * document
     #
     def all
-      log_header('config')
       config
-
       if configuration.compile? && project.compiles?
-        log_header('setup')
         setup
       end
-
       if configuration.test?
-        log_header('test')
         test
       end
-
-      log_header('install')
       install
-
       if configuration.document?
-        log_header('document')
         document
       end
     end
@@ -98,15 +97,10 @@ module Setup
     # * install
     #
     def main
-      log_header('config')
       config
-
       if configuration.compile? && project.compiles?
-        log_header('setup')
         setup
       end
-
-      log_header('install')
       install
     end
 
@@ -125,42 +119,51 @@ module Setup
     # TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to 'compile' or 'make'?
     def setup
       abort "must setup config first" unless configuration.exist?
+      log_header('Compiling')
       compiler.compile
     end
 
     #
     def install
       abort "must setup config first" unless configuration.exist?
+      log_header('Installing')
       installer.install
     end
 
     #
     def test
       return unless tester.testable?
+      log_header('Testing')
       tester.test
     end
 
     #
     def document
+      log_header('Documenting')
       documentor.document
     end
 
     #
     def clean
-      #log_header('clean')
+      log_header('Cleaning')
       compiler.clean
     end
 
     #
     def distclean
-      #log_header('distclean')
+      log_header('Distcleaning')
       compiler.distclean
     end
 
     #
     def uninstall
-      #log_header('uninstall')
+      if !File.exist?(INSTALL_RECORD)
+        io.puts "Nothing is installed."
+        return
+      end
+      log_header('Uninstalling')
       uninstaller.uninstall
+      io.puts('Ok.')
     end
 
     #
@@ -204,15 +207,22 @@ module Setup
   
     #
     def log_header(phase)
-       return if quiet?
-       #center = "            "
-       #c = (center.size - phase.size) / 2
-       #center[c,phase.size] = phase.to_s.upcase
-       line = '- ' * 4 + ' -' * 28
-       #c = (line.size - phase.size) / 2
-       line[5,phase.size] = " #{phase.to_s.upcase} "
-       io.puts "\n" + line + "\n\n"
+      return if quiet?
+      if trial?
+        io.puts("\n[TRIAL RUN] #{phase}...")
+      else
+        io.puts("\n#{phase}...")
+      end
     end
+
+    #   #center = "            "
+    #   #c = (center.size - phase.size) / 2
+    #   #center[c,phase.size] = phase.to_s.upcase
+    #   line = '- ' * 4 + ' -' * 28
+    #   #c = (line.size - phase.size) / 2
+    #   line[5,phase.size] = " #{phase.to_s.upcase} "
+    #   io.puts "\n" + line + "\n\n"
+    #end
 
   end
 

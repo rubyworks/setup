@@ -27,7 +27,7 @@ module Setup
       order << name
     end
 
-    task 'all'      , "do config, setup, then install"
+    task 'all'      , "config, setup, test, install and document"
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
     task 'setup'    , "compile ruby extentions"
@@ -181,8 +181,12 @@ module Setup
       parser.separator ""
       parser.separator "General options:"
 
-      parser.on("-q", "--quiet", "Suppress output") do |val|
-        session.options[:quiet] = val
+      parser.on("-q", "--quiet", "Suppress output") do
+        session.options[:quiet] = true
+      end
+
+      parser.on("-f", "--force", "Force operation") do
+        session.options[:force] = true
       end
 
       parser.on("--trace", "--verbose", "Watch execution") do |val|

@@ -2,49 +2,72 @@ require 'setup/base'
 
 module Setup
 
+  # TODO: It would be nice to improve this such that
+  # files to be removed are taken out of the list of
+  # directories that may be removed when they become
+  # empty. That way the end-user can see an exact list
+  # before commiting to the uninstall (using --force).
   #
   class Uninstaller < Base
 
     #
     def uninstall
-      paths = File.read(INSTALL_RECORD).split("\n")
-      dirs, files = paths.partition{ |f| File.dir?(f) }
+      return unless File.exist?(INSTALL_RECORD)
 
-      remove = []
-      files.uniq.each do |file|
-        next if /^\#/ =~ file  # skip comments
-        remove << file if File.exist?(file)
+      files = []
+      dirs  = []
+
+      paths.each do |path|
+        dirs  << path if File.dir?(path)
+        files << path if File.file?(path)
       end
 
-      if trace? && !trial?
-        puts remove.collect{ |f| "rm #{f}" }.join("\n")
-        ans = ask("Continue?", "yN")
-        case ans
-        when 'y', 'Y', 'yes'
-        else
-          return # abort?
-        end
+      if dirs.empty? && files.empty?
+        io.outs "Nothing to remove."
+        return
       end
 
-      remove.each do |file|
+      files.sort!{ |a,b| b.size <=> a.size }
+      dirs.sort!{ |a,b| b.size <=> a.size }
+
+      if !force? && !trial?
+        puts (files + dirs).collect{ |f| "#{f}" }.join("\n")
+        puts
+        puts "Must use --force option to remove these files and directories that become empty."
+        return
+      end
+
+      files.each do |file|
         rm_f(file)
       end
 
       dirs.each do |dir|
-        # okay this is over kill, but playing it safe...
-        empty = Dir[File.join(dir,'*')].empty?
-        begin
-          if trial?
-            io.puts "rmdir #{dir}"
-          else
-            rmdir(dir) if empty
-          end
-        rescue Errno::ENOTEMPTY
-          io.puts "may not be empty -- #{dir}" if trace?
-        end
+        entries = Dir.entries(dir)
+        entries.delete('.')
+        entries.delete('..')
+
+        #begin
+          rmdir(dir) if entries.empty?
+        #rescue Errno::ENOTEMPTY
+        #  io.puts "not empty -- #{dir}"
+        #end
       end
 
       rm_f(INSTALL_RECORD)
+    end
+
+  private
+
+    # path list from install record
+    def paths
+      @paths ||= (
+        lines = File.read(INSTALL_RECORD).split(/\s*\n/)
+        lines = lines.map{ |line| line.strip }
+        lines = lines.uniq
+        lines = lines.reject{ |line| line.empty? }       # skip blank lines
+        lines = lines.reject{ |line| line[0,1] == '#' }  # skip blank lines
+        lines
+      )
     end
 
   end

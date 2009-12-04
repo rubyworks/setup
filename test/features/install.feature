@@ -8,7 +8,7 @@ Feature: Install
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=site' has been run
     And 'setup.rb setup' has been run
-    When I issue the install command 'setup.rb install'
+    When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the site_ruby bin location
     And the project's libraries should be installed to the site_ruby lib location
     And the project's extensions should be installed to the site_ruby arch location
@@ -17,7 +17,7 @@ Feature: Install
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=std' has been run
     And 'setup.rb setup' has been run
-    When I issue the install command 'setup.rb install'
+    When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the ruby bin location
     And the project's libraries should be installed to the ruby lib location
     And the project's extensions should be installed to the ruby arch location
@@ -26,7 +26,7 @@ Feature: Install
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=home' has been run
     And 'setup.rb setup' has been run
-    When I issue the install command 'setup.rb install'
+    When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the home bin location
     And the project's libraries should be installed to the home lib location
     And the project's extensions should be installed to the home arch location
@@ -36,7 +36,7 @@ Feature: Install
     Given a setup.rb compliant Ruby project
     And the project does NOT have extensions
     And 'setup.rb config --type=site' has been run
-    When I issue the install command 'setup.rb install'
+    When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the site_ruby bin location
     And the project's libraries should be installed to the site_ruby lib location
 
@@ -44,7 +44,7 @@ Feature: Install
     Given a setup.rb compliant Ruby project
     And the project does NOT have extensions
     And 'setup.rb config --type=std' has been run
-    When I issue the install command 'setup.rb install'
+    When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the ruby bin location
     And the project's libraries should be installed to the ruby lib location
 
@@ -52,7 +52,7 @@ Feature: Install
     Given a setup.rb compliant Ruby project
     And the project does NOT have extensions
     And 'setup.rb config --type=home' has been run
-    When I issue the install command 'setup.rb install'
+    When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the home bin location
     And the project's libraries should be installed to the home lib location
 
@@ -60,13 +60,13 @@ Feature: Install
   Scenario: Fail to install project without first running config
     Given a setup.rb compliant Ruby project
     And 'setup.rb config' has NOT been run
-    When I issue the install command 'setup.rb install' unprepared
+    When I issue the command 'setup.rb install' unprepared
     Then I will be told that I must first run 'setup.rb config'
 
   Scenario: Fail to install project with extensions without first running setup
     Given a setup.rb compliant Ruby project
     And 'setup.rb config' has been run
     But 'setup.rb setup' has NOT been run
-    When I issue the install command 'setup.rb install' unprepared
+    When I issue the command 'setup.rb install' unprepared
     Then I will be told that I must first run 'setup.rb setup'
 

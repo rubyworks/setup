@@ -1,9 +1,9 @@
-#When /^I issue 'setup\.rb setup'$/ do
-#  system "#{SETUPCMD} setup"
-#end
+Given /'setup.rb setup' has been run$/ do
+  Setup::Command.run("setup", "--quiet") #, "--trace")
+end
 
 Then /^the extensions should be compiled$/ do
-  exts = Dir['ext/mytest/mytest.so']
+  exts = Dir['ext/faux/faux.so']
   exts.assert!.empty?
 end
 
@@ -12,7 +12,7 @@ Then /^I will be told that I must first run 'setup\.rb config'$/ do
 end
 
 Then /^the extensions will not be compiled$/ do
-  exts = Dir['ext/mytest/mytest.so']
+  exts = Dir['ext/faux/faux.so']
   exts.assert.empty?
 end
 

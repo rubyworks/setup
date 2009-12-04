@@ -23,6 +23,9 @@ module Setup
     attr_accessor :quiet
 
     #
+    attr_accessor :force
+
+    #
     attr_accessor :io
 
     #
@@ -61,6 +64,9 @@ module Setup
     def quiet? ; @quiet ; end
 
     #
+    def force? ; @force ; end
+
+    #
     def rootdir
       project.rootdir
     end
@@ -80,12 +86,12 @@ module Setup
     end
 
     # Ask a question of the user.
-    def ask(question, answers=nil)
-      $stdout.puts "#{question}"
-      $stdout.puts " [#{answers}] " if answers
-      until inp = $stdin.gets ; sleep 1 ; end
-      inp.strip
-    end
+    #def ask(question, answers=nil)
+    #  $stdout.puts "#{question}"
+    #  $stdout.puts " [#{answers}] " if answers
+    #  until inp = $stdin.gets ; sleep 1 ; end
+    #  inp.strip
+    #end
 
     #
     def trace_off #:yield:
@@ -101,7 +107,7 @@ module Setup
 
     #
     def rm_f(path)
-      io.puts "rm -f #{path}" if trace?
+      io.puts "rm -f #{path}" if trace? or trial?
       return if trial?
       force_remove_file(path)
     end
@@ -117,14 +123,14 @@ module Setup
     #
     def remove_file(path)
       File.chmod 0777, path
-      File.unlink path
+      File.unlink(path)
     end
 
     #
     def rmdir(path)
-      $stderr.puts "rmdir #{path}" if trace?
+      io.puts "rmdir #{path}" if trace? or trial?
       return if trial?
-      Dir.rmdir path
+      Dir.rmdir(path)
     end
 
   end

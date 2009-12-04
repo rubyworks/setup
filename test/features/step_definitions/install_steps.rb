@@ -2,11 +2,15 @@ Given /^'setup\.rb setup' has NOT been run$/ do
   # TODO: assert there are no compiled extensions
 end
 
-When /I issue the install command 'setup.rb install'$/ do
+Given /'setup.rb install' has been run$/ do
   Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--quiet") #, "--trace")
 end
 
-When /I issue the install command 'setup.rb install' unprepared$/ do
+When /I issue the command 'setup\.rb install'$/ do
+  Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--quiet") #, "--trace")
+end
+
+When /I issue the command 'setup.rb install' unprepared$/ do
   begin
     Setup::Command.run("install", "--prefix=#{FAUXROOT}", "--quiet") #, "--trace")
   rescue SystemExit => error

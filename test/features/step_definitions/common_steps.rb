@@ -13,26 +13,22 @@ Given /the project does NOT have extensions$/ do
   $setup_no_extensions = true
 end
 
-Given /^'setup\.rb (.*?)' has been run$/ do |cmd|
-  argv = cmd.split(/\s+/)
-  Setup::Command.run(*argv)
-end
+#Given /^'setup\.rb (.*?)' has been run$/ do |cmd|
+#  argv = cmd.split(/\s+/)
+#  Setup::Command.run(*argv)
+#end
 
-Given /^'setup\.rb config' has NOT been run$/ do
-  #pending
-end
+#When /^I issue the command 'setup.rb (.*?)'$/ do |cmd|
+#  argv = cmd.split(/\s+/)
+#  Setup::Command.run(*argv)
+#end
 
-When /^I issue the command 'setup.rb (.*?)'$/ do |cmd|
-  argv = cmd.split(/\s+/)
-  Setup::Command.run(*argv)
-end
-
-When /^I issue the command 'setup.rb (.*?)' unprepared$/ do |cmd|
-  begin
-    argv = cmd.split(/\s+/)
-    Setup::Command.run(*argv)
-  rescue SystemExit => error
-    $setup_feature_error = error
-  end
-end
+#When /^I issue the command 'setup.rb (.*?)' unprepared$/ do |cmd|
+#  begin
+#    argv = cmd.split(/\s+/)
+#    Setup::Command.run(*argv)
+#  rescue SystemExit => error
+#    $setup_feature_error = error
+#  end
+#end
 
