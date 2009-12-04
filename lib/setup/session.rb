@@ -1,4 +1,5 @@
-require 'setup/rubyver'
+require 'setup/core_ext'
+require 'setup/constats'
 require 'setup/project'
 require 'setup/configuration'
 require 'setup/compiler'
@@ -88,6 +89,25 @@ module Setup
         log_header('document')
         document
       end
+    end
+
+    # Run main set of tasks in sequences.
+    #
+    # * config
+    # * setup
+    # * install
+    #
+    def main
+      log_header('config')
+      config
+
+      if configuration.compile? && project.compiles?
+        log_header('setup')
+        setup
+      end
+
+      log_header('install')
+      install
     end
 
     #

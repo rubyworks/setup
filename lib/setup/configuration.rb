@@ -2,24 +2,27 @@ require 'rbconfig'
 require 'fileutils'
 require 'erb'
 require 'yaml'
-require 'setup/rubyver'
+require 'setup/core_ext'
+require 'setup/constants'
 
 module Setup
 
   # Stores platform information and general install settings.
-
+  #
   class Configuration
 
+    # Ruby System Configuration
     RBCONFIG  = ::Config::CONFIG
 
-    #CONFIGFILE = '.cache/setup/config'
-    CONFIGFILE = 'SetupConfig'
+    # Confgiuration file
+    CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
 
     # Custom configuration file.
-    METACONFIGFILE = 'script/.setup/metaconfig{,.rb}'
+    META_CONFIG_FILE = META_EXTENSION_DIR + '/configuration.rb'
 
+    #
     def self.options
-      @options ||= []
+      @@options ||= []
     end
 
     # TODO: better methods for path type
@@ -109,8 +112,8 @@ module Setup
 
     #
     def initialize_metaconfig
-      if File.exist?(METACONFIGFILE)
-        script = File.read(METACONFIGFILE)
+      if File.exist?(META_CONFIG_FILE)
+        script = File.read(META_CONFIG_FILE)
         (class << self; self; end).class_eval(script)
       end
     end
@@ -137,8 +140,8 @@ module Setup
 
     # Load configuration.
     def initialize_configfile
-      if File.exist?(CONFIGFILE)
-        erb = ERB.new(File.read(CONFIGFILE))
+      if File.exist?(CONFIG_FILE)
+        erb = ERB.new(File.read(CONFIG_FILE))
         txt = erb.result(binding)
         dat = YAML.load(txt)
         dat.each do |k, v|
@@ -162,7 +165,7 @@ module Setup
 
     #def initialize_configfile
     # begin
-    #    File.foreach(CONFIGFILE) do |line|
+    #    File.foreach(CONFIG_FILE) do |line|
     #      k, v = *line.split(/=/, 2)
     #      k.gsub!('-','_')
     #      __send__("#{k}=",v.strip) #self[k] = v.strip
@@ -561,20 +564,20 @@ module Setup
     # Save configuration.
     def save_config
       out = to_yaml
-      if not File.exist?(File.dirname(CONFIGFILE))
-        FileUtils.mkdir_p(File.dirname(CONFIGFILE))
+      if not File.exist?(File.dirname(CONFIG_FILE))
+        FileUtils.mkdir_p(File.dirname(CONFIG_FILE))
       end
-      if File.exist?(CONFIGFILE)
-        txt = File.read(CONFIGFILE)
+      if File.exist?(CONFIG_FILE)
+        txt = File.read(CONFIG_FILE)
         return nil if txt == out
       end          
-      File.open(CONFIGFILE, 'w'){ |f| f << out }
+      File.open(CONFIG_FILE, 'w'){ |f| f << out }
       true
     end
 
     # Does the configuration file exist?
     def exist?
-      File.exist?(CONFIGFILE)
+      File.exist?(CONFIG_FILE)
     end
 
     #

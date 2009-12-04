@@ -1,11 +1,7 @@
+require 'setup/core_ext'
+require 'setup/constants'
+
 module Setup
-
-  #
-  FILETYPES = %w( bin lib ext data etc man doc )
-
-  #
-  INSTALL_RECORD = 'InstalledFiles'
-  #INSTALL_RECORD = '.cache/setup/installedfiles'
 
   # Common base class for all Setup build classes.
   # 
@@ -33,8 +29,25 @@ module Setup
     def initialize(project, configuration, options={})
       @project = project
       @config  = configuration
+
+      initialize_hooks
+
       options.each do |k,v|
         __send__("#{k}=", v) if respond_to?("#{k}=")
+      end
+    end
+
+    # Hooking into the setup process, use extension scripts
+    # according to the name of the class. For instance to 
+    # augment the behavior of the Installer, use:
+    #
+    #   script/.setup/installer.rb
+    #
+    def initialize_hooks
+      file = META_EXTENSION_DIR + "/#{self.class.name.downcase}.rb"
+      if File.exist?(file)
+        script = File.read(file)
+        (class << self; self; end).class_eval(script)
       end
     end
 

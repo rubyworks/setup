@@ -1,62 +1,61 @@
 require 'setup/install'
 require 'rake/clean'
 
-setup = Setup::Installer.new
-
-desc 'Config, setup and then install'
-task :all => [:config, :setup, :install]
-
-desc 'Saves your configurations'
-task :config do
-  setup.exec_config
+def session
+  @session ||= Setup::Session.new(:io=>$stdout)
 end
 
-desc 'Compiles ruby extentions'
-task :setup do
-  setup.exec_setup
+namespace :setup do
+
+  desc 'Config, setup and then install'
+  task :all => [:config, :setup, :install]
+
+  desc 'Saves your configurations'
+  task :config do
+    session.config
+  end
+
+  desc 'Compiles ruby extentions'
+  task :setup do
+    session.setup
+  end
+
+  desc 'Runs unit tests'
+  task :test do
+    session.test
+  end
+
+  desc 'Generate ri documentation'
+  task :rdoc do
+    session.document
+  end
+
+  desc 'Installs files'
+  task :install do
+    session.install
+  end
+
+  desc 'Uninstalls files'
+  task :uninstall do
+    session.uninstall
+  end
+
+  desc "Does `make clean' for each extention"
+  task :clean do
+    session.clean
+  end
+
+  desc  "Does `make distclean' for each extention"
+  task :distclean do
+    session.distclean
+  end
+
+  desc 'Shows current configuration'
+  task :show do
+    session.show
+  end
 end
 
-desc 'Runs unit tests'
-task :test do
-  setup.exec_test
-end
-
-desc 'Generate rdoc documentation'
-task :rdoc do
-  setup.exec_rdoc
-end
-
-desc 'Generate ri documentation'
-task :ri do
-  setup.exec_ri
-end
-
-desc 'Installs files'
-task :install do
-  setup.exec_install
-end
-
-desc 'Uninstalls files'
-task :uninstall do
-  setup.exec_uninstall
-end
-
-#desc "Does `make clean' for each extention"
-task :makeclean do
-  setup.exec_clean
-end
-
-task :clean => [:makeclean]
-
-#desc  "Does `make distclean' for each extention"
-task :distclean do
-  exec_distclean
-end
-
-task :clobber => [:distclean]
-
-desc 'Shows current configuration'
-task :show do
-  setup.exec_show
-end
+task :clean   => ['setup:clean']
+task :clobber => ['setup:distclean']
 

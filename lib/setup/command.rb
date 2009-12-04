@@ -31,9 +31,9 @@ module Setup
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
     task 'setup'    , "compile ruby extentions"
-    #task 'rdoc'     , "generate rdoc documentation"
     task 'test'     , "run tests"
     task 'document' , "generate ri documentation"
+    #task 'rdoc'     , "generate rdoc documentation"
     task 'install'  , "install project files"
     task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
@@ -80,18 +80,7 @@ module Setup
       # This ensures we are in a project directory.
       rootdir = session.project.rootdir
 
-      # TODO: Might be nice to have a ouput header, but not sure
-      # what it should conatin or look like yet.
-
-      #unless session.quiet?
-      #  if session.project.name
-      #    puts "= #{session.project.name} (#{rootdir})"
-      #  else
-      #    puts "= #{rootdir}"
-      #  end
-      #end
-
-      #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
+      print_header
 
       begin
         session.__send__(task)
@@ -228,6 +217,20 @@ module Setup
     #
     def task_names
       self.class.tasks.keys
+    end
+
+    # TODO: Might be nice to have a ouput header, but not sure
+    # what it should conatin or look like yet.
+    def print_header
+      #unless session.quiet?
+      #  if session.project.name
+      #    puts "= #{session.project.name} (#{rootdir})"
+      #  else
+      #    puts "= #{rootdir}"
+      #  end
+      #end
+
+      #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
     end
 
 =begin
