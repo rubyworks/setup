@@ -5,7 +5,7 @@ Feature: Setup/Compile Extensions
 
   Scenario: Compile a new project
     Given a setup.rb compliant Ruby project
-    And 'setup.rb config' has already been run
+    And 'setup.rb config' has been run
     When I issue the command 'setup.rb setup'
     Then the extensions should be compiled
 
