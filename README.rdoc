@@ -22,8 +22,7 @@ of the setup.rb and Ruby Setup.
 
 * The directory convention 'conf' has been change to 'etc'.
 * Multi-package project layouts are no longer supported.
-* Metaconfig support is handled via singleton extension.
-* No longer supports hooks API (may support in the future like Metaconfig though).
+* Metaconfig and Hooks are handled via singleton extensions.
 * No longer supports versions of Ruby older than v1.6.3.
 
 === STATUS
@@ -31,7 +30,7 @@ of the setup.rb and Ruby Setup.
 Version 5.0.0 is a major re-engineering of setup.rb. Although it is fairly well
 tested, as such, it should be considered betaware until it accumulates
 enough use in the field. I will update this message when I feel a new status
-has been achieved -- likely accompanied by a new release.
+has been achieved (likely accompanied by an updated release).
 
 
 == INSTALLATION
