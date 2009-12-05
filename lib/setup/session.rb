@@ -79,7 +79,7 @@ module Setup
     def all
       config
       if configuration.compile? && project.compiles?
-        setup
+        make
       end
       if configuration.test?
         test
@@ -102,12 +102,15 @@ module Setup
       compiler.configure
     end
 
-    # TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to 'compile' or 'make'?
-    def setup
+    #
+    def make
       abort "must setup config first" unless configuration.exist?
       log_header('Compiling')
       compiler.compile
     end
+
+    # What #make used to be called.
+    alias_method :setup, :make
 
     #
     def install

@@ -30,7 +30,7 @@ module Setup
     task 'all'      , "config, setup, test, install"
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
-    task 'setup'    , "compile ruby extentions"
+    task 'make'     , "compile ruby extentions"
     task 'test'     , "run test suite"
     task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
