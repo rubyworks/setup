@@ -1,14 +1,17 @@
+require 'setup/constants'
+
 module Setup
 
   # Complexities arise in trying to figure out what test framework
   # is used, and how to run tests. To simplify the process, this
-  # class simply looks for a special script, ususally this will be
-  # a shell script <tt>script/test</tt>, but a ruby script
-  # <tt>script/setup/test.rb</tt> will be used instead if it exists.
+  # class simply looks for a special script, this can be  a shell
+  # script at <tt>script/test</tt>, or a ruby script that
+  # <tt>.setup/testrc.rb</tt> will be used instead if it exists.
 
   class Tester < Base
 
-    RUBYSCRIPT  = 'script/.setup/test.rb'
+    RUBYSCRIPT  = META_EXTENSION_DIR + '/testrc.rb'
+
     SHELLSCRIPT = 'script/test'
 
     #
