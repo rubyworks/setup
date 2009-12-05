@@ -85,23 +85,9 @@ module Setup
         test
       end
       install
-      if configuration.document?
-        document
-      end
-    end
-
-    # Run default set of tasks in sequences.
-    #
-    # * config
-    # * setup
-    # * install
-    #
-    def default
-      config
-      if configuration.compile? && project.compiles?
-        setup
-      end
-      install
+      #if configuration.document?
+      #  document
+      #end
     end
 
     #
@@ -139,6 +125,7 @@ module Setup
 
     #
     def document
+      #return unless configuration.document?
       log_header('Documenting')
       documentor.document
     end

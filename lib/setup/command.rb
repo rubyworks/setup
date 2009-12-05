@@ -27,8 +27,7 @@ module Setup
       order << name
     end
 
-    task 'default'  , "config, setup, install (when no command is given)"
-    task 'all'      , "config, setup, test, install and doc"
+    task 'all'      , "config, setup, test, install"
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
     task 'setup'    , "compile ruby extentions"
@@ -47,7 +46,7 @@ module Setup
       #config  = session.configuration
 
       task = ARGV.find{ |a| a !~ /^[-]/ }
-      task = 'default' unless task
+      task = 'all' unless task
 
       unless task_names.include?(task)
         $stderr.puts "Not a valid task -- #{task}"
@@ -61,7 +60,7 @@ module Setup
 
       optparse_header(parser, options)
       case task
-      when 'all', 'default'
+      when 'all'
         optparse_all(parser, options)
       when 'config'
         optparse_config(parser, options)
