@@ -4,7 +4,7 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: "TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to 'compile' or 'make'?"
+  body: "Alias for #make"
 full_name: Setup::Session#setup
 is_singleton: false
 name: setup

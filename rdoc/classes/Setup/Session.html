@@ -91,152 +91,152 @@
           
             
             <li class="singleton">
-              <a href="#M000090">::new</a>
+              <a href="#M000083">::new</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000111">#all</a>
+              <a href="#M000103">#all</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000132">#clean</a>
+              <a href="#M000121">#clean</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000143">#compiler</a>
+              <a href="#M000135">#compiler</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000120">#config</a>
+              <a href="#M000104">#config</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000142">#configuration</a>
+              <a href="#M000132">#configuration</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000117">#default</a>
+              <a href="#M000125">#distclean</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000133">#distclean</a>
+              <a href="#M000120">#document</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000129">#document</a>
+              <a href="#M000141">#documentor</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000148">#documentor</a>
+              <a href="#M000099">#force=</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000107">#force=</a>
+              <a href="#M000098">#force?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000106">#force?</a>
+              <a href="#M000116">#install</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000125">#install</a>
+              <a href="#M000136">#installer</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000144">#installer</a>
+              <a href="#M000084">#io</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000091">#io</a>
+              <a href="#M000087">#io=</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000095">#io=</a>
+              <a href="#M000144">#log_header</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000154">#log_header</a>
+              <a href="#M000108">#make</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000138">#project</a>
+              <a href="#M000131">#project</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000105">#quiet=</a>
+              <a href="#M000096">#quiet=</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000102">#quiet?</a>
+              <a href="#M000095">#quiet?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000124">#setup</a>
+              <a href="#M000115">#setup</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000137">#show</a>
+              <a href="#M000130">#show</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000128">#test</a>
+              <a href="#M000117">#test</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000147">#tester</a>
+              <a href="#M000137">#tester</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000097">#trace=</a>
+              <a href="#M000089">#trace=</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000096">#trace?</a>
+              <a href="#M000088">#trace?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000101">#trial=</a>
+              <a href="#M000094">#trial=</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000100">#trial?</a>
+              <a href="#M000090">#trial?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000134">#uninstall</a>
+              <a href="#M000126">#uninstall</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000153">#uninstaller</a>
+              <a href="#M000142">#uninstaller</a>
             </li>
           
         </ul>
@@ -373,7 +373,7 @@
 
     
       <div id="new-method" class="method-detail ">
-        <a name="M000090"></a>
+        <a name="M000083"></a>
 
         <div class="method-heading">
         
@@ -414,7 +414,7 @@ New <a href="Session.html">Session</a>
 
     
       <div id="all-method" class="method-detail ">
-        <a name="M000111"></a>
+        <a name="M000103"></a>
 
         <div class="method-heading">
         
@@ -456,15 +456,15 @@ Run all tasks in sequences.
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all</span>
       <span class="ruby-identifier">config</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">compile?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">compiles?</span>
-        <span class="ruby-identifier">setup</span>
+        <span class="ruby-identifier">make</span>
       <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">test?</span>
         <span class="ruby-identifier">test</span>
       <span class="ruby-keyword kw">end</span>
       <span class="ruby-identifier">install</span>
-      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">document?</span>
-        <span class="ruby-identifier">document</span>
-      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt">#if configuration.document?</span>
+      <span class="ruby-comment cmt">#  document</span>
+      <span class="ruby-comment cmt">#end</span>
     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
@@ -475,7 +475,7 @@ Run all tasks in sequences.
 
     
       <div id="clean-method" class="method-detail ">
-        <a name="M000132"></a>
+        <a name="M000121"></a>
 
         <div class="method-heading">
         
@@ -494,7 +494,7 @@ Run all tasks in sequences.
           <div class="method-source-code"
             id="clean-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 147</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 137</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clean</span>
       <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Cleaning'</span>)
       <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">clean</span>
@@ -508,7 +508,7 @@ Run all tasks in sequences.
 
     
       <div id="compiler-method" class="method-detail ">
-        <a name="M000143"></a>
+        <a name="M000135"></a>
 
         <div class="method-heading">
         
@@ -527,7 +527,7 @@ Run all tasks in sequences.
           <div class="method-source-code"
             id="compiler-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 186</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 176</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compiler</span>
       <span class="ruby-ivar">@compiler</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Compiler</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -540,7 +540,7 @@ Run all tasks in sequences.
 
     
       <div id="config-method" class="method-detail ">
-        <a name="M000120"></a>
+        <a name="M000104"></a>
 
         <div class="method-heading">
         
@@ -559,7 +559,7 @@ Run all tasks in sequences.
           <div class="method-source-code"
             id="config-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 108</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 94</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">config</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">save_config</span>
         <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Configuration saved.&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
@@ -579,7 +579,7 @@ Run all tasks in sequences.
 
     
       <div id="configuration-method" class="method-detail ">
-        <a name="M000142"></a>
+        <a name="M000132"></a>
 
         <div class="method-heading">
         
@@ -598,7 +598,7 @@ Run all tasks in sequences.
           <div class="method-source-code"
             id="configuration-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 182</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 172</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configuration</span>
       <span class="ruby-ivar">@configuration</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">new</span>
     <span class="ruby-keyword kw">end</span></pre>
@@ -610,57 +610,8 @@ Run all tasks in sequences.
       </div>
 
     
-      <div id="default-method" class="method-detail ">
-        <a name="M000117"></a>
-
-        <div class="method-heading">
-        
-          <span class="method-name">default</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        
-        </div>
-
-        <div class="method-description">
-          
-          <p>
-Run default set of tasks in sequences.
-</p>
-<ul>
-<li>config
-
-</li>
-<li>setup
-
-</li>
-<li>install
-
-</li>
-</ul>
-          
-
-          
-          <div class="method-source-code"
-            id="default-source">
-<pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 99</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default</span>
-      <span class="ruby-identifier">config</span>
-      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">compile?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">compiles?</span>
-        <span class="ruby-identifier">setup</span>
-      <span class="ruby-keyword kw">end</span>
-      <span class="ruby-identifier">install</span>
-    <span class="ruby-keyword kw">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-      </div>
-
-    
       <div id="distclean-method" class="method-detail ">
-        <a name="M000133"></a>
+        <a name="M000125"></a>
 
         <div class="method-heading">
         
@@ -679,7 +630,7 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="distclean-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 153</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 143</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">distclean</span>
       <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Distcleaning'</span>)
       <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">distclean</span>
@@ -693,7 +644,7 @@ Run default set of tasks in sequences.
 
     
       <div id="document-method" class="method-detail ">
-        <a name="M000129"></a>
+        <a name="M000120"></a>
 
         <div class="method-heading">
         
@@ -712,8 +663,9 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="document-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 141</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 130</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">document</span>
+      <span class="ruby-comment cmt">#return unless configuration.document?</span>
       <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Documenting'</span>)
       <span class="ruby-identifier">documentor</span>.<span class="ruby-identifier">document</span>
     <span class="ruby-keyword kw">end</span></pre>
@@ -726,7 +678,7 @@ Run default set of tasks in sequences.
 
     
       <div id="documentor-method" class="method-detail ">
-        <a name="M000148"></a>
+        <a name="M000141"></a>
 
         <div class="method-heading">
         
@@ -745,7 +697,7 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="documentor-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 198</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 188</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">documentor</span>
       <span class="ruby-ivar">@documentor</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Documentor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -758,7 +710,7 @@ Run default set of tasks in sequences.
 
     
       <div id="force--method" class="method-detail ">
-        <a name="M000107"></a>
+        <a name="M000099"></a>
 
         <div class="method-heading">
         
@@ -790,7 +742,7 @@ Run default set of tasks in sequences.
 
     
       <div id="force--method" class="method-detail ">
-        <a name="M000106"></a>
+        <a name="M000098"></a>
 
         <div class="method-heading">
         
@@ -820,7 +772,7 @@ Run default set of tasks in sequences.
 
     
       <div id="install-method" class="method-detail ">
-        <a name="M000125"></a>
+        <a name="M000116"></a>
 
         <div class="method-heading">
         
@@ -839,7 +791,7 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="install-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 127</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 116</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install</span>
       <span class="ruby-identifier">abort</span> <span class="ruby-value str">&quot;must setup config first&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">exist?</span>
       <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Installing'</span>)
@@ -854,7 +806,7 @@ Run default set of tasks in sequences.
 
     
       <div id="installer-method" class="method-detail ">
-        <a name="M000144"></a>
+        <a name="M000136"></a>
 
         <div class="method-heading">
         
@@ -873,7 +825,7 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="installer-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 190</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 180</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">installer</span>
       <span class="ruby-ivar">@installer</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Installer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -886,7 +838,7 @@ Run default set of tasks in sequences.
 
     
       <div id="io-method" class="method-detail ">
-        <a name="M000091"></a>
+        <a name="M000084"></a>
 
         <div class="method-heading">
         
@@ -918,7 +870,7 @@ Run default set of tasks in sequences.
 
     
       <div id="io--method" class="method-detail ">
-        <a name="M000095"></a>
+        <a name="M000087"></a>
 
         <div class="method-heading">
         
@@ -950,7 +902,7 @@ Run default set of tasks in sequences.
 
     
       <div id="log-header-method" class="method-detail ">
-        <a name="M000154"></a>
+        <a name="M000144"></a>
 
         <div class="method-heading">
         
@@ -969,7 +921,7 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="log-header-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 209</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 199</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_header</span>(<span class="ruby-identifier">phase</span>)
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">quiet?</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
@@ -986,8 +938,46 @@ Run default set of tasks in sequences.
       </div>
 
     
+      <div id="make-method" class="method-detail ">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">make</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="make-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 106</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make</span>
+      <span class="ruby-identifier">abort</span> <span class="ruby-value str">&quot;must setup config first&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">exist?</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Compiling'</span>)
+      <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">compile</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Session.html#M000115">setup</a>
+        </div>
+        
+      </div>
+
+    
       <div id="project-method" class="method-detail ">
-        <a name="M000138"></a>
+        <a name="M000131"></a>
 
         <div class="method-heading">
         
@@ -1006,7 +996,7 @@ Run default set of tasks in sequences.
           <div class="method-source-code"
             id="project-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 178</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 168</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project</span>
       <span class="ruby-ivar">@project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span>
     <span class="ruby-keyword kw">end</span></pre>
@@ -1019,7 +1009,7 @@ Run default set of tasks in sequences.
 
     
       <div id="quiet--method" class="method-detail ">
-        <a name="M000105"></a>
+        <a name="M000096"></a>
 
         <div class="method-heading">
         
@@ -1051,7 +1041,7 @@ Run default set of tasks in sequences.
 
     
       <div id="quiet--method" class="method-detail ">
-        <a name="M000102"></a>
+        <a name="M000095"></a>
 
         <div class="method-heading">
         
@@ -1080,8 +1070,8 @@ Run default set of tasks in sequences.
       </div>
 
     
-      <div id="setup-method" class="method-detail ">
-        <a name="M000124"></a>
+      <div id="setup-method" class="method-detail method-alias">
+        <a name="M000115"></a>
 
         <div class="method-heading">
         
@@ -1094,22 +1084,10 @@ Run default set of tasks in sequences.
         <div class="method-description">
           
           <p>
-TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
-&#8216;compile&#8217; or &#8216;make&#8217;?
+Alias for <a href="Session.html#M000108">make</a>
 </p>
           
 
-          
-          <div class="method-source-code"
-            id="setup-source">
-<pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 120</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
-      <span class="ruby-identifier">abort</span> <span class="ruby-value str">&quot;must setup config first&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">exist?</span>
-      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Compiling'</span>)
-      <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">compile</span>
-    <span class="ruby-keyword kw">end</span></pre>
-          </div>
           
         </div>
 
@@ -1118,7 +1096,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="show-method" class="method-detail ">
-        <a name="M000137"></a>
+        <a name="M000130"></a>
 
         <div class="method-heading">
         
@@ -1137,7 +1115,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
           <div class="method-source-code"
             id="show-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 170</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 160</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
       <span class="ruby-comment cmt">#configuration.show</span>
       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">configuration</span>
@@ -1151,7 +1129,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="test-method" class="method-detail ">
-        <a name="M000128"></a>
+        <a name="M000117"></a>
 
         <div class="method-heading">
         
@@ -1170,7 +1148,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
           <div class="method-source-code"
             id="test-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 134</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 123</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">tester</span>.<span class="ruby-identifier">testable?</span>
       <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Testing'</span>)
@@ -1185,7 +1163,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="tester-method" class="method-detail ">
-        <a name="M000147"></a>
+        <a name="M000137"></a>
 
         <div class="method-heading">
         
@@ -1204,7 +1182,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
           <div class="method-source-code"
             id="tester-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 194</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 184</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tester</span>
       <span class="ruby-ivar">@tester</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Tester</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -1217,7 +1195,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="trace--method" class="method-detail ">
-        <a name="M000097"></a>
+        <a name="M000089"></a>
 
         <div class="method-heading">
         
@@ -1249,7 +1227,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="trace--method" class="method-detail ">
-        <a name="M000096"></a>
+        <a name="M000088"></a>
 
         <div class="method-heading">
         
@@ -1279,7 +1257,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="trial--method" class="method-detail ">
-        <a name="M000101"></a>
+        <a name="M000094"></a>
 
         <div class="method-heading">
         
@@ -1311,7 +1289,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="trial--method" class="method-detail ">
-        <a name="M000100"></a>
+        <a name="M000090"></a>
 
         <div class="method-heading">
         
@@ -1341,7 +1319,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="uninstall-method" class="method-detail ">
-        <a name="M000134"></a>
+        <a name="M000126"></a>
 
         <div class="method-heading">
         
@@ -1360,7 +1338,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
           <div class="method-source-code"
             id="uninstall-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 159</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 149</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">uninstall</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">INSTALL_RECORD</span>)
         <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Nothing is installed.&quot;</span>
@@ -1379,7 +1357,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
 
     
       <div id="uninstaller-method" class="method-detail ">
-        <a name="M000153"></a>
+        <a name="M000142"></a>
 
         <div class="method-heading">
         
@@ -1398,7 +1376,7 @@ TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
           <div class="method-source-code"
             id="uninstaller-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/session.rb, line 202</span>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 192</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">uninstaller</span>
       <span class="ruby-ivar">@uninstaller</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Uninstaller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword kw">end</span></pre>

@@ -96,7 +96,7 @@
           
             
             <li class="singleton">
-              <a href="#M000020">::run</a>
+              <a href="#M000019">::run</a>
             </li>
           
             
@@ -106,62 +106,62 @@
           
             
             <li class="singleton">
-              <a href="#M000021">::tasks</a>
+              <a href="#M000020">::tasks</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000031">#configuration</a>
+              <a href="#M000029">#configuration</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000035">#optparse_all</a>
+              <a href="#M000032">#optparse_all</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000042">#optparse_common</a>
+              <a href="#M000041">#optparse_common</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000037">#optparse_config</a>
+              <a href="#M000034">#optparse_config</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000034">#optparse_header</a>
+              <a href="#M000031">#optparse_header</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000039">#optparse_install</a>
+              <a href="#M000038">#optparse_install</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000041">#optparse_uninstall</a>
+              <a href="#M000040">#optparse_uninstall</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000049">#print_header</a>
+              <a href="#M000045">#print_header</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000025">#run</a>
+              <a href="#M000024">#run</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000030">#session</a>
+              <a href="#M000028">#session</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000047">#task_names</a>
+              <a href="#M000044">#task_names</a>
             </li>
           
         </ul>
@@ -310,7 +310,7 @@ CLI for Setup.rb
 
     
       <div id="run-method" class="method-detail ">
-        <a name="M000020"></a>
+        <a name="M000019"></a>
 
         <div class="method-heading">
         
@@ -375,7 +375,7 @@ CLI for Setup.rb
 
     
       <div id="tasks-method" class="method-detail ">
-        <a name="M000021"></a>
+        <a name="M000020"></a>
 
         <div class="method-heading">
         
@@ -413,7 +413,7 @@ CLI for Setup.rb
 
     
       <div id="configuration-method" class="method-detail ">
-        <a name="M000031"></a>
+        <a name="M000029"></a>
 
         <div class="method-heading">
         
@@ -432,7 +432,7 @@ CLI for Setup.rb
           <div class="method-source-code"
             id="configuration-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 103</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 102</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configuration</span>
       <span class="ruby-ivar">@configuration</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">configuration</span>
     <span class="ruby-keyword kw">end</span></pre>
@@ -445,7 +445,7 @@ CLI for Setup.rb
 
     
       <div id="optparse-all-method" class="method-detail ">
-        <a name="M000035"></a>
+        <a name="M000032"></a>
 
         <div class="method-heading">
         
@@ -464,7 +464,7 @@ CLI for Setup.rb
           <div class="method-source-code"
             id="optparse-all-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 113</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 112</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_all</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-identifier">optparse_config</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-comment cmt">#optparse_install(parser, options)</span>
@@ -484,7 +484,7 @@ CLI for Setup.rb
 
     
       <div id="optparse-common-method" class="method-detail ">
-        <a name="M000042"></a>
+        <a name="M000041"></a>
 
         <div class="method-heading">
         
@@ -505,7 +505,7 @@ Common options
           <div class="method-source-code"
             id="optparse-common-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 180</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 179</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_common</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;General options:&quot;</span>
@@ -555,7 +555,7 @@ Common options
 
     
       <div id="optparse-config-method" class="method-detail ">
-        <a name="M000037"></a>
+        <a name="M000034"></a>
 
         <div class="method-heading">
         
@@ -574,7 +574,7 @@ Common options
           <div class="method-source-code"
             id="optparse-config-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 125</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 124</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_config</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Configuration options:&quot;</span>
@@ -609,7 +609,7 @@ Common options
 
     
       <div id="optparse-header-method" class="method-detail ">
-        <a name="M000034"></a>
+        <a name="M000031"></a>
 
         <div class="method-heading">
         
@@ -628,7 +628,7 @@ Common options
           <div class="method-source-code"
             id="optparse-header-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 108</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 107</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_header</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-node">&quot;USAGE: #{File.basename($0)} [command] [options]&quot;</span>
     <span class="ruby-keyword kw">end</span></pre>
@@ -641,7 +641,7 @@ Common options
 
     
       <div id="optparse-install-method" class="method-detail ">
-        <a name="M000039"></a>
+        <a name="M000038"></a>
 
         <div class="method-heading">
         
@@ -660,7 +660,7 @@ Common options
           <div class="method-source-code"
             id="optparse-install-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 152</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 151</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_install</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
       <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Install options:&quot;</span>
@@ -678,7 +678,7 @@ Common options
 
     
       <div id="optparse-uninstall-method" class="method-detail ">
-        <a name="M000041"></a>
+        <a name="M000040"></a>
 
         <div class="method-heading">
         
@@ -697,7 +697,7 @@ Common options
           <div class="method-source-code"
             id="optparse-uninstall-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 171</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 170</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_uninstall</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-comment cmt">#parser.separator &quot;&quot;</span>
       <span class="ruby-comment cmt">#parser.separator &quot;Uninstall options:&quot;</span>
@@ -714,7 +714,7 @@ Common options
 
     
       <div id="print-header-method" class="method-detail ">
-        <a name="M000049"></a>
+        <a name="M000045"></a>
 
         <div class="method-heading">
         
@@ -736,7 +736,7 @@ conatin or look like yet.
           <div class="method-source-code"
             id="print-header-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 228</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 227</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print_header</span>
       <span class="ruby-comment cmt">#unless session.quiet?</span>
       <span class="ruby-comment cmt">#  if session.project.name</span>
@@ -757,7 +757,7 @@ conatin or look like yet.
 
     
       <div id="run-method" class="method-detail ">
-        <a name="M000025"></a>
+        <a name="M000024"></a>
 
         <div class="method-heading">
         
@@ -776,7 +776,7 @@ conatin or look like yet.
           <div class="method-source-code"
             id="run-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 43</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 42</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
       <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">argv</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
 
@@ -784,7 +784,7 @@ conatin or look like yet.
       <span class="ruby-comment cmt">#config  = session.configuration</span>
 
       <span class="ruby-identifier">task</span> = <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^[-]/</span> }
-      <span class="ruby-identifier">task</span> = <span class="ruby-value str">'default'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">task</span>
+      <span class="ruby-identifier">task</span> = <span class="ruby-value str">'all'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">task</span>
 
       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">task_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">task</span>)
         <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Not a valid task -- #{task}&quot;</span>
@@ -798,7 +798,7 @@ conatin or look like yet.
 
       <span class="ruby-identifier">optparse_header</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">task</span>
-      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'all'</span>, <span class="ruby-value str">'default'</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'all'</span>
         <span class="ruby-identifier">optparse_all</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'config'</span>
         <span class="ruby-identifier">optparse_config</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
@@ -839,7 +839,7 @@ conatin or look like yet.
 
     
       <div id="session-method" class="method-detail ">
-        <a name="M000030"></a>
+        <a name="M000028"></a>
 
         <div class="method-heading">
         
@@ -858,7 +858,7 @@ conatin or look like yet.
           <div class="method-source-code"
             id="session-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 98</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 97</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session</span>
       <span class="ruby-ivar">@session</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Session</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:io=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">$stdout</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -871,7 +871,7 @@ conatin or look like yet.
 
     
       <div id="task-names-method" class="method-detail ">
-        <a name="M000047"></a>
+        <a name="M000044"></a>
 
         <div class="method-heading">
         
@@ -890,7 +890,7 @@ conatin or look like yet.
           <div class="method-source-code"
             id="task-names-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/command.rb, line 222</span>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 221</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">task_names</span>
       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">keys</span>
     <span class="ruby-keyword kw">end</span></pre>

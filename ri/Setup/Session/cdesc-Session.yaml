@@ -28,8 +28,6 @@ instance_methods:
 - !ruby/object:RDoc::RI::MethodSummary 
   name: configuration
 - !ruby/object:RDoc::RI::MethodSummary 
-  name: default
-- !ruby/object:RDoc::RI::MethodSummary 
   name: distclean
 - !ruby/object:RDoc::RI::MethodSummary 
   name: document
@@ -49,6 +47,8 @@ instance_methods:
   name: io=
 - !ruby/object:RDoc::RI::MethodSummary 
   name: log_header
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: make
 - !ruby/object:RDoc::RI::MethodSummary 
   name: project
 - !ruby/object:RDoc::RI::MethodSummary 
