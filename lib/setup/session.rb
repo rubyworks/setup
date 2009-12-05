@@ -90,13 +90,13 @@ module Setup
       end
     end
 
-    # Run main set of tasks in sequences.
+    # Run default set of tasks in sequences.
     #
     # * config
     # * setup
     # * install
     #
-    def main
+    def default
       config
       if configuration.compile? && project.compiles?
         setup

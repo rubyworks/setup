@@ -27,13 +27,13 @@ module Setup
       order << name
     end
 
-    task 'all'      , "config, setup, test, install and document"
+    task 'default'  , "config, setup, install (when no command is given)"
+    task 'all'      , "config, setup, test, install and doc"
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
     task 'setup'    , "compile ruby extentions"
-    task 'test'     , "run tests"
-    task 'document' , "generate ri documentation"
-    #task 'rdoc'     , "generate rdoc documentation"
+    task 'test'     , "run test suite"
+    task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
     task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
@@ -47,7 +47,7 @@ module Setup
       #config  = session.configuration
 
       task = ARGV.find{ |a| a !~ /^[-]/ }
-      task = 'all' unless task
+      task = 'default' unless task
 
       unless task_names.include?(task)
         $stderr.puts "Not a valid task -- #{task}"
@@ -61,7 +61,7 @@ module Setup
 
       optparse_header(parser, options)
       case task
-      when 'all'
+      when 'all', 'default'
         optparse_all(parser, options)
       when 'config'
         optparse_config(parser, options)

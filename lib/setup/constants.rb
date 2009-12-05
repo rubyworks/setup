@@ -1,7 +1,7 @@
 module Setup
 
   #
-  META_EXTENSION_DIR = 'script/.setup'
+  META_EXTENSION_DIR = '.setup'
 
   #
   FILETYPES = %w( bin lib ext data etc man doc )

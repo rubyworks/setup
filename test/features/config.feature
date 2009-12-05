@@ -6,11 +6,11 @@ Feature: Configuration
   Scenario: Configure a new project
     Given a setup.rb compliant Ruby project
     When I issue the command 'setup.rb config'
-    Then a '.cache/setup/config' file should be generated
+    Then a config file should be generated
 
   Scenario: Configure a previously configured project
     Given a setup.rb compliant Ruby project
     And 'setup.rb config' has been run
     When I issue the command 'setup.rb config'
-    Then the '.cache/setup/config' file should be updated
+    Then the config file should be updated
 
