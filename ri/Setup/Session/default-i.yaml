@@ -1,0 +1,24 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Run default set of tasks in sequences.
+- !ruby/object:RDoc::Markup::Flow::LIST 
+  contents: 
+  - !ruby/struct:RDoc::Markup::Flow::LI 
+    label: "*"
+    body: config
+  - !ruby/struct:RDoc::Markup::Flow::LI 
+    label: "*"
+    body: setup
+  - !ruby/struct:RDoc::Markup::Flow::LI 
+    label: "*"
+    body: install
+  type: :BULLET
+full_name: Setup::Session#default
+is_singleton: false
+name: default
+params: ()
+visibility: public

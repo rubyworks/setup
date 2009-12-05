@@ -2,9 +2,10 @@
 aliases: []
 
 block_params: 
-comment: 
+comment: []
+
 full_name: Setup::Installer#open_atomic_writer
 is_singleton: false
 name: open_atomic_writer
 params: (path, &block)
-visibility: public
+visibility: private

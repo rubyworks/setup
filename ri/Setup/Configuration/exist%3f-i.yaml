@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Does the configuration file exist?
+full_name: Setup::Configuration#exist?
+is_singleton: false
+name: exist?
+params: ()
+visibility: public

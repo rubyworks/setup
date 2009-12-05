@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Setup::Tester</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Setup</a>&nbsp;
+      <a href="/">Setup::Tester</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../files/lib/setup/tester_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/setup/tester.rb">lib/setup/tester.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <li class="class">Base</li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="method">
+              <a href="#M000001">#test</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000003">#test_rubyscript</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000002">#test_shellscript</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000000">#testable?</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../files/SetupConfig.html">SetupConfig</a></li>
+        
+          <li class="file"><a href="../../files/InstalledFiles.html">InstalledFiles</a></li>
+        
+          <li class="file"><a href="../../files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../../files/COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="../../files/README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../classes/Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Base.html">Setup::Base</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Compiler.html">Setup::Compiler</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Configuration.html">Setup::Configuration</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Documentor.html">Setup::Documentor</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Project.html">Setup::Project</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Session.html">Setup::Session</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Tester.html">Setup::Tester</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+        
+          <li class="class"><a href="../../classes/Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Tester</h1>
+      
+
+      <p>
+Complexities arise in trying to figure out what test framework is used, and
+how to run tests. To simplify the process, this class simply looks for a
+special script, this can be a shell script at <tt>script/test</tt>, or a
+ruby script that <tt>.setup/testrc.rb</tt> will be used instead if it
+exists.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+    <div id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt><a name="RUBYSCRIPT">RUBYSCRIPT</a></dt>
+        
+        <dd class="description missing-docs">(Not documented)</dd>
+        
+      
+        <dt><a name="SHELLSCRIPT">SHELLSCRIPT</a></dt>
+        
+        <dd class="description missing-docs">(Not documented)</dd>
+        
+      
+      </dl>
+    </div>
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="test-method" class="method-detail ">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">test</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="test-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 26</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">testable?</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">RUBYSCRIPT</span>)
+        <span class="ruby-identifier">test_rubyscript</span>
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">SHELLSCRIPT</span>)
+        <span class="ruby-identifier">test_shellscript</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt">#puts &quot;Ok.&quot; unless quiet?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="test-rubyscript-method" class="method-detail ">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">test_rubyscript</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="test-rubyscript-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 42</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_rubyscript</span>
+      <span class="ruby-identifier">ruby</span>(<span class="ruby-constant">RUBYSCRIPT</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="test-shellscript-method" class="method-detail ">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">test_shellscript</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="test-shellscript-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 37</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_shellscript</span>
+      <span class="ruby-identifier">bash</span>(<span class="ruby-constant">SHELLSCRIPT</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="testable--method" class="method-detail ">
+        <a name="M000000"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">testable?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="testable--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 18</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">testable?</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">no_test</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">RUBYSCRIPT</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">SHELLSCRIPT</span>)
+      <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

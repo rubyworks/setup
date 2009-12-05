@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Comfirm a <tt>path</tt> is a directory and exists.
+full_name: Setup::Installer#directory?
+is_singleton: false
+name: directory?
+params: (path)
+visibility: private

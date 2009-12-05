@@ -2,8 +2,9 @@
 aliases: []
 
 block_params: 
-comment: []
-
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Dynamic link library extension for this system.
 full_name: Setup::Installer#dllext
 is_singleton: false
 name: dllext

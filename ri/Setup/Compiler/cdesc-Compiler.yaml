@@ -1,0 +1,27 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: []
+
+constants: []
+
+full_name: Setup::Compiler
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: clean
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: compile
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: configure
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: distclean
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: extdirs
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: make
+name: Compiler
+superclass: Base

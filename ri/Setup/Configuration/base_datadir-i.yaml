@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Configuration#base_datadir
+is_singleton: false
+name: base_datadir
+params: ()
+visibility: public

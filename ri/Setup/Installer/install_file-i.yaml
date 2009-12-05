@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Install a project file.
+full_name: Setup::Installer#install_file
+is_singleton: false
+name: install_file
+params: (dir, from, dest, mode, prefix=nil)
+visibility: private

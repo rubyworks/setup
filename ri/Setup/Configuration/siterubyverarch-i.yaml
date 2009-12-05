@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Directory for aux ruby binary libraries
+full_name: Setup::Configuration#siterubyverarch
+is_singleton: false
+name: siterubyverarch
+params: ()
+visibility: public

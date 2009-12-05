@@ -3,8 +3,10 @@ aliases: []
 
 block_params: 
 comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Is a current project file different from a previously installed file?
 full_name: Setup::Installer#diff?
 is_singleton: false
 name: diff?
 params: (new_content, path)
-visibility: public
+visibility: private

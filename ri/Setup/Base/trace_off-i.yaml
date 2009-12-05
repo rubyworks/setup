@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: ""
+comment: []
+
+full_name: Setup::Base#trace_off
+is_singleton: false
+name: trace_off
+params: () {|| ...}
+visibility: public

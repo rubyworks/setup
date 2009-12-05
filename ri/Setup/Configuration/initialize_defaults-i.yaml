@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: By default installation is to site locations, and ri documentation will not be generated.
+full_name: Setup::Configuration#initialize_defaults
+is_singleton: false
+name: initialize_defaults
+params: ()
+visibility: public

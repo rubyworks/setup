@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Tester#test_shellscript
+is_singleton: false
+name: test_shellscript
+params: ()
+visibility: public

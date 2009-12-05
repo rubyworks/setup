@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "Alias for #type="
+full_name: Setup::Configuration#installdirs=
+is_singleton: false
+name: installdirs=
+params: (val)
+visibility: public

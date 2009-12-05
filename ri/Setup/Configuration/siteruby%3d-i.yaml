@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Set directory for version-independent aux ruby libraries
+full_name: Setup::Configuration#siteruby=
+is_singleton: false
+name: siteruby=
+params: (path)
+visibility: public

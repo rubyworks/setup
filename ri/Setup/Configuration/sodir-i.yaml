@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Directory for ruby extentions
+full_name: Setup::Configuration#sodir
+is_singleton: false
+name: sodir
+params: ()
+visibility: public

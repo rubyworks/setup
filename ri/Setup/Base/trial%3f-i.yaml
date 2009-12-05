@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Base#trial?
+is_singleton: false
+name: trial?
+params: ()
+visibility: public

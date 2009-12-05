@@ -2,8 +2,9 @@
 aliases: []
 
 block_params: 
-comment: []
-
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Get a list of project files given a project subdirectory.
 full_name: Setup::Installer#files
 is_singleton: false
 name: files

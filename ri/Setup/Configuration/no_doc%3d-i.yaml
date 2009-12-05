@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Configuration#no_doc=
+is_singleton: false
+name: no_doc=
+params: (val)
+visibility: public

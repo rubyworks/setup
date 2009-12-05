@@ -1,0 +1,37 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: The Project class encapsulates information about the project/package setup is effecting.
+- !ruby/struct:RDoc::Markup::Flow::RULE 
+  width: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: The Project class encapsulates information about the project/package setup is effecting.
+constants: 
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  - !ruby/struct:RDoc::Markup::Flow::P 
+    body: Match used to determine the root dir of a project.
+  name: ROOT_MARKER
+  value: "'{setup.rb,script/setup,meta/,MANIFEST,lib/}'"
+full_name: Setup::Project
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: compiles?
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: extconfs
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: extensions
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: loadpath
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: name
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: rootdir
+name: Project
+superclass: Object

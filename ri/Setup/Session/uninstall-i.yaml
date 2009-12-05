@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Session#uninstall
+is_singleton: false
+name: uninstall
+params: ()
+visibility: public

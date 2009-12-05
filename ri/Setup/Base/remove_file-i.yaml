@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Base#remove_file
+is_singleton: false
+name: remove_file
+params: (path)
+visibility: public

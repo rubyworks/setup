@@ -15,7 +15,8 @@ class_methods:
   name: new
 - !ruby/object:RDoc::RI::MethodSummary 
   name: parse
-comment: 
+comment: []
+
 constants: []
 
 full_name: Setup::Installer::Shebang

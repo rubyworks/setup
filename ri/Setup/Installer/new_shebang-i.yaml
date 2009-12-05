@@ -2,9 +2,10 @@
 aliases: []
 
 block_params: 
-comment: 
+comment: []
+
 full_name: Setup::Installer#new_shebang
 is_singleton: false
 name: new_shebang
 params: (old)
-visibility: public
+visibility: private

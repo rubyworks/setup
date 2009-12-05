@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: path list from install record
+full_name: Setup::Uninstaller#paths
+is_singleton: false
+name: paths
+params: ()
+visibility: private

@@ -5,6 +5,8 @@ block_params:
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
   body: Install documentation.
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "TODO: The use of the project name in the doc directory should be set during the config phase. Define a seperate config method for it."
 full_name: Setup::Installer#install_doc
 is_singleton: false
 name: install_doc

@@ -1,0 +1,1399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Setup::Installer</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Setup</a>&nbsp;
+      <a href="/">Setup::Installer</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../files/lib/setup/installer_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/setup/installer.rb">lib/setup/installer.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <li class="class">Base</li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+      <div id="namespace-list-section" class="section">
+        <h3 class="section-header">Namespace</h3>
+        <ul class="link-list">
+          
+          <li class="class"><a href="Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="method">
+              <a href="#M000033">#binread</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000029">#destination</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000032">#diff?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000014">#directory?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000017">#dllext</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000015">#files</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000005">#install</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000006">#install_bin</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000010">#install_data</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000013">#install_doc</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000011">#install_etc</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000007">#install_ext</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000019">#install_file</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000018">#install_files</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000009">#install_lib</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000012">#install_man</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000004">#install_prefix</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000028">#install_record</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000036">#install_shebang</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000024">#mkdir_p</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000040">#new_shebang</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000043">#open_atomic_writer</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000027">#prune_install_record</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000026">#record_installation</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000016">#select_dllext</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000038">#update_shebang_line</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../files/SetupConfig.html">SetupConfig</a></li>
+        
+          <li class="file"><a href="../../files/InstalledFiles.html">InstalledFiles</a></li>
+        
+          <li class="file"><a href="../../files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../../files/COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="../../files/README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../classes/Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Base.html">Setup::Base</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Compiler.html">Setup::Compiler</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Configuration.html">Setup::Configuration</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Documentor.html">Setup::Documentor</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Project.html">Setup::Project</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Session.html">Setup::Session</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Tester.html">Setup::Tester</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+        
+          <li class="class"><a href="../../classes/Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Installer</h1>
+      
+
+      <p>
+<a href="Installer.html">Installer</a> class handles the actual install
+procedure.
+</p>
+<p>
+NOTE: This new version does not support per-directory hooks.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="install-method" class="method-detail ">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install package.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 18</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install</span>
+      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">rootdir</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">install_bin</span>
+        <span class="ruby-identifier">install_ext</span>
+        <span class="ruby-identifier">install_lib</span>
+        <span class="ruby-identifier">install_data</span>
+        <span class="ruby-identifier">install_man</span>
+        <span class="ruby-identifier">install_doc</span>
+        <span class="ruby-identifier">install_etc</span>
+        <span class="ruby-identifier">prune_install_record</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-bin-method" class="method-detail ">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_bin</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install binaries (executables).
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-bin-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 32</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_bin</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'bin'</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* bin -&gt; #{config.bindir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'bin'</span>)
+      <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'bin'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">bindir</span>, <span class="ruby-value">0755</span>)
+      <span class="ruby-comment cmt">#install_shebang(files, config.bindir)</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-data-method" class="method-detail ">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_data</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install shared data.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-data-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 63</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_data</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'data'</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* data -&gt; #{config.datadir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'data'</span>)
+      <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'data'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">datadir</span>, <span class="ruby-value">0644</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-doc-method" class="method-detail ">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_doc</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install documentation.
+</p>
+<p>
+TODO: The use of the project name in the doc directory should be set during
+the config phase. Define a seperate config method for it.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-doc-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 91</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_doc</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">document?</span>  <span class="ruby-comment cmt"># TODO: seprate ri generation from doc installation</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'doc'</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">name</span>
+      <span class="ruby-identifier">dir</span>   = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">docdir</span>, <span class="ruby-value str">&quot;ruby-{project.name}&quot;</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* doc -&gt; #{dir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'doc'</span>)
+      <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'doc'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-value">0644</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-etc-method" class="method-detail ">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_etc</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install configuration.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-etc-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 71</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_etc</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'etc'</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* etc -&gt; #{config.sysconfdir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'etc'</span>)
+      <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'etc'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">sysconfdir</span>, <span class="ruby-value">0644</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-ext-method" class="method-detail ">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_ext</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install shared extension libraries.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-ext-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 41</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_ext</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'ext'</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* ext -&gt; #{config.sodir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'ext'</span>)
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">select_dllext</span>(<span class="ruby-identifier">files</span>)
+      <span class="ruby-comment cmt">#install_files('ext', files, config.sodir, 0555)</span>
+      <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file</span>)), <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file</span>))
+        <span class="ruby-identifier">dest</span> = <span class="ruby-identifier">destination</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">sodir</span>, <span class="ruby-identifier">name</span>)
+        <span class="ruby-identifier">install_file</span>(<span class="ruby-value str">'ext'</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">dest</span>, <span class="ruby-value">0555</span>, <span class="ruby-identifier">install_prefix</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-lib-method" class="method-detail ">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_lib</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install library files.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-lib-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 55</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_lib</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'lib'</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* lib -&gt; #{config.rbdir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'lib'</span>)
+      <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'lib'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">rbdir</span>, <span class="ruby-value">0644</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-man-method" class="method-detail ">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_man</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install manpages.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-man-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 79</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_man</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'man'</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* man -&gt; #{config.mandir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'man'</span>)
+      <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'man'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">mandir</span>, <span class="ruby-value">0644</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-prefix-method" class="method-detail ">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_prefix</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="install-prefix-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 12</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_prefix</span>
+      <span class="ruby-identifier">config</span>.<span class="ruby-identifier">install_prefix</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="private-instance-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="binread-method" class="method-detail ">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">binread</span><span
+            class="method-args">(fname)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Binary read.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="binread-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 245</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">binread</span>(<span class="ruby-identifier">fname</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-value str">'rb'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="destination-method" class="method-detail ">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">destination</span><span
+            class="method-args">(dir, file)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Determine actual destination including install_prefix.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="destination-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 230</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>)
+      <span class="ruby-identifier">dest</span> = <span class="ruby-identifier">install_prefix</span> <span class="ruby-value">? </span><span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">install_prefix</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)) <span class="ruby-operator">:</span> <span class="ruby-identifier">dir</span>
+      <span class="ruby-identifier">dest</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dest</span>, <span class="ruby-identifier">file</span>) <span class="ruby-comment cmt">#if File.dir?(dest)</span>
+      <span class="ruby-identifier">dest</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dest</span>)
+      <span class="ruby-identifier">dest</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="diff--method" class="method-detail ">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">diff?</span><span
+            class="method-args">(new_content, path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Is a current project file different from a previously installed file?
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="diff--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 239</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">diff?</span>(<span class="ruby-identifier">new_content</span>, <span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-identifier">new_content</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">binread</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="directory--method" class="method-detail ">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">directory?</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Comfirm a <tt>path</tt> is a directory and exists.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="directory--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 104</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="dllext-method" class="method-detail ">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">dllext</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Dynamic link library extension for this system.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="dllext-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 128</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dllext</span>
+      <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dlext</span>
+      <span class="ruby-comment cmt">#Configuration::RBCONFIG['DLEXT']</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="files-method" class="method-detail ">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">files</span><span
+            class="method-args">(dir)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Get a list of project files given a project subdirectory.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="files-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 109</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">files</span>(<span class="ruby-identifier">dir</span>)
+      <span class="ruby-identifier">files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{dir}/**/*&quot;</span>]
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">select</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">f</span>) }
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">&quot;#{dir}/&quot;</span>, <span class="ruby-value str">''</span>) }
+      <span class="ruby-identifier">files</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-file-method" class="method-detail ">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_file</span><span
+            class="method-args">(dir, from, dest, mode, prefix=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install a project file.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-file-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 143</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_file</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">dest</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">prefix</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">dest</span>))
+  
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">trial?</span>
+        <span class="ruby-comment cmt">#to = prefix ? File.join(prefix, dir, from) : File.join(dir, from)</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;install #{dir}/#{from} #{dest}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
+
+      <span class="ruby-identifier">str</span> = <span class="ruby-identifier">binread</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">from</span>))
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">diff?</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">dest</span>)
+        <span class="ruby-identifier">trace_off</span> {
+          <span class="ruby-identifier">rm_f</span>(<span class="ruby-identifier">dest</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">dest</span>)
+        }
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">dest</span>, <span class="ruby-value str">'wb'</span>){ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">str</span>) }
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">chmod</span>(<span class="ruby-identifier">mode</span>, <span class="ruby-identifier">dest</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">record_installation</span>(<span class="ruby-identifier">dest</span>) <span class="ruby-comment cmt"># record file as installed</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-files-method" class="method-detail ">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_files</span><span
+            class="method-args">(dir, list, dest, mode)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install project files.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-files-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 134</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_files</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">list</span>, <span class="ruby-identifier">dest</span>, <span class="ruby-identifier">mode</span>)
+      <span class="ruby-comment cmt">#mkdir_p(dest) #, install_prefix)</span>
+      <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fname</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">rdest</span> = <span class="ruby-identifier">destination</span>(<span class="ruby-identifier">dest</span>, <span class="ruby-identifier">fname</span>)
+        <span class="ruby-identifier">install_file</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">fname</span>, <span class="ruby-identifier">rdest</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">install_prefix</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-record-method" class="method-detail ">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_record</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Get the install record file name, and ensure it&#8217;s location is
+prepared (ie. make it&#8217;s directory).
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="install-record-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 215</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_record</span>
+      <span class="ruby-ivar">@install_record</span> <span class="ruby-operator">||=</span> (
+        <span class="ruby-identifier">file</span> = <span class="ruby-constant">INSTALL_RECORD</span>
+        <span class="ruby-identifier">dir</span>  = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">dir</span>)
+          <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dir</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">file</span>
+      )
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-shebang-method" class="method-detail ">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install_shebang</span><span
+            class="method-args">(files, dir)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="install-shebang-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 257</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_shebang</span>(<span class="ruby-identifier">files</span>, <span class="ruby-identifier">dir</span>)
+      <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file</span>))
+        <span class="ruby-identifier">update_shebang_line</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="mkdir-p-method" class="method-detail ">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">mkdir_p</span><span
+            class="method-args">(dirname)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Install a directory.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="mkdir-p-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 170</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dirname</span>) <span class="ruby-comment cmt">#, prefix=nil)</span>
+      <span class="ruby-comment cmt">#dirname = destination(dirname)</span>
+      <span class="ruby-comment cmt">#dirname = File.join(prefix, File.expand_path(dirname)) if prefix</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">dirname</span>)
+
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;mkdir -p #{dirname}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">trial?</span>
+
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
+
+      <span class="ruby-comment cmt"># Does not check '/', it's too abnormal.</span>
+      <span class="ruby-identifier">dirs</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dirname</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">%r&lt;(?=/)&gt;</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-regexp re">/\A[a-z]:\z/i</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">dirs</span>[<span class="ruby-value">0</span>]
+        <span class="ruby-identifier">disk</span> = <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">shift</span>
+        <span class="ruby-identifier">dirs</span>[<span class="ruby-value">0</span>] = <span class="ruby-identifier">disk</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dirs</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">path</span> = <span class="ruby-identifier">dirs</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">idx</span>].<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dir?</span>(<span class="ruby-identifier">path</span>)
+          <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-identifier">path</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">record_installation</span>(<span class="ruby-identifier">path</span>)  <span class="ruby-comment cmt"># record directories made</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="new-shebang-method" class="method-detail ">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new_shebang</span><span
+            class="method-args">(old)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="new-shebang-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 292</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_shebang</span>(<span class="ruby-identifier">old</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-regexp re">/\Aruby/</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">old</span>.<span class="ruby-identifier">cmd</span>)
+        <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">rubypath</span>, <span class="ruby-identifier">old</span>.<span class="ruby-identifier">args</span>)
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">old</span>.<span class="ruby-identifier">cmd</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'env'</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">old</span>.<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'ruby'</span>
+        <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">rubypath</span>, <span class="ruby-identifier">old</span>.<span class="ruby-identifier">args</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>])
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">old</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">shebang</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'all'</span>
+        <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">rubypath</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="open-atomic-writer-method" class="method-detail ">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">open_atomic_writer</span><span
+            class="method-args">(path, &block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="open-atomic-writer-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 304</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open_atomic_writer</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">tmpfile</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'.tmp'</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">tmpfile</span>, <span class="ruby-value str">'wb'</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">rename</span> <span class="ruby-identifier">tmpfile</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">ensure</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span> <span class="ruby-identifier">tmpfile</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">tmpfile</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="prune-install-record-method" class="method-detail ">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">prune_install_record</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Remove duplicates from the install record.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="prune-install-record-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 204</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prune_install_record</span>
+      <span class="ruby-identifier">entries</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">install_record</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+      <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">uniq!</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">install_record</span>, <span class="ruby-value str">'w'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">f</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+        <span class="ruby-identifier">f</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="record-installation-method" class="method-detail ">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">record_installation</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Record that a file or directory was installed in the install record file.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="record-installation-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 196</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">record_installation</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">install_record</span>, <span class="ruby-value str">'a'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt">#io.puts &quot;installed #{path}&quot; if trace?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="select-dllext-method" class="method-detail ">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">select_dllext</span><span
+            class="method-args">(files)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Extract dynamic link libraries from all ext files.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="select-dllext-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 117</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">select_dllext</span>(<span class="ruby-identifier">files</span>)
+      <span class="ruby-identifier">ents</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> 
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>) <span class="ruby-operator">==</span> <span class="ruby-node">&quot;.#{dllext}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ents</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">files</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-value str">&quot;ruby extention not compiled: 'setup.rb setup' first&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">ents</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="update-shebang-line-method" class="method-detail ">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">update_shebang_line</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="update-shebang-line-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 265</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_shebang_line</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">shebang</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'never'</span>
+      <span class="ruby-identifier">old</span> = <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">old</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">old</span>.<span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;warning: #{path}&quot;</span>
+          <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Shebang line has too many args.&quot;</span>
+          <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;It is not portable and your program may not work.&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">new</span> = <span class="ruby-identifier">new_shebang</span>(<span class="ruby-identifier">old</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">old</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">shebang</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'all'</span>
+        <span class="ruby-identifier">new</span> = <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">rubypath</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;updating shebang: #{File.basename(path)}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span>
+      <span class="ruby-identifier">open_atomic_writer</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">output</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value str">'rb'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">f</span>.<span class="ruby-identifier">gets</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">old</span>   <span class="ruby-comment cmt"># discard</span>
+          <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">new</span>.<span class="ruby-identifier">to_s</span>
+          <span class="ruby-identifier">output</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

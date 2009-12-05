@@ -2,10 +2,11 @@
 aliases: []
 
 block_params: 
-comment: []
-
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Install project files.
 full_name: Setup::Installer#install_files
 is_singleton: false
 name: install_files
-params: (list, dest, mode)
+params: (dir, list, dest, mode)
 visibility: private

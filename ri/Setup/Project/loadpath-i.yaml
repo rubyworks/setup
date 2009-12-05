@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: This is needed if a project has loadpaths other than the standard lib/. Note the routine is designed to handle YAML arrays or line by line list.
+full_name: Setup::Project#loadpath
+is_singleton: false
+name: loadpath
+params: ()
+visibility: public

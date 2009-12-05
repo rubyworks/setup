@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Base libdir
+full_name: Setup::Configuration#base_libdir
+is_singleton: false
+name: base_libdir
+params: ()
+visibility: public

@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Command#task_names
+is_singleton: false
+name: task_names
+params: ()
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Directory for ruby scripts
+full_name: Setup::Configuration#rbdir
+is_singleton: false
+name: rbdir
+params: ()
+visibility: public

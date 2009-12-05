@@ -3,8 +3,10 @@ aliases: []
 
 block_params: 
 comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Install a directory.
 full_name: Setup::Installer#mkdir_p
 is_singleton: false
 name: mkdir_p
-params: (dirname, prefix = nil)
-visibility: public
+params: (dirname)
+visibility: private

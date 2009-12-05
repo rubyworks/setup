@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Command#optparse_install
+is_singleton: false
+name: optparse_install
+params: (parser, options)
+visibility: public

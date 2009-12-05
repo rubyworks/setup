@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Boolean attribute. Can be assigned true, false, nil, or a string matching yes|true|y|t or no|false|n|f.
+full_name: Setup::Configuration#boolean
+is_singleton: false
+name: boolean
+params: (val, name=nil)
+visibility: private

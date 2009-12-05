@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Common options
+full_name: Setup::Command#optparse_common
+is_singleton: false
+name: optparse_common
+params: (parser, options)
+visibility: public

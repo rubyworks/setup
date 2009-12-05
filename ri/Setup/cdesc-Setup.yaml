@@ -8,7 +8,22 @@ constants:
 - !ruby/object:RDoc::RI::Constant 
   comment: 
   name: VERSION
-  value: "'4.1.1'"
+  value: "'5.0.0'"
+- !ruby/object:RDoc::RI::Constant 
+  comment: []
+
+  name: META_EXTENSION_DIR
+  value: "'.setup'"
+- !ruby/object:RDoc::RI::Constant 
+  comment: []
+
+  name: FILETYPES
+  value: "%w( bin lib ext data etc man doc )"
+- !ruby/object:RDoc::RI::Constant 
+  comment: []
+
+  name: INSTALL_RECORD
+  value: "'InstalledFiles'"
 full_name: Setup
 includes: []
 

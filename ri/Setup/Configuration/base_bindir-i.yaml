@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Base bin directory
+full_name: Setup::Configuration#base_bindir
+is_singleton: false
+name: base_bindir
+params: ()
+visibility: public

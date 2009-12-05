@@ -3,7 +3,8 @@ attributes: []
 
 class_methods: []
 
-comment: 
+comment: []
+
 constants: []
 
 full_name: Setup::Error

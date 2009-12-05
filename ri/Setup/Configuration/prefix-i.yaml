@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Path prefix of target environment
+full_name: Setup::Configuration#prefix
+is_singleton: false
+name: prefix
+params: ()
+visibility: public

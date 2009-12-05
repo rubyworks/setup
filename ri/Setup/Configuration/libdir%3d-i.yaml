@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Set directory for libraries
+full_name: Setup::Configuration#libdir=
+is_singleton: false
+name: libdir=
+params: (path)
+visibility: public

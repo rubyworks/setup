@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Setup::Session</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Setup</a>&nbsp;
+      <a href="/">Setup::Session</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../files/lib/setup/session_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/setup/session.rb">lib/setup/session.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <!-- why was this class="link" ? -->
+          <li class="class"><a href="../Object.html">Object</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#M000090">::new</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000111">#all</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000132">#clean</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000143">#compiler</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000120">#config</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000142">#configuration</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000117">#default</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000133">#distclean</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000129">#document</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000148">#documentor</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000107">#force=</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000106">#force?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000125">#install</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000144">#installer</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000091">#io</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000095">#io=</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000154">#log_header</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000138">#project</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000105">#quiet=</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000102">#quiet?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000124">#setup</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000137">#show</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000128">#test</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000147">#tester</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000097">#trace=</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000096">#trace?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000101">#trial=</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000100">#trial?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000134">#uninstall</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000153">#uninstaller</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../files/SetupConfig.html">SetupConfig</a></li>
+        
+          <li class="file"><a href="../../files/InstalledFiles.html">InstalledFiles</a></li>
+        
+          <li class="file"><a href="../../files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../../files/COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="../../files/README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../classes/Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Base.html">Setup::Base</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Compiler.html">Setup::Compiler</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Configuration.html">Setup::Configuration</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Documentor.html">Setup::Documentor</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Project.html">Setup::Project</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Session.html">Setup::Session</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Tester.html">Setup::Tester</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+        
+          <li class="class"><a href="../../classes/Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Session</h1>
+      
+
+      
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+    <div id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="options-attribute-method" class="method-detail">
+        <a name="options"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">options</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>
+<a href="Session.html">Session</a> options.
+</p>
+        
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="M000090"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new</span><span
+            class="method-args">(options={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+New <a href="Session.html">Session</a>
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 20</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span>={})
+      <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">io</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>  <span class="ruby-comment cmt"># log instead ?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="all-method" class="method-detail ">
+        <a name="M000111"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">all</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Run all tasks in sequences.
+</p>
+<ul>
+<li>config
+
+</li>
+<li>setup
+
+</li>
+<li>test
+
+</li>
+<li>install
+
+</li>
+<li>document
+
+</li>
+</ul>
+          
+
+          
+          <div class="method-source-code"
+            id="all-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 79</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all</span>
+      <span class="ruby-identifier">config</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">compile?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">compiles?</span>
+        <span class="ruby-identifier">setup</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">test?</span>
+        <span class="ruby-identifier">test</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">install</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">document?</span>
+        <span class="ruby-identifier">document</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="clean-method" class="method-detail ">
+        <a name="M000132"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">clean</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="clean-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 147</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clean</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Cleaning'</span>)
+      <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">clean</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="compiler-method" class="method-detail ">
+        <a name="M000143"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">compiler</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="compiler-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 186</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compiler</span>
+      <span class="ruby-ivar">@compiler</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Compiler</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="config-method" class="method-detail ">
+        <a name="M000120"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">config</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="config-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 108</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">config</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">save_config</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Configuration saved.&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Configuration current.&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">configuration</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">quiet?</span>
+      <span class="ruby-comment cmt">#io.puts(&quot;Configuration saved.&quot;) unless quiet?</span>
+      <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">configure</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="configuration-method" class="method-detail ">
+        <a name="M000142"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">configuration</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="configuration-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 182</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configuration</span>
+      <span class="ruby-ivar">@configuration</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="default-method" class="method-detail ">
+        <a name="M000117"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">default</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Run default set of tasks in sequences.
+</p>
+<ul>
+<li>config
+
+</li>
+<li>setup
+
+</li>
+<li>install
+
+</li>
+</ul>
+          
+
+          
+          <div class="method-source-code"
+            id="default-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 99</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default</span>
+      <span class="ruby-identifier">config</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">compile?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">compiles?</span>
+        <span class="ruby-identifier">setup</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">install</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="distclean-method" class="method-detail ">
+        <a name="M000133"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">distclean</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="distclean-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 153</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">distclean</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Distcleaning'</span>)
+      <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">distclean</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="document-method" class="method-detail ">
+        <a name="M000129"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">document</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="document-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 141</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">document</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Documenting'</span>)
+      <span class="ruby-identifier">documentor</span>.<span class="ruby-identifier">document</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="documentor-method" class="method-detail ">
+        <a name="M000148"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">documentor</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="documentor-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 198</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">documentor</span>
+      <span class="ruby-ivar">@documentor</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Documentor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="force--method" class="method-detail ">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">force=</span><span
+            class="method-args">(val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="force--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 65</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">force=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:force</span>] = <span class="ruby-identifier">val</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="force--method" class="method-detail ">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">force?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="force--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 62</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">force?</span>; <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:force</span>]; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="install-method" class="method-detail ">
+        <a name="M000125"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">install</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="install-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 127</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install</span>
+      <span class="ruby-identifier">abort</span> <span class="ruby-value str">&quot;must setup config first&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">exist?</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Installing'</span>)
+      <span class="ruby-identifier">installer</span>.<span class="ruby-identifier">install</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="installer-method" class="method-detail ">
+        <a name="M000144"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">installer</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="installer-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 190</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">installer</span>
+      <span class="ruby-ivar">@installer</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Installer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="io-method" class="method-detail ">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">io</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="io-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 28</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">io</span>
+      <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:io</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="io--method" class="method-detail ">
+        <a name="M000095"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">io=</span><span
+            class="method-args">(anyio)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="io--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 33</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">io=</span>(<span class="ruby-identifier">anyio</span>)
+      <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:io</span>] = <span class="ruby-identifier">anyio</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="log-header-method" class="method-detail ">
+        <a name="M000154"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">log_header</span><span
+            class="method-args">(phase)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="log-header-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 209</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_header</span>(<span class="ruby-identifier">phase</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;\n[TRIAL RUN] #{phase}...&quot;</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-node">&quot;\n#{phase}...&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="project-method" class="method-detail ">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">project</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="project-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 178</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project</span>
+      <span class="ruby-ivar">@project</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Project</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="quiet--method" class="method-detail ">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">quiet=</span><span
+            class="method-args">(val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="quiet--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 57</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quiet=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:quiet</span>] = <span class="ruby-identifier">val</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="quiet--method" class="method-detail ">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">quiet?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="quiet--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 54</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quiet?</span>; <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:quiet</span>]; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="setup-method" class="method-detail ">
+        <a name="M000124"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">setup</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+TODO: Hate the name b/c of <tt>$ setup.rb setup</tt>. Rename to
+&#8216;compile&#8217; or &#8216;make&#8217;?
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="setup-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 120</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
+      <span class="ruby-identifier">abort</span> <span class="ruby-value str">&quot;must setup config first&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">exist?</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Compiling'</span>)
+      <span class="ruby-identifier">compiler</span>.<span class="ruby-identifier">compile</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="show-method" class="method-detail ">
+        <a name="M000137"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="show-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 170</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+      <span class="ruby-comment cmt">#configuration.show</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">configuration</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="test-method" class="method-detail ">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">test</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="test-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 134</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">tester</span>.<span class="ruby-identifier">testable?</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Testing'</span>)
+      <span class="ruby-identifier">tester</span>.<span class="ruby-identifier">test</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="tester-method" class="method-detail ">
+        <a name="M000147"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">tester</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="tester-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 194</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tester</span>
+      <span class="ruby-ivar">@tester</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Tester</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trace--method" class="method-detail ">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trace=</span><span
+            class="method-args">(val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trace--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 41</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:trace</span>] = <span class="ruby-identifier">val</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trace--method" class="method-detail ">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trace?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trace--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 38</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace?</span>; <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:trace</span>]; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trial--method" class="method-detail ">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trial=</span><span
+            class="method-args">(val)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trial--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 49</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trial=</span>(<span class="ruby-identifier">val</span>)
+      <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:trial</span>] = <span class="ruby-identifier">val</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trial--method" class="method-detail ">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trial?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trial--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 46</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trial?</span>; <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:trial</span>]; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="uninstall-method" class="method-detail ">
+        <a name="M000134"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">uninstall</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="uninstall-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 159</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">uninstall</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">INSTALL_RECORD</span>)
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Nothing is installed.&quot;</span>
+        <span class="ruby-keyword kw">return</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">log_header</span>(<span class="ruby-value str">'Uninstalling'</span>)
+      <span class="ruby-identifier">uninstaller</span>.<span class="ruby-identifier">uninstall</span>
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-value str">'Ok.'</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="uninstaller-method" class="method-detail ">
+        <a name="M000153"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">uninstaller</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="uninstaller-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/session.rb, line 202</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">uninstaller</span>
+      <span class="ruby-ivar">@uninstaller</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Uninstaller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

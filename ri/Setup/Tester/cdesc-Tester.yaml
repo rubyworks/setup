@@ -1,0 +1,35 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Complexities arise in trying to figure out what test framework is used, and how to run tests. To simplify the process, this class simply looks for a special script, this can be a shell script at <tt>script/test</tt>, or a ruby script that <tt>.setup/testrc.rb</tt> will be used instead if it exists.
+- !ruby/struct:RDoc::Markup::Flow::RULE 
+  width: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Complexities arise in trying to figure out what test framework is used, and how to run tests. To simplify the process, this class simply looks for a special script, this can be a shell script at <tt>script/test</tt>, or a ruby script that <tt>.setup/testrc.rb</tt> will be used instead if it exists.
+constants: 
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  name: RUBYSCRIPT
+  value: META_EXTENSION_DIR + '/testrc.rb'
+- !ruby/object:RDoc::RI::Constant 
+  comment: 
+  name: SHELLSCRIPT
+  value: "'script/test'"
+full_name: Setup::Tester
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: test
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: test_rubyscript
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: test_shellscript
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: testable?
+name: Tester
+superclass: Base

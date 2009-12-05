@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Get configuration from environment.
+full_name: Setup::Configuration#initialize_environment
+is_singleton: false
+name: initialize_environment
+params: ()
+visibility: public

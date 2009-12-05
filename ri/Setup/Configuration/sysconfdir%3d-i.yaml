@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Set directory for system configuration files
+full_name: Setup::Configuration#sysconfdir=
+is_singleton: false
+name: sysconfdir=
+params: (path)
+visibility: public

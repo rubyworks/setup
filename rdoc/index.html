@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -8,32 +7,35 @@
 
   <title>Setup</title>
 
-  <link rel="SHORTCUT ICON" href="images/ruby.png">
+  <link rel="SHORTCUT ICON" href="assets/icon/ruby.png">
 
-  <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/thickbox.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/darkfish.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/highlight.js" type="text/javascript" charset="utf-8"></script>
+  <link type="text/css" rel="stylesheet" href="assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="assets/highlight/styles/github.css" title="GitHub" />
 
-  <script>
-    $(document).ready(function() {
-      $('#documentation pre').wrapInner('<code></code>');
-      hljs.tabReplace = '    ';
-      hljs.initHighlightingOnLoad('ruby');
+  <script type="text/javascript" charset="utf-8" src="assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax()
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
     });
   </script>
-
-  <link type="text/css" rel="stylesheet" href="rdoc.css" media="screen" />
-  <link type="text/css" rel="stylesheet" href="js/github.css" title="GitHub" />
-
-  
 </head>
 <body class="indexpage">
+<div id="main">
 
+  
   <div class="head">
     <h1>
-      <img src="images/project.png" align="absmiddle">&nbsp;
+      <img src="assets/icon/project.png" align="absmiddle">&nbsp;
       <a href="index.html">Setup</a>
     </h1>
   </div>
@@ -44,14 +46,18 @@
       
       
       <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
+        <h3 class="section-header">Information</h3>
         <ul>
         
-          <li class="file"><a href="COPYING.html">COPYING</a></li>
+          <li class="file"><a href="files/SetupConfig.html">SetupConfig</a></li>
         
-          <li class="file"><a href="HISTORY.html">HISTORY</a></li>
+          <li class="file"><a href="files/InstalledFiles.html">InstalledFiles</a></li>
         
-          <li class="file"><a href="README_rdoc.html">README.rdoc</a></li>
+          <li class="file"><a href="files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="files/COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="files/README_rdoc.html">README.rdoc</a></li>
         
         </ul>
       </div>
@@ -59,32 +65,45 @@
 
       <div id="classindex-section" class="section project-section">
         <h3 class="section-header">Class Index
-          <span class="search-toggle"><img src="images/find.png"
+          <span class="search-toggle"><img src="assets/icon/find.png"
             height="16" width="16" alt="[+]"
             title="show/hide quicksearch" /></span></h3>
         <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
         <fieldset>
           <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
+          <input type="text" name="quicksearch" value="" class="quicksearch-field" />
         </fieldset>
         </form>
 
         <ul class="link-list">
         
-          <li class="module"><a href="Setup.html">Setup</a></li>
+          <li class="module"><a href="classes/Setup.html">Setup</a></li>
         
-          <li class="class"><a href="Setup/Command.html">Setup::Command</a></li>
+          <li class="class"><a href="classes/Setup/Base.html">Setup::Base</a></li>
         
-          <li class="class"><a href="Setup/ConfigTable.html">Setup::ConfigTable</a></li>
+          <li class="class"><a href="classes/Setup/Command.html">Setup::Command</a></li>
         
-          <li class="class"><a href="Setup/ConfigTable/MetaConfigEnvironment.html">Setup::ConfigTable::MetaConfigEnvironment</a></li>
+          <li class="class"><a href="classes/Setup/Compiler.html">Setup::Compiler</a></li>
         
-          <li class="class"><a href="Setup/Error.html">Setup::Error</a></li>
+          <li class="class"><a href="classes/Setup/Configuration.html">Setup::Configuration</a></li>
         
-          <li class="class"><a href="Setup/Installer.html">Setup::Installer</a></li>
+          <li class="class"><a href="classes/Setup/Documentor.html">Setup::Documentor</a></li>
         
-          <li class="class"><a href="Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+          <li class="class"><a href="classes/Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="classes/Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+          <li class="class"><a href="classes/Setup/Project.html">Setup::Project</a></li>
+        
+          <li class="class"><a href="classes/Setup/Session.html">Setup::Session</a></li>
+        
+          <li class="class"><a href="classes/Setup/Tester.html">Setup::Tester</a></li>
+        
+          <li class="class"><a href="classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+        
+          <li class="class"><a href="classes/Object.html">Object</a></li>
         
         </ul>
         <div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -95,847 +114,1164 @@
         <h3 class="section-header">Method Index</h3>
         <ul>
           
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Installer::Shebang</span>
+              <a href="classes/Setup/Installer/Shebang.html#M000044">::load</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Installer::Shebang</span>
+              <a href="classes/Setup/Installer/Shebang.html#M000046">::new</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000167">::new</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000090">::new</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000060">::new</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000057">::option</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000056">::options</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000022">::order</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Installer::Shebang</span>
+              <a href="classes/Setup/Installer/Shebang.html#M000045">::parse</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000020">::run</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000023">::task</a>
+            </li>
+          
+            
+            <li class="singleton" style="clear: both;">
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000021">::tasks</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000111">#all</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000066">#base_bindir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000068">#base_datadir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000070">#base_docdir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000067">#base_libdir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000074">#base_localstatedir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000069">#base_mandir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000072">#base_rubyarchdir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000071">#base_rubylibdir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000073">#base_sysconfdir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000174">#bash</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000098">#bindir</a>
+            </li>
+          
+            
+            <li class="method" style="clear: both;">
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000099">#bindir=</a>
+            </li>
+          
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000058">::attr_accessor</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000033">#binread</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000060">::attr_boolean</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000164">#boolean</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000057">::attr_pathlist</a>
+              <span class="method-parent-aside">Setup::Compiler</span>
+              <a href="classes/Setup/Compiler.html#M000187">#clean</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000055">::attr_pathname</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000132">#clean</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer::Shebang</span>
-              <a href="Setup/Installer/Shebang.html#M000040">::load</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000175">#command</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000000">::new</a>
+              <span class="method-parent-aside">Setup::Compiler</span>
+              <a href="classes/Setup/Compiler.html#M000186">#compile</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000070">::new</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000155">#compile?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer::Shebang</span>
-              <a href="Setup/Installer/Shebang.html#M000042">::new</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000143">#compiler</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000112">::new</a>
+              <span class="method-parent-aside">Setup::Project</span>
+              <a href="classes/Setup/Project.html#M000055">#compiles?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer::Shebang</span>
-              <a href="Setup/Installer/Shebang.html#M000041">::parse</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000120">#config</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Command</span>
-              <a href="Setup/Command.html#M000015">::run</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000031">#configuration</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000107">#[]</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000142">#configuration</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000108">#[]=</a>
+              <span class="method-parent-aside">Setup::Compiler</span>
+              <a href="classes/Setup/Compiler.html#M000185">#configure</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000123">#add_bool_config</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000108">#datadir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000122">#add_config</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000109">#datadir=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000125">#add_path_config</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000117">#default</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000138">#ask</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000029">#destination</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000102">#binread</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000032">#diff?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000117">#bool_config?</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000014">#directory?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000079">#clean_dir_bin</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000133">#distclean</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000081">#clean_dir_data</a>
+              <span class="method-parent-aside">Setup::Compiler</span>
+              <a href="classes/Setup/Compiler.html#M000188">#distclean</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000084">#clean_dir_doc</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000017">#dllext</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000082">#clean_dir_etc</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000113">#docdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000085">#clean_dir_ext</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000114">#docdir=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000080">#clean_dir_lib</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000129">#document</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000083">#clean_dir_man</a>
+              <span class="method-parent-aside">Setup::Documentor</span>
+              <a href="classes/Setup/Documentor.html#M000179">#document</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000132">#command</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000157">#document?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000010">#compiles?</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000148">#documentor</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000106">#compiles?</a>
+              <span class="method-parent-aside">Setup::Documentor</span>
+              <a href="classes/Setup/Documentor.html#M000184">#exec_rdoc</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000115">#config?</a>
+              <span class="method-parent-aside">Setup::Documentor</span>
+              <a href="classes/Setup/Documentor.html#M000181">#exec_ri</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000019">#config_dir_bin</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000162">#exist?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000022">#config_dir_data</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000136">#extconfopt</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000025">#config_dir_doc</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000139">#extconfopt=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000023">#config_dir_etc</a>
+              <span class="method-parent-aside">Setup::Project</span>
+              <a href="classes/Setup/Project.html#M000053">#extconfs</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000021">#config_dir_ext</a>
+              <span class="method-parent-aside">Setup::Compiler</span>
+              <a href="classes/Setup/Compiler.html#M000189">#extdirs</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000020">#config_dir_lib</a>
+              <span class="method-parent-aside">Setup::Project</span>
+              <a href="classes/Setup/Project.html#M000054">#extensions</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000024">#config_dir_man</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000015">#files</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000114">#config_names</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000107">#force=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000146">#curr_objdir</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000172">#force?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000145">#curr_srcdir</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000106">#force?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000076">#descriptions</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000180">#force_remove_file</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000163">#diff?</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000166">#home</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000131">#diff?</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000065">#initialize_configfile</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000137">#directories_of</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000063">#initialize_defaults</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000087">#distclean_dir_bin</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000064">#initialize_environment</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000090">#distclean_dir_data</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000168">#initialize_hooks</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000093">#distclean_dir_doc</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000061">#initialize_metaconfig</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000091">#distclean_dir_etc</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000125">#install</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000089">#distclean_dir_ext</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000005">#install</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000088">#distclean_dir_lib</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000006">#install_bin</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000092">#distclean_dir_man</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000010">#install_data</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000098">#dive_into</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000013">#install_doc</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000063">#dllext</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000011">#install_etc</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000165">#dllext</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000007">#install_ext</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000096">#env_config</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000019">#install_file</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000017">#exec_all</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000018">#install_files</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000078">#exec_clean</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000009">#install_lib</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000018">#exec_config</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000012">#install_man</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000086">#exec_distclean</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000004">#install_prefix</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000045">#exec_doc</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000028">#install_record</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000048">#exec_install</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000036">#install_shebang</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000046">#exec_rdoc</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000077">#installdirs</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000047">#exec_ri</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000078">#installdirs=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000028">#exec_setup</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000144">#installer</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000027">#exec_show</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000091">#io</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000094">#exec_task_traverse</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000095">#io=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000044">#exec_test</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000103">#libdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000075">#exec_uninstall</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000104">#libdir=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000068">#existfiles</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000081">#libruby</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000026">#extconf</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000082">#libruby=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000104">#extconfs</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000083">#librubyver</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000135">#extdir?</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000084">#librubyver=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000105">#extensions</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000085">#librubyverarch</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000009">#extensions</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000086">#librubyverarch=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000157">#files</a>
+              <span class="method-parent-aside">Setup::Project</span>
+              <a href="classes/Setup/Project.html#M000052">#loadpath</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000136">#files_of</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000121">#localstatedir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000124">#force_remove_file</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000122">#localstatedir=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000141">#get_config</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000154">#log_header</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000072">#glob_reject</a>
+              <span class="method-parent-aside">Setup::Compiler</span>
+              <a href="classes/Setup/Compiler.html#M000190">#make</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000071">#glob_select</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000131">#makeprog</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000074">#globs2re</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000135">#makeprog=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Command</span>
-              <a href="Setup/Command.html#M000038">#help</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000110">#mandir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000069">#hookfiles</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000112">#mandir=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000073">#initialize_attributes</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000024">#mkdir_p</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000077">#initialize_defaults</a>
+              <span class="method-parent-aside">Setup::Project</span>
+              <a href="classes/Setup/Project.html#M000051">#name</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000001">#inspect</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000040">#new_shebang</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000139">#install</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000151">#no_doc</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000160">#install</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000152">#no_doc=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000127">#install</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000145">#no_ext</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000140">#install_bin</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000146">#no_ext=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000149">#install_data</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000149">#no_test</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000049">#install_dir_bin</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000150">#no_test=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000052">#install_dir_data</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000043">#open_atomic_writer</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000056">#install_dir_doc</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000059">#options</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000053">#install_dir_etc</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000035">#optparse_all</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000051">#install_dir_ext</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000042">#optparse_common</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000050">#install_dir_lib</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000037">#optparse_config</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000054">#install_dir_man</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000034">#optparse_header</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000155">#install_doc</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000039">#optparse_install</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000150">#install_etc</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000041">#optparse_uninstall</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000142">#install_ext</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000163">#pathname</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000059">#install_files</a>
+              <span class="method-parent-aside">Setup::Uninstaller</span>
+              <a href="classes/Setup/Uninstaller.html#M000062">#paths</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000159">#install_files</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000079">#prefix</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000144">#install_lib</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000080">#prefix=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000152">#install_man</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000049">#print_header</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000003">#installation!</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000138">#project</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000002">#installation?</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000027">#prune_install_record</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000067">#installdirs=</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000105">#quiet=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000061">#libfiles</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000171">#quiet?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000097">#load_config</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000102">#quiet?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000109">#load_meta_config</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000115">#rbdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000134">#make</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000026">#record_installation</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000065">#mapdir</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000182">#remove_file</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000103">#mkdir_p</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000178">#rm_f</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000161">#mkdir_p</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000183">#rmdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000121">#move_file</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000173">#rootdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000037">#new_shebang</a>
+              <span class="method-parent-aside">Setup::Project</span>
+              <a href="classes/Setup/Project.html#M000050">#rootdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000004">#no_harm?</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000176">#ruby</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000011">#noop</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000123">#rubypath</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000013">#objdir_root</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000126">#rubypath=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000039">#open_atomic_writer</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000127">#rubyprog</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000119">#path_config?</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000130">#rubyprog=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000006">#quiet?</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000025">#run</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000162">#record_installation</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000161">#save_config</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000130">#record_installation</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000016">#select_dllext</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000014">#relpath</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000030">#session</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000129">#remove_config</a>
+              <span class="method-parent-aside">Object</span>
+              <a href="classes/Object.html#M000008">#session</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000126">#remove_file</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000124">#setup</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000116">#remove_tree</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000140">#shebang</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000118">#remove_tree0</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000141">#shebang=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000008">#report_header</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000137">#show</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000110">#rm_f</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000087">#siteruby</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000111">#rm_rf</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000088">#siteruby=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000113">#rmdir</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000089">#siterubyver</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000133">#ruby</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000092">#siterubyver=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000164">#rubyextentions</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000093">#siterubyverarch</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000062">#rubyextentions</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000094">#siterubyverarch=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Command</span>
-              <a href="Setup/Command.html#M000016">#run</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000116">#sodir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000099">#run_hook</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000165">#subprefix</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000100">#save_config</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000118">#sysconfdir</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000143">#set_config</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000119">#sysconfdir=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000128">#set_config_default</a>
+              <span class="method-parent-aside">Setup::Command</span>
+              <a href="classes/Setup/Command.html#M000047">#task_names</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000029">#setup_dir_bin</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000128">#test</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000032">#setup_dir_data</a>
+              <span class="method-parent-aside">Setup::Tester</span>
+              <a href="classes/Setup/Tester.html#M000001">#test</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000035">#setup_dir_doc</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000156">#test?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000033">#setup_dir_etc</a>
+              <span class="method-parent-aside">Setup::Tester</span>
+              <a href="classes/Setup/Tester.html#M000003">#test_rubyscript</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000031">#setup_dir_ext</a>
+              <span class="method-parent-aside">Setup::Tester</span>
+              <a href="classes/Setup/Tester.html#M000002">#test_shellscript</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000030">#setup_dir_lib</a>
+              <span class="method-parent-aside">Setup::Tester</span>
+              <a href="classes/Setup/Tester.html#M000000">#testable?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000034">#setup_dir_man</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000147">#tester</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000066">#shebang=</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000158">#to_h</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable</span>
-              <a href="Setup/ConfigTable.html#M000101">#show</a>
+              <span class="method-parent-aside">Setup::Installer::Shebang</span>
+              <a href="classes/Setup/Installer/Shebang.html#M000048">#to_s</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000012">#srcdir_root</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000159">#to_s</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000158">#srcdirectories</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000160">#to_yaml</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000151">#srcdirectory?</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000097">#trace=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000154">#srcentries</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000096">#trace?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000148">#srcexist?</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000170">#trace?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000147">#srcfile</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000177">#trace_off</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000153">#srcfile?</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000101">#trial=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000156">#srcfiles</a>
+              <span class="method-parent-aside">Setup::Base</span>
+              <a href="classes/Setup/Base.html#M000169">#trial?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000064">#targetfiles</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000100">#trial?</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer::Shebang</span>
-              <a href="Setup/Installer/Shebang.html#M000043">#to_s</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000075">#type</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000095">#traverse</a>
+              <span class="method-parent-aside">Setup::Configuration</span>
+              <a href="classes/Setup/Configuration.html#M000076">#type=</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000036">#update_shebang_line</a>
+              <span class="method-parent-aside">Setup::Uninstaller</span>
+              <a href="classes/Setup/Uninstaller.html#M000058">#uninstall</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::ConfigTable::MetaConfigEnvironment</span>
-              <a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000120">#value_config?</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000134">#uninstall</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000005">#verbose?</a>
+              <span class="method-parent-aside">Setup::Session</span>
+              <a href="classes/Setup/Session.html#M000153">#uninstaller</a>
             </li>
           
+            
             <li class="method" style="clear: both;">
-              <span style="float: right; font-size: 0.8em;">&nbsp;Setup::Installer</span>
-              <a href="Setup/Installer.html#M000007">#verbose_off</a>
+              <span class="method-parent-aside">Setup::Installer</span>
+              <a href="classes/Setup/Installer.html#M000038">#update_shebang_line</a>
             </li>
           
         </ul>
       </div>
 
-      
-
     </div>
 
-    <!-- ISSUE: Can't find RDoc::Generator::Redfish::VERSION -->
     <div id="validator-badges">
-      Generated with <a href="http://github.com/proutils/rdazzle">Razzle Dazzle Redfish</a><br/><br/>
-      <a href="http://validator.w3.org/check/referer">[Validate]</a>
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI RedFish</a> 1.1
+      <br/><br/> 
     </div>
   </div>
 
@@ -945,11 +1281,15 @@
   <h2>Files</h2>
   <ul>
     
-      <li class="file"><a href="COPYING.html">COPYING</a></li>
+      <li class="file"><a href="files/COPYING.html">COPYING</a></li>
     
-      <li class="file"><a href="HISTORY.html">HISTORY</a></li>
+      <li class="file"><a href="files/HISTORY.html">HISTORY</a></li>
     
-      <li class="file"><a href="README_rdoc.html">README.rdoc</a></li>
+      <li class="file"><a href="files/InstalledFiles.html">InstalledFiles</a></li>
+    
+      <li class="file"><a href="files/README_rdoc.html">README.rdoc</a></li>
+    
+      <li class="file"><a href="files/SetupConfig.html">SetupConfig</a></li>
     
   </ul>
   
@@ -957,380 +1297,452 @@
   <h2>Classes/Modules</h2>
   <ul>
     
-    <li class="module"><a href="Setup.html">Setup</a></li>
+    <li class="module"><a href="classes/Setup.html">Setup</a></li>
     
-    <li class="class"><a href="Setup/Command.html">Setup::Command</a></li>
+    <li class="class"><a href="classes/Setup/Base.html">Setup::Base</a></li>
     
-    <li class="class"><a href="Setup/ConfigTable.html">Setup::ConfigTable</a></li>
+    <li class="class"><a href="classes/Setup/Command.html">Setup::Command</a></li>
     
-    <li class="class"><a href="Setup/ConfigTable/MetaConfigEnvironment.html">Setup::ConfigTable::MetaConfigEnvironment</a></li>
+    <li class="class"><a href="classes/Setup/Compiler.html">Setup::Compiler</a></li>
     
-    <li class="class"><a href="Setup/Error.html">Setup::Error</a></li>
+    <li class="class"><a href="classes/Setup/Configuration.html">Setup::Configuration</a></li>
     
-    <li class="class"><a href="Setup/Installer.html">Setup::Installer</a></li>
+    <li class="class"><a href="classes/Setup/Documentor.html">Setup::Documentor</a></li>
     
-    <li class="class"><a href="Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+    <li class="class"><a href="classes/Setup/Error.html">Setup::Error</a></li>
+    
+    <li class="class"><a href="classes/Setup/Installer.html">Setup::Installer</a></li>
+    
+    <li class="class"><a href="classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+    
+    <li class="class"><a href="classes/Setup/Project.html">Setup::Project</a></li>
+    
+    <li class="class"><a href="classes/Setup/Session.html">Setup::Session</a></li>
+    
+    <li class="class"><a href="classes/Setup/Tester.html">Setup::Tester</a></li>
+    
+    <li class="class"><a href="classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+    
+    <li class="class"><a href="classes/Object.html">Object</a></li>
     
   </ul>
 
   <h2>Methods</h2>
   <ul>
     
-      <li><a href="Setup/ConfigTable.html#M000058">::attr_accessor &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Installer/Shebang.html#M000044">::load &mdash; Setup::Installer::Shebang</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000060">::attr_boolean &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000060">::new &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000057">::attr_pathlist &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Base.html#M000167">::new &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000055">::attr_pathname &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Installer/Shebang.html#M000046">::new &mdash; Setup::Installer::Shebang</a></li>
     
-      <li><a href="Setup/Installer/Shebang.html#M000040">::load &mdash; Setup::Installer::Shebang</a></li>
+      <li><a href="classes/Setup/Session.html#M000090">::new &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000000">::new &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000057">::option &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000070">::new &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000056">::options &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer/Shebang.html#M000042">::new &mdash; Setup::Installer::Shebang</a></li>
+      <li><a href="classes/Setup/Command.html#M000022">::order &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000112">::new &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Installer/Shebang.html#M000045">::parse &mdash; Setup::Installer::Shebang</a></li>
     
-      <li><a href="Setup/Installer/Shebang.html#M000041">::parse &mdash; Setup::Installer::Shebang</a></li>
+      <li><a href="classes/Setup/Command.html#M000020">::run &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Command.html#M000015">::run &mdash; Setup::Command</a></li>
+      <li><a href="classes/Setup/Command.html#M000023">::task &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000107">#[] &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Command.html#M000021">::tasks &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000108">#[]= &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Session.html#M000111">#all &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000123">#add_bool_config &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000066">#base_bindir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000122">#add_config &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000068">#base_datadir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000125">#add_path_config &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000070">#base_docdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000138">#ask &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000067">#base_libdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000102">#binread &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000074">#base_localstatedir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000117">#bool_config? &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000069">#base_mandir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000079">#clean_dir_bin &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000072">#base_rubyarchdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000081">#clean_dir_data &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000071">#base_rubylibdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000084">#clean_dir_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000073">#base_sysconfdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000082">#clean_dir_etc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000174">#bash &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000085">#clean_dir_ext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000098">#bindir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000080">#clean_dir_lib &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000099">#bindir= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000083">#clean_dir_man &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000033">#binread &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000132">#command &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000164">#boolean &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000010">#compiles? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Compiler.html#M000187">#clean &mdash; Setup::Compiler</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000106">#compiles? &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Session.html#M000132">#clean &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000115">#config? &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Base.html#M000175">#command &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000019">#config_dir_bin &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Compiler.html#M000186">#compile &mdash; Setup::Compiler</a></li>
     
-      <li><a href="Setup/Installer.html#M000022">#config_dir_data &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000155">#compile? &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000025">#config_dir_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000143">#compiler &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000023">#config_dir_etc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Project.html#M000055">#compiles? &mdash; Setup::Project</a></li>
     
-      <li><a href="Setup/Installer.html#M000021">#config_dir_ext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000120">#config &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000020">#config_dir_lib &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000031">#configuration &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000024">#config_dir_man &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000142">#configuration &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000114">#config_names &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Compiler.html#M000185">#configure &mdash; Setup::Compiler</a></li>
     
-      <li><a href="Setup/Installer.html#M000146">#curr_objdir &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000108">#datadir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000145">#curr_srcdir &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000109">#datadir= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000076">#descriptions &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Session.html#M000117">#default &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000163">#diff? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000029">#destination &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000131">#diff? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000032">#diff? &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000137">#directories_of &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000014">#directory? &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000087">#distclean_dir_bin &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Compiler.html#M000188">#distclean &mdash; Setup::Compiler</a></li>
     
-      <li><a href="Setup/Installer.html#M000090">#distclean_dir_data &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000133">#distclean &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000093">#distclean_dir_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000017">#dllext &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000091">#distclean_dir_etc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000113">#docdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000089">#distclean_dir_ext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000114">#docdir= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000088">#distclean_dir_lib &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Documentor.html#M000179">#document &mdash; Setup::Documentor</a></li>
     
-      <li><a href="Setup/Installer.html#M000092">#distclean_dir_man &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000129">#document &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000098">#dive_into &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000157">#document? &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000063">#dllext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000148">#documentor &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000165">#dllext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Documentor.html#M000184">#exec_rdoc &mdash; Setup::Documentor</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000096">#env_config &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Documentor.html#M000181">#exec_ri &mdash; Setup::Documentor</a></li>
     
-      <li><a href="Setup/Installer.html#M000017">#exec_all &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000162">#exist? &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000078">#exec_clean &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000136">#extconfopt &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000018">#exec_config &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000139">#extconfopt= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000086">#exec_distclean &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Project.html#M000053">#extconfs &mdash; Setup::Project</a></li>
     
-      <li><a href="Setup/Installer.html#M000045">#exec_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Compiler.html#M000189">#extdirs &mdash; Setup::Compiler</a></li>
     
-      <li><a href="Setup/Installer.html#M000048">#exec_install &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Project.html#M000054">#extensions &mdash; Setup::Project</a></li>
     
-      <li><a href="Setup/Installer.html#M000046">#exec_rdoc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000015">#files &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000047">#exec_ri &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000107">#force= &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000028">#exec_setup &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000106">#force? &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000027">#exec_show &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000172">#force? &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000094">#exec_task_traverse &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000180">#force_remove_file &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000044">#exec_test &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000166">#home &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000075">#exec_uninstall &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000065">#initialize_configfile &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000068">#existfiles &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000063">#initialize_defaults &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000026">#extconf &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000064">#initialize_environment &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000104">#extconfs &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Base.html#M000168">#initialize_hooks &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000135">#extdir? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000061">#initialize_metaconfig &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000105">#extensions &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Session.html#M000125">#install &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000009">#extensions &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000005">#install &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000157">#files &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000006">#install_bin &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000136">#files_of &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000010">#install_data &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000124">#force_remove_file &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000013">#install_doc &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000141">#get_config &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000011">#install_etc &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000072">#glob_reject &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000007">#install_ext &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000071">#glob_select &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000019">#install_file &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000074">#globs2re &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000018">#install_files &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Command.html#M000038">#help &mdash; Setup::Command</a></li>
+      <li><a href="classes/Setup/Installer.html#M000009">#install_lib &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000069">#hookfiles &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000012">#install_man &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000073">#initialize_attributes &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Installer.html#M000004">#install_prefix &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000077">#initialize_defaults &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Installer.html#M000028">#install_record &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000001">#inspect &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000036">#install_shebang &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000139">#install &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000077">#installdirs &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000160">#install &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000078">#installdirs= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000127">#install &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000144">#installer &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000140">#install_bin &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000091">#io &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000149">#install_data &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000095">#io= &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000049">#install_dir_bin &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000103">#libdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000052">#install_dir_data &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000104">#libdir= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000056">#install_dir_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000081">#libruby &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000053">#install_dir_etc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000082">#libruby= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000051">#install_dir_ext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000083">#librubyver &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000050">#install_dir_lib &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000084">#librubyver= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000054">#install_dir_man &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000085">#librubyverarch &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000155">#install_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000086">#librubyverarch= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000150">#install_etc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Project.html#M000052">#loadpath &mdash; Setup::Project</a></li>
     
-      <li><a href="Setup/Installer.html#M000142">#install_ext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000121">#localstatedir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000059">#install_files &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000122">#localstatedir= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000159">#install_files &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000154">#log_header &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000144">#install_lib &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Compiler.html#M000190">#make &mdash; Setup::Compiler</a></li>
     
-      <li><a href="Setup/Installer.html#M000152">#install_man &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000131">#makeprog &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000003">#installation! &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000135">#makeprog= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000002">#installation? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000110">#mandir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000067">#installdirs= &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000112">#mandir= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000061">#libfiles &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000024">#mkdir_p &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000097">#load_config &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Project.html#M000051">#name &mdash; Setup::Project</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000109">#load_meta_config &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Installer.html#M000040">#new_shebang &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000134">#make &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000151">#no_doc &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000065">#mapdir &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000152">#no_doc= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000103">#mkdir_p &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000145">#no_ext &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000161">#mkdir_p &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000146">#no_ext= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000121">#move_file &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000149">#no_test &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000037">#new_shebang &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000150">#no_test= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000004">#no_harm? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000043">#open_atomic_writer &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000011">#noop &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000059">#options &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000013">#objdir_root &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000035">#optparse_all &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000039">#open_atomic_writer &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000042">#optparse_common &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000119">#path_config? &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Command.html#M000037">#optparse_config &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000006">#quiet? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000034">#optparse_header &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000162">#record_installation &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000039">#optparse_install &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000130">#record_installation &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000041">#optparse_uninstall &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000014">#relpath &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000163">#pathname &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000129">#remove_config &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Uninstaller.html#M000062">#paths &mdash; Setup::Uninstaller</a></li>
     
-      <li><a href="Setup/Installer.html#M000126">#remove_file &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000079">#prefix &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000116">#remove_tree &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000080">#prefix= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000118">#remove_tree0 &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000049">#print_header &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000008">#report_header &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000138">#project &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000110">#rm_f &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000027">#prune_install_record &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Installer.html#M000111">#rm_rf &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000105">#quiet= &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000113">#rmdir &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000171">#quiet? &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000133">#ruby &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000102">#quiet? &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000164">#rubyextentions &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000115">#rbdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000062">#rubyextentions &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Installer.html#M000026">#record_installation &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/Command.html#M000016">#run &mdash; Setup::Command</a></li>
+      <li><a href="classes/Setup/Base.html#M000182">#remove_file &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000099">#run_hook &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000178">#rm_f &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000100">#save_config &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Base.html#M000183">#rmdir &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000143">#set_config &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000173">#rootdir &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000128">#set_config_default &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Project.html#M000050">#rootdir &mdash; Setup::Project</a></li>
     
-      <li><a href="Setup/Installer.html#M000029">#setup_dir_bin &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Base.html#M000176">#ruby &mdash; Setup::Base</a></li>
     
-      <li><a href="Setup/Installer.html#M000032">#setup_dir_data &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000123">#rubypath &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000035">#setup_dir_doc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000126">#rubypath= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000033">#setup_dir_etc &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000127">#rubyprog &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000031">#setup_dir_ext &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000130">#rubyprog= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000030">#setup_dir_lib &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000025">#run &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000034">#setup_dir_man &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000161">#save_config &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000066">#shebang= &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Setup/Installer.html#M000016">#select_dllext &mdash; Setup::Installer</a></li>
     
-      <li><a href="Setup/ConfigTable.html#M000101">#show &mdash; Setup::ConfigTable</a></li>
+      <li><a href="classes/Object.html#M000008">#session &mdash; Object</a></li>
     
-      <li><a href="Setup/Installer.html#M000012">#srcdir_root &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Command.html#M000030">#session &mdash; Setup::Command</a></li>
     
-      <li><a href="Setup/Installer.html#M000158">#srcdirectories &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000124">#setup &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000151">#srcdirectory? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000140">#shebang &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000154">#srcentries &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000141">#shebang= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000148">#srcexist? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Session.html#M000137">#show &mdash; Setup::Session</a></li>
     
-      <li><a href="Setup/Installer.html#M000147">#srcfile &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000087">#siteruby &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000153">#srcfile? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000088">#siteruby= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000156">#srcfiles &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000089">#siterubyver &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000064">#targetfiles &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000092">#siterubyver= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer/Shebang.html#M000043">#to_s &mdash; Setup::Installer::Shebang</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000093">#siterubyverarch &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000095">#traverse &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000094">#siterubyverarch= &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000036">#update_shebang_line &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000116">#sodir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/ConfigTable/MetaConfigEnvironment.html#M000120">#value_config? &mdash; Setup::ConfigTable::MetaConfigEnvironment</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000165">#subprefix &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000005">#verbose? &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000118">#sysconfdir &mdash; Setup::Configuration</a></li>
     
-      <li><a href="Setup/Installer.html#M000007">#verbose_off &mdash; Setup::Installer</a></li>
+      <li><a href="classes/Setup/Configuration.html#M000119">#sysconfdir= &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Command.html#M000047">#task_names &mdash; Setup::Command</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000128">#test &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Tester.html#M000001">#test &mdash; Setup::Tester</a></li>
+    
+      <li><a href="classes/Setup/Configuration.html#M000156">#test? &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Tester.html#M000003">#test_rubyscript &mdash; Setup::Tester</a></li>
+    
+      <li><a href="classes/Setup/Tester.html#M000002">#test_shellscript &mdash; Setup::Tester</a></li>
+    
+      <li><a href="classes/Setup/Tester.html#M000000">#testable? &mdash; Setup::Tester</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000147">#tester &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Configuration.html#M000158">#to_h &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Configuration.html#M000159">#to_s &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Installer/Shebang.html#M000048">#to_s &mdash; Setup::Installer::Shebang</a></li>
+    
+      <li><a href="classes/Setup/Configuration.html#M000160">#to_yaml &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000097">#trace= &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Base.html#M000170">#trace? &mdash; Setup::Base</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000096">#trace? &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Base.html#M000177">#trace_off &mdash; Setup::Base</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000101">#trial= &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Base.html#M000169">#trial? &mdash; Setup::Base</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000100">#trial? &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Configuration.html#M000075">#type &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Configuration.html#M000076">#type= &mdash; Setup::Configuration</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000134">#uninstall &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Uninstaller.html#M000058">#uninstall &mdash; Setup::Uninstaller</a></li>
+    
+      <li><a href="classes/Setup/Session.html#M000153">#uninstaller &mdash; Setup::Session</a></li>
+    
+      <li><a href="classes/Setup/Installer.html#M000038">#update_shebang_line &mdash; Setup::Installer</a></li>
     
   </ul>
 -->
 
   
   <div id="documentation">
-    <h1>Ruby <a href="Setup.html">Setup</a></h1>
-<pre>
-  http://setup.rubyforge.org
-</pre>
+    <h1>Ruby <a href="../classes/Setup.html">Setup</a></h1>
+<ul>
+<li><a href="http://protuils.github.com/setup">protuils.github.com/setup</a>
+
+</li>
+<li><a href="http://github.com/protuils/setup">github.com/protuils/setup</a>
+
+</li>
+</ul>
 <h2>INTRODUCTION</h2>
 <p>
 Every Rubyist is aware of Minero Aoki&#8217;s ever useful setup.rb script.
-It&#8217;s how most of us used to install our ruby programs before RubyGems
+It&#8217;s how most of us used to install our Ruby programs before RubyGems
 came along. And it&#8217;s still mighty useful in certain scenarios, not
-the least of which is the job of the distribution package managers. <a
-href="Setup.html">Setup</a> converts setup.rb into a stand-alone
-application. No longer will you need distribute setup.rb with you Ruby
-packages. Just instruct your users to use <a href="Setup.html">Setup</a>.
+the least of which is the job of distro package maintainers.
+</p>
+<p>
+Ruby <a href="../classes/Setup.html">Setup</a> converts setup.rb into a
+stand-alone application. No longer will you need distribute setup.rb with
+you Ruby packages. Just instruct your users to install Ruby <a
+href="../classes/Setup.html">Setup</a> and go from there.
 </p>
 <h3>IMPORTANT</h3>
 <p>
 There a couple very important difference between the old 3.4.1 verison of
-the setup.rb script and version 4.0.0 of the independent application.
+the setup.rb and Ruby <a href="../classes/Setup.html">Setup</a>.
 </p>
 <ul>
 <li>The directory convention &#8216;conf&#8217; has been change to
@@ -1340,28 +1752,41 @@ the setup.rb script and version 4.0.0 of the independent application.
 <li>Multi-package project layouts are no longer supported.
 
 </li>
+<li>Metaconfig and Hooks are handled via singleton extensions.
+
+</li>
+<li>No longer supports versions of Ruby older than v1.6.3.
+
+</li>
 </ul>
+<h3>STATUS</h3>
+<p>
+Version 5.0.0 is a major re-engineering of setup.rb. Although it is fairly
+well tested, as such, it should be considered betaware until it accumulates
+enough use in the field. I will update this message when I feel a new
+status has been achieved (likely accompanied by an updated release).
+</p>
 <h2>INSTALLATION</h2>
 <p>
 The easy way to install is via RubyGems.
 </p>
 <pre>
-  $ gem install setup
+  $ sudo gem install setup
 </pre>
 <p>
-To install <a href="Setup.html">Setup</a> manually you need to
-&#8220;boot-strap&#8221; it. This is done for you, by running the
-following:
+To install <a href="../classes/Setup.html">Setup</a> manually you need to
+&#8220;boot-strap&#8221; it. Download the tarball, and from the
+decompressed package directory run:
 </p>
 <pre>
-  $ ruby setup.rb
+  $ ruby script/setup
 </pre>
-<h2>SYNOPSIS</h2>
+<h2>HOW TO USE</h2>
 <p>
 To use setup.rb, a project must conform to the setup.rb standard layout.
 </p>
 <p>
-Please see the documentation in doc/book. Note that the documentation is
+Please see the documentation on the website. Note that the documentation is
 slightly out of sync with the latest release.
 </p>
 <p>
@@ -1385,10 +1810,10 @@ If you later decide you want to remove the program.
   $ setup.rb uninstall
 </pre>
 <p>
-Note that uninstall is made possible by the
-&#8217;.cache/setup/installedfiles&#8217; file that is generated by the
-install process. If that file is deleted than you will not be able to
-uninstall. (You can get around this be reinstalling first though).
+Note that uninstall is made possible by the &#8216;InstalledFiles&#8217;
+file that is generated by the install process. If that file is deleted than
+you will not be able to uninstall. (You can get around this be reinstalling
+first though).
 </p>
 <p>
 You can clean up any setup products with:
@@ -1403,35 +1828,26 @@ And restore the package to it&#8217;s pristine state with:
   $ setup.rb distclean
 </pre>
 <p>
-Not that this last command will remove the .cache/setup/installedfiles
-file!
+Not that this last command will remove the <a
+href="InstalledFiles.html">InstalledFiles</a> file!
 </p>
-<h2>TODO LIST</h2>
-<ul>
-<li>Maybe protect &#8216;installedfiles&#8217; from removal, even on distclean.
-
-</li>
-<li>Separate compiling code into separate class.
-
-</li>
-</ul>
 <h2>COPYRIGHT &amp; LICENSE</h2>
 <p>
-Copyright &#169; 2002,2005 Minero Aoki
+Copyright &#169; 2008,2009 Thomas Sawyer
 </p>
 <p>
-Copyright &#169; 2008,2009 Thomas Sawyer
+Copyright &#169; 2002,2005 Minero Aoki
 </p>
 <p>
 GNU LGPL, Lesser General Public License version 2.1.
 </p>
 <p>
-For details of LGPL, see the file &#8220;COPYING&#8221;.
+For details of LGPL, see the <a href="COPYING.html">COPYING</a> file.
 </p>
 <pre>
                                                7trans
                                   transfire@gmail.com
-                                  http://tigerops.org
+                           http://proutils.github.com
 
                                           Minero Aoki
                                   aamine@loveruby.net
@@ -1441,6 +1857,7 @@ For details of LGPL, see the file &#8220;COPYING&#8221;.
   </div>
   
 
+</div>
 </body>
 </html>
 

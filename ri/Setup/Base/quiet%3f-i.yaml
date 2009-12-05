@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Base#quiet?
+is_singleton: false
+name: quiet?
+params: ()
+visibility: public

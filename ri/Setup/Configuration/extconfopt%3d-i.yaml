@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Configuration#extconfopt=
+is_singleton: false
+name: extconfopt=
+params: (string)
+visibility: public

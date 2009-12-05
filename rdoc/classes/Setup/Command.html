@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Setup::Command</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Setup</a>&nbsp;
+      <a href="/">Setup::Command</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../files/lib/setup/command_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/setup/command.rb">lib/setup/command.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <!-- why was this class="link" ? -->
+          <li class="class"><a href="../Object.html">Object</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#M000022">::order</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#M000020">::run</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#M000023">::task</a>
+            </li>
+          
+            
+            <li class="singleton">
+              <a href="#M000021">::tasks</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000031">#configuration</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000035">#optparse_all</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000042">#optparse_common</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000037">#optparse_config</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000034">#optparse_header</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000039">#optparse_install</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000041">#optparse_uninstall</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000049">#print_header</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000025">#run</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000030">#session</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000047">#task_names</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../files/SetupConfig.html">SetupConfig</a></li>
+        
+          <li class="file"><a href="../../files/InstalledFiles.html">InstalledFiles</a></li>
+        
+          <li class="file"><a href="../../files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../../files/COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="../../files/README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../classes/Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Base.html">Setup::Base</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Compiler.html">Setup::Compiler</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Configuration.html">Setup::Configuration</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Documentor.html">Setup::Documentor</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Project.html">Setup::Project</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Session.html">Setup::Session</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Tester.html">Setup::Tester</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+        
+          <li class="class"><a href="../../classes/Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Command</h1>
+      
+
+      <p>
+CLI for Setup.rb
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="order-method" class="method-detail ">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">order</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="order-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 20</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">order</span>
+      <span class="ruby-ivar">@order</span> <span class="ruby-operator">||=</span> []
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="run-method" class="method-detail ">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">run</span><span
+            class="method-args">(*argv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="run-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 10</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">run</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+      <span class="ruby-identifier">new</span>.<span class="ruby-identifier">run</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="task-method" class="method-detail ">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">task</span><span
+            class="method-args">(name, description)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="task-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 25</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">task</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">description</span>)
+      <span class="ruby-identifier">tasks</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">description</span>
+      <span class="ruby-identifier">order</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="tasks-method" class="method-detail ">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">tasks</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="tasks-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 15</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">tasks</span>
+      <span class="ruby-ivar">@tasks</span> <span class="ruby-operator">||=</span> {}
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="configuration-method" class="method-detail ">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">configuration</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="configuration-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 103</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configuration</span>
+      <span class="ruby-ivar">@configuration</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">configuration</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="optparse-all-method" class="method-detail ">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">optparse_all</span><span
+            class="method-args">(parser, options)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="optparse-all-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 113</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_all</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">optparse_config</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-comment cmt">#optparse_install(parser, options)</span>
+      <span class="ruby-comment cmt">#parser.on(&quot;--no-test&quot;, &quot;do not run tests&quot;) do</span>
+      <span class="ruby-comment cmt">#  configuration.no_test = true</span>
+      <span class="ruby-comment cmt">#end</span>
+      <span class="ruby-comment cmt">#parser.on(&quot;--no-doc&quot;, &quot;do not generate ri documentation&quot;) do</span>
+      <span class="ruby-comment cmt">#  configuration.no_doc = true</span>
+      <span class="ruby-comment cmt">#end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="optparse-common-method" class="method-detail ">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">optparse_common</span><span
+            class="method-args">(parser, options)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Common options
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="optparse-common-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 180</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_common</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;General options:&quot;</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-q&quot;</span>, <span class="ruby-value str">&quot;--quiet&quot;</span>, <span class="ruby-value str">&quot;Suppress output&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:quiet</span>] = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;-f&quot;</span>, <span class="ruby-value str">&quot;--force&quot;</span>, <span class="ruby-value str">&quot;Force operation&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>] = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--trace&quot;</span>, <span class="ruby-value str">&quot;--verbose&quot;</span>, <span class="ruby-value str">&quot;Watch execution&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:trace</span>] = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--trial&quot;</span>, <span class="ruby-value str">&quot;--no-harm&quot;</span>, <span class="ruby-value str">&quot;Do not write to disk&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:trial</span>] = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Inform options:&quot;</span>
+
+      <span class="ruby-comment cmt"># Tail options (eg. commands in option form)</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;-h&quot;</span>, <span class="ruby-value str">&quot;--help&quot;</span>, <span class="ruby-value str">&quot;display this help information&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-comment cmt">#puts help</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">parser</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;--version&quot;</span>, <span class="ruby-value str">&quot;-v&quot;</span>, <span class="ruby-value str">&quot;Show version&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">$0</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">' v'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Setup</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span> <span class="ruby-comment cmt">#Version.join('.')</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;--copyright&quot;</span>, <span class="ruby-value str">&quot;Show copyright&quot;</span>) <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-constant">Setup</span><span class="ruby-operator">::</span><span class="ruby-constant">COPYRIGHT</span> <span class="ruby-comment cmt">#opyright</span>
+        <span class="ruby-identifier">exit</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="optparse-config-method" class="method-detail ">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">optparse_config</span><span
+            class="method-args">(parser, options)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="optparse-config-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 125</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_config</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Configuration options:&quot;</span>
+      <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">desc</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">optname</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">'_'</span>, <span class="ruby-value str">'-'</span>)
+        <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:bool</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">optname</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'no-'</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+            <span class="ruby-identifier">optname</span> = <span class="ruby-value str">&quot;[no-]&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">optname</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/^no-/</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-node">&quot;--#{optname}&quot;</span>, <span class="ruby-identifier">desc</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{name}=&quot;</span>, <span class="ruby-operator">!</span><span class="ruby-identifier">val</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">optname</span> = <span class="ruby-value str">&quot;[no-]&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">optname</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/^no-/</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-node">&quot;--#{optname}&quot;</span>, <span class="ruby-identifier">desc</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{name}=&quot;</span>, <span class="ruby-identifier">val</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-node">&quot;--#{optname} #{type.to_s.upcase}&quot;</span>, <span class="ruby-identifier">desc</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{name}=&quot;</span>, <span class="ruby-identifier">val</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="optparse-header-method" class="method-detail ">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">optparse_header</span><span
+            class="method-args">(parser, options)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="optparse-header-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 108</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_header</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-node">&quot;USAGE: #{File.basename($0)} [command] [options]&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="optparse-install-method" class="method-detail ">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">optparse_install</span><span
+            class="method-args">(parser, options)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="optparse-install-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 152</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_install</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;Install options:&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">on</span>(<span class="ruby-value str">&quot;--prefix PATH&quot;</span>, <span class="ruby-value str">&quot;Installation prefix&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment cmt">#session.options[:install_prefix] = val</span>
+        <span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">install_prefix</span> = <span class="ruby-identifier">val</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="optparse-uninstall-method" class="method-detail ">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">optparse_uninstall</span><span
+            class="method-args">(parser, options)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="optparse-uninstall-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 171</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">optparse_uninstall</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-comment cmt">#parser.separator &quot;&quot;</span>
+      <span class="ruby-comment cmt">#parser.separator &quot;Uninstall options:&quot;</span>
+      <span class="ruby-comment cmt">#parser.on(&quot;--prefix [PATH]&quot;, &quot;Installation prefix&quot;) do |val|</span>
+      <span class="ruby-comment cmt">#  session.options[:install_prefix] = val</span>
+      <span class="ruby-comment cmt">#end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="print-header-method" class="method-detail ">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">print_header</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+TODO: Might be nice to have a ouput header, but not sure what it should
+conatin or look like yet.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="print-header-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 228</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print_header</span>
+      <span class="ruby-comment cmt">#unless session.quiet?</span>
+      <span class="ruby-comment cmt">#  if session.project.name</span>
+      <span class="ruby-comment cmt">#    puts &quot;= #{session.project.name} (#{rootdir})&quot;</span>
+      <span class="ruby-comment cmt">#  else</span>
+      <span class="ruby-comment cmt">#    puts &quot;= #{rootdir}&quot;</span>
+      <span class="ruby-comment cmt">#  end</span>
+      <span class="ruby-comment cmt">#end</span>
+
+      <span class="ruby-comment cmt">#$stderr &lt;&lt; &quot;#{session.options.inspect}\n&quot; if session.trace? or session.trial?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="run-method" class="method-detail ">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">run</span><span
+            class="method-args">(*argv)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="run-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 43</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">argv</span>)
+      <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-identifier">argv</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">empty?</span>
+
+      <span class="ruby-comment cmt">#session = Session.new(:io=&gt;$stdio)</span>
+      <span class="ruby-comment cmt">#config  = session.configuration</span>
+
+      <span class="ruby-identifier">task</span> = <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^[-]/</span> }
+      <span class="ruby-identifier">task</span> = <span class="ruby-value str">'default'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">task</span>
+
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">task_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">task</span>)
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Not a valid task -- #{task}&quot;</span>
+        <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">parser</span>  = <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">options</span> = {}
+
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-node">&quot;Usage: #{File.basename($0)} [TASK] [OPTIONS]&quot;</span>
+
+      <span class="ruby-identifier">optparse_header</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">task</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'all'</span>, <span class="ruby-value str">'default'</span>
+        <span class="ruby-identifier">optparse_all</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'config'</span>
+        <span class="ruby-identifier">optparse_config</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'install'</span>
+        <span class="ruby-identifier">optparse_install</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">optparse_common</span>(<span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-constant">ARGV</span>)
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OptionParser</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidOption</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">capitalize</span>
+        <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># This ensures we are in a project directory.</span>
+      <span class="ruby-identifier">rootdir</span> = <span class="ruby-identifier">session</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">rootdir</span>
+
+      <span class="ruby-identifier">print_header</span>
+
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">task</span>)
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Error</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$DEBUG</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">$!</span>.<span class="ruby-identifier">message</span>
+        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Try 'setup.rb --help' for detailed usage.&quot;</span>
+        <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">puts</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">session</span>.<span class="ruby-identifier">quiet?</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="session-method" class="method-detail ">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">session</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="session-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 98</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session</span>
+      <span class="ruby-ivar">@session</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Session</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:io=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">$stdout</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="task-names-method" class="method-detail ">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">task_names</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="task-names-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/command.rb, line 222</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">task_names</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">keys</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

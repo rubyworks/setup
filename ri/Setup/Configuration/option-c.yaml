@@ -1,0 +1,12 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "TODO: better methods for path type"
+full_name: Setup::Configuration::option
+is_singleton: true
+name: option
+params: (name, type, description)
+visibility: public

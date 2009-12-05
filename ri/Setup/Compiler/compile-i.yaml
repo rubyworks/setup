@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Compiler#compile
+is_singleton: false
+name: compile
+params: ()
+visibility: public

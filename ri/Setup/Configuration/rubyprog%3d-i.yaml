@@ -1,0 +1,11 @@
+--- !ruby/object:RDoc::RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: []
+
+full_name: Setup::Configuration#rubyprog=
+is_singleton: false
+name: rubyprog=
+params: (command)
+visibility: public

@@ -3,7 +3,13 @@ attributes: []
 
 class_methods: 
 - !ruby/object:RDoc::RI::MethodSummary 
+  name: order
+- !ruby/object:RDoc::RI::MethodSummary 
   name: run
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: task
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: tasks
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
   body: CLI for Setup.rb
@@ -11,22 +17,33 @@ comment:
   width: 
 - !ruby/struct:RDoc::Markup::Flow::P 
   body: CLI for Setup.rb
-constants: 
-- !ruby/object:RDoc::RI::Constant 
-  comment: 
-  name: TASKS
-  value: "%w(all config show setup test install uninstall rdoc ri clean distclean)"
-- !ruby/object:RDoc::RI::Constant 
-  comment: 
-  name: TASK_DESCRIPTIONS
-  value: "[       [ 'all',       \"do config, setup, then install\" ],       [ 'config',    \"saves your configurations\" ],       [ 'show',      \"shows current configuration\" ],       [ 'setup',     \"compiles ruby extentions and others\" ],       [ 'rdoc',      \"generate rdoc documentation\" ],       [ 'ri',        \"generate ri documentation\" ],       [ 'install',   \"installs files\" ],       [ 'uninstall', \"uninstalls files\" ],       [ 'test',      \"run all tests in test/\" ],       [ 'clean',     \"does `make clean' for each extention\" ],       [ 'distclean', \"does `make distclean' for each extention\" ]     ]"
+constants: []
+
 full_name: Setup::Command
 includes: []
 
 instance_methods: 
 - !ruby/object:RDoc::RI::MethodSummary 
-  name: help
+  name: configuration
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: optparse_all
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: optparse_common
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: optparse_config
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: optparse_header
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: optparse_install
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: optparse_uninstall
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: print_header
 - !ruby/object:RDoc::RI::MethodSummary 
   name: run
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: session
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: task_names
 name: Command
 superclass: Object

@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+  <title>Class: Setup::Base</title>
+
+  
+    <link rel="SHORTCUT ICON" href="../../assets/icon/class.png">
+  
+
+  <link type="text/css" rel="stylesheet" href="../../assets/rdoc.css" media="screen" />
+  <link type="text/css" rel="stylesheet" href="../../assets/highlight/styles/github.css" title="GitHub" />
+
+  <script type="text/javascript" charset="utf-8" src="../../assets/jquery.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/highlight/highlight.pack.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/quicksearch.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../../assets/main.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready( function() {
+      hookHighlightSyntax();
+	    hookSourceViews();
+	    hookDebuggingToggle();
+	    hookQuickSearch();
+	    highlightLocationTarget();
+
+	    $('ul.link-list a').bind("click", highlightClickTarget);
+    });
+  </script>
+</head>
+<body class="class">
+<div id="main">
+
+  <div class="head">
+    <h1>
+      
+        <img src="../../assets/icon/class.png" align="absmiddle">&nbsp;
+      
+      <a href="../../index.html">Setup</a>&nbsp;
+      <a href="/">Setup::Base</a>
+    </h1>
+  </div>
+
+  <div id="metadata">
+    <div id="project-metadata">
+
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li class="file"><a href="../../files/lib/setup/base_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/setup/base.rb">lib/setup/base.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      <!-- What about Git info, or Hg info? This seems almost silly, albeit kind of cool. -->
+      <!-- TODO: generalize this for all SCMs -->
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        <ul>
+          
+          <!-- why was this class="link" ? -->
+          <li class="class"><a href="../Object.html">Object</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+            
+            <li class="singleton">
+              <a href="#M000167">::new</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000174">#bash</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000175">#command</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000172">#force?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000180">#force_remove_file</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000168">#initialize_hooks</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000171">#quiet?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000182">#remove_file</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000178">#rm_f</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000183">#rmdir</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000173">#rootdir</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000176">#ruby</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000170">#trace?</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000177">#trace_off</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000169">#trial?</a>
+            </li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Information</h3>
+        <ul>
+        
+          <li class="file"><a href="../../files/SetupConfig.html">SetupConfig</a></li>
+        
+          <li class="file"><a href="../../files/InstalledFiles.html">InstalledFiles</a></li>
+        
+          <li class="file"><a href="../../files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../../files/COPYING.html">COPYING</a></li>
+        
+          <li class="file"><a href="../../files/README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="../../assets/icon/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <!-- classpage.html : classes -->
+        <ul class="link-list">
+        
+          <li class="module"><a href="../../classes/Setup.html">Setup</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Base.html">Setup::Base</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Command.html">Setup::Command</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Compiler.html">Setup::Compiler</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Configuration.html">Setup::Configuration</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Documentor.html">Setup::Documentor</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Error.html">Setup::Error</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer.html">Setup::Installer</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Installer/Shebang.html">Setup::Installer::Shebang</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Project.html">Setup::Project</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Session.html">Setup::Session</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Tester.html">Setup::Tester</a></li>
+        
+          <li class="class"><a href="../../classes/Setup/Uninstaller.html">Setup::Uninstaller</a></li>
+        
+          <li class="class"><a href="../../classes/Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+    </div>
+
+    <div id="validator-badges">
+      
+      <div style="float: right; margin-right: 5px;">
+        <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
+      </div>
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      <br/><br/>
+    </div>
+  </div>
+
+  <div id="documentation">
+
+    <div id="description">
+      
+        <h1>Base</h1>
+      
+
+      <p>
+Common base class for all <a href="../Setup.html">Setup</a> build classes.
+</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+    <div id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="project-attribute-method" class="method-detail">
+        <a name="project"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">project</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="config-attribute-method" class="method-detail">
+        <a name="config"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">config</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="trial-attribute-method" class="method-detail">
+        <a name="trial"></a>
+        
+        <a name="trial="></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">trial</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="trace-attribute-method" class="method-detail">
+        <a name="trace"></a>
+        
+        <a name="trace="></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">trace</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="quiet-attribute-method" class="method-detail">
+        <a name="quiet"></a>
+        
+        <a name="quiet="></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">quiet</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="force-attribute-method" class="method-detail">
+        <a name="force"></a>
+        
+        <a name="force="></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">force</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="io-attribute-method" class="method-detail">
+        <a name="io"></a>
+        
+        <a name="io="></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">io</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="M000167"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">new</span><span
+            class="method-args">(project, configuration, options={})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 32</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">project</span>, <span class="ruby-identifier">configuration</span>, <span class="ruby-identifier">options</span>={})
+      <span class="ruby-ivar">@project</span> = <span class="ruby-identifier">project</span>
+      <span class="ruby-ivar">@config</span>  = <span class="ruby-identifier">configuration</span>
+
+      <span class="ruby-identifier">initialize_hooks</span>
+
+      <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">__send__</span>(<span class="ruby-node">&quot;#{k}=&quot;</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-node">&quot;#{k}=&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="bash-method" class="method-detail ">
+        <a name="M000174"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">bash</span><span
+            class="method-args">(*args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Shellout executation.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="bash-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 75</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bash</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span>
+      <span class="ruby-identifier">system</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-node">&quot;system(#{args.map{|a| a.inspect }.join(' ')}) failed&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Base.html#M000175">command</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="command-method" class="method-detail method-alias">
+        <a name="M000175"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">command</span><span
+            class="method-args">(*args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Alias for <a href="Base.html#M000174">bash</a>
+</p>
+          
+
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="force--method" class="method-detail ">
+        <a name="M000172"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">force?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="force--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 67</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">force?</span> ; <span class="ruby-ivar">@force</span> ; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="force-remove-file-method" class="method-detail ">
+        <a name="M000180"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">force_remove_file</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="force-remove-file-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 116</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">force_remove_file</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">remove_file</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">rescue</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="initialize-hooks-method" class="method-detail ">
+        <a name="M000168"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">initialize_hooks</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Hooking into the setup process, use extension scripts according to the name
+of the class. For instance to augment the behavior of the <a
+href="Installer.html">Installer</a>, use:
+</p>
+<pre>
+  script/.setup/installer.rb
+</pre>
+          
+
+          
+          <div class="method-source-code"
+            id="initialize-hooks-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 49</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_hooks</span>
+      <span class="ruby-identifier">file</span> = <span class="ruby-constant">META_EXTENSION_DIR</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/#{self.class.name.downcase}.rb&quot;</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-identifier">script</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">file</span>)
+        (<span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">end</span>).<span class="ruby-identifier">class_eval</span>(<span class="ruby-identifier">script</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="quiet--method" class="method-detail ">
+        <a name="M000171"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">quiet?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="quiet--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 64</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quiet?</span> ; <span class="ruby-ivar">@quiet</span> ; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="remove-file-method" class="method-detail ">
+        <a name="M000182"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">remove_file</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="remove-file-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 124</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_file</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">chmod</span> <span class="ruby-value">0777</span>, <span class="ruby-identifier">path</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="rm-f-method" class="method-detail ">
+        <a name="M000178"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">rm_f</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="rm-f-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 109</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rm_f</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;rm -f #{path}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">trial?</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
+      <span class="ruby-identifier">force_remove_file</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="rmdir-method" class="method-detail ">
+        <a name="M000183"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">rmdir</span><span
+            class="method-args">(path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="rmdir-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 130</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rmdir</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;rmdir #{path}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trace?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">trial?</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
+      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">rmdir</span>(<span class="ruby-identifier">path</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="rootdir-method" class="method-detail ">
+        <a name="M000173"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">rootdir</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="rootdir-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 70</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rootdir</span>
+      <span class="ruby-identifier">project</span>.<span class="ruby-identifier">rootdir</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="ruby-method" class="method-detail ">
+        <a name="M000176"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">ruby</span><span
+            class="method-args">(*args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Shellout a ruby command.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="ruby-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 84</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ruby</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+      <span class="ruby-identifier">bash</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">rubyprog</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trace--method" class="method-detail ">
+        <a name="M000170"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trace?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trace--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 61</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace?</span> ; <span class="ruby-ivar">@trace</span> ; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trace-off-method" class="method-detail ">
+        <a name="M000177"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trace_off</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trace-off-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 97</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace_off</span> <span class="ruby-comment cmt">#:yield:</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">save</span>, <span class="ruby-ivar">@trace</span> = <span class="ruby-identifier">trace?</span>, <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">yield</span>
+      <span class="ruby-keyword kw">ensure</span>
+        <span class="ruby-ivar">@trace</span> = <span class="ruby-identifier">save</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+      <div id="trial--method" class="method-detail ">
+        <a name="M000169"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">trial?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="trial--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/base.rb, line 58</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trial?</span> ; <span class="ruby-ivar">@trial</span> ; <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+
+  <div id="rdoc-debugging-section-dump" class="debugging-section">
+  
+    <p>Disabled; run with --debug to generate this.</p>
+  
+  </div>
+
+</main>
+</body>
+</html>
+

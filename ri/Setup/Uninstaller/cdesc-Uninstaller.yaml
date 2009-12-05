@@ -1,0 +1,24 @@
+--- !ruby/object:RDoc::RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "TODO: It would be nice to improve this such that files to be removed are taken out of the list of directories that may be removed when they become empty. That way the end-user can see an exact list before commiting to the uninstall (using --force)."
+- !ruby/struct:RDoc::Markup::Flow::RULE 
+  width: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "TODO: It would be nice to improve this such that files to be removed are taken out of the list of directories that may be removed when they become empty. That way the end-user can see an exact list before commiting to the uninstall (using --force)."
+constants: []
+
+full_name: Setup::Uninstaller
+includes: []
+
+instance_methods: 
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: paths
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: uninstall
+name: Uninstaller
+superclass: Base
