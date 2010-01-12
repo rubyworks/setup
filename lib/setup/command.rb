@@ -3,25 +3,30 @@ require 'optparse'
 
 module Setup
 
-  # CLI for Setup.rb
+  # Command-line interface for Setup.rb.
+
   class Command
 
-    #
+    # Initialize and run.
+
     def self.run(*argv)
       new.run(*argv)
     end
 
-    #
+    # Hash of <tt>task => description</tt>.
+
     def self.tasks
       @tasks ||= {}
     end
 
-    #
+    # Task names listed in order of information.
+
     def self.order
       @order ||= []
     end
 
-    #
+    # Define a task.
+
     def self.task(name, description)
       tasks[name] = description
       order << name
@@ -38,7 +43,8 @@ module Setup
     task 'clean'    , "does `make clean' for each extention"
     task 'distclean', "does `make distclean' for each extention"
 
-    #
+    # Run command.
+
     def run(*argv)
       ARGV.replace(argv) unless argv.empty?
 
@@ -93,12 +99,14 @@ module Setup
       puts unless session.quiet?
     end
 
-    #
+    # Setup session.
+
     def session
       @session ||= Session.new(:io=>$stdout)
     end
 
-    #
+    # Setup configuration. This comes from the +session+ object.
+
     def configuration
       @configuration ||= session.configuration
     end
@@ -108,7 +116,8 @@ module Setup
       parser.banner = "USAGE: #{File.basename($0)} [command] [options]"
     end
 
-    #
+    # Setup options for +all+ task.
+
     def optparse_all(parser, options)
       optparse_config(parser, options)
       #optparse_install(parser, options)
@@ -120,7 +129,8 @@ module Setup
       #end
     end
 
-    #
+    # Setup options for +config+ task.
+
     def optparse_config(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
@@ -154,7 +164,8 @@ module Setup
       end
     end
 
-    #
+    # Setup options for +install+ task.
+
     def optparse_install(parser, options)
       parser.separator ""
       parser.separator "Install options:"
@@ -163,6 +174,8 @@ module Setup
         configuration.install_prefix = val
       end
     end
+
+    # Setup options for +test+ task.
 
     #def optparse_test(parser, options)
     #  parser.separator ""
@@ -173,16 +186,18 @@ module Setup
     #  end
     #end
 
-    #
-    def optparse_uninstall(parser, options)
-      #parser.separator ""
-      #parser.separator "Uninstall options:"
-      #parser.on("--prefix [PATH]", "Installation prefix") do |val|
-      #  session.options[:install_prefix] = val
-      #end
-    end
+    # Setup options for +uninstall+ task.
 
-    # Common options
+    #def optparse_uninstall(parser, options)
+    #  parser.separator ""
+    #  parser.separator "Uninstall options:"
+    #  parser.on("--prefix [PATH]", "Installation prefix") do |val|
+    #    session.options[:install_prefix] = val
+    #  end
+    #end
+
+    # Common options for every task.
+
     def optparse_common(parser, options)
       parser.separator ""
       parser.separator "General options:"
@@ -224,13 +239,21 @@ module Setup
       end
     end
 
-    #
+    # List of task names.
+    #--
+    # TODO: shouldn't this use +self.class.order+ ?
+    #++
+
     def task_names
+      #self.class.order
       self.class.tasks.keys
     end
 
-    # TODO: Might be nice to have a ouput header, but not sure
-    # what it should conatin or look like yet.
+    # Output Header.
+    #
+    # TODO: This is not yet used. It might be nice to have,
+    # but not sure what it should contain or look like.
+
     def print_header
       #unless session.quiet?
       #  if session.project.name
@@ -239,7 +262,6 @@ module Setup
       #    puts "= #{rootdir}"
       #  end
       #end
-
       #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
     end
 
