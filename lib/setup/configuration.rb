@@ -58,7 +58,7 @@ module Setup
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
 
     option :no_test, :t     , :bool, 'run pre-installation tests'
-    option :no_ri,          , :bool, 'generate ri documentation'
+    option :no_ri           , :bool, 'generate ri documentation'
     option :no_doc,  :d     , :bool, 'install doc/ directory'
     option :no_ext          , :bool, 'compile/install ruby extentions'
 
@@ -133,9 +133,9 @@ module Setup
 
     # Get configuration from environment.
     def initialize_environment
-      options.each do |name, type, description|
+      options.each do |name, *args|
         if value = ENV["RUBYSETUP_#{name.to_s.upcase}"]
-          __send__("#{name}=",value)
+          __send__("#{name}=", value)
         end
       end
     end
@@ -565,8 +565,8 @@ module Setup
     #
     def to_h
       h = {}
-      self.class.options.each do |name, type, description|
-        h[name] = __send__(name)
+      options.each do |name, *args|
+        h[name.to_s] = __send__(name)
       end
       h
     end
