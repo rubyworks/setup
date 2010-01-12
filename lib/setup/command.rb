@@ -135,6 +135,7 @@ module Setup
       parser.separator ""
       parser.separator "Configuration options:"
       configuration.options.each do |args|
+        args = args.dup
         desc = args.pop
         type = args.pop
         name, shortcut = *args
@@ -203,19 +204,23 @@ module Setup
       parser.separator "General options:"
 
       parser.on("-q", "--quiet", "Suppress output") do
-        session.options[:quiet] = true
+        session.quiet = true
       end
 
       parser.on("-f", "--force", "Force operation") do
-        session.options[:force] = true
+        session.force = true
       end
 
       parser.on("--trace", "--verbose", "Watch execution") do |val|
-        session.options[:trace] = true
+        session.trace = true
       end
 
       parser.on("--trial", "--no-harm", "Do not write to disk") do |val|
-        session.options[:trial] = true
+        session.trial = true
+      end
+
+      parser.on("--debug", "Turn on debug mode") do |val|
+        $DEBUG = true
       end
 
       parser.separator ""
