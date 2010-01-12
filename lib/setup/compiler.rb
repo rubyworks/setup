@@ -6,12 +6,19 @@ module Setup
   class Compiler < Base
 
     #
+    def compiles?
+      !extdirs.empty?
+      #extdirs.any?{ |dir| File.exist?(File.join(dir, 'extconf.rb')) }
+    end
+
+    #
     def configure
       extdirs.each do |dir|
         Dir.chdir(dir) do
-          # unless File.exist?('Makefile') ?
-          #load("extconf.rb", true) if File.exist?('extconf.rb')
-          ruby("extconf.rb") if File.exist?('extconf.rb')
+          if File.exist?('extconf.rb') && !FileUtils.uptodate?('Makefile', ['extconf.rb'])
+            #load("extconf.rb", true)
+            ruby("extconf.rb")
+          end
         end
       end
     end
