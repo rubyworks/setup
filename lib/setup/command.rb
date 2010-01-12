@@ -124,23 +124,30 @@ module Setup
     def optparse_config(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
-      configuration.options.each do |name, type, desc|
+      configuration.options.each do |args|
+        desc = args.pop
+        type = args.pop
+        name, shortcut = *args
+        #raise ArgumentError unless name, type, desc
         optname = name.to_s.gsub('_', '-')
         case type
         when :bool
           if optname.index('no-') == 0
             optname = "[no-]" + optname.sub(/^no-/, '')
-            parser.on("--#{optname}", desc) do |val|
+            opts = shortcut ? ["-#{shortcut}", "--#{optname}", desc] : ["--#{optname}", desc]
+            parser.on(*opts) do |val|
               configuration.__send__("#{name}=", !val)
             end
           else
             optname = "[no-]" + optname.sub(/^no-/, '')
-            parser.on("--#{optname}", desc) do |val|
+            opts = shortcut ? ["-#{shortcut}", "--#{optname}", desc] : ["--#{optname}", desc]
+            parser.on(*opts) do |val|
               configuration.__send__("#{name}=", val)
             end
           end
         else
-          parser.on("--#{optname} #{type.to_s.upcase}", desc) do |val|
+          opts = shortcut ? ["-#{shortcut}", "--#{optname} #{type.to_s.upcase}", desc] : ["--#{optname} #{type.to_s.upcase}", desc]
+          parser.on(*opts) do |val|
             configuration.__send__("#{name}=", val)
           end
         end
@@ -236,41 +243,7 @@ module Setup
       #$stderr << "#{session.options.inspect}\n" if session.trace? or session.trial?
     end
 
-=begin
-    # Generate help text
-    def help
-    fmt = " " * 12 + "%-10s       %s"
-      commands = self.class.order.collect do |k|
-        d = self.class.tasks[k]
-        (fmt % ["#{k}", d])
-      end.join("\n").strip
-
-      fmt = " " * 13 + "%-20s       %s"
-      configs = configuration.options.collect do |k,t,d|
-        (fmt % ["--#{k}", d])
-      end.join("\n").strip
-
-      text = <<-END
-        USAGE: #{File.basename($0)} [command] [options]
-
-        Commands:
-            #{commands}
-
-        Options for CONFIG:
-            #{configs}
-
-        Options for INSTALL:
-            --prefix                      Set the install prefix
-
-        Options in common:
-            -q --quiet                    Silence output
-               --verbose                  Provide verbose output
-            -n --no-write                 Do not write to disk
-
-      END
-      text.gsub(/^\ {8,8}/, '')
-    end
-=end
-
   end
+
 end
+
