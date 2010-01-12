@@ -24,7 +24,8 @@ module Setup
     def exec_ri
       case config.type #installdirs
       when 'std', 'ruby'
-        output = "--ri-system"
+        #output = "--ri-system" # no longer supported?
+        output  = "--ri-site"
       when 'site'
         output = "--ri-site"
       when 'home'
@@ -59,14 +60,15 @@ module Setup
         puts cmd
       else
         begin
-          system(cmd)
+          success = system(cmd)
+          raise unless success
           #require 'rdoc/rdoc'
           #::RDoc::RDoc.new.document(opt)
           io.puts "Ok ri." #unless quiet?
         rescue Exception
           $stderr.puts "ri generation failed"
           $stderr.puts "command was: '#{cmd}'"
-          $stderr.puts "proceeding with install..."
+          #$stderr.puts "proceeding with install..."
         end
 
         # Now in local directory
