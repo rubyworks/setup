@@ -31,7 +31,8 @@ module Setup
     # Install binaries (executables).
     def install_bin
       return unless directory?('bin')
-      io.puts "* bin -> #{config.bindir}" unless quiet?
+      report_transfer('bin', config.bindir)
+      #io.puts "* bin -> #{config.bindir}" unless quiet?
       files = files('bin')
       install_files('bin', files, config.bindir, 0755)
       #install_shebang(files, config.bindir)
@@ -40,7 +41,8 @@ module Setup
     # Install shared extension libraries.
     def install_ext
       return unless directory?('ext')
-      io.puts "* ext -> #{config.sodir}" unless quiet?
+      report_transfer('ext', config.sodir)
+      #io.puts "* ext -> #{config.sodir}" unless quiet?
       files = files('ext')
       files = select_dllext(files)
       #install_files('ext', files, config.sodir, 0555)
@@ -54,7 +56,8 @@ module Setup
     # Install library files.
     def install_lib
       return unless directory?('lib')
-      io.puts "* lib -> #{config.rbdir}" unless quiet?
+      report_transfer('lib', config.rbdir)
+      #io.puts "* lib -> #{config.rbdir}" unless quiet?
       files = files('lib')
       install_files('lib', files, config.rbdir, 0644)
     end
@@ -62,7 +65,8 @@ module Setup
     # Install shared data.
     def install_data
       return unless directory?('data')
-      io.puts "* data -> #{config.datadir}" unless quiet?
+      report_transfer('data', config.datadir)
+      #io.puts "* data -> #{config.datadir}" unless quiet?
       files = files('data')
       install_files('data', files, config.datadir, 0644)
     end
@@ -70,7 +74,7 @@ module Setup
     # Install configuration.
     def install_etc
       return unless directory?('etc')
-      io.puts "* etc -> #{config.sysconfdir}" unless quiet?
+      report_transfer('etc', config.sysconfdir)
       files = files('etc')
       install_files('etc', files, config.sysconfdir, 0644)
     end
@@ -78,7 +82,7 @@ module Setup
     # Install manpages.
     def install_man
       return unless directory?('man')
-      io.puts "* man -> #{config.mandir}" unless quiet?
+      report_transfer('man', config.mandir)
       files = files('man')
       install_files('man', files, config.mandir, 0644)
     end
@@ -92,13 +96,22 @@ module Setup
       return unless config.doc?
       return unless directory?('doc')
       return unless project.name
-      dir   = File.join(config.docdir, "ruby-{project.name}")
-      io.puts "* doc -> #{dir}" unless quiet?
+      dir = File.join(config.docdir, "ruby-{project.name}")
+      report_transfer('doc', dir)
+      #io.puts "* doc -> #{dir}" unless quiet?
       files = files('doc')
       install_files('doc', files, dir, 0644)
     end
 
   private
+
+    # Display the file transfer taking place.
+    def report_transfer(source, directory)
+      unless quiet?
+        out = File.join(install_prefix, directory)
+        io.puts "* #{source} -> #{out}"
+      end
+    end
 
     # Comfirm a +path+ is a directory and exists.
     def directory?(path)
