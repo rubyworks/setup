@@ -24,13 +24,12 @@ module Setup
 
     #
     def test
-      return if !testable?
+      return true if !testable?
       if File.exist?(RUBYSCRIPT)
         test_rubyscript
       elsif File.exist?(SHELLSCRIPT)
         test_shellscript
       end
-      #puts "Ok." unless quiet?
     end
 
     #

@@ -89,7 +89,7 @@ module Setup
     # should be set during the config phase. Define a seperate
     # config method for it.
     def install_doc
-      return unless config.document?  # TODO: seprate ri generation from doc installation
+      return unless config.doc?
       return unless directory?('doc')
       return unless project.name
       dir   = File.join(config.docdir, "ruby-{project.name}")

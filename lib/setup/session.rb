@@ -68,13 +68,17 @@ module Setup
 
     # #  S E T U P  T A S K S  # #
 
-    # Run all tasks in sequences.
+    # Run all tasks in sequence.
     #
     # * config
     # * setup
     # * test
     # * install
-    # * document
+    #
+    # The +document+ task is not part of this sequence
+    # due to the fact the ri documentation is not easy to
+    # uninstall. Use <tt>setup.rb document</tt> to install
+    # ri documentation manually.
     #
     def all
       config
@@ -82,12 +86,13 @@ module Setup
         make
       end
       if configuration.test?
-        test
+        ok = test
+        exit 1 unless ok
       end
       install
-      #if configuration.document?
-      #  document
-      #end
+      if configuration.doc?
+        document
+      end
     end
 
     #
@@ -121,14 +126,14 @@ module Setup
 
     #
     def test
-      return unless tester.testable?
+      return true unless tester.testable?
       log_header('Testing')
       tester.test
     end
 
     #
     def document
-      #return unless configuration.document?
+      #return unless configuration.doc?
       log_header('Documenting')
       documentor.document
     end
