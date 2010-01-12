@@ -26,8 +26,8 @@ module Setup
     end
 
     # TODO: better methods for path type
-    def self.option(name, type, description)
-      options << [name.to_s, type, description]
+    def self.option(name, *args) #type, description)
+      options << [name.to_s, *args] #type, description]
       attr_accessor(name)
     end
 
@@ -57,9 +57,10 @@ module Setup
 
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
 
-    option :no_ext          , :bool, 'do not compile/install ruby extentions'
-    option :no_test         , :bool, 'do not run tests'
-    option :no_doc          , :bool, 'do not generate ri documentation'
+    option :no_test, :t     , :bool, 'run pre-installation tests'
+    option :no_ri,          , :bool, 'generate ri documentation'
+    option :no_doc,  :d     , :bool, 'install doc/ directory'
+    option :no_ext          , :bool, 'compile/install ruby extentions'
 
     #option :rdoc            , :pick, 'generate rdoc documentation'
     #option :rdoc_template   , :pick, 'rdoc document template to use'
@@ -105,7 +106,6 @@ module Setup
       initialize_defaults
       initialize_environment
       initialize_configfile
-
       values.each{ |k,v| __send__("#{k}=", v) }
       yeild(self) if block_given?
     end
@@ -118,12 +118,14 @@ module Setup
       end
     end
 
-    # By default installation is to site locations,
-    # and ri documentation will not be generated.
+    # By default installation is to site locations, tests will
+    # not be run, ri documentation will not be generated, but
+    # the +doc/+ directory will be installed.
     def initialize_defaults
       self.type    = 'site'
-      self.no_doc  = true
-      self.no_test = false
+      self.no_ri   = true
+      self.no_test = true
+      self.no_doc  = false
       self.no_ext  = false
       #@rbdir = siterubyver      #'$siterubyver'
       #@sodir = siterubyverarch  #'$siterubyverarch'
@@ -523,19 +525,37 @@ module Setup
       @no_doc = boolean(val)
     end
 
+    #
+    def no_ri
+      @no_ri
+    end
+
+    #
+    def no_ri=(val)
+      @no_ri = boolean(val)
+    end
+
     #def rdoc            = 'no'
     #def rdoctemplate    = nil
     #def testrunner      = 'auto' # needed?
 
+    # Compile native extensions?
     def compile?
       !no_ext
     end
 
+    # Run unit tests?
     def test?
       !no_test
     end
 
-    def document?
+    # Generate ri documentation?
+    def ri?
+      !no_ri
+    end
+
+    # Install doc directory?
+    def doc?
       !no_doc
     end
 
