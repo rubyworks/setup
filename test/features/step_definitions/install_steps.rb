@@ -1,4 +1,4 @@
-Given /^'setup\.rb setup' has NOT been run$/ do
+Given /^'setup\.rb make' has NOT been run$/ do
   # TODO: assert there are no compiled extensions
 end
 
@@ -18,8 +18,8 @@ When /I issue the command 'setup.rb install' unprepared$/ do
   end
 end
 
-Then /^I will be told that I must first run 'setup\.rb setup'$/ do
-  $setup_feature_error.message.assert =~ /setup\.rb setup first/
+Then /^I will be told that I must first run 'setup\.rb make'$/ do
+  $setup_feature_error.message.assert =~ /setup\.rb make first/
 end
 
 # Site Ruby Locations

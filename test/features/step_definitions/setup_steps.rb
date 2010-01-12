@@ -1,14 +1,14 @@
-Given /'setup.rb setup' has been run$/ do
-  Setup::Command.run("setup", "--quiet") #, "--trace")
+Given /'setup.rb make' has been run$/ do
+  Setup::Command.run("make", "--quiet") #, "--trace")
 end
 
-When /^I issue the command 'setup\.rb setup'$/ do
-    Setup::Command.run("setup", "--quiet")
+When /^I issue the command 'setup\.rb make'$/ do
+  Setup::Command.run("make", "--quiet")
 end
 
-When /^I issue the command 'setup\.rb setup' unprepared$/ do
+When /^I issue the command 'setup\.rb make' unprepared$/ do
   begin
-    Setup::Command.run("setup", "--quiet")
+    Setup::Command.run("make", "--quiet")
   rescue SystemExit => error
     $setup_feature_error = error
   end
