@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-01-13 03:28:11
+# Setup.rb, 2010-01-13 04:14:39
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -361,8 +361,8 @@ module Setup
     option :extconfopt      , :opts, 'options to pass-thru to extconf.rb'
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
     option :no_test, :t     , :bool, 'run pre-installation tests'
-    option :no_ri           , :bool, 'generate ri documentation'
-    option :no_doc,  :d     , :bool, 'install doc/ directory'
+    option :no_ri,   :d     , :bool, 'generate ri documentation'
+    option :no_doc,         , :bool, 'install doc/ directory'
     option :no_ext          , :bool, 'compile/install ruby extentions'
     option :install_prefix  , :path, 'install to alternate root location'
     option :root            , :path, 'install to alternate root location'
