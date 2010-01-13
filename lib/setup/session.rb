@@ -71,14 +71,14 @@ module Setup
     # Run all tasks in sequence.
     #
     # * config
-    # * setup
-    # * test
+    # * make
+    # * test      (if selected)
     # * install
+    # * document  (if selected)
     #
-    # The +document+ task is not part of this sequence
-    # due to the fact the ri documentation is not easy to
-    # uninstall. Use <tt>setup.rb document</tt> to install
-    # ri documentation manually.
+    # Note that ri documentation is not easy to uninstall.
+    # So use the --ri option knowledgably. You can alwasy
+    # Use <tt>setup.rb document</tt> at a later time.
     #
     def all
       config
@@ -90,27 +90,29 @@ module Setup
         exit 1 unless ok
       end
       install
-      if configuration.doc?
+      if configuration.ri?
         document
       end
     end
 
     #
     def config
+      log_header('Configure')
       if configuration.save_config
         io.puts "Configuration saved." unless quiet?
       else
         io.puts "Configuration current." unless quiet?
       end
       puts configuration if trace? && !quiet?
-      #io.puts("Configuration saved.") unless quiet?
-      compiler.configure
+      if compiler.compiles?
+        compiler.configure
+      end
     end
 
     #
     def make
       abort "must setup config first" unless configuration.exist?
-      log_header('Compiling')
+      log_header('Compile')
       compiler.compile
     end
 
@@ -120,33 +122,33 @@ module Setup
     #
     def install
       abort "must setup config first" unless configuration.exist?
-      log_header('Installing')
+      log_header('Install')
       installer.install
     end
 
     #
     def test
       return true unless tester.testable?
-      log_header('Testing')
+      log_header('Test')
       tester.test
     end
 
     #
     def document
       #return unless configuration.doc?
-      log_header('Documenting')
+      log_header('Document')
       documentor.document
     end
 
     #
     def clean
-      log_header('Cleaning')
+      log_header('Clean')
       compiler.clean
     end
 
     #
     def distclean
-      log_header('Distcleaning')
+      log_header('Distclean')
       compiler.distclean
     end
 
@@ -156,7 +158,7 @@ module Setup
         io.puts "Nothing is installed."
         return
       end
-      log_header('Uninstalling')
+      log_header('Uninstall')
       uninstaller.uninstall
       io.puts('Ok.')
     end
@@ -204,9 +206,9 @@ module Setup
     def log_header(phase)
       return if quiet?
       if trial?
-        io.puts("\n[TRIAL RUN] #{phase}...")
+        io.puts("\n[TRIAL RUN] #{phase.upcase}")
       else
-        io.puts("\n#{phase}...")
+        io.puts("\n#{phase.upcase}")
       end
     end
 
