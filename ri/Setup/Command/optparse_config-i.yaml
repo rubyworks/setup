@@ -2,8 +2,9 @@
 aliases: []
 
 block_params: 
-comment: []
-
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Setup options for <tt>config</tt> task.
 full_name: Setup::Command#optparse_config
 is_singleton: false
 name: optparse_config

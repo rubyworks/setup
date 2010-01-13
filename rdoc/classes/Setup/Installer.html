@@ -99,32 +99,32 @@
           
             
             <li class="method">
-              <a href="#M000036">#binread</a>
+              <a href="#M000037">#binread</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000033">#destination</a>
+              <a href="#M000034">#destination</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000035">#diff?</a>
+              <a href="#M000036">#diff?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000014">#directory?</a>
+              <a href="#M000015">#directory?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000017">#dllext</a>
+              <a href="#M000018">#dllext</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000015">#files</a>
+              <a href="#M000016">#files</a>
             </li>
           
             
@@ -159,17 +159,17 @@
           
             
             <li class="method">
-              <a href="#M000021">#install_file</a>
+              <a href="#M000023">#install_file</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000018">#install_files</a>
+              <a href="#M000020">#install_files</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000009">#install_lib</a>
+              <a href="#M000008">#install_lib</a>
             </li>
           
             
@@ -184,22 +184,22 @@
           
             
             <li class="method">
-              <a href="#M000030">#install_record</a>
+              <a href="#M000032">#install_record</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000037">#install_shebang</a>
+              <a href="#M000038">#install_shebang</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000025">#mkdir_p</a>
+              <a href="#M000026">#mkdir_p</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000042">#new_shebang</a>
+              <a href="#M000041">#new_shebang</a>
             </li>
           
             
@@ -209,17 +209,22 @@
           
             
             <li class="method">
-              <a href="#M000027">#prune_install_record</a>
+              <a href="#M000028">#prune_install_record</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000026">#record_installation</a>
+              <a href="#M000027">#record_installation</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000016">#select_dllext</a>
+              <a href="#M000014">#report_transfer</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000017">#select_dllext</a>
             </li>
           
             
@@ -412,7 +417,8 @@ Install binaries (executables).
 <span class="ruby-comment cmt"># File lib/setup/installer.rb, line 32</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_bin</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'bin'</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* bin -&gt; #{config.bindir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'bin'</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">bindir</span>)
+      <span class="ruby-comment cmt">#io.puts &quot;* bin -&gt; #{config.bindir}&quot; unless quiet?</span>
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'bin'</span>)
       <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'bin'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">bindir</span>, <span class="ruby-value">0755</span>)
       <span class="ruby-comment cmt">#install_shebang(files, config.bindir)</span>
@@ -447,10 +453,11 @@ Install shared data.
           <div class="method-source-code"
             id="install-data-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 63</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 66</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_data</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'data'</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* data -&gt; #{config.datadir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'data'</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">datadir</span>)
+      <span class="ruby-comment cmt">#io.puts &quot;* data -&gt; #{config.datadir}&quot; unless quiet?</span>
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'data'</span>)
       <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'data'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">datadir</span>, <span class="ruby-value">0644</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -488,13 +495,14 @@ the config phase. Define a seperate config method for it.
           <div class="method-source-code"
             id="install-doc-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 91</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 95</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_doc</span>
-      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">document?</span>  <span class="ruby-comment cmt"># TODO: seprate ri generation from doc installation</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">doc?</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'doc'</span>)
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">project</span>.<span class="ruby-identifier">name</span>
-      <span class="ruby-identifier">dir</span>   = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">docdir</span>, <span class="ruby-value str">&quot;ruby-{project.name}&quot;</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* doc -&gt; #{dir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">docdir</span>, <span class="ruby-value str">&quot;ruby-{project.name}&quot;</span>)
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'doc'</span>, <span class="ruby-identifier">dir</span>)
+      <span class="ruby-comment cmt">#io.puts &quot;* doc -&gt; #{dir}&quot; unless quiet?</span>
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'doc'</span>)
       <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'doc'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-value">0644</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -528,10 +536,10 @@ Install configuration.
           <div class="method-source-code"
             id="install-etc-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 71</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 75</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_etc</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'etc'</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* etc -&gt; #{config.sysconfdir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'etc'</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">sysconfdir</span>)
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'etc'</span>)
       <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'etc'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">sysconfdir</span>, <span class="ruby-value">0644</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -565,10 +573,11 @@ Install shared extension libraries.
           <div class="method-source-code"
             id="install-ext-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 41</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 42</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_ext</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'ext'</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* ext -&gt; #{config.sodir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'ext'</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">sodir</span>)
+      <span class="ruby-comment cmt">#io.puts &quot;* ext -&gt; #{config.sodir}&quot; unless quiet?</span>
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'ext'</span>)
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">select_dllext</span>(<span class="ruby-identifier">files</span>)
       <span class="ruby-comment cmt">#install_files('ext', files, config.sodir, 0555)</span>
@@ -587,7 +596,7 @@ Install shared extension libraries.
 
     
       <div id="install-lib-method" class="method-detail ">
-        <a name="M000009"></a>
+        <a name="M000008"></a>
 
         <div class="method-heading">
         
@@ -608,10 +617,11 @@ Install library files.
           <div class="method-source-code"
             id="install-lib-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 55</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 57</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_lib</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'lib'</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* lib -&gt; #{config.rbdir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'lib'</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">rbdir</span>)
+      <span class="ruby-comment cmt">#io.puts &quot;* lib -&gt; #{config.rbdir}&quot; unless quiet?</span>
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'lib'</span>)
       <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'lib'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">rbdir</span>, <span class="ruby-value">0644</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -645,10 +655,10 @@ Install manpages.
           <div class="method-source-code"
             id="install-man-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 79</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 83</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_man</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-value str">'man'</span>)
-      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* man -&gt; #{config.mandir}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+      <span class="ruby-identifier">report_transfer</span>(<span class="ruby-value str">'man'</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">mandir</span>)
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>(<span class="ruby-value str">'man'</span>)
       <span class="ruby-identifier">install_files</span>(<span class="ruby-value str">'man'</span>, <span class="ruby-identifier">files</span>, <span class="ruby-identifier">config</span>.<span class="ruby-identifier">mandir</span>, <span class="ruby-value">0644</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -699,7 +709,7 @@ Install manpages.
 
     
       <div id="binread-method" class="method-detail ">
-        <a name="M000036"></a>
+        <a name="M000037"></a>
 
         <div class="method-heading">
         
@@ -720,7 +730,7 @@ Binary read.
           <div class="method-source-code"
             id="binread-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 245</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 262</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">binread</span>(<span class="ruby-identifier">fname</span>)
       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-value str">'rb'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>
@@ -735,7 +745,7 @@ Binary read.
 
     
       <div id="destination-method" class="method-detail ">
-        <a name="M000033"></a>
+        <a name="M000034"></a>
 
         <div class="method-heading">
         
@@ -756,7 +766,7 @@ Determine actual destination including install_prefix.
           <div class="method-source-code"
             id="destination-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 230</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 247</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>)
       <span class="ruby-identifier">dest</span> = <span class="ruby-identifier">install_prefix</span> <span class="ruby-value">? </span><span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">install_prefix</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dir</span>)) <span class="ruby-operator">:</span> <span class="ruby-identifier">dir</span>
       <span class="ruby-identifier">dest</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dest</span>, <span class="ruby-identifier">file</span>) <span class="ruby-comment cmt">#if File.dir?(dest)</span>
@@ -772,7 +782,7 @@ Determine actual destination including install_prefix.
 
     
       <div id="diff--method" class="method-detail ">
-        <a name="M000035"></a>
+        <a name="M000036"></a>
 
         <div class="method-heading">
         
@@ -793,7 +803,7 @@ Is a current project file different from a previously installed file?
           <div class="method-source-code"
             id="diff--source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 239</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 256</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">diff?</span>(<span class="ruby-identifier">new_content</span>, <span class="ruby-identifier">path</span>)
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-identifier">new_content</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">binread</span>(<span class="ruby-identifier">path</span>)
@@ -807,7 +817,7 @@ Is a current project file different from a previously installed file?
 
     
       <div id="directory--method" class="method-detail ">
-        <a name="M000014"></a>
+        <a name="M000015"></a>
 
         <div class="method-heading">
         
@@ -828,7 +838,7 @@ Comfirm a <tt>path</tt> is a directory and exists.
           <div class="method-source-code"
             id="directory--source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 104</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 121</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -841,7 +851,7 @@ Comfirm a <tt>path</tt> is a directory and exists.
 
     
       <div id="dllext-method" class="method-detail ">
-        <a name="M000017"></a>
+        <a name="M000018"></a>
 
         <div class="method-heading">
         
@@ -862,7 +872,7 @@ Dynamic link library extension for this system.
           <div class="method-source-code"
             id="dllext-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 128</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 145</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dllext</span>
       <span class="ruby-identifier">config</span>.<span class="ruby-identifier">dlext</span>
       <span class="ruby-comment cmt">#Configuration::RBCONFIG['DLEXT']</span>
@@ -876,7 +886,7 @@ Dynamic link library extension for this system.
 
     
       <div id="files-method" class="method-detail ">
-        <a name="M000015"></a>
+        <a name="M000016"></a>
 
         <div class="method-heading">
         
@@ -897,7 +907,7 @@ Get a list of project files given a project subdirectory.
           <div class="method-source-code"
             id="files-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 109</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 126</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">files</span>(<span class="ruby-identifier">dir</span>)
       <span class="ruby-identifier">files</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{dir}/**/*&quot;</span>]
       <span class="ruby-identifier">files</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">select</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">f</span>) }
@@ -913,7 +923,7 @@ Get a list of project files given a project subdirectory.
 
     
       <div id="install-file-method" class="method-detail ">
-        <a name="M000021"></a>
+        <a name="M000023"></a>
 
         <div class="method-heading">
         
@@ -934,7 +944,7 @@ Install a project file.
           <div class="method-source-code"
             id="install-file-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 143</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 160</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_file</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">from</span>, <span class="ruby-identifier">dest</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">prefix</span>=<span class="ruby-keyword kw">nil</span>)
       <span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">dest</span>))
   
@@ -966,7 +976,7 @@ Install a project file.
 
     
       <div id="install-files-method" class="method-detail ">
-        <a name="M000018"></a>
+        <a name="M000020"></a>
 
         <div class="method-heading">
         
@@ -987,7 +997,7 @@ Install project files.
           <div class="method-source-code"
             id="install-files-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 134</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 151</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_files</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">list</span>, <span class="ruby-identifier">dest</span>, <span class="ruby-identifier">mode</span>)
       <span class="ruby-comment cmt">#mkdir_p(dest) #, install_prefix)</span>
       <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fname</span><span class="ruby-operator">|</span>
@@ -1004,7 +1014,7 @@ Install project files.
 
     
       <div id="install-record-method" class="method-detail ">
-        <a name="M000030"></a>
+        <a name="M000032"></a>
 
         <div class="method-heading">
         
@@ -1026,7 +1036,7 @@ prepared (ie. make it&#8217;s directory).
           <div class="method-source-code"
             id="install-record-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 215</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 232</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_record</span>
       <span class="ruby-ivar">@install_record</span> <span class="ruby-operator">||=</span> (
         <span class="ruby-identifier">file</span> = <span class="ruby-constant">INSTALL_RECORD</span>
@@ -1046,7 +1056,7 @@ prepared (ie. make it&#8217;s directory).
 
     
       <div id="install-shebang-method" class="method-detail ">
-        <a name="M000037"></a>
+        <a name="M000038"></a>
 
         <div class="method-heading">
         
@@ -1065,7 +1075,7 @@ prepared (ie. make it&#8217;s directory).
           <div class="method-source-code"
             id="install-shebang-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 257</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 274</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_shebang</span>(<span class="ruby-identifier">files</span>, <span class="ruby-identifier">dir</span>)
       <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file</span>))
@@ -1081,7 +1091,7 @@ prepared (ie. make it&#8217;s directory).
 
     
       <div id="mkdir-p-method" class="method-detail ">
-        <a name="M000025"></a>
+        <a name="M000026"></a>
 
         <div class="method-heading">
         
@@ -1102,7 +1112,7 @@ Install a directory.
           <div class="method-source-code"
             id="mkdir-p-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 170</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 187</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dirname</span>) <span class="ruby-comment cmt">#, prefix=nil)</span>
       <span class="ruby-comment cmt">#dirname = destination(dirname)</span>
       <span class="ruby-comment cmt">#dirname = File.join(prefix, File.expand_path(dirname)) if prefix</span>
@@ -1135,7 +1145,7 @@ Install a directory.
 
     
       <div id="new-shebang-method" class="method-detail ">
-        <a name="M000042"></a>
+        <a name="M000041"></a>
 
         <div class="method-heading">
         
@@ -1154,7 +1164,7 @@ Install a directory.
           <div class="method-source-code"
             id="new-shebang-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 292</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 309</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_shebang</span>(<span class="ruby-identifier">old</span>)
       <span class="ruby-keyword kw">if</span> <span class="ruby-regexp re">/\Aruby/</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">old</span>.<span class="ruby-identifier">cmd</span>)
         <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">rubypath</span>, <span class="ruby-identifier">old</span>.<span class="ruby-identifier">args</span>)
@@ -1193,7 +1203,7 @@ Install a directory.
           <div class="method-source-code"
             id="open-atomic-writer-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 304</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 321</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open_atomic_writer</span>(<span class="ruby-identifier">path</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
       <span class="ruby-identifier">tmpfile</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'.tmp'</span>
       <span class="ruby-keyword kw">begin</span>
@@ -1212,7 +1222,7 @@ Install a directory.
 
     
       <div id="prune-install-record-method" class="method-detail ">
-        <a name="M000027"></a>
+        <a name="M000028"></a>
 
         <div class="method-heading">
         
@@ -1233,7 +1243,7 @@ Remove duplicates from the install record.
           <div class="method-source-code"
             id="prune-install-record-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 204</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 221</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prune_install_record</span>
       <span class="ruby-identifier">entries</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">install_record</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
       <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">uniq!</span>
@@ -1251,7 +1261,7 @@ Remove duplicates from the install record.
 
     
       <div id="record-installation-method" class="method-detail ">
-        <a name="M000026"></a>
+        <a name="M000027"></a>
 
         <div class="method-heading">
         
@@ -1272,7 +1282,7 @@ Record that a file or directory was installed in the install record file.
           <div class="method-source-code"
             id="record-installation-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 196</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 213</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">record_installation</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">install_record</span>, <span class="ruby-value str">'a'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">path</span>)
@@ -1287,8 +1297,49 @@ Record that a file or directory was installed in the install record file.
       </div>
 
     
+      <div id="report-transfer-method" class="method-detail ">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">report_transfer</span><span
+            class="method-args">(source, directory)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          <p>
+Display the file transfer taking place.
+</p>
+          
+
+          
+          <div class="method-source-code"
+            id="report-transfer-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 109</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_transfer</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">directory</span>)
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">quiet?</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">install_prefix</span>
+          <span class="ruby-identifier">out</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">install_prefix</span>, <span class="ruby-identifier">directory</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">out</span> = <span class="ruby-identifier">directory</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;* #{source} -&gt; #{out}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
       <div id="select-dllext-method" class="method-detail ">
-        <a name="M000016"></a>
+        <a name="M000017"></a>
 
         <div class="method-heading">
         
@@ -1309,7 +1360,7 @@ Extract dynamic link libraries from all ext files.
           <div class="method-source-code"
             id="select-dllext-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 117</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 134</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">select_dllext</span>(<span class="ruby-identifier">files</span>)
       <span class="ruby-identifier">ents</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> 
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>) <span class="ruby-operator">==</span> <span class="ruby-node">&quot;.#{dllext}&quot;</span>
@@ -1347,7 +1398,7 @@ Extract dynamic link libraries from all ext files.
           <div class="method-source-code"
             id="update-shebang-line-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 265</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 282</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_shebang_line</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">trial?</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">shebang</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'never'</span>

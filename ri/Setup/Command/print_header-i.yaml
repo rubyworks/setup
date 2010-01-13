@@ -4,7 +4,9 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: "TODO: Might be nice to have a ouput header, but not sure what it should conatin or look like yet."
+  body: Output Header.
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: "TODO: This is not yet used. It might be nice to have, but not sure what it should contain or look like."
 full_name: Setup::Command#print_header
 is_singleton: false
 name: print_header

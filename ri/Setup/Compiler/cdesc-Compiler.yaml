@@ -16,6 +16,8 @@ instance_methods:
 - !ruby/object:RDoc::RI::MethodSummary 
   name: compile
 - !ruby/object:RDoc::RI::MethodSummary 
+  name: compiles?
+- !ruby/object:RDoc::RI::MethodSummary 
   name: configure
 - !ruby/object:RDoc::RI::MethodSummary 
   name: distclean

@@ -4,7 +4,7 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: Run all tasks in sequences.
+  body: Run all tasks in sequence.
 - !ruby/object:RDoc::Markup::Flow::LIST 
   contents: 
   - !ruby/struct:RDoc::Markup::Flow::LI 
@@ -12,17 +12,19 @@ comment:
     body: config
   - !ruby/struct:RDoc::Markup::Flow::LI 
     label: "*"
-    body: setup
+    body: make
   - !ruby/struct:RDoc::Markup::Flow::LI 
     label: "*"
-    body: test
+    body: test (if selected)
   - !ruby/struct:RDoc::Markup::Flow::LI 
     label: "*"
     body: install
   - !ruby/struct:RDoc::Markup::Flow::LI 
     label: "*"
-    body: document
+    body: document (if selected)
   type: :BULLET
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Note that ri documentation is not easy to uninstall. So use the --ri option knowledgably. You can alwasy Use <tt>setup.rb document</tt> at a later time.
 full_name: Setup::Session#all
 is_singleton: false
 name: all

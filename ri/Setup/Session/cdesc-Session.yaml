@@ -22,6 +22,8 @@ instance_methods:
 - !ruby/object:RDoc::RI::MethodSummary 
   name: clean
 - !ruby/object:RDoc::RI::MethodSummary 
+  name: compile?
+- !ruby/object:RDoc::RI::MethodSummary 
   name: compiler
 - !ruby/object:RDoc::RI::MethodSummary 
   name: config

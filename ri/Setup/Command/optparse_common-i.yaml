@@ -4,7 +4,7 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: Common options
+  body: Common options for every task.
 full_name: Setup::Command#optparse_common
 is_singleton: false
 name: optparse_common

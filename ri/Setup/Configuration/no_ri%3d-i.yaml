@@ -4,8 +4,8 @@ aliases: []
 block_params: 
 comment: []
 
-full_name: Setup::Command#optparse_uninstall
+full_name: Setup::Configuration#no_ri=
 is_singleton: false
-name: optparse_uninstall
-params: (parser, options)
+name: no_ri=
+params: (val)
 visibility: public

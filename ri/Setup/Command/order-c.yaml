@@ -2,8 +2,9 @@
 aliases: []
 
 block_params: 
-comment: []
-
+comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Task names listed in order of information.
 full_name: Setup::Command::order
 is_singleton: true
 name: order

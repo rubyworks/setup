@@ -3,6 +3,8 @@ aliases: []
 
 block_params: 
 comment: 
+- !ruby/struct:RDoc::Markup::Flow::P 
+  body: Run unit tests?
 full_name: Setup::Configuration#test?
 is_singleton: false
 name: test?

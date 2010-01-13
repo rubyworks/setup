@@ -4,9 +4,9 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: List of task names.
-full_name: Setup::Command#task_names
+  body: Install doc directory?
+full_name: Setup::Configuration#doc?
 is_singleton: false
-name: task_names
+name: doc?
 params: ()
 visibility: public

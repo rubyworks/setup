@@ -69,6 +69,8 @@ instance_methods:
 - !ruby/object:RDoc::RI::MethodSummary 
   name: record_installation
 - !ruby/object:RDoc::RI::MethodSummary 
+  name: report_transfer
+- !ruby/object:RDoc::RI::MethodSummary 
   name: select_dllext
 - !ruby/object:RDoc::RI::MethodSummary 
   name: update_shebang_line

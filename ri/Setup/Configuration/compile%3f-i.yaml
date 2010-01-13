@@ -4,7 +4,7 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: "def rdoc = 'no' def rdoctemplate = nil def testrunner = 'auto' # needed?"
+  body: Compile native extensions?
 full_name: Setup::Configuration#compile?
 is_singleton: false
 name: compile?

@@ -69,11 +69,11 @@ instance_methods:
 - !ruby/object:RDoc::RI::MethodSummary 
   name: datadir=
 - !ruby/object:RDoc::RI::MethodSummary 
+  name: doc?
+- !ruby/object:RDoc::RI::MethodSummary 
   name: docdir
 - !ruby/object:RDoc::RI::MethodSummary 
   name: docdir=
-- !ruby/object:RDoc::RI::MethodSummary 
-  name: document?
 - !ruby/object:RDoc::RI::MethodSummary 
   name: exist?
 - !ruby/object:RDoc::RI::MethodSummary 
@@ -131,6 +131,10 @@ instance_methods:
 - !ruby/object:RDoc::RI::MethodSummary 
   name: no_ext=
 - !ruby/object:RDoc::RI::MethodSummary 
+  name: no_ri
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: no_ri=
+- !ruby/object:RDoc::RI::MethodSummary 
   name: no_test
 - !ruby/object:RDoc::RI::MethodSummary 
   name: no_test=
@@ -144,6 +148,8 @@ instance_methods:
   name: prefix=
 - !ruby/object:RDoc::RI::MethodSummary 
   name: rbdir
+- !ruby/object:RDoc::RI::MethodSummary 
+  name: ri?
 - !ruby/object:RDoc::RI::MethodSummary 
   name: rubypath
 - !ruby/object:RDoc::RI::MethodSummary 

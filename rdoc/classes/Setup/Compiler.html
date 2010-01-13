@@ -90,32 +90,37 @@
           
             
             <li class="method">
-              <a href="#M000187">#clean</a>
+              <a href="#M000192">#clean</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000186">#compile</a>
+              <a href="#M000191">#compile</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000185">#configure</a>
+              <a href="#M000189">#compiles?</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000188">#distclean</a>
+              <a href="#M000190">#configure</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000189">#extdirs</a>
+              <a href="#M000193">#distclean</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000190">#make</a>
+              <a href="#M000194">#extdirs</a>
+            </li>
+          
+            
+            <li class="method">
+              <a href="#M000195">#make</a>
             </li>
           
         </ul>
@@ -229,7 +234,7 @@
 
     
       <div id="clean-method" class="method-detail ">
-        <a name="M000187"></a>
+        <a name="M000192"></a>
 
         <div class="method-heading">
         
@@ -248,7 +253,7 @@
           <div class="method-source-code"
             id="clean-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 29</span>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 36</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clean</span>
       <span class="ruby-identifier">extdirs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword kw">do</span>
@@ -265,7 +270,7 @@
 
     
       <div id="compile-method" class="method-detail ">
-        <a name="M000186"></a>
+        <a name="M000191"></a>
 
         <div class="method-heading">
         
@@ -284,7 +289,7 @@
           <div class="method-source-code"
             id="compile-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 20</span>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 27</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>
       <span class="ruby-identifier">extdirs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword kw">do</span>
@@ -300,8 +305,41 @@
       </div>
 
     
+      <div id="compiles--method" class="method-detail ">
+        <a name="M000189"></a>
+
+        <div class="method-heading">
+        
+          <span class="method-name">compiles?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        
+        </div>
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="compiles--source">
+<pre>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 9</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compiles?</span>
+      <span class="ruby-operator">!</span><span class="ruby-identifier">extdirs</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-comment cmt">#extdirs.any?{ |dir| File.exist?(File.join(dir, 'extconf.rb')) }</span>
+    <span class="ruby-keyword kw">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+      </div>
+
+    
       <div id="configure-method" class="method-detail ">
-        <a name="M000185"></a>
+        <a name="M000190"></a>
 
         <div class="method-heading">
         
@@ -320,13 +358,14 @@
           <div class="method-source-code"
             id="configure-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 9</span>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 15</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configure</span>
       <span class="ruby-identifier">extdirs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword kw">do</span>
-          <span class="ruby-comment cmt"># unless File.exist?('Makefile') ?</span>
-          <span class="ruby-comment cmt">#load(&quot;extconf.rb&quot;, true) if File.exist?('extconf.rb')</span>
-          <span class="ruby-identifier">ruby</span>(<span class="ruby-value str">&quot;extconf.rb&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-value str">'extconf.rb'</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-value str">'extconf.rb'</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">uptodate?</span>(<span class="ruby-value str">'Makefile'</span>, [<span class="ruby-value str">'extconf.rb'</span>])
+            <span class="ruby-comment cmt">#load(&quot;extconf.rb&quot;, true)</span>
+            <span class="ruby-identifier">ruby</span>(<span class="ruby-value str">&quot;extconf.rb&quot;</span>)
+          <span class="ruby-keyword kw">end</span>
         <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">end</span>
     <span class="ruby-keyword kw">end</span></pre>
@@ -339,7 +378,7 @@
 
     
       <div id="distclean-method" class="method-detail ">
-        <a name="M000188"></a>
+        <a name="M000193"></a>
 
         <div class="method-heading">
         
@@ -358,7 +397,7 @@
           <div class="method-source-code"
             id="distclean-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 38</span>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 45</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">distclean</span>
       <span class="ruby-identifier">extdirs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
         <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword kw">do</span>
@@ -375,7 +414,7 @@
 
     
       <div id="extdirs-method" class="method-detail ">
-        <a name="M000189"></a>
+        <a name="M000194"></a>
 
         <div class="method-heading">
         
@@ -396,7 +435,7 @@ TODO: get from project
           <div class="method-source-code"
             id="extdirs-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 47</span>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 54</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extdirs</span>
       <span class="ruby-constant">Dir</span>[<span class="ruby-value str">'ext/**/*/{MANIFEST,extconf.rb}'</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">f</span>)
@@ -411,7 +450,7 @@ TODO: get from project
 
     
       <div id="make-method" class="method-detail ">
-        <a name="M000190"></a>
+        <a name="M000195"></a>
 
         <div class="method-heading">
         
@@ -430,7 +469,7 @@ TODO: get from project
           <div class="method-source-code"
             id="make-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 54</span>
+<span class="ruby-comment cmt"># File lib/setup/compiler.rb, line 61</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">make</span>(<span class="ruby-identifier">task</span>=<span class="ruby-keyword kw">nil</span>)
       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-value str">'Makefile'</span>)
       <span class="ruby-identifier">bash</span>(<span class="ruby-operator">*</span>[<span class="ruby-identifier">config</span>.<span class="ruby-identifier">makeprog</span>, <span class="ruby-identifier">task</span>].<span class="ruby-identifier">compact</span>)

@@ -264,13 +264,12 @@ exists.
 <pre>
 <span class="ruby-comment cmt"># File lib/setup/tester.rb, line 26</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test</span>
-      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">testable?</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">testable?</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">RUBYSCRIPT</span>)
         <span class="ruby-identifier">test_rubyscript</span>
       <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-constant">SHELLSCRIPT</span>)
         <span class="ruby-identifier">test_shellscript</span>
       <span class="ruby-keyword kw">end</span>
-      <span class="ruby-comment cmt">#puts &quot;Ok.&quot; unless quiet?</span>
     <span class="ruby-keyword kw">end</span></pre>
           </div>
           
@@ -300,7 +299,7 @@ exists.
           <div class="method-source-code"
             id="test-rubyscript-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 42</span>
+<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 41</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_rubyscript</span>
       <span class="ruby-identifier">ruby</span>(<span class="ruby-constant">RUBYSCRIPT</span>)
     <span class="ruby-keyword kw">end</span></pre>
@@ -332,7 +331,7 @@ exists.
           <div class="method-source-code"
             id="test-shellscript-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 37</span>
+<span class="ruby-comment cmt"># File lib/setup/tester.rb, line 36</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_shellscript</span>
       <span class="ruby-identifier">bash</span>(<span class="ruby-constant">SHELLSCRIPT</span>)
     <span class="ruby-keyword kw">end</span></pre>

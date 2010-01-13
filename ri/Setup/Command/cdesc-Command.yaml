@@ -12,11 +12,11 @@ class_methods:
   name: tasks
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: CLI for Setup.rb
+  body: Command-line interface for Setup.rb.
 - !ruby/struct:RDoc::Markup::Flow::RULE 
   width: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: CLI for Setup.rb
+  body: Command-line interface for Setup.rb.
 constants: []
 
 full_name: Setup::Command
@@ -35,8 +35,6 @@ instance_methods:
   name: optparse_header
 - !ruby/object:RDoc::RI::MethodSummary 
   name: optparse_install
-- !ruby/object:RDoc::RI::MethodSummary 
-  name: optparse_uninstall
 - !ruby/object:RDoc::RI::MethodSummary 
   name: print_header
 - !ruby/object:RDoc::RI::MethodSummary 

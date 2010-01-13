@@ -2,9 +2,10 @@
 aliases: []
 
 block_params: 
-comment: 
-full_name: Setup::Configuration#document?
+comment: []
+
+full_name: Setup::Session#compile?
 is_singleton: false
-name: document?
+name: compile?
 params: ()
 visibility: public

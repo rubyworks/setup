@@ -2,11 +2,10 @@
 aliases: []
 
 block_params: 
-comment: 
-- !ruby/struct:RDoc::Markup::Flow::P 
-  body: Setup session.
-full_name: Setup::Command#session
+comment: []
+
+full_name: Setup::Compiler#compiles?
 is_singleton: false
-name: session
+name: compiles?
 params: ()
 visibility: public

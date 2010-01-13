@@ -8,5 +8,5 @@ comment:
 full_name: Setup::Configuration::option
 is_singleton: true
 name: option
-params: (name, type, description)
+params: (name, *args)
 visibility: public

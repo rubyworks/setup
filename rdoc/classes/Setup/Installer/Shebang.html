@@ -91,7 +91,7 @@
           
             
             <li class="singleton">
-              <a href="#M000046">::load</a>
+              <a href="#M000044">::load</a>
             </li>
           
             
@@ -101,7 +101,7 @@
           
             
             <li class="singleton">
-              <a href="#M000047">::parse</a>
+              <a href="#M000045">::parse</a>
             </li>
           
             
@@ -256,7 +256,7 @@
 
     
       <div id="load-method" class="method-detail ">
-        <a name="M000046"></a>
+        <a name="M000044"></a>
 
         <div class="method-heading">
         
@@ -275,7 +275,7 @@
           <div class="method-source-code"
             id="load-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 316</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 333</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">path</span>)
         <span class="ruby-identifier">line</span> = <span class="ruby-keyword kw">nil</span>
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
@@ -312,7 +312,7 @@
           <div class="method-source-code"
             id="new-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 330</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 347</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">args</span> = [])
         <span class="ruby-ivar">@cmd</span> = <span class="ruby-identifier">cmd</span>
         <span class="ruby-ivar">@args</span> = <span class="ruby-identifier">args</span>
@@ -326,7 +326,7 @@
 
     
       <div id="parse-method" class="method-detail ">
-        <a name="M000047"></a>
+        <a name="M000045"></a>
 
         <div class="method-heading">
         
@@ -345,7 +345,7 @@
           <div class="method-source-code"
             id="parse-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 325</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 342</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Shebang</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">line</span>)
         <span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\A\#!/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">' '</span>)
         <span class="ruby-identifier">new</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">args</span>)
@@ -384,7 +384,7 @@
           <div class="method-source-code"
             id="to-s-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 338</span>
+<span class="ruby-comment cmt"># File lib/setup/installer.rb, line 355</span>
       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
         <span class="ruby-node">&quot;#! #{@cmd}&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot; #{@args.join(' ')}&quot;</span>)
       <span class="ruby-keyword kw">end</span></pre>

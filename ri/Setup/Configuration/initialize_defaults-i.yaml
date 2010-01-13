@@ -4,7 +4,7 @@ aliases: []
 block_params: 
 comment: 
 - !ruby/struct:RDoc::Markup::Flow::P 
-  body: By default installation is to site locations, and ri documentation will not be generated.
+  body: By default installation is to site locations, tests will not be run, ri documentation will not be generated, but the <tt>doc/</tt> directory will be installed.
 full_name: Setup::Configuration#initialize_defaults
 is_singleton: false
 name: initialize_defaults
