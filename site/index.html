@@ -117,13 +117,12 @@
 
   <h3>Compiling</h3>
 
-  <p>Compiling extensions is handled via 'make'.</p>
-
   <pre>
     $ setup.rb make
   </pre>
 
-  <p>This looks in the <tt>ext/</tt> directory for all <tt>Makefile</tt>s.
+  <p>Compiling extensions is handled via 'make'.
+  This looks in the <tt>ext/</tt> directory for all <tt>Makefile</tt>s.
   Which are then executed to compile the extensions.</p>
 
   <!--
@@ -152,11 +151,11 @@
   libraries such as RSpec, Lemon, Bacon, QED or Cucumber.</p>
 
   <pre>
-    $ setup -t all
+    $ setup.rb all -t
   </pre>
 
   <p>Testing can also be activated when using <tt>all</tt> via the <tt>-t</tt> or
-  <tt>--test</tt> option.</p>
+  <tt>--test</tt> option, as shown above.</p>
 
 
   <h3>Installing</h3>
@@ -183,7 +182,7 @@
     $ setup.rb document
   </pre>
 
-  <p>Documenting generates *ri* documents for the program and automatically
+  <p>Documenting generates <tt>ri</tt> documents for the program and automatically
   places them in the appropriate system location. Documenting is not
   part of the standard sequence due to the way ri documentation is currently
   handled by the +rdoc+ tool -- it is not possible to uninstall them. So this
@@ -206,13 +205,13 @@
 
   <h3>Common Options</h3>
 
-  <p>Al commands support common options:</p>
-
   <pre>
   -q --quiet                    silence all output
      --trace --verbose          report on each operation performed
      --trial --no-harm          do not write to disk
   </pre>
+
+  <p>All commands support these common options.</p>
 
 </div>
 </div>
