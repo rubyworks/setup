@@ -16,8 +16,8 @@ namespace :setup do
   end
 
   desc 'Compiles ruby extentions'
-  task :setup do
-    session.setup
+  task :make do
+    session.make
   end
 
   desc 'Runs unit tests'
