@@ -206,10 +206,13 @@ module Setup
     def log_header(phase)
       return if quiet?
       if trial?
-        io.puts("\n[TRIAL RUN] #{phase.upcase}")
+        str = "#{phase.upcase} (trail run)"
       else
-        io.puts("\n#{phase.upcase}")
+        str = "#{phase.upcase}"
       end
+      line = "- " * 35
+      line[0..str.size+3] = str
+      io.puts("\n- - #{line}\n\n")
     end
 
     #   #center = "            "

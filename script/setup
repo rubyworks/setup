@@ -19,6 +19,11 @@ unless Errno.const_defined?(:ENOTEMPTY)   # Windows?
   end
 end
 module Setup
+  META_EXTENSION_DIR = '.setup'
+  FILETYPES = %w( bin lib ext data etc man doc )
+  INSTALL_RECORD = 'InstalledFiles'  #'.cache/setup/installedfiles'
+end
+module Setup
   class Project
     ROOT_MARKER = '{setup.rb,script/setup,meta/,MANIFEST,lib/}'
     def rootdir
@@ -88,56 +93,72 @@ module Setup
     def quiet=(val)
       @options[:quiet] = val
     end
+    def force?; @options[:force]; end
+    def force=(val)
+      @options[:force] = val
+    end
     def all
-      log_header('config')
       config
       if configuration.compile? && project.compiles?
-        log_header('setup')
-        setup
+        make
       end
       if configuration.test?
-        log_header('test')
-        test
+        ok = test
+        exit 1 unless ok
       end
-      log_header('install')
       install
-      if configuration.document?
-        log_header('document')
+      if configuration.ri?
         document
       end
     end
     def config
+      log_header('Configure')
       if configuration.save_config
         io.puts "Configuration saved." unless quiet?
       else
         io.puts "Configuration current." unless quiet?
       end
       puts configuration if trace? && !quiet?
-      compiler.configure
+      if compiler.compiles?
+        compiler.configure
+      end
     end
-    def setup
+    def make
       abort "must setup config first" unless configuration.exist?
+      log_header('Compile')
       compiler.compile
     end
+    alias_method :setup, :make
     def install
       abort "must setup config first" unless configuration.exist?
+      log_header('Install')
       installer.install
     end
     def test
-      return unless tester.testable?
+      return true unless tester.testable?
+      log_header('Test')
       tester.test
     end
     def document
+      log_header('Document')
       documentor.document
     end
     def clean
+      log_header('Clean')
       compiler.clean
     end
     def distclean
+      log_header('Distclean')
       compiler.distclean
     end
     def uninstall
+      if !File.exist?(INSTALL_RECORD)
+        io.puts "Nothing is installed."
+        return
+      end
+      log_header('Uninstall')
       uninstaller.uninstall
+      io.puts('Ok.')
     end
     def show
       puts configuration
@@ -164,33 +185,43 @@ module Setup
       @uninstaller ||= Uninstaller.new(project, configuration, options)
     end
     def log_header(phase)
-       return if quiet?
-       line = '- ' * 4 + ' -' * 28
-       line[5,phase.size] = " #{phase.to_s.upcase} "
-       io.puts "\n" + line + "\n\n"
+      return if quiet?
+      if trial?
+        io.puts("\n[TRIAL RUN] #{phase.upcase}")
+      else
+        io.puts("\n#{phase.upcase}")
+      end
     end
   end
 end
 module Setup
-  FILETYPES = %w( bin lib ext data etc man doc )
-  INSTALL_RECORD = 'InstalledFiles'
   class Base
     attr :project
     attr :config
     attr_accessor :trial
     attr_accessor :trace
     attr_accessor :quiet
+    attr_accessor :force
     attr_accessor :io
     def initialize(project, configuration, options={})
       @project = project
       @config  = configuration
+      initialize_hooks
       options.each do |k,v|
         __send__("#{k}=", v) if respond_to?("#{k}=")
+      end
+    end
+    def initialize_hooks
+      file = META_EXTENSION_DIR + "/#{self.class.name.downcase}.rb"
+      if File.exist?(file)
+        script = File.read(file)
+        (class << self; self; end).class_eval(script)
       end
     end
     def trial? ; @trial ; end
     def trace? ; @trace ; end
     def quiet? ; @quiet ; end
+    def force? ; @force ; end
     def rootdir
       project.rootdir
     end
@@ -202,12 +233,6 @@ module Setup
     def ruby(*args)
       bash(config.rubyprog, *args)
     end
-    def ask(question, answers=nil)
-      $stdout.puts "#{question}"
-      $stdout.puts " [#{answers}] " if answers
-      until inp = $stdin.gets ; sleep 1 ; end
-      inp.strip
-    end
     def trace_off #:yield:
       begin
         save, @trace = trace?, false
@@ -217,7 +242,7 @@ module Setup
       end
     end
     def rm_f(path)
-      io.puts "rm -f #{path}" if trace?
+      io.puts "rm -f #{path}" if trace? or trial?
       return if trial?
       force_remove_file(path)
     end
@@ -229,12 +254,12 @@ module Setup
     end
     def remove_file(path)
       File.chmod 0777, path
-      File.unlink path
+      File.unlink(path)
     end
     def rmdir(path)
-      $stderr.puts "rmdir #{path}" if trace?
+      io.puts "rmdir #{path}" if trace? or trial?
       return if trial?
-      Dir.rmdir path
+      Dir.rmdir(path)
     end
   end
   class Error < StandardError
@@ -242,10 +267,15 @@ module Setup
 end
 module Setup
   class Compiler < Base
+    def compiles?
+      !extdirs.empty?
+    end
     def configure
       extdirs.each do |dir|
         Dir.chdir(dir) do
-          ruby("extconf.rb") if File.exist?('extconf.rb')
+          if File.exist?('extconf.rb') && !FileUtils.uptodate?('Makefile', ['extconf.rb'])
+            ruby("extconf.rb")
+          end
         end
       end
     end
@@ -288,13 +318,13 @@ require 'yaml'
 module Setup
   class Configuration
     RBCONFIG  = ::Config::CONFIG
-    CONFIGFILE = 'SetupConfig'
-    METACONFIGFILE = 'script/.setup/metaconfig{,.rb}'
+    CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
+    META_CONFIG_FILE = META_EXTENSION_DIR + '/configuration.rb'
     def self.options
-      @options ||= []
+      @@options ||= []
     end
-    def self.option(name, type, description)
-      options << [name.to_s, type, description]
+    def self.option(name, *args) #type, description)
+      options << [name.to_s, *args] #type, description]
       attr_accessor(name)
     end
     option :prefix          , :path, 'path prefix of target environment'
@@ -318,9 +348,10 @@ module Setup
     option :makeprog        , :prog, 'make program to compile ruby extentions'
     option :extconfopt      , :opts, 'options to pass-thru to extconf.rb'
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
-    option :no_ext          , :bool, 'do not compile/install ruby extentions'
-    option :no_test         , :bool, 'do not run tests'
-    option :no_doc          , :bool, 'do not generate ri documentation'
+    option :no_test, :t     , :bool, 'run pre-installation tests'
+    option :no_ri           , :bool, 'generate ri documentation'
+    option :no_doc,  :d     , :bool, 'install doc/ directory'
+    option :no_ext          , :bool, 'compile/install ruby extentions'
     option :install_prefix  , :path, 'install to alternate root location'
     option :root            , :path, 'install to alternate root location'
     option :installdirs     , :pick, 'install location mode (site,std,home)'  #, local)
@@ -349,27 +380,28 @@ module Setup
       yeild(self) if block_given?
     end
     def initialize_metaconfig
-      if File.exist?(METACONFIGFILE)
-        script = File.read(METACONFIGFILE)
+      if File.exist?(META_CONFIG_FILE)
+        script = File.read(META_CONFIG_FILE)
         (class << self; self; end).class_eval(script)
       end
     end
     def initialize_defaults
       self.type    = 'site'
-      self.no_doc  = true
-      self.no_test = false
+      self.no_ri   = true
+      self.no_test = true
+      self.no_doc  = false
       self.no_ext  = false
     end
     def initialize_environment
-      options.each do |name, type, description|
+      options.each do |name, *args|
         if value = ENV["RUBYSETUP_#{name.to_s.upcase}"]
-          __send__("#{name}=",value)
+          __send__("#{name}=", value)
         end
       end
     end
     def initialize_configfile
-      if File.exist?(CONFIGFILE)
-        erb = ERB.new(File.read(CONFIGFILE))
+      if File.exist?(CONFIG_FILE)
+        erb = ERB.new(File.read(CONFIG_FILE))
         txt = erb.result(binding)
         dat = YAML.load(txt)
         dat.each do |k, v|
@@ -591,19 +623,28 @@ module Setup
     def no_doc=(val)
       @no_doc = boolean(val)
     end
+    def no_ri
+      @no_ri
+    end
+    def no_ri=(val)
+      @no_ri = boolean(val)
+    end
     def compile?
       !no_ext
     end
     def test?
       !no_test
     end
-    def document?
+    def ri?
+      !no_ri
+    end
+    def doc?
       !no_doc
     end
     def to_h
       h = {}
-      self.class.options.each do |name, type, description|
-        h[name] = __send__(name)
+      options.each do |name, *args|
+        h[name.to_s] = __send__(name)
       end
       h
     end
@@ -615,18 +656,18 @@ module Setup
     end
     def save_config
       out = to_yaml
-      if not File.exist?(File.dirname(CONFIGFILE))
-        FileUtils.mkdir_p(File.dirname(CONFIGFILE))
+      if not File.exist?(File.dirname(CONFIG_FILE))
+        FileUtils.mkdir_p(File.dirname(CONFIG_FILE))
       end
-      if File.exist?(CONFIGFILE)
-        txt = File.read(CONFIGFILE)
+      if File.exist?(CONFIG_FILE)
+        txt = File.read(CONFIG_FILE)
         return nil if txt == out
       end          
-      File.open(CONFIGFILE, 'w'){ |f| f << out }
+      File.open(CONFIG_FILE, 'w'){ |f| f << out }
       true
     end
     def exist?
-      File.exist?(CONFIGFILE)
+      File.exist?(CONFIG_FILE)
     end
   private
     def pathname(path)
@@ -722,7 +763,7 @@ module Setup
     def exec_ri
       case config.type #installdirs
       when 'std', 'ruby'
-        output = "--ri-system"
+        output  = "--ri-site"
       when 'site'
         output = "--ri-site"
       when 'home'
@@ -750,12 +791,12 @@ module Setup
         puts cmd
       else
         begin
-          system(cmd)
+          success = system(cmd)
+          raise unless success
           io.puts "Ok ri." #unless quiet?
         rescue Exception
           $stderr.puts "ri generation failed"
           $stderr.puts "command was: '#{cmd}'"
-          $stderr.puts "proceeding with install..."
         end
       end
     end
@@ -822,13 +863,13 @@ module Setup
     end
     def install_bin
       return unless directory?('bin')
-      io.puts "* bin -> #{config.bindir}" unless quiet?
+      report_transfer('bin', config.bindir)
       files = files('bin')
       install_files('bin', files, config.bindir, 0755)
     end
     def install_ext
       return unless directory?('ext')
-      io.puts "* ext -> #{config.sodir}" unless quiet?
+      report_transfer('ext', config.sodir)
       files = files('ext')
       files = select_dllext(files)
       files.each do |file|
@@ -839,38 +880,44 @@ module Setup
     end
     def install_lib
       return unless directory?('lib')
-      io.puts "* lib -> #{config.rbdir}" unless quiet?
+      report_transfer('lib', config.rbdir)
       files = files('lib')
       install_files('lib', files, config.rbdir, 0644)
     end
     def install_data
       return unless directory?('data')
-      io.puts "* data -> #{config.datadir}" unless quiet?
+      report_transfer('data', config.datadir)
       files = files('data')
       install_files('data', files, config.datadir, 0644)
     end
     def install_etc
       return unless directory?('etc')
-      io.puts "* etc -> #{config.sysconfdir}" unless quiet?
+      report_transfer('etc', config.sysconfdir)
       files = files('etc')
       install_files('etc', files, config.sysconfdir, 0644)
     end
     def install_man
       return unless directory?('man')
-      io.puts "* man -> #{config.mandir}" unless quiet?
+      report_transfer('man', config.mandir)
       files = files('man')
       install_files('man', files, config.mandir, 0644)
     end
     def install_doc
-      return unless config.document?  # TODO: seprate ri generation from doc installation
+      return unless config.doc?
       return unless directory?('doc')
       return unless project.name
-      dir   = File.join(config.docdir, "ruby-{project.name}")
-      io.puts "* doc -> #{dir}" unless quiet?
+      dir = File.join(config.docdir, "ruby-{project.name}")
+      report_transfer('doc', dir)
       files = files('doc')
       install_files('doc', files, dir, 0644)
     end
   private
+    def report_transfer(source, directory)
+      unless quiet?
+        out = File.join(install_prefix, directory)
+        io.puts "* #{source} -> #{out}"
+      end
+    end
     def directory?(path)
       File.directory?(path)
     end
@@ -1046,7 +1093,7 @@ module Setup
 end
 module Setup
   class Tester < Base
-    RUBYSCRIPT  = 'script/.setup/test.rb'
+    RUBYSCRIPT  = META_EXTENSION_DIR + '/testrc.rb'
     SHELLSCRIPT = 'script/test'
     def testable?
       return false if config.no_test
@@ -1055,7 +1102,7 @@ module Setup
       false
     end
     def test
-      return if !testable?
+      return true if !testable?
       if File.exist?(RUBYSCRIPT)
         test_rubyscript
       elsif File.exist?(SHELLSCRIPT)
@@ -1073,38 +1120,46 @@ end
 module Setup
   class Uninstaller < Base
     def uninstall
-      paths = File.read(INSTALL_RECORD).split("\n")
-      dirs, files = paths.partition{ |f| File.dir?(f) }
-      remove = []
-      files.uniq.each do |file|
-        next if /^\#/ =~ file  # skip comments
-        remove << file if File.exist?(file)
+      return unless File.exist?(INSTALL_RECORD)
+      files = []
+      dirs  = []
+      paths.each do |path|
+        dirs  << path if File.dir?(path)
+        files << path if File.file?(path)
       end
-      if trace? && !trial?
-        puts remove.collect{ |f| "rm #{f}" }.join("\n")
-        ans = ask("Continue?", "yN")
-        case ans
-        when 'y', 'Y', 'yes'
-        else
-          return # abort?
-        end
+      if dirs.empty? && files.empty?
+        io.outs "Nothing to remove."
+        return
       end
-      remove.each do |file|
+      files.sort!{ |a,b| b.size <=> a.size }
+      dirs.sort!{ |a,b| b.size <=> a.size }
+      if !force? && !trial?
+        puts (files + dirs).collect{ |f| "#{f}" }.join("\n")
+        puts
+        puts "Must use --force option to remove these files and directories that become empty."
+        return
+      end
+      files.each do |file|
         rm_f(file)
       end
       dirs.each do |dir|
-        empty = Dir[File.join(dir,'*')].empty?
-        begin
-          if trial?
-            io.puts "rmdir #{dir}"
-          else
-            rmdir(dir) if empty
-          end
-        rescue Errno::ENOTEMPTY
-          io.puts "may not be empty -- #{dir}" if trace?
-        end
+        entries = Dir.entries(dir)
+        entries.delete('.')
+        entries.delete('..')
+          rmdir(dir) if entries.empty?
       end
       rm_f(INSTALL_RECORD)
+    end
+  private
+    def paths
+      @paths ||= (
+        lines = File.read(INSTALL_RECORD).split(/\s*\n/)
+        lines = lines.map{ |line| line.strip }
+        lines = lines.uniq
+        lines = lines.reject{ |line| line.empty? }       # skip blank lines
+        lines = lines.reject{ |line| line[0,1] == '#' }  # skip blank lines
+        lines
+      )
     end
   end
 end
@@ -1124,12 +1179,12 @@ module Setup
       tasks[name] = description
       order << name
     end
-    task 'all'      , "do config, setup, then install"
+    task 'all'      , "config, setup, test, install"
     task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
-    task 'setup'    , "compile ruby extentions"
-    task 'test'     , "run tests"
-    task 'document' , "generate ri documentation"
+    task 'make'     , "compile ruby extentions"
+    task 'test'     , "run test suite"
+    task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
     task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
@@ -1162,6 +1217,7 @@ module Setup
         exit 1
       end
       rootdir = session.project.rootdir
+      print_header
       begin
         session.__send__(task)
       rescue Error
@@ -1187,23 +1243,30 @@ module Setup
     def optparse_config(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
-      configuration.options.each do |name, type, desc|
+      configuration.options.each do |args|
+        args = args.dup
+        desc = args.pop
+        type = args.pop
+        name, shortcut = *args
         optname = name.to_s.gsub('_', '-')
         case type
         when :bool
           if optname.index('no-') == 0
             optname = "[no-]" + optname.sub(/^no-/, '')
-            parser.on("--#{optname}", desc) do |val|
+            opts = shortcut ? ["-#{shortcut}", "--#{optname}", desc] : ["--#{optname}", desc]
+            parser.on(*opts) do |val|
               configuration.__send__("#{name}=", !val)
             end
           else
             optname = "[no-]" + optname.sub(/^no-/, '')
-            parser.on("--#{optname}", desc) do |val|
+            opts = shortcut ? ["-#{shortcut}", "--#{optname}", desc] : ["--#{optname}", desc]
+            parser.on(*opts) do |val|
               configuration.__send__("#{name}=", val)
             end
           end
         else
-          parser.on("--#{optname} #{type.to_s.upcase}", desc) do |val|
+          opts = shortcut ? ["-#{shortcut}", "--#{optname} #{type.to_s.upcase}", desc] : ["--#{optname} #{type.to_s.upcase}", desc]
+          parser.on(*opts) do |val|
             configuration.__send__("#{name}=", val)
           end
         end
@@ -1216,19 +1279,23 @@ module Setup
         configuration.install_prefix = val
       end
     end
-    def optparse_uninstall(parser, options)
-    end
     def optparse_common(parser, options)
       parser.separator ""
       parser.separator "General options:"
-      parser.on("-q", "--quiet", "Suppress output") do |val|
-        session.options[:quiet] = val
+      parser.on("-q", "--quiet", "Suppress output") do
+        session.quiet = true
+      end
+      parser.on("-f", "--force", "Force operation") do
+        session.force = true
       end
       parser.on("--trace", "--verbose", "Watch execution") do |val|
-        session.options[:trace] = true
+        session.trace = true
       end
       parser.on("--trial", "--no-harm", "Do not write to disk") do |val|
-        session.options[:trial] = true
+        session.trial = true
+      end
+      parser.on("--debug", "Turn on debug mode") do |val|
+        $DEBUG = true
       end
       parser.separator ""
       parser.separator "Inform options:"
@@ -1248,31 +1315,8 @@ module Setup
     def task_names
       self.class.tasks.keys
     end
-=begin
-    def help
-    fmt = " " * 12 + "%-10s       %s"
-      commands = self.class.order.collect do |k|
-        d = self.class.tasks[k]
-        (fmt % ["#{k}", d])
-      end.join("\n").strip
-      fmt = " " * 13 + "%-20s       %s"
-      configs = configuration.options.collect do |k,t,d|
-        (fmt % ["--#{k}", d])
-      end.join("\n").strip
-      text = <<-END
-        USAGE: #{File.basename($0)} [command] [options]
-        Commands:
-        Options for CONFIG:
-        Options for INSTALL:
-            --prefix                      Set the install prefix
-        Options in common:
-            -q --quiet                    Silence output
-               --verbose                  Provide verbose output
-            -n --no-write                 Do not write to disk
-      END
-      text.gsub(/^\ {8,8}/, '')
+    def print_header
     end
-=end
   end
 end
 Setup::Command.run
