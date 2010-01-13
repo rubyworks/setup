@@ -1,6 +1,6 @@
 require 'setup/installer'
 
-Test Installer do
+Test Setup::Installer do
 
   Unit :files => "finds all files to be installed" do
     prefix = File.join(Dir.tmpdir, 'setup', 'fauxroot')
