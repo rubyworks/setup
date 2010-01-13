@@ -25,6 +25,17 @@ scripts = %w{
   bin/setup.rb
 }
 
+comment = <<-HERE
+#
+# Setup.rb, #{Time.now.strftime("%Y-%m-%d %H:%M:%S")}
+#
+# This is a stand-alone bundle of the setup.rb application.
+# You can place it in your projects script/ directory, or
+# rename it to 'setup.rb' and place it in your project's
+# root directory (just like old times).
+#
+HERE
+
 #
 bundle = ""
 
@@ -46,6 +57,7 @@ bundle.gsub!(/^\s*\#.*?\n/, '')
 # save
 File.open('script/setup', 'w') do |f|
   f << "#!/usr/bin/env ruby\n"
+  f << comment
   f << bundle
 end
 

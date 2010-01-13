@@ -1,4 +1,12 @@
 #!/usr/bin/env ruby
+#
+# Setup.rb, 2010-01-12 20:05:48
+#
+# This is a stand-alone bundle of the setup.rb application.
+# You can place it in your projects script/ directory, or
+# rename it to 'setup.rb' and place it in your project's
+# root directory (just like old times).
+#
 module Setup
   VERSION   = '5.0.0'
 end
