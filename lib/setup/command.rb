@@ -121,11 +121,14 @@ module Setup
     def optparse_all(parser, options)
       optparse_config(parser, options)
       #optparse_install(parser, options)
-      #parser.on("--no-test", "do not run tests") do
-      #  configuration.no_test = true
+      #parser.on("-t", "--[no-]test", "run tests") do |val|
+      #  configuration.no_test = val
       #end
-      #parser.on("--no-doc", "do not generate ri documentation") do
-      #  configuration.no_doc = true
+      #parser.on("--[no-]ri", "generate ri documentation") do |val|
+      #  configuration.no_doc = val
+      #end
+      #parser.on("--[no-]doc", "do not install documentation") do |val|
+      #  configuration.no_doc = val
       #end
     end
 
@@ -180,8 +183,7 @@ module Setup
 
     #def optparse_test(parser, options)
     #  parser.separator ""
-    #  parser.separator "Install options:"
-    #
+    #  parser.separator "Test options:"
     #  parser.on("--runner TYPE", "Test runner (auto|console|gtk|gtk2|tk)") do |val|
     #    ENV['RUBYSETUP_TESTRUNNER'] = val
     #  end

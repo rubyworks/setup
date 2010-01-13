@@ -66,6 +66,11 @@ module Setup
       @options[:force] = val
     end
 
+    #
+    def compile?
+      configuration.compile? && project.compiles?
+    end
+
     # #  S E T U P  T A S K S  # #
 
     # Run all tasks in sequence.
@@ -82,7 +87,7 @@ module Setup
     #
     def all
       config
-      if configuration.compile? && project.compiles?
+      if compile?
         make
       end
       if configuration.test?
@@ -104,9 +109,7 @@ module Setup
         io.puts "Configuration current." unless quiet?
       end
       puts configuration if trace? && !quiet?
-      if compiler.compiles?
-        compiler.configure
-      end
+      compiler.configure if compile? #compiler.compiles?
     end
 
     #

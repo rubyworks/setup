@@ -152,11 +152,10 @@ module Setup
           k = k.gsub('-','_')
           __send__("#{k}=", v)
         end
-
+        # do these last
         if dat['type']
           self.type = dat['type']
         end
-
         if dat['installdirs']
           self.installdirs = dat['installdirs']
         end
