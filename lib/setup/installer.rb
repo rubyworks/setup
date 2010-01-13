@@ -108,7 +108,11 @@ module Setup
     # Display the file transfer taking place.
     def report_transfer(source, directory)
       unless quiet?
-        out = File.join(install_prefix, directory)
+        if install_prefix
+          out = File.join(install_prefix, directory)
+        else
+          out = directory
+        end
         io.puts "* #{source} -> #{out}"
       end
     end
