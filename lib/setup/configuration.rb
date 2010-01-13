@@ -58,8 +58,8 @@ module Setup
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
 
     option :no_test, :t     , :bool, 'run pre-installation tests'
-    option :no_ri           , :bool, 'generate ri documentation'
-    option :no_doc,  :d     , :bool, 'install doc/ directory'
+    option :no_ri,   :d     , :bool, 'generate ri documentation'
+    option :no_doc,         , :bool, 'install doc/ directory'
     option :no_ext          , :bool, 'compile/install ruby extentions'
 
     #option :rdoc            , :pick, 'generate rdoc documentation'

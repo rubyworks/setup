@@ -57,13 +57,12 @@
     $ sudo setup.rb
   </pre>
 
-  <p>If needs be, the end-installer can separate setup.rb's operation
+  <p>If need be, the end-installer can separate setup.rb's operation
   into it's component phases:</p>
 
   <pre>
     $ setup.rb config
-    $ setup.rb setup
-    $ setup.rb test
+    $ setup.rb make
     $ sudo setup.rb install
   </pre>
 
@@ -96,9 +95,10 @@
        --makeprog                 make program to compile ruby extentions
        --extconfopt               options to pass-thru to extconf.rb
        --shebang                  shebang line (#!) editing mode (all,ruby,never)
-       --no-ext                   do not compile/install ruby extentions
-       --no-test                  do not run tests
-       --no-doc                   do not generate documentation
+       --[no-]ext                 do or do not compile/install ruby extentions
+       --[no-]test                do or do not run tests
+       --[no-]doc                 do or do not install documentation (doc/)
+       --[no-]ri                  do or do not generate ri documentation
        --type                     install location mode (std,site,home)
        --installdirs              old term for --type
        --root                     set the installation root prefix
@@ -150,6 +150,14 @@
   intensions. Note, you can deactivate testing when using <tt>.setup.rb all</tt>
   via the <tt>--no-test</tt> option. Keep in mind that testing may require support
   libraries such as RSpec, Lemon, Bacon, QED or Cucumber.</p>
+
+  <pre>
+    $ setup -t all
+  </pre>
+
+  <p>Testing can also be activated when using <tt>all</tt> via the <tt>-t</tt> or
+  <tt>--test</tt> option.</p>
+
 
   <h3>Installing</h3>
 
