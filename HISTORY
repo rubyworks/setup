@@ -1,10 +1,10 @@
 = RELEASE HISTORY
 
-== 5.0.0 / 2009-12-02
+== 5.0.0 / 2010-01-12
 
 Version 5 represents a major milestone in Setup.rb's development.
-While the 4.x series focused on imporving upon aspects of the
-orginal 3.4.1 code by Minero Aoki, this version takes the next step
+While the 4.x series focused on improving on aspects of the
+orginal 3.4.1 code base by Minero Aoki, this version takes the next step
 and reworks the entire script into an truly object-oriented design.
 In so doing, the system no longer traverses project directories
 one-by-one installing or compiling files as they are come across,
@@ -13,15 +13,19 @@ through them performing the required action.
 
 Changes:
 
-* 2 Major Changes
+* 5 Major Changes
 
     * Split script into distinct classes, one for each setup phase.
-    * Testing is handled by optional script/test or script/setup.rc/test.rb file.
+    * Testing is handled by optional script/test or .setup/testrc.rb file.
+    * Renamed 'setup' phase to 'make' phase.
+    * Deprecated MetaConfig API; support singleton extensions instead.
+    * Deprecated support for Ruby versions older than v1.6.2.
 
-* 2 Minor Changes
+* 3 Minor Changes
 
     * Returned to using InstalledFiles for record installation and improved.
     * Use SetupConfig instead of .cache/setup/config to store system configuration.
+    * Improved configuration options (eg. can use --type instead of --installdirs)
 
 
 == 4.2.1 / 2009-08-26
