@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-01-12 20:05:48
+# Setup.rb, 2010-01-13 03:28:11
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -105,9 +105,12 @@ module Setup
     def force=(val)
       @options[:force] = val
     end
+    def compile?
+      configuration.compile? && project.compiles?
+    end
     def all
       config
-      if configuration.compile? && project.compiles?
+      if compile?
         make
       end
       if configuration.test?
@@ -127,9 +130,7 @@ module Setup
         io.puts "Configuration current." unless quiet?
       end
       puts configuration if trace? && !quiet?
-      if compiler.compiles?
-        compiler.configure
-      end
+      compiler.configure if compile? #compiler.compiles?
     end
     def make
       abort "must setup config first" unless configuration.exist?
