@@ -2,6 +2,7 @@ require 'rbconfig'
 require 'fileutils'
 require 'erb'
 require 'yaml'
+require 'shellwords'
 require 'setup/core_ext'
 require 'setup/constants'
 
