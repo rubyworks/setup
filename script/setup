@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-01-26 21:42:15
+# Setup.rb, 2010-01-26 21:50:03
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -327,6 +327,7 @@ require 'rbconfig'
 require 'fileutils'
 require 'erb'
 require 'yaml'
+require 'shellwords'
 module Setup
   class Configuration
     RBCONFIG  = ::Config::CONFIG
