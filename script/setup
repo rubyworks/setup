@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-01-13 04:37:34
+# Setup.rb, 2010-01-26 21:42:15
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -373,8 +373,13 @@ module Setup
       name = key.to_s.downcase
       define_method(name){ val }
     end
-    ::Config::CONFIG["configure_args"].each do |ent|
-      key, val = *ent.split("=")
+    config_args = Shellwords.shellwords(::Config::CONFIG["configure_args"])
+    config_args.each do |ent|
+      if ent.index("=")
+        key, val = *ent.split("=")
+      else
+        key, val = ent, true
+      end
       name = key.downcase
       name = name.sub(/^--/,'')
       name = name.gsub(/-/,'_')

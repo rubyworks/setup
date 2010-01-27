@@ -83,9 +83,13 @@ module Setup
     end
 
     # Turn all of CONFIG["configure_args"] into methods.
-
-    ::Config::CONFIG["configure_args"].each do |ent|
-      key, val = *ent.split("=")
+    config_args = Shellwords.shellwords(::Config::CONFIG["configure_args"])
+    config_args.each do |ent|
+      if ent.index("=")
+        key, val = *ent.split("=")
+      else
+        key, val = ent, true
+      end
       name = key.downcase
       name = name.sub(/^--/,'')
       name = name.gsub(/-/,'_')
