@@ -114,7 +114,7 @@ module Setup
 
     #
     def make
-      abort "must setup config first" unless configuration.exist?
+      abort "must run 'setup config' first" unless configuration.exist?
       log_header('Compile')
       compiler.compile
     end
@@ -124,7 +124,7 @@ module Setup
 
     #
     def install
-      abort "must setup config first" unless configuration.exist?
+      abort "must run 'setup config' first" unless configuration.exist?
       log_header('Install')
       installer.install
     end

@@ -89,11 +89,11 @@ module Setup
 
       begin
         session.__send__(task)
-      rescue Error
-        raise if $DEBUG
+      rescue Error => err
+        raise err if $DEBUG
         $stderr.puts $!.message
         $stderr.puts "Try 'setup.rb --help' for detailed usage."
-        exit 1
+        abort $!.message #exit 1
       end
 
       puts unless session.quiet?

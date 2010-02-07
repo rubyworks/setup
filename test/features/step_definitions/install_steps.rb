@@ -19,7 +19,7 @@ When /I issue the command 'setup.rb install' unprepared$/ do
 end
 
 Then /^I will be told that I must first run 'setup\.rb make'$/ do
-  $setup_feature_error.message.assert =~ /setup\.rb make first/
+  $setup_feature_error.to_s.assert =~ /setup\.rb make\'? first/
 end
 
 # Site Ruby Locations

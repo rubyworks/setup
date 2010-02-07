@@ -3,7 +3,6 @@ Feature: Install
   As a Ruby Developer
   I want to use the setup.rb install command
 
-
   Scenario: Install project to Ruby's site locations
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=site' has been run
