@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-02-07 08:25:38
+# Setup.rb, 2010-02-07 08:33:15
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -8,7 +8,7 @@
 # root directory (just like old times).
 #
 module Setup
-  VERSION   = '5.0.0'
+  VERSION   = '5.0.1'
 end
 class << File #:nodoc: all
   unless respond_to?(:read)   # Ruby 1.6 and less
