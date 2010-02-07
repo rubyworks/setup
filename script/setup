@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-01-26 21:50:03
+# Setup.rb, 2010-02-07 08:25:38
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -133,13 +133,13 @@ module Setup
       compiler.configure if compile? #compiler.compiles?
     end
     def make
-      abort "must setup config first" unless configuration.exist?
+      abort "must run 'setup config' first" unless configuration.exist?
       log_header('Compile')
       compiler.compile
     end
     alias_method :setup, :make
     def install
-      abort "must setup config first" unless configuration.exist?
+      abort "must run 'setup config' first" unless configuration.exist?
       log_header('Install')
       installer.install
     end
@@ -954,7 +954,7 @@ module Setup
         File.extname(file) == ".#{dllext}"
       end
       if ents.empty? && !files.empty?
-        raise Error, "ruby extention not compiled: 'setup.rb setup' first"
+        raise Error, "ruby extention not compiled: 'setup.rb make' first"
       end
       ents
     end
@@ -1242,11 +1242,11 @@ module Setup
       print_header
       begin
         session.__send__(task)
-      rescue Error
-        raise if $DEBUG
+      rescue Error => err
+        raise err if $DEBUG
         $stderr.puts $!.message
         $stderr.puts "Try 'setup.rb --help' for detailed usage."
-        exit 1
+        abort $!.message #exit 1
       end
       puts unless session.quiet?
     end

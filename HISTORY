@@ -1,5 +1,21 @@
 = RELEASE HISTORY
 
+== 5.0.1 / 2010-02-07
+
+Version 5.0.1 fixes a bug reading configuration options,
+and makes some minor adjusemnt to exit error messages.
+
+Changes:
+
+* 1 Bug Fix
+
+    * Fixed parsing of ruby install parameters on systems with custom configurations.
+
+* 1 Minor Enhancement
+
+    * Use 'abort $!.message' instead of 'exit 1' when exiting on error.
+
+
 == 5.0.0 / 2010-01-12
 
 Version 5 represents a major milestone in Setup.rb's development.
