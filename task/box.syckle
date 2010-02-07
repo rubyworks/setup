@@ -1,9 +1,0 @@
----
-box:
-  service: Box
-  active : true
-  types  : [gem, gz]
-  include: [bin, lib, meta, script, test, "[A-Z]*"]
-  exclude: [InstalledFiles, SetupConfig]
-  master : true
-
