@@ -51,7 +51,7 @@ a:hover {
   border-bottom: 1px dotted #FF226C;
 }
 
-pre {#FF226C;
+pre {
   padding: 0.5em 0;
   border: 1px solid #ccc;
 }
@@ -634,6 +634,7 @@ div.method-source-code pre {
 
 .file h1, h2, h3, h4, h5  {
   color: #FF226C;
+  color: #222222;
 }
 
 /*

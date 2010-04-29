@@ -99,17 +99,17 @@
           
             
             <li class="method">
-              <a href="#M000037">#binread</a>
+              <a href="#M000036">#binread</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000034">#destination</a>
+              <a href="#M000030">#destination</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000036">#diff?</a>
+              <a href="#M000033">#diff?</a>
             </li>
           
             
@@ -159,12 +159,12 @@
           
             
             <li class="method">
-              <a href="#M000023">#install_file</a>
+              <a href="#M000020">#install_file</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000020">#install_files</a>
+              <a href="#M000019">#install_files</a>
             </li>
           
             
@@ -184,7 +184,7 @@
           
             
             <li class="method">
-              <a href="#M000032">#install_record</a>
+              <a href="#M000029">#install_record</a>
             </li>
           
             
@@ -194,17 +194,17 @@
           
             
             <li class="method">
-              <a href="#M000026">#mkdir_p</a>
+              <a href="#M000025">#mkdir_p</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000041">#new_shebang</a>
+              <a href="#M000040">#new_shebang</a>
             </li>
           
             
             <li class="method">
-              <a href="#M000043">#open_atomic_writer</a>
+              <a href="#M000042">#open_atomic_writer</a>
             </li>
           
             
@@ -252,6 +252,8 @@
           <li class="file"><a href="../../files/InstalledFiles.html">InstalledFiles</a></li>
         
           <li class="file"><a href="../../files/HISTORY.html">HISTORY</a></li>
+        
+          <li class="file"><a href="../../files/Syckfile.html">Syckfile</a></li>
         
           <li class="file"><a href="../../files/COPYING.html">COPYING</a></li>
         
@@ -315,7 +317,7 @@
       <div style="float: right; margin-right: 5px;">
         <a href="http://validator.w3.org/check/referer"><img src="../../assets/icon/check.png" alt="[Validate]" height="16" width="16" /></a>
       </div>
-      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.1
+      Generated with <a href="http://github.com/proutils/webri">WebRI Redfish</a> 1.2
       <br/><br/>
     </div>
   </div>
@@ -709,7 +711,7 @@ Install manpages.
 
     
       <div id="binread-method" class="method-detail ">
-        <a name="M000037"></a>
+        <a name="M000036"></a>
 
         <div class="method-heading">
         
@@ -745,7 +747,7 @@ Binary read.
 
     
       <div id="destination-method" class="method-detail ">
-        <a name="M000034"></a>
+        <a name="M000030"></a>
 
         <div class="method-heading">
         
@@ -782,7 +784,7 @@ Determine actual destination including install_prefix.
 
     
       <div id="diff--method" class="method-detail ">
-        <a name="M000036"></a>
+        <a name="M000033"></a>
 
         <div class="method-heading">
         
@@ -923,7 +925,7 @@ Get a list of project files given a project subdirectory.
 
     
       <div id="install-file-method" class="method-detail ">
-        <a name="M000023"></a>
+        <a name="M000020"></a>
 
         <div class="method-heading">
         
@@ -976,7 +978,7 @@ Install a project file.
 
     
       <div id="install-files-method" class="method-detail ">
-        <a name="M000020"></a>
+        <a name="M000019"></a>
 
         <div class="method-heading">
         
@@ -1014,7 +1016,7 @@ Install project files.
 
     
       <div id="install-record-method" class="method-detail ">
-        <a name="M000032"></a>
+        <a name="M000029"></a>
 
         <div class="method-heading">
         
@@ -1091,7 +1093,7 @@ prepared (ie. make it&#8217;s directory).
 
     
       <div id="mkdir-p-method" class="method-detail ">
-        <a name="M000026"></a>
+        <a name="M000025"></a>
 
         <div class="method-heading">
         
@@ -1145,7 +1147,7 @@ Install a directory.
 
     
       <div id="new-shebang-method" class="method-detail ">
-        <a name="M000041"></a>
+        <a name="M000040"></a>
 
         <div class="method-heading">
         
@@ -1184,7 +1186,7 @@ Install a directory.
 
     
       <div id="open-atomic-writer-method" class="method-detail ">
-        <a name="M000043"></a>
+        <a name="M000042"></a>
 
         <div class="method-heading">
         
@@ -1366,7 +1368,7 @@ Extract dynamic link libraries from all ext files.
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">file</span>) <span class="ruby-operator">==</span> <span class="ruby-node">&quot;.#{dllext}&quot;</span>
       <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ents</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">files</span>.<span class="ruby-identifier">empty?</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-value str">&quot;ruby extention not compiled: 'setup.rb setup' first&quot;</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Error</span>, <span class="ruby-value str">&quot;ruby extention not compiled: 'setup.rb make' first&quot;</span>
       <span class="ruby-keyword kw">end</span>
       <span class="ruby-identifier">ents</span>
     <span class="ruby-keyword kw">end</span></pre>

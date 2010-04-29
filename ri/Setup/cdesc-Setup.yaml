@@ -8,7 +8,7 @@ constants:
 - !ruby/object:RDoc::RI::Constant 
   comment: 
   name: VERSION
-  value: "'5.0.0'"
+  value: "'5.0.1'"
 - !ruby/object:RDoc::RI::Constant 
   comment: []
 
