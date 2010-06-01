@@ -1,12 +1,20 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-06-01 11:26:08
+# Setup.rb, 2010-06-01 12:03:30
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
-# rename it to 'setup.rb' and place it in your project's
+# call it 'setup.rb' and place it in your project's
 # root directory (just like old times).
 #
+# NOTE: As of version 5.1.0 this bundled rendition is also
+# being used for the bin/setup.rb exe. Rather than the previous:
+#
+#   require 'setup/command'
+#   Setup::Command.run
+#
+# By doing so, +rvm+ should be able to use it across all rubies
+# without issue and without needing to install it for each.
 module Setup
   VERSION   = '5.0.1'
 end
@@ -1249,6 +1257,11 @@ module Setup
       end
       rootdir = session.project.rootdir
       print_header
+      begin
+        $stderr.puts "(#{RUBY_ENGINE} #{RUBY_PLATFORM} #{RUBY_VERSION})"
+      rescue
+        $stderr.puts "(#{RUBY_PLATFORM} #{RUBY_VERSION})"
+      end
       begin
         session.__send__(task)
       rescue Error => err

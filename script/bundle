@@ -33,9 +33,17 @@ comment = <<-HERE
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
-# rename it to 'setup.rb' and place it in your project's
+# call it 'setup.rb' and place it in your project's
 # root directory (just like old times).
 #
+# NOTE: As of version 5.1.0 this bundled rendition is also
+# being used for the bin/setup.rb exe. Rather than the previous:
+#
+#   require 'setup/command'
+#   Setup::Command.run
+#
+# By doing so, +rvm+ should be able to use it across all rubies
+# without issue and without needing to install it for each.
 HERE
 
 #
@@ -62,5 +70,12 @@ File.open('script/setup', 'w') do |f|
   f << comment
   f << bundle
 end
-
 FileUtils.chmod(0744, 'script/setup')
+
+File.open('bin/setup.rb', 'w') do |f|
+  f << "#!/usr/bin/env ruby\n"
+  f << comment
+  f << bundle
+end
+FileUtils.chmod(0744, 'bin/setup.rb')
+
