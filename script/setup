@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Setup.rb, 2010-02-07 08:33:15
+# Setup.rb, 2010-06-01 11:26:08
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -29,7 +29,8 @@ end
 module Setup
   META_EXTENSION_DIR = '.setup'
   FILETYPES = %w( bin lib ext data etc man doc )
-  INSTALL_RECORD = 'InstalledFiles'  #'.cache/setup/installedfiles'
+  INSTALL_RECORD = 'SetupReceipt'
+  CONFIG_FILE = 'SetupConfig'
 end
 module Setup
   class Project
@@ -109,10 +110,8 @@ module Setup
       configuration.compile? && project.compiles?
     end
     def all
-      config
-      if compile?
-        make
-      end
+        config
+        compile
       if configuration.test?
         ok = test
         exit 1 unless ok
@@ -122,24 +121,31 @@ module Setup
         document
       end
     end
-    def config
-      log_header('Configure')
+    def preconfig
+      log_header('Preconfig')
       if configuration.save_config
-        io.puts "Configuration saved." unless quiet?
+        io.print "#{CONFIG_FILE} was saved. " unless quiet?
       else
-        io.puts "Configuration current." unless quiet?
+        io.print "#{CONFIG_FILE} is current. " unless quiet?
       end
+      io.puts "Edit to customize configuration." unless quiet?
       puts configuration if trace? && !quiet?
-      compiler.configure if compile? #compiler.compiles?
     end
-    def make
-      abort "must run 'setup config' first" unless configuration.exist?
-      log_header('Compile')
-      compiler.compile
+    def config
+      if compile?
+        log_header('Config')
+        compiler.configure
+      end
     end
+    def compile
+      if compile?
+        log_header('Compile')
+        compiler.compile
+      end
+    end
+    alias_method :make, :compile
     alias_method :setup, :make
     def install
-      abort "must run 'setup config' first" unless configuration.exist?
       log_header('Install')
       installer.install
     end
@@ -331,7 +337,6 @@ require 'shellwords'
 module Setup
   class Configuration
     RBCONFIG  = ::Config::CONFIG
-    CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
     META_CONFIG_FILE = META_EXTENSION_DIR + '/configuration.rb'
     def self.options
       @@options ||= []
@@ -393,9 +398,9 @@ module Setup
       initialize_metaconfig
       initialize_defaults
       initialize_environment
-      initialize_configfile
+      initialize_configfile unless values[:reset]
       values.each{ |k,v| __send__("#{k}=", v) }
-      yeild(self) if block_given?
+      yield(self) if block_given?
     end
     def initialize_metaconfig
       if File.exist?(META_CONFIG_FILE)
@@ -407,7 +412,7 @@ module Setup
       self.type    = 'site'
       self.no_ri   = true
       self.no_test = true
-      self.no_doc  = false
+      self.no_doc  = true
       self.no_ext  = false
     end
     def initialize_environment
@@ -418,7 +423,7 @@ module Setup
       end
     end
     def initialize_configfile
-      if File.exist?(CONFIG_FILE)
+      if exist?
         erb = ERB.new(File.read(CONFIG_FILE))
         txt = erb.result(binding)
         dat = YAML.load(txt)
@@ -436,6 +441,7 @@ module Setup
         end
       end
     end
+    attr_accessor :reset
     def base_bindir
       @base_bindir ||= subprefix('bindir')
     end
@@ -924,7 +930,7 @@ module Setup
       return unless config.doc?
       return unless directory?('doc')
       return unless project.name
-      dir = File.join(config.docdir, "ruby-{project.name}")
+      dir = File.join(config.docdir, "ruby-#{project.name}")
       report_transfer('doc', dir)
       files = files('doc')
       install_files('doc', files, dir, 0644)
@@ -1201,10 +1207,11 @@ module Setup
       tasks[name] = description
       order << name
     end
-    task 'all'      , "config, setup, test, install"
-    task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
-    task 'make'     , "compile ruby extentions"
+    task 'all'      , "config, compile and install"
+    task 'preconfig', "customize configuration settings"
+    task 'config'   , "configure extensions"
+    task 'compile'  , "compile ruby extentions"
     task 'test'     , "run test suite"
     task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
@@ -1224,12 +1231,14 @@ module Setup
       parser.banner = "Usage: #{File.basename($0)} [TASK] [OPTIONS]"
       optparse_header(parser, options)
       case task
-      when 'all'
-        optparse_all(parser, options)
+      when 'preconfig'
+        optparse_preconfig(parser, options)
       when 'config'
         optparse_config(parser, options)
       when 'install'
         optparse_install(parser, options)
+      when 'all'
+        optparse_all(parser, options)
       end
       optparse_common(parser, options)
       begin
@@ -1262,7 +1271,7 @@ module Setup
     def optparse_all(parser, options)
       optparse_config(parser, options)
     end
-    def optparse_config(parser, options)
+    def optparse_preconfig(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
       configuration.options.each do |args|
@@ -1287,12 +1296,15 @@ module Setup
             end
           end
         else
-          opts = shortcut ? ["-#{shortcut}", "--#{optname} #{type.to_s.upcase}", desc] : ["--#{optname} #{type.to_s.upcase}", desc]
+          opts = shortcut ? ["-#{shortcut}", "--#{optname} #{type.to_s.upcase}", desc] :
+                            ["--#{optname} #{type.to_s.upcase}", desc]
           parser.on(*opts) do |val|
             configuration.__send__("#{name}=", val)
           end
         end
       end
+    end
+    def optparse_config(parser, options)
     end
     def optparse_install(parser, options)
       parser.separator ""

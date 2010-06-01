@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
+
 raise "Not the right place #{Dir.pwd}" unless File.directory?('lib')
 
 #scripts = (Dir['lib/*.rb'] + Dir['lib/**/*']).uniq
