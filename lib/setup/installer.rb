@@ -96,7 +96,7 @@ module Setup
       return unless config.doc?
       return unless directory?('doc')
       return unless project.name
-      dir = File.join(config.docdir, "ruby-{project.name}")
+      dir = File.join(config.docdir, "ruby-#{project.name}")
       report_transfer('doc', dir)
       #io.puts "* doc -> #{dir}" unless quiet?
       files = files('doc')
