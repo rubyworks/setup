@@ -7,6 +7,9 @@ module Setup
   FILETYPES = %w( bin lib ext data etc man doc )
 
   #
-  INSTALL_RECORD = 'InstalledFiles'  #'.cache/setup/installedfiles'
+  INSTALL_RECORD = 'SetupReceipt'
+
+  #
+  CONFIG_FILE = 'SetupConfig'
 
 end

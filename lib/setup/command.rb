@@ -32,10 +32,11 @@ module Setup
       order << name
     end
 
-    task 'all'      , "config, setup, test, install"
-    task 'config'   , "saves your configuration"
     task 'show'     , "show current configuration"
-    task 'make'     , "compile ruby extentions"
+    task 'all'      , "config, compile and install"
+    task 'preconfig', "customize configuration settings"
+    task 'config'   , "configure extensions"
+    task 'compile'  , "compile ruby extentions"
     task 'test'     , "run test suite"
     task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
@@ -66,12 +67,14 @@ module Setup
 
       optparse_header(parser, options)
       case task
-      when 'all'
-        optparse_all(parser, options)
+      when 'preconfig'
+        optparse_preconfig(parser, options)
       when 'config'
         optparse_config(parser, options)
       when 'install'
         optparse_install(parser, options)
+      when 'all'
+        optparse_all(parser, options)
       end
       optparse_common(parser, options)
 
@@ -134,9 +137,12 @@ module Setup
 
     # Setup options for +config+ task.
 
-    def optparse_config(parser, options)
+    def optparse_preconfig(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
+      #parser.on('--reset', 'reset configuration to default settings') do
+      #  session.reset = true
+      #end
       configuration.options.each do |args|
         args = args.dup
         desc = args.pop
@@ -160,12 +166,17 @@ module Setup
             end
           end
         else
-          opts = shortcut ? ["-#{shortcut}", "--#{optname} #{type.to_s.upcase}", desc] : ["--#{optname} #{type.to_s.upcase}", desc]
+          opts = shortcut ? ["-#{shortcut}", "--#{optname} #{type.to_s.upcase}", desc] :
+                            ["--#{optname} #{type.to_s.upcase}", desc]
           parser.on(*opts) do |val|
             configuration.__send__("#{name}=", val)
           end
         end
       end
+    end
+
+    #
+    def optparse_config(parser, options)
     end
 
     # Setup options for +install+ task.

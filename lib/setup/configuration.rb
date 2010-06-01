@@ -15,8 +15,8 @@ module Setup
     # Ruby System Configuration
     RBCONFIG  = ::Config::CONFIG
 
-    # Confgiuration file
-    CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
+    ## Confgiuration file
+    #CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
 
     # Custom configuration file.
     META_CONFIG_FILE = META_EXTENSION_DIR + '/configuration.rb'
@@ -110,9 +110,10 @@ module Setup
       initialize_metaconfig
       initialize_defaults
       initialize_environment
-      initialize_configfile
+      initialize_configfile unless values[:reset]
+
       values.each{ |k,v| __send__("#{k}=", v) }
-      yeild(self) if block_given?
+      yield(self) if block_given?
     end
 
     #
@@ -130,7 +131,7 @@ module Setup
       self.type    = 'site'
       self.no_ri   = true
       self.no_test = true
-      self.no_doc  = false
+      self.no_doc  = true
       self.no_ext  = false
       #@rbdir = siterubyver      #'$siterubyver'
       #@sodir = siterubyverarch  #'$siterubyverarch'
@@ -147,7 +148,7 @@ module Setup
 
     # Load configuration.
     def initialize_configfile
-      if File.exist?(CONFIG_FILE)
+      if exist?
         erb = ERB.new(File.read(CONFIG_FILE))
         txt = erb.result(binding)
         dat = YAML.load(txt)
@@ -180,6 +181,8 @@ module Setup
     #    raise Error, $!.message + "\n#{File.basename($0)} config first"
     #  end
     #end
+
+    attr_accessor :reset
 
     # #  B A S E  D I R E C T O R I E S  # #
 

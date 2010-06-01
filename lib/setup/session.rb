@@ -24,6 +24,15 @@ module Setup
 
     # #  O P T I O N S  # #
 
+    ## Reset configuration?
+    #def reset?
+    #  @options[:reset]
+    #end
+
+    #def reset=(value)
+    #  @options[:reset] = value
+    #end
+
     #
     def io
       @options[:io]
@@ -86,10 +95,10 @@ module Setup
     # Use <tt>setup.rb document</tt> at a later time.
     #
     def all
-      config
-      if compile?
-        make
-      end
+      #if compile?
+        config
+        compile
+      #end
       if configuration.test?
         ok = test
         exit 1 unless ok
@@ -101,30 +110,44 @@ module Setup
     end
 
     #
-    def config
-      log_header('Configure')
+    def preconfig
+      log_header('Preconfig')
+      #if reset?
+      #  @configuration = Configuration.new(:reset=>true)
+      #end
       if configuration.save_config
-        io.puts "Configuration saved." unless quiet?
+        io.print "#{CONFIG_FILE} was saved. " unless quiet?
       else
-        io.puts "Configuration current." unless quiet?
+        io.print "#{CONFIG_FILE} is current. " unless quiet?
       end
+      io.puts "Edit to customize configuration." unless quiet?
       puts configuration if trace? && !quiet?
-      compiler.configure if compile? #compiler.compiles?
     end
 
     #
-    def make
-      abort "must run 'setup config' first" unless configuration.exist?
-      log_header('Compile')
-      compiler.compile
+    def config
+      if compile?
+        log_header('Config')
+        compiler.configure
+      end
+    end
+
+    #
+    def compile
+      if compile?
+        #abort "must run 'setup config' first" unless configuration.exist?
+        log_header('Compile')
+        compiler.compile
+      end
     end
 
     # What #make used to be called.
+    alias_method :make, :compile
     alias_method :setup, :make
 
     #
     def install
-      abort "must run 'setup config' first" unless configuration.exist?
+      #abort "must run 'setup config' first" unless configuration.exist?
       log_header('Install')
       installer.install
     end
