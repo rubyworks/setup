@@ -91,6 +91,12 @@ module Setup
       print_header
 
       begin
+        $stderr.puts "(#{RUBY_ENGINE} #{RUBY_VERSION} #{RUBY_PLATFORM})"
+      rescue
+        $stderr.puts "(#{RUBY_VERSION} #{RUBY_PLATFORM})"
+      end
+
+      begin
         session.__send__(task)
       rescue Error => err
         raise err if $DEBUG
