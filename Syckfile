@@ -23,11 +23,8 @@ gemcutter:
 
 box:
   service: Box
+  types  : [gem]
   active : true
-  types  : [gem, gz]
-  include: [bin, lib, meta, script, test, "[A-Z]*"]
-  exclude: [InstalledFiles, SetupConfig]
-  master : true
 
 ridoc:
   service: RIDoc
