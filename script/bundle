@@ -24,12 +24,13 @@ scripts = %w{
   lib/setup/tester.rb
   lib/setup/uninstaller.rb
   lib/setup/command.rb
-  bin/setup.rb
 }
 
+version = YAML.load(File.new('VERSION'))
+version = version.values_at('major', 'minor', 'patch', 'state', 'build').compact.join('.')
+
 comment = <<-HERE
-#
-# Setup.rb, #{Time.now.strftime("%Y-%m-%d %H:%M:%S")}
+# Setup.rb v#{version}
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -54,6 +55,7 @@ scripts.each do |script|
   bundle << "\n\n# %-16s #{"#" * 60}\n\n" % File.basename(script)
   bundle << File.read(script)
 end
+bundle << "\nSetup::Command.run"
 
 # remove setup requires
 bundle.gsub!(/require\s+["']setup\/(.*?)["']\s*$/, '')
