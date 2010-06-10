@@ -53,11 +53,13 @@ module Setup
 
     #
     def trial?; @options[:trial]; end
+    alias_method :dryrun?, :trial?
 
     #
     def trial=(val)
       @options[:trial] = val
     end
+    alias_method :dryrun=, :trial=
 
     #
     def quiet?; @options[:quiet]; end
