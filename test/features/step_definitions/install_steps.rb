@@ -22,6 +22,10 @@ Then /^I will be told that I must first run 'setup\.rb compile'$/ do
   $setup_feature_error.to_s.assert =~ /setup\.rb compile\'? first/
 end
 
+#Then /^I will be told that I must first run 'setup\.rb compile'$/ do
+#  $setup_feature_error.message.assert == "must run \'setup compile\' first"
+#end
+
 # Site Ruby Locations
 
 Then /the project's exectuables should be installed to the site_ruby bin location$/ do
