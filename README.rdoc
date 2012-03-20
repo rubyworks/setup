@@ -30,14 +30,7 @@ of the setup.rb and Ruby Setup.
 * Multi-package project layouts are no longer supported.
 * Metaconfig and Hooks are handled via singleton extensions.
 * No longer supports versions of Ruby older than v1.6.3.
-* The +setup+ phase has been renamed to the +make+ phase.
-
-=== STATUS
-
-Version 5 is a major re-engineering of setup.rb. Although it is fairly well
-tested, as such, it should be considered betaware until it accumulates
-enough use in the field. I will update this message when I feel a new status
-has been achieved (likely accompanied by an updated release).
+* The +setup+ phase has been renamed to the +compile+ phase.
 
 
 == INSTALLATION
@@ -125,18 +118,16 @@ take advantage of setup.rb's special features, please see the website.
 
 Copyright (c) 2008,2009 Thomas Sawyer
 
-Copyright (c) 2002,2005 Minero Aoki
-
-GNU LGPL, Lesser General Public License version 2.1.
-
-For details of LGPL, see the COPYING file.
-
-
+BSD-2-Clause License.
 
                                                7trans
                                   transfire@gmail.com
-                           http://proutils.github.com
+                           http://rubyworks.github.com
 
+
+Copyright (c) 2002,2005 Minero Aoki
+
+GNU LGPL, Lesser General Public License version 2.1+.
 
                                           Minero Aoki
                                   aamine@loveruby.net
