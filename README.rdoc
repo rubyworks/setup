@@ -4,7 +4,7 @@
 {Issues}[http://github.com/rubyworks/setup/issues] /
 {Source}[http://github.com/rubyworks/setup]
 
-[![Build Status](https://secure.travis-ci.org/rubyworks/setup.png)](http://travis-ci.org/rubyworks/setup)
+{<img src="https://secure.travis-ci.org/rubyworks/setup.png" />}[http://travis-ci.org/rubyworks/setup]
 
 
 == INTRODUCTION
