@@ -4,29 +4,29 @@ source:
 - PROFILE
 - profile.yml
 authors:
+- name: 7rans
+  email: transfire@gmail.com
 - name: Minero Aoki
   email: aamine@loveruby.net
-- name: Thomas Swyer
-  email: transfire@gmail.com
 copyrights:
 - holder: Rubyworks
   year: '2009'
   license: BSD-2-Clause
 - holder: Minero Aoki
   year: '2005'
-  license: Ruby
+  license: LGPL-2.0+
 requirements:
-- name: ae
+- name: detroit
   groups:
-  - test
+  - build
   development: true
 - name: cucumber
   groups:
   - test
   development: true
-- name: detroit
+- name: ae
   groups:
-  - build
+  - test
   development: true
 dependencies: []
 alternatives: []
@@ -49,11 +49,20 @@ summary: Setup.rb as a stand-alone application.
 version: 5.1.0
 name: setup
 title: Setup
-description: Every Rubyist is aware of Minero Aoki's ever useful setup.rb script.
-  It's how most of us used to install our ruby programs before RubyGems came along.And
-  it's still mighty useful in certain scenarios, not the least of which is the job
-  of the distribution package managers. Setup converts setup.rb into a stand-alone
-  application. No longer will you need distribute setup.rb with you Ruby packages.
-  Just instruct your users to use Setup.
-organization: Rubyworks
+description: ! 'Every Rubyist is aware of Minero Aoki''s ever useful
+
+  setup.rb script. It''s how most of us used to install
+
+  our ruby programs before RubyGems came along. And it''s
+
+  still mighty useful in certain scenarios, not the least
+
+  of which is the job of the distribution package managers.
+
+  Setup converts setup.rb into a stand-alone application.
+
+  No longer will you need distribute setup.rb with you
+
+  Ruby packages. Just instruct your users to use Setup.'
+organization: rubyworks
 date: '2012-03-18'

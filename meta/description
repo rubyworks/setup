@@ -1,6 +1,6 @@
 Every Rubyist is aware of Minero Aoki's ever useful
 setup.rb script. It's how most of us used to install
-our ruby programs before RubyGems came along.And it's
+our ruby programs before RubyGems came along. And it's
 still mighty useful in certain scenarios, not the least
 of which is the job of the distribution package managers.
 Setup converts setup.rb into a stand-alone application.
