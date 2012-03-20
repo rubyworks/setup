@@ -2,6 +2,7 @@
 source:
 - meta
 - PROFILE
+- profile.yml
 authors:
 - name: Minero Aoki
   email: aamine@loveruby.net
