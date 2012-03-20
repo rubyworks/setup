@@ -19,15 +19,13 @@ scripts = %w{
   lib/setup/base.rb
   lib/setup/compiler.rb
   lib/setup/configuration.rb
-  lib/setup/documentor.rb
   lib/setup/installer.rb
   lib/setup/tester.rb
   lib/setup/uninstaller.rb
   lib/setup/command.rb
 }
 
-version = YAML.load(File.new('VERSION'))
-version = version.values_at('major', 'minor', 'patch', 'state', 'build').compact.join('.')
+version = YAML.load_file('.ruby')['version']
 
 comment = <<-HERE
 # Setup.rb v#{version}

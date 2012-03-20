@@ -14,8 +14,22 @@
 #
 # By doing so, +rvm+ should be able to use it across all rubies
 # without issue and without needing to install it for each.
+require 'yaml'
 module Setup
-  VERSION   = '5.1.0'
+  DIRECTORY = File.dirname(__FILE__) + '/setup'
+  PROFILE = YAML.load(File.new(DIRECTORY + '/profile.yml'))
+  verfile = YAML.load(File.new(DIRECTORY + '/version.yml'))
+  VERSION = verfile.values_at('major','minor','patch','state','build').compact.join('.')
+  def self.const_missing(name)
+    key = name.to_s.downcase
+    if verfile.key?(key)
+      verfile[key]
+    elsif profile.key?(key)
+      PROFILE[key]
+    else
+      super(name)
+    end
+  end
 end
 class << File #:nodoc: all
   unless respond_to?(:read)   # Ruby 1.6 and less
@@ -41,35 +55,41 @@ module Setup
 end
 module Setup
   class Project
-    ROOT_MARKER = '{setup.rb,script/setup,meta/,MANIFEST,lib/}'
+    ROOT_MARKER = '{.ruby,setup.rb,.setup,lib/}'
+    def initialize
+      @dotruby_file = find('.ruby')
+      @dotruby = YAML.load_file(@dotruby_file) if @dotruby_file
+      @name     = nil
+      @version  = nil
+      @loadpath = ['lib']
+      if @dotruby
+        @name     = @dotruby['name']
+        @version  = @dotruby['version']
+        @loadpath = @dotruby['load_path']
+      else
+        if file = find('.setup/name')
+          @name = File.read(file).strip
+        end
+        if file = find('.setup/version')
+          @version = File.read(file).strip
+        end
+        if file = find('.setup/loadpath')
+          @loadpath = File.read(file).strip
+        end
+      end
+    end
+    attr :dotruby
+    attr :name
+    attr :version
+    attr :loadpath
+    alias load_path loadpath
     def rootdir
       @rootdir ||= (
-        root = Dir[File.join(Dir.pwd, ROOT_MARKER)].first
+        root = Dir.glob(File.join(Dir.pwd, ROOT_MARKER), File::FNM_CASEFOLD).first
         if !root
           raise Error, "not a project directory"
         else
           Dir.pwd
-        end
-      )
-    end
-    def name
-      @name = (
-        if file = Dir["{script/setup,meta,.meta}/name"].first
-          File.read(file).strip
-        else
-          nil
-        end
-      )
-    end
-    def loadpath
-      @loadpath ||= (
-        if file = Dir.glob('{script/setup,meta,.meta}/loadpath').first
-          raw = File.read(file).strip.chomp(']')
-          raw.split(/[\n,]/).map do |e|
-            e.strip.sub(/^[\[-]\s*/,'')
-          end
-        else
-          nil
         end
       )
     end
@@ -81,6 +101,21 @@ module Setup
     end
     def compiles?
       !extensions.empty?
+    end
+    def yardopts
+      Dir.glob(File.join(rootdir, '.yardopts')).first
+    end
+    def document
+      Dir.glob(File.join(rootdir, '.document')).first
+    end
+    def find(glob, flags=0)
+      case flags
+      when :casefold
+        flags = File::FNM_CASEFOLD
+      else
+        flags = flags.to_i
+      end      
+      Dir.glob(File.join(rootdir, glob), flags).first
     end
   end
 end
@@ -102,9 +137,11 @@ module Setup
       @options[:trace] = val
     end
     def trial?; @options[:trial]; end
+    alias_method :dryrun?, :trial?
     def trial=(val)
       @options[:trial] = val
     end
+    alias_method :dryrun=, :trial=
     def quiet?; @options[:quiet]; end
     def quiet=(val)
       @options[:quiet] = val
@@ -124,11 +161,8 @@ module Setup
         exit 1 unless ok
       end
       install
-      if configuration.ri?
-        document
-      end
     end
-    def preconfig
+    def config
       log_header('Preconfig')
       if configuration.save_config
         io.print "#{CONFIG_FILE} was saved. " unless quiet?
@@ -138,15 +172,10 @@ module Setup
       io.puts "Edit to customize configuration." unless quiet?
       puts configuration if trace? && !quiet?
     end
-    def config
-      if compile?
-        log_header('Config')
-        compiler.configure
-      end
-    end
     def compile
       if compile?
         log_header('Compile')
+        compiler.configure
         compiler.compile
       end
     end
@@ -160,10 +189,6 @@ module Setup
       return true unless tester.testable?
       log_header('Test')
       tester.test
-    end
-    def document
-      log_header('Document')
-      documentor.document
     end
     def clean
       log_header('Clean')
@@ -199,9 +224,6 @@ module Setup
     end
     def tester
       @tester ||= Tester.new(project, configuration, options)
-    end
-    def documentor
-      @documentor ||= Documentor.new(project, configuration, options)
     end
     def uninstaller
       @uninstaller ||= Uninstaller.new(project, configuration, options)
@@ -344,7 +366,7 @@ require 'shellwords'
 module Setup
   class Configuration
     RBCONFIG  = ::Config::CONFIG
-    META_CONFIG_FILE = META_EXTENSION_DIR + '/configuration.rb'
+    META_CONFIG_FILE = META_EXTENSION_DIR + '/metaconfig.rb'
     def self.options
       @@options ||= []
     end
@@ -374,7 +396,6 @@ module Setup
     option :extconfopt      , :opts, 'options to pass-thru to extconf.rb'
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
     option :no_test, :t     , :bool, 'run pre-installation tests'
-    option :no_ri,   :d     , :bool, 'generate ri documentation'
     option :no_doc          , :bool, 'install doc/ directory'
     option :no_ext          , :bool, 'compile/install ruby extentions'
     option :install_prefix  , :path, 'install to alternate root location'
@@ -666,9 +687,6 @@ module Setup
     def test?
       !no_test
     end
-    def ri?
-      !no_ri
-    end
     def doc?
       !no_doc
     end
@@ -785,96 +803,6 @@ end #module Setup
       end
     end
 =end
-module Setup
-  class Documentor < Base
-    def document
-      return if config.no_doc
-      exec_ri
-    end
-    def exec_ri
-      case config.type #installdirs
-      when 'std', 'ruby'
-        output  = "--ri-site"
-      when 'site'
-        output = "--ri-site"
-      when 'home'
-        output = "--ri"
-      else
-        abort "bad config: should not be possible -- type=#{config.type}"
-      end
-      if File.exist?('.document')
-        files = File.read('.document').split("\n")
-        files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
-        files.collect!{ |f| f.strip }
-      else
-        files = []
-        files << 'lib' if File.directory?('lib')
-        files << 'ext' if File.directory?('ext')
-      end
-      opt = []
-      opt << "-U"
-      opt << "-q" #if quiet?
-      opt << output
-      opt << files
-      opt = opt.flatten
-      cmd = "rdoc " + opt.join(' ')
-      if trial?
-        puts cmd
-      else
-        begin
-          success = system(cmd)
-          raise unless success
-          io.puts "Ok ri." #unless quiet?
-        rescue Exception
-          $stderr.puts "ri generation failed"
-          $stderr.puts "command was: '#{cmd}'"
-        end
-      end
-    end
-    def exec_rdoc
-      main = Dir.glob("README{,.*}", File::FNM_CASEFOLD).first
-      if File.exist?('.document')
-        files = File.read('.document').split("\n")
-        files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
-        files.collect!{ |f| f.strip }
-      else
-        files = []
-        files << main  if main
-        files << 'lib' if File.directory?('lib')
-        files << 'ext' if File.directory?('ext')
-      end
-      checkfiles = (files + files.map{ |f| Dir[File.join(f,'*','**')] }).flatten.uniq
-      if FileUtils.uptodate?('doc/rdoc', checkfiles)
-        puts "RDocs look current."
-        return
-      end
-      output    = 'doc/rdoc'
-      title     = (PACKAGE.capitalize + " API").strip if PACKAGE
-      template  = config.doctemplate || 'html'
-      opt = []
-      opt << "-U"
-      opt << "-q" #if quiet?
-      opt << "--op=#{output}"
-      opt << "--title=#{title}"
-      opt << "--main=#{main}"     if main
-      opt << files
-      opt = opt.flatten
-      cmd = "rdoc " + opt.join(' ')
-      if trial?
-        puts cmd 
-      else
-        begin
-          system(cmd)
-          puts "Ok rdoc." unless quiet?
-        rescue Exception
-          puts "Fail rdoc."
-          puts "Command was: '#{cmd}'"
-          puts "Proceeding with install anyway."
-        end
-      end
-    end
-  end
-end
 module Setup
   class Installer < Base
     def install_prefix
@@ -1216,15 +1144,13 @@ module Setup
     end
     task 'show'     , "show current configuration"
     task 'all'      , "config, compile and install"
-    task 'preconfig', "customize configuration settings"
-    task 'config'   , "configure extensions"
+    task 'config'   , "save/customize configuration settings"
     task 'compile'  , "compile ruby extentions"
     task 'test'     , "run test suite"
-    task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
-    task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
     task 'distclean', "does `make distclean' for each extention"
+    task 'uninstall', "uninstall previously installed files"
     def run(*argv)
       ARGV.replace(argv) unless argv.empty?
       task = ARGV.find{ |a| a !~ /^[-]/ }
@@ -1238,10 +1164,10 @@ module Setup
       parser.banner = "Usage: #{File.basename($0)} [TASK] [OPTIONS]"
       optparse_header(parser, options)
       case task
-      when 'preconfig'
-        optparse_preconfig(parser, options)
       when 'config'
         optparse_config(parser, options)
+      when 'compile'
+        optparse_compile(parser, options)
       when 'install'
         optparse_install(parser, options)
       when 'all'
@@ -1282,8 +1208,10 @@ module Setup
     end
     def optparse_all(parser, options)
       optparse_config(parser, options)
+      optparse_compile(parser, options)
+      optparse_install(parser, options)  # TODO: why was this remarked out ?
     end
-    def optparse_preconfig(parser, options)
+    def optparse_config(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
       configuration.options.each do |args|
@@ -1316,13 +1244,19 @@ module Setup
         end
       end
     end
-    def optparse_config(parser, options)
+    def optparse_compile(parser, options)
     end
     def optparse_install(parser, options)
-      parser.separator ""
-      parser.separator "Install options:"
-      parser.on("--prefix PATH", "Installation prefix") do |val|
+      parser.separator ''
+      parser.separator 'Install options:'
+      parser.on('--prefix PATH', 'install to alternate root location') do |val|
         configuration.install_prefix = val
+      end
+      parser.on('--type TYPE', "install location mode (site,std,home)") do |val|
+        configuration.type = val
+      end
+      parser.on('-t', '--[no-]test', "run pre-installation tests") do |bool|
+        configuration.test = bool
       end
     end
     def optparse_common(parser, options)
