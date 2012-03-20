@@ -5,14 +5,13 @@ Feature: Setup/Compile Extensions
 
   Scenario: Compile a new project
     Given a setup.rb compliant Ruby project
-    And 'setup.rb config' has been run
-    When I issue the command 'setup.rb compile'
+    And 'setup.rb compile' has been run
     Then the extensions should be compiled
 
-  Scenario: Fail to compile project without first running config
+  Scenario: Fail to install project without first running compile
     Given a setup.rb compliant Ruby project
-    And 'setup.rb config' has NOT been run
-    When I issue the command 'setup.rb compile' unprepared
+    And 'setup.rb compile' has NOT been run
+    When I issue the command 'setup.rb install' unprepared
     Then I will be told that I must first run 'setup.rb config'
     And the extensions will not be compiled
 

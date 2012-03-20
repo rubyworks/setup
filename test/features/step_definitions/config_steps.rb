@@ -15,10 +15,10 @@ When /^I issue the command 'setup.rb config'$/ do
 end
 
 Then /^a config file should be generated$/ do
-  File.assert.exists?(Setup::Configuration::CONFIG_FILE)
+  File.assert.exists?(Setup::CONFIG_FILE)
 end
 
 Then /^the config file should be updated$/ do
-  File.assert.exists?(Setup::Configuration::CONFIG_FILE)
+  File.assert.exists?(Setup::CONFIG_FILE)
 end
 
