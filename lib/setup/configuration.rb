@@ -533,14 +533,14 @@ module Setup
     end
 
     #
-    def no_ri
-      @no_ri
-    end
+    #def no_ri
+    #  @no_ri
+    #end
 
     #
-    def no_ri=(val)
-      @no_ri = boolean(val)
-    end
+    #def no_ri=(val)
+    #  @no_ri = boolean(val)
+    #end
 
     #def rdoc            = 'no'
     #def rdoctemplate    = nil
@@ -557,9 +557,9 @@ module Setup
     end
 
     # Generate ri documentation?
-    def ri?
-      !no_ri
-    end
+    #def ri?
+    #  !no_ri
+    #end
 
     # Install doc directory?
     def doc?

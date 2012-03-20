@@ -38,8 +38,8 @@ module Setup
     task 'config'   , "configure extensions"
     task 'compile'  , "compile ruby extentions"
     task 'test'     , "run test suite"
-    task 'doc'      , "generate ri documentation"
     task 'install'  , "install project files"
+    task 'doc'      , "install with documentation (doc/ directory)"
     task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
     task 'distclean', "does `make distclean' for each extention"
@@ -54,6 +54,8 @@ module Setup
 
       task = ARGV.find{ |a| a !~ /^[-]/ }
       task = 'all' unless task
+
+      #task = 'doc' if task == 'document'
 
       unless task_names.include?(task)
         $stderr.puts "Not a valid task -- #{task}"
@@ -129,14 +131,11 @@ module Setup
 
     def optparse_all(parser, options)
       optparse_config(parser, options)
-      #optparse_install(parser, options)
-      #parser.on("-t", "--[no-]test", "run tests") do |val|
+      optparse_install(parser, options)  # TODO: why was this remarked out ?
+      #parser.on("-t", "--[no-]test", "run tests (default is --no-test)") do |val|
       #  configuration.no_test = val
       #end
-      #parser.on("--[no-]ri", "generate ri documentation") do |val|
-      #  configuration.no_doc = val
-      #end
-      #parser.on("--[no-]doc", "do not install documentation") do |val|
+      #parser.on("--[no-]doc", "generate ri/yri documentation (default is --doc)") do |val|
       #  configuration.no_doc = val
       #end
     end

@@ -88,18 +88,6 @@ Keep in mind that testing may require support libraries such as RSpec,
 Lemon, Bacon, QED or Cucumber. When using the +all+ command, you can
 activate testing via the <tt>--test</tt> or <tt>-t</tt> option if desired.
 
-The +document+ phase is used to generate ri documentation for a package.
-
-  $ setup.rb document
-
-This generates *ri* documents for the program and automatically
-places the documentation in the appropriate system location. Documenting
-is not part of the default sequence due to the way ri documentation is
-handled by the +rdoc+ tool. It is not possible to uninstall it. So this
-phase must be run seperate from the others. Please only use the +document+
-command when you are ceratin that you want the documentation in your ri
-system. (Hopefully this can be fixed in the near future.)
-
 If you later decide you want to remove a program from your system, use
 +uninstall+.
 

@@ -1,21 +1,68 @@
 module Setup
 
-  # The Project class encapsulates information
-  # about the project/package setup is effecting.
+  # The Project class encapsulates information about the project/package
+  # setup is handling.
   #
-  # This class recognizes the VERSION file as defined by
-  # Ruby POM, but will fallback to .setup/name, .setup/version
-  # and .setup/loadpath if a VERSION file is not found or
-  # can not be parsed.
+  # To inform Setup.rb of the project's name, version and
+  # load path --information it can use to provide additional
+  # features, create a file in you project's root directory
+  # called `.ruby`. This is a YAML file with at minimum the
+  # entries:
+  #
+  #     ---
+  #     name: foo
+  #     version: 1.0.0
+  #     load_path: [lib]
+  #
+  # As of v5.1.0, Setup.rb no longer recognizes the VERSION file
+  # or the `.setup/name`, `.setup/version` and `.setup/loadpath` files.
+  # The `.ruby` file better serves this purpose and is a more widely
+  # recognized standard.
+  #
   class Project
 
     # Match used to determine the root dir of a project.
-    ROOT_MARKER = '{setup.rb,.setup,VERSION*,MANIFEST,lib/}'
+    ROOT_MARKER = '{.ruby,setup.rb,.setup,lib/}'
 
     #
     def initialize
-      parse_verfile
+      @dotruby_file = find('.ruby')
+
+      @dotruby = YAML.load_file(@dotruby_file) if @dotruby_file
+
+      @name     = nil
+      @version  = nil
+      @loadpath = ['lib']
+
+      if @dotruby
+        @name     = @dotruby['name']
+        @version  = @dotruby['version']
+        @loadpath = @dotruby['load_path']
+      else
+        if file = find('.setup/name')
+          @name = File.read(file).strip
+        end
+        if file = find('.setup/version')
+          @version = File.read(file).strip
+        end
+        if file = find('.setup/loadpath')
+          @loadpath = File.read(file).strip
+        end
+      end
     end
+
+    attr :dotruby
+
+    # The name of the package, used to install docs in system doc/ruby-{name}/ location.
+    attr :name
+
+    # Current version number of project.
+    attr :version
+
+    #
+    attr :loadpath
+
+    alias load_path loadpath
 
     # Locate project root.
     def rootdir
@@ -29,84 +76,8 @@ module Setup
       )
     end
 
-    # Path to VERSION file.
-    def verfile
-      @verfile ||= Dir.glob(File.join(rootdir, 'version{,.txt,.yml,.yaml}'), File::FNM_CASEFOLD).first
-    end
-
-    # Parse VERSION file accoring to Ruby POM standard.
-    def parse_verfile
-      if verfile
-        data = YAML.load(File.new(verfile))
-        case data
-        when Hash
-          data = data.inject({}){ |h,(k,v)| h[k.to_s] = v; h }
-          @name     = data['name']
-          @loadpath = data['path']
-          @version  = data.values_at('major', 'minor', 'patch', 'state', 'build').compact.join('.')
-        when String
-          data.strip!
-          if md = /^(\w+)[-\ ]/.match(data)
-            @name = md[1]
-          end
-          if md = /\ (\d+[.].*?)\ /.match(data)
-            @version = md[1]
-          end
-          @loadpath = []
-          data.scan(/\ (\S+\/)\ /).each do |path|
-            @loadpath << path.chomp('/')
-          end
-          @loadpath = nil if @loadpath.empty?
-        else
-          $stderr << "warn: bad #{file} ?"
-        end
-      end
-    end
-
-    # The name of the package, used to install docs in system doc/ruby-{name}/ location.
-    def name
-      @name = (
-        if file = Dir[".setup/name"].first
-          File.read(file).strip
-        else
-          nil
-        end
-      )
-    end
-
-    # Current version number of project.
-    def version
-      @version = (
-        if file = Dir[".setup/version"].first
-          File.read(file).strip
-        else
-          nil
-        end
-      )
-    end
-
-    # This is needed if a project has loadpaths other than the standard lib/.
-    # Note the routine is designed to handle (pseudo) YAML arrays or line by
-    # line list.
-    def loadpath
-      @loadpath ||= (
-        if file = Dir.glob('.script/loadpath').first
-          data = YAML.load(File.new(file))
-          case data
-          when String
-            data.split(/\n/).map{|e| e.strip}
-          when Array
-            data
-          else
-            nil
-          end
-        else
-          nil
-        end
-      )
-    end
-
-    #
+    # Setup.rb uses `ext/**/extconf.rb` as convention for the location of
+    # compiled scripts.
     def extconfs
       @extconfs ||= Dir['ext/**/extconf.rb']
     end
@@ -121,7 +92,27 @@ module Setup
       !extensions.empty?
     end
 
+    #
+    def yardopts
+      Dir.glob(File.join(rootdir, '.yardopts')).first
+    end
+
+    #
+    def document
+      Dir.glob(File.join(rootdir, '.document')).first
+    end
+
+    # Find a file relative to project's root directory.
+    def find(glob, mode=0)
+      case mode
+      when :casefold
+        mode = File::FNM_CASEFOLD
+      else
+        mode = mode.to_i
+      end      
+      Dir.glob(File.join(rootdir, glob), flags).first
+    end
+
   end
 
 end
-

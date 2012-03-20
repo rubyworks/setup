@@ -5,7 +5,7 @@ require 'setup/configuration'
 require 'setup/compiler'
 require 'setup/installer'
 require 'setup/tester'
-require 'setup/documentor'
+#require 'setup/documentor'
 require 'setup/uninstaller'
 
 module Setup
@@ -88,13 +88,8 @@ module Setup
     #
     # * config
     # * make
-    # * test      (if selected)
+    # * test      (optional)
     # * install
-    # * document  (if selected)
-    #
-    # Note that ri documentation is not easy to uninstall.
-    # So use the --ri option knowledgably. You can alwasy
-    # Use <tt>setup.rb document</tt> at a later time.
     #
     def all
       #if compile?
@@ -106,9 +101,9 @@ module Setup
         exit 1 unless ok
       end
       install
-      if configuration.ri?
-        document
-      end
+      #if configuration.ri?
+      #  document
+      #end
     end
 
     #
@@ -162,11 +157,11 @@ module Setup
     end
 
     #
-    def document
-      #return unless configuration.doc?
-      log_header('Document')
-      documentor.document
-    end
+    #def document
+    #  #return unless configuration.doc?
+    #  log_header('Document')
+    #  documentor.document
+    #end
 
     #
     def clean
@@ -220,9 +215,9 @@ module Setup
       @tester ||= Tester.new(project, configuration, options)
     end
     #
-    def documentor
-      @documentor ||= Documentor.new(project, configuration, options)
-    end
+    #def documentor
+    #  @documentor ||= Documentor.new(project, configuration, options)
+    #end
     #
     def uninstaller
       @uninstaller ||= Uninstaller.new(project, configuration, options)

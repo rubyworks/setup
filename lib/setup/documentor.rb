@@ -2,47 +2,46 @@ require 'setup/base'
 
 module Setup
 
+  # As of v0.5.1 Setup.rb no longer support the document phase at all. The
+  # document phase would generate *ri* documentation for a project, adding in
+  # with the rest of ri documentation. After careful consideration, it has
+  # become clear that it is better for documentation to be left up to dedicated
+  # tools. For example, you could easily document your Ruby install site
+  # location yourself with
+  #
+  #   $ rdoc --ri-site /usr/local/lib/site_ruby
+  #
+  # Using of course, whichever path is appropriate to your system.
+  #
+  # This descision also allows setup.rb to be less Ruby-specific, and useful
+  # as a more general install tool.
+  #
+  # @deprecated Setup.rb no longer generate ri documentation, ever.
   #
   class Documentor < Base
 
     #
     def document
       return if config.no_doc
-      exec_ri
 
-      #if file = DOCSCRIPT
-      #  ruby(file)
-      #else
-      #  exec_rdoc
-      #end
+      exec_ri
+      exec_yri
     end
 
     # Generate ri documentation.
-    #++
-    # TODO: call rdoc programmatically.
-    #--
+    #
+    # @todo Should we run rdoc programmatically instead of shelling out?
+    #
     def exec_ri
       case config.type #installdirs
-      when 'std', 'ruby'
-        #output = "--ri-system" # no longer supported?
-        output  = "--ri-site"
-      when 'site'
-        output = "--ri-site"
       when 'home'
         output = "--ri"
+      when 'site'
+        output = "--ri-site"
+      when 'std', 'ruby'
+        output  = "--ri-site"
       else
         abort "bad config: should not be possible -- type=#{config.type}"
-      end
-
-      if File.exist?('.document')
-        files = File.read('.document').split("\n")
-        files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
-        files.collect!{ |f| f.strip }
-      #elsif File.exist?('meta/loadpath')
-      else
-        files = []
-        files << 'lib' if File.directory?('lib')
-        files << 'ext' if File.directory?('ext')
       end
 
       opt = []
@@ -50,9 +49,21 @@ module Setup
       opt << "-q" #if quiet?
       #opt << "-D" #if $DEBUG
       opt << output
-      opt << files
 
-      opt = opt.flatten
+      unless project.document
+        files = []
+        files << 'lib' if project.find('lib')
+        files << 'ext' if project.find('ext')
+      else
+        files = []
+        #files = File.read('.document').split("\n")
+        #files.reject!{ |l| l =~ /^\s*[#]/ || l !~ /\S/ }
+        #files.collect!{ |f| f.strip }
+      end
+
+      opt.concat(files)
+
+      opt.flatten!
 
       cmd = "rdoc " + opt.join(' ')
 
@@ -70,24 +81,20 @@ module Setup
           $stderr.puts "command was: '#{cmd}'"
           #$stderr.puts "proceeding with install..."
         end
-
-        # Now in local directory
-        #opt = []
-        #opt << "-U"
-        #opt << "--ri --op 'doc/ri'"
-        #opt << files
-        #opt = opt.flatten
-        #::RDoc::RDoc.new.document(opt)
       end
     end
 
-    # Generate rdocs.
     #
-    # Needs <tt>meta/name</tt> or <tt>.meta/name</tt>.
+    # Generate YARD Ruby Index documention.
     #
-    # NOTE: This is not being used. It's here in case we decide
-    # to add this feature, though it is quite possible that
-    # we may never do so.
+    def exec_yri
+
+    end
+
+    # Generate rdocs. Needs project <tt>name</tt>.
+    #
+    # @deprecated This is not being used. It's here in case we decide
+    #   to add the feature back in the future.
     #
     def exec_rdoc
       main = Dir.glob("README{,.*}", File::FNM_CASEFOLD).first
@@ -146,4 +153,3 @@ module Setup
   end
 
 end
-
