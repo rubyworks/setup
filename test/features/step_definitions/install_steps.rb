@@ -30,7 +30,8 @@ end
 
 Then /the project's exectuables should be installed to the site_ruby bin location$/ do
   entries = installed_files
-  entries.assert.include?('/usr/bin/faux')
+  #entries.assert.any? { |path| /bin\/faux$/ =~ path }
+  entries.assert.include?("#{Config::CONFIG['bindir']}/faux")
 end
 
 Then /the project's libraries should be installed to the site_ruby lib location$/ do
