@@ -1,6 +1,7 @@
 = Ruby Setup
 
 {Website}[http://rubyworks.github.com/setup] /
+{Guide}[https://github.com/rubyworks/setup/wiki] /
 {Issues}[http://github.com/rubyworks/setup/issues] /
 {Source}[http://github.com/rubyworks/setup]
 
