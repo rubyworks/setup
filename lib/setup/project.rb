@@ -104,7 +104,7 @@ module Setup
 
     # Find a file relative to project's root directory.
     def find(glob, flags=0)
-      case mode
+      case flags
       when :casefold
         flags = File::FNM_CASEFOLD
       else
