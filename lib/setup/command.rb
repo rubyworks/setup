@@ -187,11 +187,15 @@ module Setup
     # Setup options for +install+ task.
 
     def optparse_install(parser, options)
-      parser.separator ""
-      parser.separator "Install options:"
-      parser.on("--prefix PATH", "Installation prefix") do |val|
-        #session.options[:install_prefix] = val
+      parser.separator ''
+      parser.separator 'Install options:'
+      # install prefix can be set without preconfig
+      parser.on('--prefix PATH', 'install to alternate root location') do |val|
         configuration.install_prefix = val
+      end
+      # type can be set without preconfig
+      parser.on('-t', '--type TYPE', "install location mode (site,std,home)") do |val|
+        configuration.type = val
       end
     end
 

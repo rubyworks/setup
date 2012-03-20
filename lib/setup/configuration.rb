@@ -269,12 +269,11 @@ module Setup
       end
     end
 
-    #
+    # Alias for `#type`.
     alias_method :installdirs, :type
 
-    #
+    # Alias for `#type=`.
     alias_method :installdirs=, :type=
-
 
     #
     alias_method :install_prefix, :root
