@@ -15,6 +15,10 @@ copyrights:
   year: '2005'
   license: Ruby
 requirements:
+- name: ae
+  groups:
+  - test
+  development: true
 - name: cucumber
   groups:
   - test

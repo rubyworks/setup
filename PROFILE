@@ -23,6 +23,7 @@ description:
 organization: Rubyworks
 
 requirements:
+  - ae       (test)
   - cucumber (test)
   - detroit  (build)
 
