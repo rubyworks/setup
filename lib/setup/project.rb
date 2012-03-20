@@ -103,12 +103,12 @@ module Setup
     end
 
     # Find a file relative to project's root directory.
-    def find(glob, mode=0)
+    def find(glob, flags=0)
       case mode
       when :casefold
-        mode = File::FNM_CASEFOLD
+        flags = File::FNM_CASEFOLD
       else
-        mode = mode.to_i
+        flags = flags.to_i
       end      
       Dir.glob(File.join(rootdir, glob), flags).first
     end
