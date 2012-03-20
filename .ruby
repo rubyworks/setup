@@ -15,13 +15,13 @@ copyrights:
   year: '2005'
   license: Ruby
 requirements:
-- name: detroit
-  groups:
-  - build
-  development: true
 - name: cucumber
   groups:
   - test
+  development: true
+- name: detroit
+  groups:
+  - build
   development: true
 dependencies: []
 alternatives: []

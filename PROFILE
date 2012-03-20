@@ -22,6 +22,10 @@ description:
 
 organization: Rubyworks
 
+requirements:
+  - cucumber (test)
+  - detroit  (build)
+
 resources:
   home: http://rubyworks.github.com/setup
   code: http://github.com/rubyworks/setup
