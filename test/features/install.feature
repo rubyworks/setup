@@ -6,7 +6,7 @@ Feature: Install
   Scenario: Install project to Ruby's site locations
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=site' has been run
-    And 'setup.rb make' has been run
+    And 'setup.rb compile' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the site_ruby bin location
     And the project's libraries should be installed to the site_ruby lib location
@@ -15,7 +15,7 @@ Feature: Install
   Scenario: Install project to standard ruby locations
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=std' has been run
-    And 'setup.rb make' has been run
+    And 'setup.rb compile' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the ruby bin location
     And the project's libraries should be installed to the ruby lib location
@@ -24,7 +24,7 @@ Feature: Install
   Scenario: Install project to XDG home locations
     Given a setup.rb compliant Ruby project
     And 'setup.rb config --type=home' has been run
-    And 'setup.rb make' has been run
+    And 'setup.rb compile' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the home bin location
     And the project's libraries should be installed to the home lib location
