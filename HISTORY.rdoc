@@ -1,23 +1,24 @@
 = RELEASE HISTORY
 
-== 5.1.0 / 2010-05-31
+== 5.1.0 / 2012-03-20
 
-This release separates the config "phase" into two parts: preconfig and config.
-The config phase is for extensions. It handles 'make config'. Whereas preconfig
-is now subcommand that allows you to optional customize setup.rb's configuration,
-via the SetupConfig file. Without specifically running +setup.rb preconfig+ first,
-Setup will use the default settings (based on -t site, std, home).
-
-In addition bin/setup.rb is now the all-in-one bundled script. This allows +rvm+
-to use setup.rb across multiple rubies without having to install it anew for each
-case.
+With this release `bin/setup.rb` is now the all-in-one bundled script.
+This allows +rvm+ to use setup.rb across multiple rubies without having
+to install it anew for each case. This release also renames the `make`
+phase (previously called the `setup` phase) to `compile`, which is much 
+more descriptive of it's purpose for the general user.
 
 Changes:
 
 * Major Enhancements
 
-    * config has been split into preconfig and config
-    * bin/setup.rb is now the bundled rendition
+    * Rename `make` phase to `compile`.
+    * So called "MetaConfig" is handled via `.setup/metaconfig.rb`.
+    * The `bin/setup.rb` script is now the full-on bundled script.
+
+* Bug Fixes
+
+    * The `--prefix` option works with `all` command.
 
 
 == 5.0.1 / 2010-02-07
