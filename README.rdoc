@@ -76,7 +76,15 @@ Where +config+ determines the configuration of your Ruby distribution,
 +make+ compiles any extensions and +install+ copies project files to
 the appropriate places on your system.
 
-Setup.rb also supports two optional phases, +test+ and +document+.
+Setup.rb also supports two optional phases, +preconfig+ and +test+.
+
+  $ setup preconfig
+
+Preconfiguration must be run before any other phase in order to be of
+use. Running `preconfig` creates a `SetupConfig` file which you can then
+edit to make any adjustment neccessary to the installation. When finished
+editing this file, use setup.rb as before and your custom configurtion
+will be used in place of the standard defaults.
 
   $ setup.rb test
 
