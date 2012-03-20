@@ -5,8 +5,7 @@ Feature: Install
 
   Scenario: Install project to Ruby's site locations
     Given a setup.rb compliant Ruby project
-    And 'setup.rb preconfig --type=site' has been run
-    And 'setup.rb config' has been run
+    And 'setup.rb config --type=site' has been run
     And 'setup.rb make' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the site_ruby bin location
@@ -15,8 +14,7 @@ Feature: Install
 
   Scenario: Install project to standard ruby locations
     Given a setup.rb compliant Ruby project
-    And 'setup.rb preconfig --type=std' has been run
-    And 'setup.rb config' has been run
+    And 'setup.rb config --type=std' has been run
     And 'setup.rb make' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the ruby bin location
@@ -25,8 +23,7 @@ Feature: Install
 
   Scenario: Install project to XDG home locations
     Given a setup.rb compliant Ruby project
-    And 'setup.rb preconfig --type=home' has been run
-    And 'setup.rb config' has been run
+    And 'setup.rb config --type=home' has been run
     And 'setup.rb make' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the home bin location
@@ -37,8 +34,7 @@ Feature: Install
   Scenario: Install extensionless project to Ruby's site locations
     Given a setup.rb compliant Ruby project
     And the project does NOT have extensions
-    And 'setup.rb preconfig --type=site' has been run
-    And 'setup.rb config' has been run
+    And 'setup.rb config --type=site' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the site_ruby bin location
     And the project's libraries should be installed to the site_ruby lib location
@@ -46,7 +42,7 @@ Feature: Install
   Scenario: Install extensionless project to standard ruby locations
     Given a setup.rb compliant Ruby project
     And the project does NOT have extensions
-    And 'setup.rb preconfig --type=std' has been run
+    And 'setup.rb config --type=std' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the ruby bin location
     And the project's libraries should be installed to the ruby lib location
@@ -54,7 +50,7 @@ Feature: Install
   Scenario: Install extensionless project to XDG home locations
     Given a setup.rb compliant Ruby project
     And the project does NOT have extensions
-    And 'setup.rb preconfig --type=home' has been run
+    And 'setup.rb config --type=home' has been run
     When I issue the command 'setup.rb install'
     Then the project's exectuables should be installed to the home bin location
     And the project's libraries should be installed to the home lib location
@@ -69,7 +65,7 @@ Feature: Install
   Scenario: Fail to install project with extensions without first running setup
     Given a setup.rb compliant Ruby project
     And 'setup.rb config' has been run
-    But 'setup.rb make' has NOT been run
+    But 'setup.rb compile' has NOT been run
     When I issue the command 'setup.rb install' unprepared
-    Then I will be told that I must first run 'setup.rb make'
+    Then I will be told that I must first run 'setup.rb compile'
 

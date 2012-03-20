@@ -6,7 +6,7 @@ Feature: Uninstall
   Scenario: Uninstall a package
     Given a setup.rb compliant Ruby project
     And 'setup.rb config' has been run
-    And 'setup.rb make' has been run
+    And 'setup.rb compile' has been run
     And 'setup.rb install' has been run
     When I issue the command 'setup.rb uninstall'
     Then the package files should be removed

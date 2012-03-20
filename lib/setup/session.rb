@@ -107,7 +107,7 @@ module Setup
     end
 
     #
-    def preconfig
+    def config
       log_header('Preconfig')
       #if reset?
       #  @configuration = Configuration.new(:reset=>true)
@@ -122,18 +122,11 @@ module Setup
     end
 
     #
-    def config
-      if compile?
-        log_header('Config')
-        compiler.configure
-      end
-    end
-
-    #
     def compile
       if compile?
-        #abort "must run 'setup config' first" unless configuration.exist?
         log_header('Compile')
+        compiler.configure
+        #abort "must run 'setup config' first" unless configuration.exist?
         compiler.compile
       end
     end

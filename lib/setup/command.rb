@@ -34,15 +34,13 @@ module Setup
 
     task 'show'     , "show current configuration"
     task 'all'      , "config, compile and install"
-    task 'preconfig', "customize configuration settings"
-    task 'config'   , "configure extensions"
+    task 'config'   , "save/customize configuration settings"
     task 'compile'  , "compile ruby extentions"
     task 'test'     , "run test suite"
     task 'install'  , "install project files"
-    task 'doc'      , "install with documentation (doc/ directory)"
-    task 'uninstall', "uninstall previously installed files"
     task 'clean'    , "does `make clean' for each extention"
     task 'distclean', "does `make distclean' for each extention"
+    task 'uninstall', "uninstall previously installed files"
 
     # Run command.
 
@@ -69,10 +67,10 @@ module Setup
 
       optparse_header(parser, options)
       case task
-      when 'preconfig'
-        optparse_preconfig(parser, options)
       when 'config'
         optparse_config(parser, options)
+      when 'compile'
+        optparse_compile(parser, options)
       when 'install'
         optparse_install(parser, options)
       when 'all'
@@ -130,8 +128,8 @@ module Setup
     # Setup options for +all+ task.
 
     def optparse_all(parser, options)
-      optparse_preconfig(parser, options)
       optparse_config(parser, options)
+      optparse_compile(parser, options)
       optparse_install(parser, options)  # TODO: why was this remarked out ?
       #parser.on("-t", "--[no-]test", "run tests (default is --no-test)") do |val|
       #  configuration.no_test = val
@@ -143,7 +141,7 @@ module Setup
 
     # Setup options for +config+ task.
 
-    def optparse_preconfig(parser, options)
+    def optparse_config(parser, options)
       parser.separator ""
       parser.separator "Configuration options:"
       #parser.on('--reset', 'reset configuration to default settings') do
@@ -182,7 +180,7 @@ module Setup
     end
 
     #
-    def optparse_config(parser, options)
+    def optparse_compile(parser, options)
     end
 
     # Setup options for +install+ task.
@@ -194,10 +192,14 @@ module Setup
       parser.on('--prefix PATH', 'install to alternate root location') do |val|
         configuration.install_prefix = val
       end
-      ## type can be set without preconfig
-      #parser.on('-T', '--type TYPE', "install location mode (site,std,home)") do |val|
-      #  configuration.type = val
-      #end
+      # type can override config
+      parser.on('--type TYPE', "install location mode (site,std,home)") do |val|
+        configuration.type = val
+      end
+      # test can be override config
+      parser.on('-t', '--[no-]test', "run pre-installation tests") do |bool|
+        configuration.test = bool
+      end
     end
 
     # Setup options for +test+ task.
