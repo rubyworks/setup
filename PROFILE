@@ -1,7 +1,8 @@
 --- 
+name   : setup
+version: 5.1.0
+
 title  : Setup
-suite  : proutils
-contact: proutls@googlegroups.com
 summary: Setup.rb as a stand-alone application.
 created: 2008-08-01
 
@@ -19,7 +20,18 @@ description:
   No longer will you need distribute setup.rb with you
   Ruby packages. Just instruct your users to use Setup.
 
+organization: Rubyworks
+
 resources:
-  homepage: http://setup.rubyforge.org
-  repository: git://github.com/proutils/setup.git
+  home: http://rubyworks.github.com/setup
+  code: http://github.com/rubyworks/setup
+  bugs: http://github.com/rubyworks/setup/issues
+  old: http://setup.rubyforge.org
+
+repositories:
+  upstream: git://github.com/rubyworks/setup.git
+
+copyrights:
+  - 2009 Rubyworks   (BSD-2-Clause)
+  - 2005 Minero Aoki (Ruby)
 
