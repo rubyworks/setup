@@ -130,6 +130,7 @@ module Setup
     # Setup options for +all+ task.
 
     def optparse_all(parser, options)
+      optparse_preconfig(parser, options)
       optparse_config(parser, options)
       optparse_install(parser, options)  # TODO: why was this remarked out ?
       #parser.on("-t", "--[no-]test", "run tests (default is --no-test)") do |val|
@@ -189,14 +190,14 @@ module Setup
     def optparse_install(parser, options)
       parser.separator ''
       parser.separator 'Install options:'
-      # install prefix can be set without preconfig
+      # install prefix overrides target prefix when installing
       parser.on('--prefix PATH', 'install to alternate root location') do |val|
         configuration.install_prefix = val
       end
-      # type can be set without preconfig
-      parser.on('-t', '--type TYPE', "install location mode (site,std,home)") do |val|
-        configuration.type = val
-      end
+      ## type can be set without preconfig
+      #parser.on('-T', '--type TYPE', "install location mode (site,std,home)") do |val|
+      #  configuration.type = val
+      #end
     end
 
     # Setup options for +test+ task.
