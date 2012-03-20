@@ -15,6 +15,18 @@ lib/setup/tester.rb
 lib/setup/uninstaller.rb
 lib/setup/version.rb
 lib/setup.rb
+meta/active
+meta/authors
+meta/copyrights
+meta/created
+meta/description
+meta/name
+meta/organization
+meta/repositories
+meta/requirements
+meta/resources
+meta/summary
+meta/version
 script/bootstrap
 script/bundle
 script/setup
@@ -42,3 +54,4 @@ README.rdoc
 Gemfile
 Assembly
 NOTICE.txt
+SetupReceipt

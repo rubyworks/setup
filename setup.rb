@@ -16,20 +16,7 @@
 # without issue and without needing to install it for each.
 require 'yaml'
 module Setup
-  DIRECTORY = File.dirname(__FILE__) + '/setup'
-  PROFILE = YAML.load(File.new(DIRECTORY + '/profile.yml'))
-  verfile = YAML.load(File.new(DIRECTORY + '/version.yml'))
-  VERSION = verfile.values_at('major','minor','patch','state','build').compact.join('.')
-  def self.const_missing(name)
-    key = name.to_s.downcase
-    if verfile.key?(key)
-      verfile[key]
-    elsif profile.key?(key)
-      PROFILE[key]
-    else
-      super(name)
-    end
-  end
+  VERSION = '5.1.0'  #:erb: VERSION = '<%= version %>'
 end
 class << File #:nodoc: all
   unless respond_to?(:read)   # Ruby 1.6 and less
@@ -895,7 +882,7 @@ module Setup
         File.extname(file) == ".#{dllext}"
       end
       if ents.empty? && !files.empty?
-        raise Error, "ruby extention not compiled: 'setup.rb make' first"
+        raise Error, "ruby extention not compiled: 'setup.rb compile' first"
       end
       ents
     end

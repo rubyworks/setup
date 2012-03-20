@@ -1,5 +1,14 @@
 = RELEASE HISTORY
 
+== 5.1.1 / 2012-03-21
+
+Qucik fix to update the bundled version of setup.rb.
+
+Changes:
+
+* Update bundled script.rb.
+
+
 == 5.1.0 / 2012-03-20
 
 With this release `bin/setup.rb` is now the all-in-one bundled script.
