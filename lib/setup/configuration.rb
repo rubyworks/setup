@@ -19,7 +19,7 @@ module Setup
     #CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
 
     # Custom configuration file.
-    META_CONFIG_FILE = META_EXTENSION_DIR + '/configuration.rb'
+    META_CONFIG_FILE = META_EXTENSION_DIR + '/metaconfig.rb'
 
     #
     def self.options
@@ -59,7 +59,8 @@ module Setup
     option :shebang         , :pick, 'shebang line (#!) editing mode (all,ruby,never)'
 
     option :no_test, :t     , :bool, 'run pre-installation tests'
-    #option :no_ri,   :d     , :bool, 'generate ri documentation'
+    # TODO: remove no_ri option in future version
+    #option :no_ri,   :d     , :bool, 'generate ri documentation (deprecated and ignored)'
     option :no_doc          , :bool, 'install doc/ directory'
     option :no_ext          , :bool, 'compile/install ruby extentions'
 
@@ -531,15 +532,17 @@ module Setup
       @no_doc = boolean(val)
     end
 
-    #
-    #def no_ri
-    #  @no_ri
-    #end
 
-    #
-    #def no_ri=(val)
-    #  @no_ri = boolean(val)
-    #end
+    # @deprecated Will be remove in future version. Currently ignored.
+    def no_ri
+      @no_ri
+    end
+
+    # @deprecated Will be remove in future version. Currently ignored.
+    def no_ri=(val)
+      @no_ri = boolean(val)
+    end
+
 
     #def rdoc            = 'no'
     #def rdoctemplate    = nil
