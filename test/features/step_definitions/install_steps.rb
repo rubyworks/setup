@@ -48,7 +48,8 @@ end
 
 Then /the project's exectuables should be installed to the ruby bin location$/ do
   entries = installed_files
-  entries.assert.include?('/usr/bin/faux')
+  #entries.assert.include?('/usr/bin/faux')
+  entries.assert.include?("#{Config::CONFIG['bindir']}/faux")
 end
 
 Then /the project's libraries should be installed to the ruby lib location$/ do
