@@ -2,7 +2,7 @@
 
 require 'fileutils'
 
-VERSION = YAML.load_file('.ruby')['version']
+VERSION = YAML.load_file('.index')['version']
 
 COMMENT = <<-HERE
 # Setup.rb v#{VERSION}
