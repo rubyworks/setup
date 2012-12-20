@@ -1,5 +1,14 @@
 = RELEASE HISTORY
 
+== 5.2.0 / 2012-12-20
+
+This release makes a couple of important changes. First the .ruby file
+is no longer the supported metadata file. While the format is basically
+the same, the file is now called .index. See the {Indexer}[http://github.com/rubyworks/indexer]
+project for more details. One can still use .setup/name, .setup/version, .setup/loadpath
+files instead.
+
+
 == 5.1.1 / 2012-03-21
 
 Qucik fix to update the bundled version of setup.rb.
