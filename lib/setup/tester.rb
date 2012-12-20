@@ -4,18 +4,24 @@ module Setup
 
   # Complexities arise in trying to figure out what test framework
   # is used, and how to run tests. To simplify the process, this
-  # class simply looks for a special script, this can be  a shell
-  # script at <tt>script/test</tt>, or a ruby script that
-  # <tt>.setup/testrc.rb</tt> will be used instead if it exists.
-
+  # class simply looks for a special Ruby script at either
+  # `.setup/test.rb` or a shell script at `.setup/test.sh` and runs
+  # the such script accordingly. The Ruby script has priority if both exist.
+  #
   class Tester < Base
 
-    RUBYSCRIPT  = META_EXTENSION_DIR + '/testrc.rb'
+    RUBYSCRIPT  = META_EXTENSION_DIR + '/test.rb'
 
-    SHELLSCRIPT = 'script/test'
+    SHELLSCRIPT = META_EXTENSION_DIR + '/test.sh'
+
+    DEPRECATED_RUBYSCRIPT  = META_EXTENSION_DIR + '/testrc.rb'
 
     #
     def testable?
+      if File.exist?(DEPRECATED_RUBYSCRIPT)
+        warn "Must use `.setup/test.rb' instead or `.setup/testrc.rb' to support testing."
+      end
+
       return false if config.no_test
       return true  if File.exist?(RUBYSCRIPT)
       return true  if File.exist?(SHELLSCRIPT)
@@ -24,11 +30,14 @@ module Setup
 
     #
     def test
-      return true if !testable?
+      return true unless testable?
+
       if File.exist?(RUBYSCRIPT)
         test_rubyscript
       elsif File.exist?(SHELLSCRIPT)
         test_shellscript
+      else
+        true
       end
     end
 
@@ -43,7 +52,7 @@ module Setup
     end
 
 
-    # DEPRECATED
+    # DEPRECATED: Since 0.5.0
     #def test
       #runner = config.testrunner
       #case runner
