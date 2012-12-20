@@ -1,4 +1,4 @@
-#!mast -x S* bin lib script test [A-Z]*
+#!mast -x S* bin lib script test *.md *.rdoc *.txt
 bin/setup.rb
 lib/setup/base.rb
 lib/setup/command.rb
@@ -15,22 +15,6 @@ lib/setup/tester.rb
 lib/setup/uninstaller.rb
 lib/setup/version.rb
 lib/setup.rb
-meta/active
-meta/authors
-meta/copyrights
-meta/created
-meta/description
-meta/name
-meta/organization
-meta/repositories
-meta/requirements
-meta/resources
-meta/summary
-meta/version
-script/bootstrap
-script/bundle
-script/setup
-script/test
 test/cases/installer.rb
 test/features/compile.feature
 test/features/config.feature
@@ -49,9 +33,6 @@ test/fixtures/faux-project/ext/faux/extconf.rb
 test/fixtures/faux-project/ext/faux/faux.c
 test/fixtures/faux-project/lib/faux.rb
 HISTORY.rdoc
-LICENSE.txt
 README.rdoc
-Gemfile
-Assembly
+LICENSE.txt
 NOTICE.txt
-SetupReceipt
