@@ -3,41 +3,46 @@ module Setup
   # The Project class encapsulates information about the project/package
   # setup is handling.
   #
-  # To inform Setup.rb of the project's name, version and
-  # load path --information it can use to provide additional
-  # features, create a file in you project's root directory
-  # called `.ruby`. This is a YAML file with at minimum the
-  # entries:
+  # Setup.rb can use information about your project to provide additional
+  # features.
+  #
+  # To inform Setup.rb of the project's name, version and load path
+  # you can create a file in you project's root directory called `.index`.
+  # This is a YAML file with minimum entries of:
   #
   #     ---
   #     name: foo
   #     version: 1.0.0
-  #     load_path: [lib]
+  #     paths:
+  #       load: [lib]
+  #
+  # See [Indexer](http://github.com/rubyworks/indexer) for more information about
+  # this file and how to easily maintain it.
+  #
+  # If a `.index` file is not found Setup.rb will look for `.setup/name`,
+  # `.setup/version` and `.setup/loadpath` files for this information.
   #
   # As of v5.1.0, Setup.rb no longer recognizes the VERSION file
-  # or the `.setup/name`, `.setup/version` and `.setup/loadpath` files.
-  # The `.ruby` file better serves this purpose and is a more widely
-  # recognized standard.
   #
   class Project
 
     # Match used to determine the root dir of a project.
-    ROOT_MARKER = '{.ruby,setup.rb,.setup,lib/}'
+    ROOT_MARKER = '{.index,setup.rb,.setup,lib/}'
 
     #
     def initialize
-      @dotruby_file = find('.ruby')
+      @dotindex_file = find('.index')
 
-      @dotruby = YAML.load_file(@dotruby_file) if @dotruby_file
+      @dotindex = YAML.load_file(@dotindex_file) if @dotindex_file
 
       @name     = nil
       @version  = nil
       @loadpath = ['lib']
 
-      if @dotruby
-        @name     = @dotruby['name']
-        @version  = @dotruby['version']
-        @loadpath = @dotruby['load_path']
+      if @dotindex
+        @name     = @dotindex['name']
+        @version  = @dotindex['version']
+        @loadpath = (@dotindex['paths'] || {})['load']
       else
         if file = find('.setup/name')
           @name = File.read(file).strip
@@ -51,7 +56,7 @@ module Setup
       end
     end
 
-    attr :dotruby
+    attr :dotindex
 
     # The name of the package, used to install docs in system doc/ruby-{name}/ location.
     attr :name
