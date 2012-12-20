@@ -16,7 +16,7 @@ module Setup
   # This descision also allows setup.rb to be less Ruby-specific, and useful
   # as a more general install tool.
   #
-  # @deprecated Setup.rb no longer generate ri documentation, ever.
+  # @deprecated Setup.rb no longer generates ri documentation, ever.
   #
   class Documentor < Base
 
