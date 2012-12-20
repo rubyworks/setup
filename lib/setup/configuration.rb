@@ -13,7 +13,7 @@ module Setup
   class Configuration
 
     # Ruby System Configuration
-    RBCONFIG  = ::Config::CONFIG
+    RBCONFIG  = ::RbConfig::CONFIG
 
     ## Confgiuration file
     #CONFIG_FILE = 'SetupConfig'  # '.cache/setup/config'
@@ -26,7 +26,9 @@ module Setup
       @@options ||= []
     end
 
+    #
     # TODO: better methods for path type
+    #
     def self.option(name, *args) #type, description)
       options << [name.to_s, *args] #type, description]
       attr_accessor(name)
@@ -76,7 +78,7 @@ module Setup
 
     # Turn all of CONFIG into methods.
 
-    ::Config::CONFIG.each do |key,val|
+    ::RbConfig::CONFIG.each do |key,val|
       next if key == "configure_args"
       name = key.to_s.downcase
       #name = name.sub(/^--/,'')
@@ -85,7 +87,7 @@ module Setup
     end
 
     # Turn all of CONFIG["configure_args"] into methods.
-    config_args = Shellwords.shellwords(::Config::CONFIG["configure_args"])
+    config_args = Shellwords.shellwords(::RbConfig::CONFIG["configure_args"])
     config_args.each do |ent|
       if ent.index("=")
         key, val = *ent.split("=")
