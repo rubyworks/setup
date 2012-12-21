@@ -16,7 +16,7 @@
 # without issue and without needing to install it for each.
 require 'yaml'
 module Setup
-  VERSION = '5.1.0'  #:erb: VERSION = '<%= version %>'
+  VERSION = '5.2.0'  #:erb: VERSION = '<%= version %>'
 end
 class << File #:nodoc: all
   unless respond_to?(:read)   # Ruby 1.6 and less
@@ -42,17 +42,17 @@ module Setup
 end
 module Setup
   class Project
-    ROOT_MARKER = '{.ruby,setup.rb,.setup,lib/}'
+    ROOT_MARKER = '{.index,setup.rb,.setup,lib/}'
     def initialize
-      @dotruby_file = find('.ruby')
-      @dotruby = YAML.load_file(@dotruby_file) if @dotruby_file
+      @dotindex_file = find('.index')
+      @dotindex = YAML.load_file(@dotindex_file) if @dotindex_file
       @name     = nil
       @version  = nil
       @loadpath = ['lib']
-      if @dotruby
-        @name     = @dotruby['name']
-        @version  = @dotruby['version']
-        @loadpath = @dotruby['load_path']
+      if @dotindex
+        @name     = @dotindex['name']
+        @version  = @dotindex['version']
+        @loadpath = (@dotindex['paths'] || {})['load']
       else
         if file = find('.setup/name')
           @name = File.read(file).strip
@@ -65,7 +65,7 @@ module Setup
         end
       end
     end
-    attr :dotruby
+    attr :dotindex
     attr :name
     attr :version
     attr :loadpath
@@ -352,7 +352,7 @@ require 'yaml'
 require 'shellwords'
 module Setup
   class Configuration
-    RBCONFIG  = ::Config::CONFIG
+    RBCONFIG  = ::RbConfig::CONFIG
     META_CONFIG_FILE = META_EXTENSION_DIR + '/metaconfig.rb'
     def self.options
       @@options ||= []
@@ -389,12 +389,12 @@ module Setup
     option :root            , :path, 'install to alternate root location'
     option :installdirs     , :pick, 'install location mode (site,std,home)'  #, local)
     option :type            , :pick, 'install location mode (site,std,home)'
-    ::Config::CONFIG.each do |key,val|
+    ::RbConfig::CONFIG.each do |key,val|
       next if key == "configure_args"
       name = key.to_s.downcase
       define_method(name){ val }
     end
-    config_args = Shellwords.shellwords(::Config::CONFIG["configure_args"])
+    config_args = Shellwords.shellwords(::RbConfig::CONFIG["configure_args"])
     config_args.each do |ent|
       if ent.index("=")
         key, val = *ent.split("=")
@@ -1043,20 +1043,26 @@ module Setup
 end
 module Setup
   class Tester < Base
-    RUBYSCRIPT  = META_EXTENSION_DIR + '/testrc.rb'
-    SHELLSCRIPT = 'script/test'
+    RUBYSCRIPT  = META_EXTENSION_DIR + '/test.rb'
+    SHELLSCRIPT = META_EXTENSION_DIR + '/test.sh'
+    DEPRECATED_RUBYSCRIPT  = META_EXTENSION_DIR + '/testrc.rb'
     def testable?
+      if File.exist?(DEPRECATED_RUBYSCRIPT)
+        warn "Must use `.setup/test.rb' instead or `.setup/testrc.rb' to support testing."
+      end
       return false if config.no_test
       return true  if File.exist?(RUBYSCRIPT)
       return true  if File.exist?(SHELLSCRIPT)
       false
     end
     def test
-      return true if !testable?
+      return true unless testable?
       if File.exist?(RUBYSCRIPT)
         test_rubyscript
       elsif File.exist?(SHELLSCRIPT)
         test_shellscript
+      else
+        true
       end
     end
     def test_shellscript
