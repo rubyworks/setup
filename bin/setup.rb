@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# Setup.rb v5.1.0
+# Setup.rb v5.2.0
 #
 # This is a stand-alone bundle of the setup.rb application.
 # You can place it in your projects script/ directory, or
@@ -692,8 +692,9 @@ module Setup
     end
     def save_config
       out = to_yaml
-      if not File.exist?(File.dirname(CONFIG_FILE))
-        FileUtils.mkdir_p(File.dirname(CONFIG_FILE))
+      dir = File.dirname(CONFIG_FILE)
+      unless File.exist?(dir)
+        FileUtils.mkdir_p(dir)
       end
       if File.exist?(CONFIG_FILE)
         txt = File.read(CONFIG_FILE)
