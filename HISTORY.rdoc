@@ -2,20 +2,18 @@
 
 == 5.2.0 / 2012-12-20
 
-This release makes a couple of important changes. First the .ruby file
+This release makes a couple of important changes. First the `.ruby` file
 is no longer the supported metadata file. While the format is basically
-the same, the file is now called .index. See the {Indexer}[http://github.com/rubyworks/indexer]
-project for more details. One can still use .setup/name, .setup/version, .setup/loadpath
-files instead.
-
-
-== 5.1.1 / 2012-03-21
-
-Qucik fix to update the bundled version of setup.rb.
+the same, the file is now called `.index`. See the {Indexer}[http://github.com/rubyworks/indexer]
+project for more details. One can still use `.setup/name`, `.setup/version`
+and `.setup/loadpath` files instead. In addition, `.setup/testrc.rb` has been
+renamed to `.setup/test.rb`, and for shell-based command use `.setup/test.sh`.
 
 Changes:
 
-* Update bundled script.rb.
+* Use .index instead of .ruby for metadata.
+* Testing is handled by either .setup/test.rb or .setup/test.sh.
+* Automatic RI documentation generation is deprecated for good.
 
 
 == 5.1.0 / 2012-03-20
@@ -28,15 +26,10 @@ more descriptive of it's purpose for the general user.
 
 Changes:
 
-* Major Enhancements
-
-    * Rename `make` phase to `compile`.
-    * So called "MetaConfig" is handled via `.setup/metaconfig.rb`.
-    * The `bin/setup.rb` script is now the full-on bundled script.
-
-* Bug Fixes
-
-    * The `--prefix` option works with `all` command.
+* Rename `make` phase to `compile`.
+* So called "MetaConfig" is handled via `.setup/metaconfig.rb`.
+* The `bin/setup.rb` script is now the full-on bundled script.
+* The `--prefix` option works with `all` command.
 
 
 == 5.0.1 / 2010-02-07
@@ -46,13 +39,8 @@ and makes some minor adjusemnt to exit error messages.
 
 Changes:
 
-* 1 Bug Fix
-
-    * Fixed parsing of ruby install parameters on systems with custom configurations.
-
-* 1 Minor Enhancement
-
-    * Use 'abort $!.message' instead of 'exit 1' when exiting on error.
+* Fixed parsing of ruby install parameters on systems with custom configurations.
+* Use 'abort $!.message' instead of 'exit 1' when exiting on error.
 
 
 == 5.0.0 / 2010-01-12
@@ -68,19 +56,14 @@ through them performing the required action.
 
 Changes:
 
-* 5 Major Changes
-
-    * Split script into distinct classes, one for each setup phase.
-    * Testing is handled by optional script/test or .setup/testrc.rb file.
-    * Renamed 'setup' phase to 'make' phase.
-    * Deprecated MetaConfig API; support singleton extensions instead.
-    * Deprecated support for Ruby versions older than v1.6.2.
-
-* 3 Minor Changes
-
-    * Returned to using InstalledFiles for record installation and improved.
-    * Use SetupConfig instead of .cache/setup/config to store system configuration.
-    * Improved configuration options (eg. can use --type instead of --installdirs)
+* Split script into distinct classes, one for each setup phase.
+* Testing is handled by optional script/test or .setup/testrc.rb file.
+* Renamed 'setup' phase to 'make' phase.
+* Deprecated MetaConfig API; support singleton extensions instead.
+* Deprecated support for Ruby versions older than v1.6.2.
+* Returned to using InstalledFiles for record installation and improved.
+* Use SetupConfig instead of .cache/setup/config to store system configuration.
+* Improved configuration options (eg. can use --type instead of --installdirs)
 
 
 == 4.2.1 / 2009-08-26
@@ -91,9 +74,7 @@ in Facets to install both lib/more and lib/core.
 
 Changes:
 
-* 1 Major Enhancement
-
-    * meta/loadpath is now supported if you have multiple paths to install.
+* meta/loadpath is now supported if you have multiple paths to install.
 
 
 == 4.2.0 / 2009-08-26
@@ -107,19 +88,14 @@ below for more details.
 
 Changes:
 
-* 7 Major Enhancements
-
-    * relocated all user configuration files to meta/ and meta/setup
-    * meta/package must exist for doc to be installed.
-    * meta/setup/test.rb must be provided to run tests.
-    * meta/setup/doc.rb can be provided as alternate for generating docs.
-    * meta/setup/metaconfig.rb is now where meta-configuration goes.
-    * documentation is installed to <system-doc-dir>/ruby-<package>/.
-    * documentation generation shells out (for now, b/c of issues with using API)
-
-* 1 Minor Addition
-
-    * Notice the setup.rb file in the project repo. Guess what that is! ;)
+* relocated all user configuration files to meta/ and meta/setup
+* meta/package must exist for doc to be installed.
+* meta/setup/test.rb must be provided to run tests.
+* meta/setup/doc.rb can be provided as alternate for generating docs.
+* meta/setup/metaconfig.rb is now where meta-configuration goes.
+* documentation is installed to <system-doc-dir>/ruby-<package>/.
+* documentation generation shells out (for now, b/c of issues with using API)
+* Notice the setup.rb file in the project repo. Guess what that is! ;)
 
 
 == 4.1.0 / 2008-11-16
@@ -144,21 +120,16 @@ Please report any problems so I can fix them ASAP. Thanks.
 
 Changes:
 
-* 5 Major Enhancements
-
-    * testing only runs if a test script if provided
-    * cache files are now stored in .cache/setup/
-    * Renamed binary from rubysetup to setup.rb.
-      * Hoping that the use of a dot in the name is not a problem on Windows.
-      * By using setup.rb for the binary, it matches exactly the name of the old script.
-      * Other developers could do likewise, eg. setup.py; akin to mkfs.ext3 and friends. 
-    * Added script/install as a bootstrap installer.
-    * restored metaconfig
-
-* 2 Minor Enhancements
-
-    * added test from original (needs work)
-    * removed test/suite.rb option from testing
+* Testing only runs if a test script if provided
+* Cache files are now stored in .cache/setup/
+* Renamed binary from rubysetup to setup.rb.
+  * Hoping that the use of a dot in the name is not a problem on Windows.
+  * By using setup.rb for the binary, it matches exactly the name of the old script.
+  * Other developers could do likewise, eg. setup.py; akin to mkfs.ext3 and friends. 
+* Added script/install as a bootstrap installer.
+* Restored metaconfig
+* Added test from original (needs work)
+* Removed test/suite.rb option from testing
 
 
 == 4.0.0 / 2008-08-15
