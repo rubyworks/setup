@@ -595,8 +595,9 @@ module Setup
     # Save configuration.
     def save_config
       out = to_yaml
-      if not File.exist?(File.dirname(CONFIG_FILE))
-        FileUtils.mkdir_p(File.dirname(CONFIG_FILE))
+      dir = File.dirname(CONFIG_FILE)
+      unless File.exist?(dir)
+        FileUtils.mkdir_p(dir)
       end
       if File.exist?(CONFIG_FILE)
         txt = File.read(CONFIG_FILE)
