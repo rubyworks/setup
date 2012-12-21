@@ -2,7 +2,7 @@
 type: ruby
 revision: 2013
 sources:
-- Index.yml
+- var
 authors:
 - name: 7rans
   email: transfire@gmail.com
@@ -52,15 +52,16 @@ copyrights:
 - holder: Minero Aoki
   year: '2005'
   license: LGPL-2.0+
-name: setup
-title: Setup
-version: 5.1.0
-summary: Setup.rb as a stand-alone application
-description: Every Rubyist is aware of Minero Aoki's ever useful setup.rb script.
-  It's how most of us used to install our ruby programs before RubyGems came along.
-  And it's still mighty useful in certain scenarios, not the least of which is the
-  job of the distribution package managers. Setup converts setup.rb into a stand-alone
-  application. No longer will you need distribute setup.rb with you Ruby packages.
-  Just instruct your users to use Setup.
 created: '2008-08-01'
+summary: Setup.rb as a stand-alone application.
+title: Setup
+version: 5.2.0
+name: setup
+description: ! "Every Rubyist is aware of Minero Aoki's ever useful setup.rb script.
+  \nIt's how most of us used to install our Ruby programs before RubyGems\ncame along.
+  And it's still mighty useful in certain scenarios, not the\nleast of which is the
+  job of the distribution package managers. While\nstill providing the usual setup.rb
+  script that one can distribute with\na project, Setup also works as a stand-alone
+  application. Instead of\ndistributing setup.rb with a package, just instruct your
+  users to install\nRuby Setup and use it instead."
 date: '2012-12-20'
