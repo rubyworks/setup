@@ -4,7 +4,6 @@ SetupReceipt
 doc/rdoc
 doc/ri
 log
-pack
 pkg
-work/sandbox/faux-root
-web
+Gemfile.lock
+*.gem

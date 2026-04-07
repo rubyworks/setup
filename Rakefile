@@ -2,7 +2,7 @@
 
 require 'fileutils'
 
-VERSION = YAML.load_file('.index')['version']
+VERSION = Gem::Specification.load('setup.gemspec').version.to_s
 
 COMMENT = <<-HERE
 # Setup.rb v#{VERSION}

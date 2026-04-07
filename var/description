@@ -1,8 +1,0 @@
-Every Rubyist is aware of Minero Aoki's ever useful setup.rb script. 
-It's how most of us used to install our Ruby programs before RubyGems
-came along. And it's still mighty useful in certain scenarios, not the
-least of which is the job of the distribution package managers. While
-still providing the usual setup.rb script that one can distribute with
-a project, Setup also works as a stand-alone application. Instead of
-distributing setup.rb with a package, just instruct your users to install
-Ruby Setup and use it instead.

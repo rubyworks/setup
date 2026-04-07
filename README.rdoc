@@ -1,5 +1,32 @@
 = Ruby Setup
 
+*ARCHIVED -- HISTORICAL ARTIFACT*
+
+Before RubyGems took over, +setup.rb+ was *the* way Ruby software was
+installed. Originally written by Minero Aoki in the early 2000s, it
+established the conventional Ruby project layout that is still in use
+today: +lib/+, +bin/+, +ext/+, +etc/+, +man/+, and so on. Most projects
+shipped a copy of +setup.rb+ in their root directory, and you installed
+them by running:
+
+    $ ruby setup.rb config
+    $ ruby setup.rb setup
+    $ sudo ruby setup.rb install
+
+This project, *Ruby Setup*, was a stand-alone repackaging of Aoki's
++setup.rb+ as an installable application, so projects no longer needed
+to bundle the script themselves -- users could just +gem install setup+
+and run +setup.rb+ on any conformant project. It was aimed primarily at
+distro package maintainers and others who needed non-gem installs.
+
+History decided otherwise. RubyGems became the universal Ruby package
+manager and +setup.rb+ faded from common use. This repository is
+preserved as a historical artifact of the pre-RubyGems era, including
+the original Aoki +setup.rb+ versions (3.4.1, 3.4.2, 3.5.1) under
++work/reference/+. No further development is planned.
+
+----
+
 {Website}[http://rubyworks.github.com/setup] /
 {Guide}[https://github.com/rubyworks/setup/wiki] /
 {Issues}[http://github.com/rubyworks/setup/issues] /
