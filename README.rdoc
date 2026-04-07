@@ -27,11 +27,8 @@ the original Aoki +setup.rb+ versions (3.4.1, 3.4.2, 3.5.1) under
 
 ----
 
-{Website}[http://rubyworks.github.com/setup] /
 {Guide}[https://github.com/rubyworks/setup/wiki] /
-{Issues}[http://github.com/rubyworks/setup/issues] /
 {Source}[http://github.com/rubyworks/setup]
-( {<img src="https://secure.travis-ci.org/rubyworks/setup.png" />}[http://travis-ci.org/rubyworks/setup] )
 
 
 == Introduction
